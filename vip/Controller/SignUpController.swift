@@ -16,6 +16,7 @@ class SignUpController: UIViewController {
     @IBOutlet weak var passwordConfirmTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     
     var uid = ""
@@ -88,6 +89,9 @@ class SignUpController: UIViewController {
 
     }
     
+    @IBAction func backButtonWasPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
 // check if signUp all fit the format
     func validateField() -> String? {
