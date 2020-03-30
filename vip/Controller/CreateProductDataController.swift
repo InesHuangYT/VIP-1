@@ -25,11 +25,15 @@ class CreateProductDataController: UIViewController {
     @IBOutlet weak var Method: UITextField!
     @IBOutlet weak var OtherInfo: UITextField!
     @IBOutlet weak var productImage: UIImageView!
+    @IBOutlet weak var backButton: UIButton!
     let imagePicker = UIImagePickerController()
-    
-    var ref: DatabaseReference!
+    var productCategory = String()
 
+
+
+    var ref: DatabaseReference!
     
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         ref = Database.database().reference()
@@ -37,6 +41,8 @@ class CreateProductDataController: UIViewController {
         tapGesture.addTarget(self, action: #selector(CreateProductDataController.openGallery(tapGesture:)))
         productImage.isUserInteractionEnabled = true
         productImage.addGestureRecognizer(tapGesture)
+        print("productCategory",productCategory)
+
         
     }
     
@@ -51,6 +57,8 @@ class CreateProductDataController: UIViewController {
 //        return storyboard.instantiateInitialViewController() as? CreateProductDataController
 //               
 //         }
+    
+    
     
     @IBAction func CreatBtn(_ sender: Any) {
         
@@ -73,11 +81,13 @@ class CreateProductDataController: UIViewController {
                                            }
                                        })
                                    })
-                               }
+        }
+    
     }
     
     private func productInfo(imageURL: String) -> Void{
-        var newData = ["ProductName": ProductName.text ?? "Null", "Price": Price.text ?? "Null", "Description": Description.text ?? "Null", "ProductEvaluation": ProductEvaluation.text ?? "Null", "SellerEvaluation": SellerEvaluation.text ?? "Null"]
+        
+        var newData = ["ProductName": ProductName.text ?? "Null", "Price": Price.text ?? "Null", "Description": Description.text ?? "Null", "ProductEvaluation": ProductEvaluation.text ?? "Null", "SellerEvaluation": SellerEvaluation.text ?? "Null", "Category": productCategory]
         
         newData["Notice"] = Notice.text ?? "Null"
         newData["ManuDate"] = ManuDate.text ?? "Null"
@@ -89,9 +99,11 @@ class CreateProductDataController: UIViewController {
         print(newData)
         
         self.ref.child("Product").childByAutoId().setValue(newData)
+        
         print("creat product data successfully")
         
 }
+    
 //        private func uploadImage() -> String{
 //
 //
@@ -101,6 +113,13 @@ class CreateProductDataController: UIViewController {
 //    }
 //
 //
+    @IBAction func backButtonWasPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CreateCategoryControllerId") as! CreateCategoryController
+        self.navigationController?.pushViewController(vc,animated: true)
+    }
+    
+    
 }
 
 

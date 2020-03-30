@@ -20,9 +20,12 @@ class ProductController: UIViewController {
     var estimatedWidth = 160.0
     var cellMarginSize = 16.0
     var ref: DatabaseReference!
+    var count = Int()
+//    var ref = Database.database().reference()    
 
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()        
+        self.collectionView.reloadData()
         self.collectionView.delegate = self 
         self.collectionView.dataSource = self
 //        將ProductCollectionViewCell連進來 
@@ -30,7 +33,6 @@ class ProductController: UIViewController {
         self.setupGridView()
         setupTextField()
         btnAction()
-        self.collectionView.reloadData()
 
     }
     
@@ -67,10 +69,13 @@ class ProductController: UIViewController {
     
 }
 
+
 extension ProductController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-        let productCount = Database.database().reference().child("Product").key?.count
-        return (productCount ?? 0)-1 
+//        let productCount = Database.database().reference().child("Product").key?.count 
+//        新增商品後不會自動更新，改用前類別頁傳值
+        return count
+
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         

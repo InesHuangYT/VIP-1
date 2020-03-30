@@ -16,17 +16,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="iUN-UH-uCb" kind="relationship" relationship="rootViewController" id="k9p-fp-AYh"/>
+                        <segue destination="iUN-UH-uCb" kind="relationship" relationship="rootViewController" id="PY9-Qf-LVo"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wqt-5F-oOo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1457" y="-1418"/>
         </scene>
-        <!--CreateProductData-->
+        <!--CreateCategoryControllerId-->
         <scene sceneID="e4W-8c-3uQ">
             <objects>
-                <viewControllerPlaceholder storyboardName="ShoppingCart" referencedIdentifier="CreateProductData" id="6QC-uL-bAh" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="ShoppingCart" referencedIdentifier="CreateCategoryControllerId" id="6QC-uL-bAh" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="ges-BN-XoA"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yb6-00-p1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -66,7 +66,7 @@
         <!--Coupon Controller-->
         <scene sceneID="Fkh-MU-OHp">
             <objects>
-                <viewController storyboardIdentifier="CouponController" automaticallyAdjustsScrollViewInsets="NO" id="y8K-rH-oHA" customClass="CouponController" customModule="VIP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CouponController" automaticallyAdjustsScrollViewInsets="NO" id="y8K-rH-oHA" customClass="CouponController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lu5-qz-xUl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,7 +136,7 @@
         <!--Menu View Controller-->
         <scene sceneID="aiK-KL-pbs">
             <objects>
-                <viewController storyboardIdentifier="MenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ztt-YQ-OxK" customClass="MenuViewController" customModule="VIP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ztt-YQ-OxK" customClass="MenuViewController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dgM-05-bsX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,7 +146,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuTableViewCell" id="9g0-ut-pS0" customClass="MenuTableViewCell" customModule="VIP" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MenuTableViewCell" id="9g0-ut-pS0" customClass="MenuTableViewCell" customModule="vip" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9g0-ut-pS0" id="M4m-FP-UPJ">
@@ -204,7 +204,7 @@
         <!--View Controller-->
         <scene sceneID="6FW-FN-azg">
             <objects>
-                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ucJ-28-r4v" customClass="ViewController" customModule="VIP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ucJ-28-r4v" customClass="ViewController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aY6-3U-Ody">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -319,7 +319,7 @@
         <!--Order Controller-->
         <scene sceneID="fxe-xi-Z0u">
             <objects>
-                <viewController storyboardIdentifier="OrderController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5KQ-wt-k7H" customClass="OrderController" customModule="VIP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5KQ-wt-k7H" customClass="OrderController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7AT-8Q-II5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -367,7 +367,7 @@
         <!--Category Controller-->
         <scene sceneID="6nM-Es-7XQ">
             <objects>
-                <viewController storyboardIdentifier="CategoryController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iO0-B2-UFs" customClass="CategoryController" customModule="VIP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iO0-B2-UFs" customClass="CategoryController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HCZ-R0-EoO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -464,7 +464,7 @@
         <!--Add Coupon Controller-->
         <scene sceneID="XH8-FO-f76">
             <objects>
-                <viewController id="PI5-ip-zsI" customClass="AddCouponController" customModule="VIP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PI5-ip-zsI" customClass="AddCouponController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ca4-wF-znX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
