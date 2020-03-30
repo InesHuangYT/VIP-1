@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CategoryController: UIViewController {
 
@@ -21,9 +22,18 @@ class CategoryController: UIViewController {
     }
     
     @IBAction func popularProductWasPresed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Product", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ProductControllerId") as!  ProductController
-        self.navigationController?.pushViewController(vc,animated: true)
+        Database.database().reference().child("Product").observe(.value, with: { 
+            (snapshot) in 
+            let allKeys = snapshot.value as! [String : AnyObject]
+            let nodeToReturn = allKeys.keys
+            let counts = nodeToReturn.count
+            print("nodeToReturn ",nodeToReturn)
+            let storyboard = UIStoryboard(name: "Product", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ProductControllerId") as!  ProductController
+            vc.count = counts
+            self.navigationController?.pushViewController(vc,animated: true)
+        })
+        
     }
     
 
