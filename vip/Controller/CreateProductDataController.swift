@@ -114,9 +114,7 @@ class CreateProductDataController: UIViewController {
 //
 //
     @IBAction func backButtonWasPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "CreateCategoryControllerId") as! CreateCategoryController
-        self.navigationController?.pushViewController(vc,animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
