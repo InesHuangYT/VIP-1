@@ -23,6 +23,8 @@
 		B08376CE2431FCC8006D169E /* GroupByController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376CD2431FCC8006D169E /* GroupByController.swift */; };
 		B08376EC243262BD006D169E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376EB243262BD006D169E /* CategoryController.swift */; };
 		B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376ED2432630E006D169E /* CreateCategoryController.swift */; };
+		B08376F324337CF6006D169E /* GropBuyCollectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376F124337CF6006D169E /* GropBuyCollectionCollectionViewCell.swift */; };
+		B08376F424337CF6006D169E /* GropBuyCollectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08376F224337CF6006D169E /* GropBuyCollectionCollectionViewCell.xib */; };
 		B087D22C23F56436001FAC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B087D22B23F56436001FAC9A /* AppDelegate.swift */; };
 		B087D22E23F56436001FAC9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B087D22D23F56436001FAC9A /* SceneDelegate.swift */; };
 		B087D23523F56439001FAC9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B087D23423F56439001FAC9A /* Assets.xcassets */; };
@@ -245,6 +247,8 @@
 		B08376CD2431FCC8006D169E /* GroupByController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupByController.swift; sourceTree = "<group>"; };
 		B08376EB243262BD006D169E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
+		B08376F124337CF6006D169E /* GropBuyCollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GropBuyCollectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		B08376F224337CF6006D169E /* GropBuyCollectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GropBuyCollectionCollectionViewCell.xib; sourceTree = "<group>"; };
 		B087D22823F56436001FAC9A /* vip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B087D22B23F56436001FAC9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B087D22D23F56436001FAC9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -392,6 +396,8 @@
 				C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */,
 				B042F7FF242266F8005982AF /* ProductCollectionViewCell.swift */,
 				B042F800242266F8005982AF /* ProductCollectionViewCell.xib */,
+				B08376F124337CF6006D169E /* GropBuyCollectionCollectionViewCell.swift */,
+				B08376F224337CF6006D169E /* GropBuyCollectionCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -662,6 +668,7 @@
 				B0E618EE240FD58400EB6E74 /* SignUpLogIn.storyboard in Resources */,
 				B042F802242266F8005982AF /* ProductCollectionViewCell.xib in Resources */,
 				B042F7F3241F8C72005982AF /* Product.storyboard in Resources */,
+				B08376F424337CF6006D169E /* GropBuyCollectionCollectionViewCell.xib in Resources */,
 				B0C77BB723F97A9100B8E5B7 /* GoogleService-Info.plist in Resources */,
 				C02BD2E524101F2900BD3E1D /* Main.storyboard in Resources */,
 				B087D23523F56439001FAC9A /* Assets.xcassets in Resources */,
@@ -743,6 +750,7 @@
 				02F25D6A242096110041541E /* ViewController.swift in Sources */,
 				B08376EC243262BD006D169E /* CategoryController.swift in Sources */,
 				02F21D5D24210211003860F9 /* AddCouponController.swift in Sources */,
+				B08376F324337CF6006D169E /* GropBuyCollectionCollectionViewCell.swift in Sources */,
 				B0E618E623FD3C8000EB6E74 /* HomeController.swift in Sources */,
 				B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */,
 				C01F4AA7240EA844003E0AAF /* ShoppingCartCell.swift in Sources */,
