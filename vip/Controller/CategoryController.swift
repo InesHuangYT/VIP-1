@@ -18,7 +18,7 @@ class CategoryController: UIViewController {
         // Do any additional setup after loading the view.
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
-    self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
     }
     
     @IBAction func popularProductWasPresed(_ sender: Any) {

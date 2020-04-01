@@ -9,6 +9,8 @@
 import UIKit
 
 class GroupBuyInformationController: UIViewController {
+    
+    var index  = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
