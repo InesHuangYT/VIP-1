@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bQs-hd-OWx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l3c-Bc-t4Q">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -149,9 +149,224 @@
             </objects>
             <point key="canvasLocation" x="724" y="177"/>
         </scene>
+        <!--Create Group Buy Product Controller-->
+        <scene sceneID="mlE-Uh-Rlu">
+            <objects>
+                <viewController storyboardIdentifier="CreateGroupBuyProductControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l3c-Bc-t4Q" customClass="CreateGroupBuyProductController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tdB-2g-B9e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-DN-9hI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xR-sv-awR">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1000"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoAPP" translatesAutoresizingMaskIntoConstraints="NO" id="vkF-tU-MTh" userLabel="Upload image">
+                                                <rect key="frame" x="33" y="23" width="309" height="136"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商品名稱 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEV-VP-hUy" userLabel="ProductName">
+                                                <rect key="frame" x="24" y="191" width="92" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="產品描述：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfe-JW-UC7" userLabel="Description">
+                                                <rect key="frame" x="24" y="265" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="產品評價：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMA-AZ-qfr" userLabel="ProductEvaluation">
+                                                <rect key="frame" x="24" y="302" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商家評價：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTd-2t-wa4" userLabel="SellerEvaluation">
+                                                <rect key="frame" x="24" y="339" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="使用方式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfI-K3-lUA" userLabel="Method">
+                                                <rect key="frame" x="24" y="487" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="有效日期：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2H-C9-JgP" userLabel="ExpDate">
+                                                <rect key="frame" x="24" y="450" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="成團人數：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPb-sL-cSb" userLabel="OtherInfo">
+                                                <rect key="frame" x="24" y="524" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="製造日期：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7to-5e-M9Z" userLabel="ManuDate">
+                                                <rect key="frame" x="24" y="413" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="價格 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sFW-ac-xwU" userLabel="Price">
+                                                <rect key="frame" x="45" y="228" width="51" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R4n-z4-y6F" userLabel="TxProductName">
+                                                <rect key="frame" x="134" y="186" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JYY-FY-OPE" userLabel="TxPrice">
+                                                <rect key="frame" x="134" y="223" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dwx-kC-MP2" userLabel="TxDescription">
+                                                <rect key="frame" x="134" y="260" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商品須知：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKp-t2-wuj" userLabel="Notice">
+                                                <rect key="frame" x="24" y="376" width="102" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlw-NT-fYE" userLabel="TxProductEvaluation">
+                                                <rect key="frame" x="134" y="297" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d71-iq-uD1" userLabel="TxSellerEvaluation">
+                                                <rect key="frame" x="134" y="334" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cOh-yf-b05" userLabel="TxNotice">
+                                                <rect key="frame" x="134" y="371" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FKF-fe-HZu" userLabel="TxManuDate">
+                                                <rect key="frame" x="134" y="408" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPL-13-tSY" userLabel="TxExpDate">
+                                                <rect key="frame" x="134" y="445" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9HB-v0-8hu" userLabel="TxMethod">
+                                                <rect key="frame" x="134" y="482" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mAz-Ag-DvH" userLabel="TxOtherInfo">
+                                                <rect key="frame" x="134" y="519" width="216" height="34"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8b-WK-fus" userLabel="CreateData">
+                                                <rect key="frame" x="113" y="585" width="149" height="52"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="CreateData"/>
+                                                <connections>
+                                                    <action selector="CreatBtn:" destination="l3c-Bc-t4Q" eventType="touchUpInside" id="T6E-zj-6SP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Dr-L9-5MH">
+                                                <rect key="frame" x="145" y="645" width="84" height="39"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" backgroundImage="back"/>
+                                                <connections>
+                                                    <action selector="backButtonWasPressed:" destination="l3c-Bc-t4Q" eventType="touchUpInside" id="fdj-yV-Q2O"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1000" id="lHx-Y3-Zz7"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="bottom" secondItem="gLd-t5-7Lk" secondAttribute="bottom" id="7ri-Fq-n5n"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="trailing" secondItem="gLd-t5-7Lk" secondAttribute="trailing" id="ISf-M7-7zr"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="top" secondItem="gLd-t5-7Lk" secondAttribute="top" id="JAc-Lk-lAE"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="width" secondItem="e92-Ni-1RE" secondAttribute="width" id="Wdq-oU-xdQ"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="centerY" secondItem="gLd-t5-7Lk" secondAttribute="centerY" id="bal-Rg-gM0"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="leading" secondItem="gLd-t5-7Lk" secondAttribute="leading" id="fr3-zW-Hxa"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="gLd-t5-7Lk"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="e92-Ni-1RE"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.86058692120000002" green="1" blue="0.85274813790000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ICs-DN-9hI" firstAttribute="leading" secondItem="OZW-La-nQm" secondAttribute="leading" id="1hl-sH-I5r"/>
+                            <constraint firstItem="ICs-DN-9hI" firstAttribute="top" secondItem="OZW-La-nQm" secondAttribute="top" id="4S5-a3-U3l"/>
+                            <constraint firstItem="ICs-DN-9hI" firstAttribute="trailing" secondItem="OZW-La-nQm" secondAttribute="trailing" id="cgi-hL-Xqo"/>
+                            <constraint firstItem="ICs-DN-9hI" firstAttribute="bottom" secondItem="OZW-La-nQm" secondAttribute="bottom" id="t2m-CT-dUd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OZW-La-nQm"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tRW-DA-OFs"/>
+                    <connections>
+                        <outlet property="Description" destination="Dwx-kC-MP2" id="LM6-zP-RgA"/>
+                        <outlet property="ExpDate" destination="kPL-13-tSY" id="zf0-tv-qMo"/>
+                        <outlet property="GroupBuyPeople" destination="mAz-Ag-DvH" id="rO3-0L-ojf"/>
+                        <outlet property="ManuDate" destination="FKF-fe-HZu" id="1wX-az-0gS"/>
+                        <outlet property="Method" destination="9HB-v0-8hu" id="mee-ur-v5c"/>
+                        <outlet property="Notice" destination="cOh-yf-b05" id="h9Q-6r-vzW"/>
+                        <outlet property="Price" destination="JYY-FY-OPE" id="uLe-qQ-OFo"/>
+                        <outlet property="ProductEvaluation" destination="rlw-NT-fYE" id="3Qm-dP-eRg"/>
+                        <outlet property="ProductName" destination="R4n-z4-y6F" id="di3-qy-fUY"/>
+                        <outlet property="SellerEvaluation" destination="d71-iq-uD1" id="Qp8-h5-Uux"/>
+                        <outlet property="backButton" destination="0Dr-L9-5MH" id="bRT-QO-1k4"/>
+                        <outlet property="productImage" destination="vkF-tU-MTh" id="lVk-HU-smx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gtc-23-vHq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-142" y="-546"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="CreateData" width="253" height="86"/>
+        <image name="back" width="253" height="86"/>
         <image name="logo" width="175" height="166"/>
+        <image name="logoAPP" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
         <image name="加入團購" width="184" height="40"/>
         <image name="加入團購按鈕" width="159" height="86"/>
