@@ -40,7 +40,6 @@ class ProductController: UIViewController {
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
-        
     }
 
     func setupGridView(){
