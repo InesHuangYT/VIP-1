@@ -70,9 +70,21 @@ extension GroupBuyController : UICollectionViewDataSource{
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                     print("key:" ,datas[indexPath.row].key)
                     vc.productId = datas[indexPath.row].key
+                    Database.database().reference().child("GroupBuy").child(datas[indexPath.row].key).child("openedBy")
+                        .queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in 
+                            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                                
+                                print("GroupBuy key count : ",snapshots.count)
+                                vc.openByCount = snapshots.count
+                                self.navigationController?.pushViewController(vc,animated: true)
+                                
+                            }
+                        })
                 }
             })
-        self.navigationController?.pushViewController(vc,animated: true)
+        
+        
         
     }
 }
