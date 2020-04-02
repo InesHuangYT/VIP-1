@@ -27,10 +27,18 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
 
     
     
-    func setProductLabel(users:String,productId:String){
-        self.userName.text = users
+    func setProductLabel(productId:String){
+//        Database.database().reference().child("GroupBuy").child(productId).child("openedBy")
+//            .queryOrderedByKey()
+//            .observeSingleEvent(of: .value, with: { snapshot in 
+//                if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+//                   print("datas",datas)
+////                self.userName.text = users
+//                }    
+//            })
         self.groupBuyId.text = productId
                 
+    
     }
     
 }

@@ -35,7 +35,7 @@ class GroupBuyCollectionViewCell: UICollectionViewCell {
     
     
     
-    func setProductLabel(index:Int){
+    func setProductLabel(index:Int) {
         Database.database().reference().child("GroupBuy")
             .queryOrderedByKey()
             .observeSingleEvent(of: .value, with: { snapshot in 

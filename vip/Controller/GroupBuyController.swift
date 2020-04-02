@@ -10,15 +10,15 @@ import UIKit
 import Firebase
 
 class GroupBuyController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
-
+    
     var ref: DatabaseReference!
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     var count = Int()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.reloadData()
@@ -27,7 +27,7 @@ class GroupBuyController: UIViewController {
         self.collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
         self.setupGridView()
         btnAction()
-
+        
         
     }
     
@@ -38,24 +38,24 @@ class GroupBuyController: UIViewController {
     
     func setupGridView(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-               flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
-               flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
+        flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
+        flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
     }
-
+    
 }
 
 
 
 extension GroupBuyController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-
+        
         return count
-
+        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyCollectionViewCell", for: indexPath) as! GroupBuyCollectionViewCell
-//        cell.setProductLabel(text: self.dataProductName[indexPath.row])
+        //        cell.setProductLabel(text: self.dataProductName[indexPath.row])
         cell.setProductLabel(index: indexPath.row)
         return cell
         
@@ -65,14 +65,15 @@ extension GroupBuyController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
         vc.index = indexPath.row   
         Database.database().reference().child("GroupBuy")
-        .queryOrderedByKey().observeSingleEvent(of: .value, with: { 
-            snapshot in
-            let values = snapshot.value as? [String:Any]
-            let valueKeys = values.map { Array($0.keys) }
-            vc.productId = valueKeys?[indexPath.row] ?? "0"
+            .queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in 
+                if let datas = snapshot.children.allObjects as? [DataSnapshot] {
+                    print("key:" ,datas[indexPath.row].key)
+                    vc.productId = datas[indexPath.row].key
+                }
             })
         self.navigationController?.pushViewController(vc,animated: true)
-
+        
     }
 }
 

@@ -30,6 +30,7 @@ class GroupBuyInformationController: UIViewController {
     var productId = String()
     var uid = Auth.auth().currentUser?.uid
     var users = Auth.auth().currentUser?.displayName
+    var openByCount = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,8 +46,7 @@ class GroupBuyInformationController: UIViewController {
         groupBuyImage.layer.borderWidth = 1
         groupBuyImage.layer.borderColor = myColor.cgColor
     }
-    
-    
+
     func btnAction(){
               btnMenu.target = self.revealViewController()
               btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
@@ -114,7 +114,7 @@ class GroupBuyInformationController: UIViewController {
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyOpenControllerId") as!  GroupBuyOpenController
         Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : no currentUser")/GroupBuy/\(self.productId)").setValue(self.productId)
-        Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy/\(String(self.uid!))").setValue(self.uid)
+        Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy/\(String(self.uid!))").setValue(self.users)
         print((self.users ?? "") + " 開團 ")
         self.navigationController?.pushViewController(vc,animated: true)
     }
@@ -126,13 +126,12 @@ class GroupBuyInformationController: UIViewController {
 
 extension GroupBuyInformationController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-        return 2
-
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyJoinCollectionViewCell", for: indexPath) as! GroupBuyJoinCollectionViewCell
-        cell.setProductLabel(users: self.users ?? "",productId: self.productId )
+        cell.setProductLabel(productId: self.productId )
         return cell
         
     }
