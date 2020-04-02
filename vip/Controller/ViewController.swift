@@ -41,6 +41,7 @@ class ViewController: UIViewController {
             let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as!  GroupBuyController
             vc.count = counts
+            
             self.navigationController?.pushViewController(vc,animated: true)
         })
         
