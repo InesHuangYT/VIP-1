@@ -240,7 +240,8 @@
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="groupBuyOpenButtonWasPressed:" destination="FF0-cw-sgC" eventType="touchUpInside" id="pBL-Vn-83y"/>
+                                                    <action selector="groupBuyOpenButtonWasPressed:" destination="FF0-cw-sgC" eventType="touchUpInside" id="Vdl-se-RBW"/>
+                                                    <segue destination="aS1-pp-jMR" kind="showDetail" id="ev4-Vz-sAE"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -297,7 +298,7 @@
                         <outlet property="btnMenu" destination="Run-iU-ZwE" id="KyG-Qs-8pk"/>
                         <outlet property="collectionView" destination="xDl-2J-K6B" id="Seb-oe-q2G"/>
                         <outlet property="groupBuyImage" destination="8hV-8a-f3t" id="nyp-MO-lCc"/>
-                        <outlet property="groupBuyOpenButton" destination="oen-uj-fEM" id="yll-aF-4PT"/>
+                        <outlet property="groupBuyOpenButton" destination="oen-uj-fEM" id="01N-uN-iof"/>
                         <outlet property="name" destination="h9w-51-9kW" id="nN5-8u-1LT"/>
                         <outlet property="price" destination="uUO-xB-sbe" id="vCD-hj-dlu"/>
                         <outlet property="productDescription" destination="2bu-Ii-w46" id="cCZ-4J-uFE"/>
@@ -312,22 +313,22 @@
         <!--Group Buy Open Controller-->
         <scene sceneID="Ggi-gW-W2r">
             <objects>
-                <viewController storyboardIdentifier="GroupBuyOpenControllerId" id="aS1-pp-jMR" customClass="GroupBuyOpenController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupBuyOpenControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aS1-pp-jMR" customClass="GroupBuyOpenController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c5L-dd-HZg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="結帳後即成功開團" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djp-Ns-Jdy">
-                                <rect key="frame" x="83" y="76" width="209" height="70"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="開團成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPf-et-ZJ8">
+                                <rect key="frame" x="136" y="241" width="102" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="開團成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPf-et-ZJ8">
-                                <rect key="frame" x="136" y="154" width="102" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="結帳後即成功開團" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djp-Ns-Jdy">
+                                <rect key="frame" x="83" y="163" width="209" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -335,15 +336,15 @@
                         <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="7b8-Xz-2sP"/>
                     </view>
+                    <navigationItem key="navigationItem" id="IC6-P3-e9J">
+                        <barButtonItem key="rightBarButtonItem" title="側邊欄" image="List_button" id="0Nd-TQ-Hhx">
+                            <color key="tintColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="btnMenu" destination="0Nd-TQ-Hhx" id="Gh1-wG-k3f"/>
+                        <outlet property="btnMenu" destination="0Nd-TQ-Hhx" id="izb-1F-1ob"/>
                     </connections>
                 </viewController>
-                <navigationItem id="IC6-P3-e9J">
-                    <barButtonItem key="rightBarButtonItem" title="側邊欄" image="List_button" id="0Nd-TQ-Hhx">
-                        <color key="tintColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </barButtonItem>
-                </navigationItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUE-Uy-w8H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1565.5999999999999" y="705.69715142428788"/>

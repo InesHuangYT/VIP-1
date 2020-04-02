@@ -16,9 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var groupBuyButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-    btnMenu.target = self.revealViewController()
-    btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+        btnMenu.target = self.revealViewController()
+        btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
         setupTextField()
+       
 
     }
     private func setupTextField(){
@@ -39,10 +40,10 @@ class ViewController: UIViewController {
             let counts = nodeToReturn.count
             print("nodeToReturn ",nodeToReturn)
             let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as!  GroupBuyController
+            let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
             vc.count = counts
-            
             self.navigationController?.pushViewController(vc,animated: true)
+            
         })
         
     }

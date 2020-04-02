@@ -17,6 +17,7 @@ class GroupBuyOpenController: UIViewController {
         super.viewDidLoad()
         btnAction()
     }
+    
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
