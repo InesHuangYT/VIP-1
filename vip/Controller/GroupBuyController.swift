@@ -63,7 +63,14 @@ extension GroupBuyController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
-        vc.index = indexPath.row        
+        vc.index = indexPath.row   
+        Database.database().reference().child("GroupBuy")
+        .queryOrderedByKey().observeSingleEvent(of: .value, with: { 
+            snapshot in
+            let values = snapshot.value as? [String:Any]
+            let valueKeys = values.map { Array($0.keys) }
+            vc.productId = valueKeys?[indexPath.row] ?? "0"
+            })
         self.navigationController?.pushViewController(vc,animated: true)
 
     }
