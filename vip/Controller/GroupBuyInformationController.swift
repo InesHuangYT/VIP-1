@@ -30,7 +30,8 @@ class GroupBuyInformationController: UIViewController {
     var productId = String()
     var uid = Auth.auth().currentUser?.uid
     var openByCount = Int()
-
+    var groupBuyPeople = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.reloadData()
@@ -45,24 +46,25 @@ class GroupBuyInformationController: UIViewController {
         groupBuyImage.layer.borderWidth = 1
         groupBuyImage.layer.borderColor = myColor.cgColor
         print("openByCount",self.openByCount)
+        print("groupBuyPeople",self.groupBuyPeople)
     }
-
+    
     func btnAction(){
-              btnMenu.target = self.revealViewController()
-              btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
-          }
+        btnMenu.target = self.revealViewController()
+        btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+    }
     func setupGridView(){
-           let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-                  flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
-                  flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
-       }
+        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
+        flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
+    }
     
     
     func setLabel(index:Int){
         Database.database().reference().child("GroupBuy")
             .queryOrderedByKey().observeSingleEvent(of: .value, with: { 
                 snapshot in
- 
+                
                 if let datas = snapshot.children.allObjects as? [DataSnapshot]{
                     let name = datas.compactMap({
                         ($0.value as! [String: Any])["ProductName"]
@@ -103,7 +105,7 @@ class GroupBuyInformationController: UIViewController {
                             }
                         }.resume()
                     }
-                 
+                    
                 }
             }
         )
@@ -111,13 +113,42 @@ class GroupBuyInformationController: UIViewController {
     }
     
     @IBAction func groupBuyOpenButtonWasPressed(_ sender: Any) {
-       
-        Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : no currentUser")/GroupBuy/\(self.productId)").setValue(self.productId)
-        let ref = Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy").childByAutoId().child("users")
-        ref.setValue(String(self.uid ?? ""))
-        print(String(self.uid ?? "") + " 開團 ")
-//        let vc = storyboard?.instantiateViewController(withIdentifier: "GroupBuyOpenControllerId") as! GroupBuyOpenController
-//        self.navigationController?.pushViewController(vc,animated: true)
+        
+        Database.database().reference().child("GroupBuy").child(productId).child("openedBy").child(self.uid ?? "")
+            .queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in 
+                
+                if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                    print("empty:",snapshots.isEmpty)
+                    if snapshots.isEmpty {
+                        let groupBuyRef = Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy/\(self.uid ?? "")").childByAutoId().child("JoinUser/users")
+                        
+                        groupBuyRef.setValue(String(self.uid ?? ""))
+                        print(String(self.uid ?? "") + " 開團 ")
+                        //  開團規則：一位使用者只能在一個商品內開一次團
+                        Database.database().reference().child("GroupBuy/\(self.productId)/openedBy/\(self.uid ?? "")")
+                            .queryOrderedByKey().observeSingleEvent(of: .value, with: { 
+                                snapshot in
+                                
+                                if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                                    
+                                    for snap in datas{
+                                        let key = snap.key
+                                        print(key)
+                                        Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : no currentUser")/GroupBuy/\(self.productId)/OpenGroupId").setValue(key)
+                                    }
+                                }
+                                
+                            })
+                    }else{
+                        print("group already exist, can't open the group")
+                        
+                    }
+                    
+                }
+                
+            })
+                
         
     }
     
@@ -134,7 +165,7 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyJoinCollectionViewCell", for: indexPath) as! GroupBuyJoinCollectionViewCell
         print("self.productId",self.productId)
-        cell.setProductLabel(productId: String(self.productId), index:indexPath.row)
+        cell.setProductLabel(productId: String(self.productId), index:indexPath.row, groupBuyPeople: self.groupBuyPeople)
         return cell
         
     }
@@ -143,7 +174,7 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
         vc.index = indexPath.row        
         self.navigationController?.pushViewController(vc,animated: true)
-
+        
     }
 }
 

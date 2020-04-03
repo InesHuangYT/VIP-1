@@ -70,6 +70,16 @@ extension GroupBuyController : UICollectionViewDataSource{
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                     print("key:" ,datas[indexPath.row].key)
                     vc.productId = datas[indexPath.row].key
+                    
+                    let groupBuyPeople = datas.compactMap({
+                        ($0.value as! [String: Any])["GroupBuyPeople"]
+                    }) 
+
+                    let people = groupBuyPeople[indexPath.row] as! String
+                    let peoples = Int64(people)
+                    print("peoples", peoples ?? 0)
+                    vc.groupBuyPeople = Int(peoples ?? 0) 
+                    
                     Database.database().reference().child("GroupBuy").child(datas[indexPath.row].key).child("openedBy")
                         .queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in 

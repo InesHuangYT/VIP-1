@@ -26,6 +26,7 @@
                                 </state>
                                 <connections>
                                     <action selector="signOutButtonWasPressed:" destination="WIY-0l-MDq" eventType="touchUpInside" id="cX7-vP-PV3"/>
+                                    <segue destination="seg-l1-Wwp" kind="show" id="dlE-hU-AtD"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="253" text="個人資訊" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kb5-uI-HXZ">
@@ -151,6 +152,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbh-8b-yfh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="135" y="845.07042253521126"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="RHp-ry-aco">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="seg-l1-Wwp" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="hER-Q4-sCb"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e6X-OP-JLf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="738" y="871"/>
         </scene>
     </scenes>
     <resources>
