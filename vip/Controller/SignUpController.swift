@@ -64,7 +64,7 @@ class SignUpController: UIViewController {
             Auth.auth().createUser(withEmail: account, password: password) {(result,err) in 
                 if err != nil{
                     print("here err ! ",err as Any)
-                    self.showError("Error with account form, must be email form")
+                    self.showError(err?.localizedDescription ?? "")
                     
                 }else{
                     
