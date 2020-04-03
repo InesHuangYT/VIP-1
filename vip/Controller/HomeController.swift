@@ -20,7 +20,6 @@ class HomeController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var selectPaymentWayButton: UIButton!
     @IBOutlet weak var signUpConfirm: UIButton!
     
-    @IBOutlet weak var currentUserlabel: UILabel!
 
     @IBOutlet weak var phoneTextField: UITextField!
     
@@ -69,7 +68,6 @@ class HomeController: UIViewController,UITextFieldDelegate {
         if let user = Auth.auth().currentUser{
             uid = user.uid
             print("uid : ",uid)
-            currentUserlabel.text = " login uid is : " + (uid)
         }
         return(uid)
 

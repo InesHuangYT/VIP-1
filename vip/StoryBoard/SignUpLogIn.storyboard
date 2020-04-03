@@ -321,22 +321,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" smartInsertDeleteType="yes" textContentType="tel"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="login UID" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NwN-aL-DJk">
-                                <rect key="frame" x="16" y="527" width="70" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.93459850550000001" green="0.95914202930000003" blue="0.90638643500000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="NwN-aL-DJk" firstAttribute="leading" secondItem="9Ox-gF-mvj" secondAttribute="leading" constant="8" id="OZL-hD-fXu"/>
-                            <constraint firstItem="NwN-aL-DJk" firstAttribute="centerY" secondItem="YxE-Wh-5fL" secondAttribute="centerY" constant="220.75" id="zF7-Ab-Dw8"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="9Ox-gF-mvj"/>
                     </view>
                     <connections>
-                        <outlet property="currentUserlabel" destination="NwN-aL-DJk" id="kpj-jC-JXe"/>
                         <outlet property="phoneTextField" destination="5XF-KV-aPg" id="txS-Dw-utj"/>
                         <outlet property="selectDeliverWayButton" destination="xY6-cl-361" id="lox-vy-kKU"/>
                         <outlet property="selectPaymentWayButton" destination="UdW-Kq-6ZN" id="ECy-Mo-Cn0"/>
