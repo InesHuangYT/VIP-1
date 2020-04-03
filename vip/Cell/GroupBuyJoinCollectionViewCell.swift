@@ -26,38 +26,43 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
     }
     
     
-    
-    func setProductLabel(productId:String,index:Int){
+    func setProductLabel(productId:String,index:Int,groupBuyPeople:Int){
         Database.database().reference().child("GroupBuy").child(productId).child("openedBy")
             .queryOrderedByKey()
             .observeSingleEvent(of: .value, with: { snapshot in 
                 
                 if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                     
-                    
-                    print(snapshots[index].key)
-                    self.groupBuyId.text = snapshots[index].key
-                    
-                    Database.database().reference().child("GroupBuy").child(productId).child("openedBy").child(snapshots[index].key).child("users")
+                    print(snapshots[index].key)     
+                    Database.database().reference().child("GroupBuy").child(productId).child("openedBy").child(snapshots[index].key)
                         .queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in 
                             
-                            Database.database().reference().child("users").child(snapshot.value as! String).child("Profile").child("name")
+                            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                                self.groupBuyId.text = (String(snapshots.count)) + " 人參加  /  " + (String(groupBuyPeople)) + " 人成團"
+                                print("這個開團人數：",snapshots.count)     
+                                
+                            }
+                            
+                        })
+                            Database.database().reference().child("users").child(snapshots[index].key).child("Profile").child("name")
                                 .queryOrderedByKey()
                                 .observeSingleEvent(of: .value, with: { snapshot in 
                                     print("name : ",snapshot.value as? String ?? "")
-                                    self.userName.text = snapshot.value as? String
+                                    self.userName.text = "開團人 " + (snapshot.value as? String ?? "")
                                 })
                             
-                            
-                            
-                        })
-                    
-
+                        
                     
                 }
                 
             })
     }
+    
+    
+    @IBAction func joinButtonWasPressed(_ sender: Any) {
+        
+    }
+    
     
 }

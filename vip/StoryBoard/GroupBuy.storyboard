@@ -230,18 +230,17 @@
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oen-uj-fEM">
-                                                <rect key="frame" x="108" y="886" width="159" height="86"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5OP-cd-CbJ">
+                                                <rect key="frame" x="138" y="936" width="98" height="56"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="86" id="KJd-Ny-j8q"/>
-                                                    <constraint firstAttribute="width" constant="159" id="oRA-FH-ffs"/>
+                                                    <constraint firstAttribute="width" constant="98" id="NJW-yi-MbE"/>
+                                                    <constraint firstAttribute="height" constant="56" id="Nru-3K-R1T"/>
                                                 </constraints>
                                                 <state key="normal" title="自己去開團" backgroundImage="自己開團">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="groupBuyOpenButtonWasPressed:" destination="FF0-cw-sgC" eventType="touchUpInside" id="Vdl-se-RBW"/>
-                                                    <segue destination="aS1-pp-jMR" kind="showDetail" id="ev4-Vz-sAE"/>
+                                                    <action selector="groupBuyOpenButtonWasPressed:" destination="FF0-cw-sgC" eventType="touchUpInside" id="hOW-uO-okp"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -252,17 +251,17 @@
                                             <constraint firstItem="8hV-8a-f3t" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" constant="62" id="AQd-7I-cu6"/>
                                             <constraint firstAttribute="height" constant="1000" id="AYY-e4-fZl"/>
                                             <constraint firstItem="eLP-ix-Dbk" firstAttribute="top" secondItem="I4G-1X-nyQ" secondAttribute="top" id="BNV-JA-ogD"/>
+                                            <constraint firstAttribute="trailing" secondItem="5OP-cd-CbJ" secondAttribute="trailing" constant="139" id="HHW-QY-pR9"/>
                                             <constraint firstAttribute="trailing" secondItem="eLP-ix-Dbk" secondAttribute="trailing" constant="39" id="IUE-XA-1Jv"/>
-                                            <constraint firstAttribute="trailing" secondItem="oen-uj-fEM" secondAttribute="trailing" constant="108" id="K5v-qx-hu3"/>
                                             <constraint firstAttribute="trailing" secondItem="xDl-2J-K6B" secondAttribute="trailing" id="Mbv-h2-h9U"/>
-                                            <constraint firstAttribute="bottom" secondItem="oen-uj-fEM" secondAttribute="bottom" constant="28" id="Mm3-0f-Ete"/>
                                             <constraint firstItem="I4G-1X-nyQ" firstAttribute="top" secondItem="HPn-zW-zQr" secondAttribute="top" constant="8" id="Rbf-xP-STc"/>
                                             <constraint firstItem="xDl-2J-K6B" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" id="UFu-4b-rGY"/>
-                                            <constraint firstItem="oen-uj-fEM" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" constant="108" id="UUq-hb-00d"/>
                                             <constraint firstItem="eLP-ix-Dbk" firstAttribute="leading" secondItem="I4G-1X-nyQ" secondAttribute="trailing" constant="31" id="Z7R-yr-Fbv"/>
+                                            <constraint firstItem="5OP-cd-CbJ" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" constant="138" id="bs5-wM-iYF"/>
                                             <constraint firstItem="8hV-8a-f3t" firstAttribute="centerX" secondItem="HPn-zW-zQr" secondAttribute="centerX" constant="-0.5" id="cQq-De-pm4"/>
+                                            <constraint firstAttribute="bottom" secondItem="5OP-cd-CbJ" secondAttribute="bottom" constant="8" id="gNC-65-TCh"/>
                                             <constraint firstItem="xDl-2J-K6B" firstAttribute="top" secondItem="8hV-8a-f3t" secondAttribute="bottom" constant="32" id="oc2-wn-CGp"/>
-                                            <constraint firstItem="oen-uj-fEM" firstAttribute="top" secondItem="xDl-2J-K6B" secondAttribute="bottom" constant="8" id="s3c-w5-CJp"/>
+                                            <constraint firstItem="5OP-cd-CbJ" firstAttribute="top" secondItem="xDl-2J-K6B" secondAttribute="bottom" constant="58" id="pAl-J5-iQs"/>
                                             <constraint firstItem="I4G-1X-nyQ" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" constant="8" id="zU2-xX-9JC"/>
                                         </constraints>
                                     </view>
@@ -295,10 +294,10 @@
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1000"/>
                     <connections>
-                        <outlet property="btnMenu" destination="Run-iU-ZwE" id="KyG-Qs-8pk"/>
+                        <outlet property="btnMenu" destination="Run-iU-ZwE" id="2iH-ve-pkT"/>
                         <outlet property="collectionView" destination="xDl-2J-K6B" id="Seb-oe-q2G"/>
                         <outlet property="groupBuyImage" destination="8hV-8a-f3t" id="nyp-MO-lCc"/>
-                        <outlet property="groupBuyOpenButton" destination="oen-uj-fEM" id="01N-uN-iof"/>
+                        <outlet property="groupBuyOpenButton" destination="5OP-cd-CbJ" id="7Jg-Sx-zCH"/>
                         <outlet property="name" destination="h9w-51-9kW" id="nN5-8u-1LT"/>
                         <outlet property="price" destination="uUO-xB-sbe" id="vCD-hj-dlu"/>
                         <outlet property="productDescription" destination="2bu-Ii-w46" id="cCZ-4J-uFE"/>
@@ -315,7 +314,7 @@
             <objects>
                 <viewController storyboardIdentifier="GroupBuyOpenControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aS1-pp-jMR" customClass="GroupBuyOpenController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c5L-dd-HZg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="開團成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPf-et-ZJ8">

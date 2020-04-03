@@ -11,7 +11,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5Yw-UO-NSI">
             <objects>
-                <navigationController navigationBarHidden="YES" id="PP3-7B-La8" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="PP3-7B-La8" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="leg-Nr-WEM">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
