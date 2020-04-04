@@ -27,32 +27,42 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
     
     
     func setProductLabel(productId:String,index:Int,groupBuyPeople:Int){
-        Database.database().reference().child("GroupBuy").child(productId).child("openedBy")
-            .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in 
+        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("openedBy")
+        
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                 
                 if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                     
-                    print(snapshots[index].key)     
-                    Database.database().reference().child("GroupBuy").child(productId).child("openedBy").child(snapshots[index].key)
+                    print(snapshots[index].key)    
+                    
+                ref.child(snapshots[index].key)
+                    .queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in 
+                            
+                        if let snapshotss = snapshot.children.allObjects as? [DataSnapshot]{
+                            
+                            print("這",snapshotss[0].key) 
+                            ref.child(snapshots[index].key).child(snapshotss[0].key).child("JoinUser/users").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                                
+                                
+                                if let snapshotsss = snapshot.children.allObjects as? [DataSnapshot]{  self.groupBuyId.text = (String(snapshotsss.count)) + " 人參加  /  " + (String(groupBuyPeople)) + " 人成團"
+                                    print("這個商品目前參加人數：",snapshotsss.count)     
+
+                                }
+                            })
+                            
+                            
+                        }
+                         
+                        })
+                    Database.database().reference().child("users").child(snapshots[index].key).child("Profile").child("name")
                         .queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in 
-                            
-                            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                                self.groupBuyId.text = (String(snapshots.count)) + " 人參加  /  " + (String(groupBuyPeople)) + " 人成團"
-                                print("這個開團人數：",snapshots.count)     
-                                
-                            }
-                            
+                            print("name : ",snapshot.value as? String ?? "")
+                            self.userName.text = "開團人 " + (snapshot.value as? String ?? "")
                         })
-                            Database.database().reference().child("users").child(snapshots[index].key).child("Profile").child("name")
-                                .queryOrderedByKey()
-                                .observeSingleEvent(of: .value, with: { snapshot in 
-                                    print("name : ",snapshot.value as? String ?? "")
-                                    self.userName.text = "開團人 " + (snapshot.value as? String ?? "")
-                                })
-                            
-                        
+                    
+                    
                     
                 }
                 
@@ -60,9 +70,7 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
     }
     
     
-    @IBAction func joinButtonWasPressed(_ sender: Any) {
-        
-    }
-    
+   
+   
     
 }

@@ -20,7 +20,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var selectPaymentWayButton: UIButton!
     @IBOutlet weak var signUpConfirm: UIButton!
     
-
+    
     @IBOutlet weak var phoneTextField: UITextField!
     
     var waySources = [String]()
@@ -28,7 +28,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
     var selectButton = UIButton()
     let transparentView = UIView()
     let tableViews = UITableView()
-//    var selectedButton = UIButton()
+    //    var selectedButton = UIButton()
     var uid = ""
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
         phoneTextField.delegate = self
         setUpTextField()
         print("current user uidd : " , currentUserName())
-     }
+    }
     
     func setUpTextField(){
         let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: .init(width:view.frame.size.width ,height:30)))
@@ -52,16 +52,16 @@ class HomeController: UIViewController,UITextFieldDelegate {
         toolBar.sizeToFit()
         phoneTextField.inputAccessoryView = toolBar
     }
-
+    
     @objc func doneButtonAction (){
         self.view.endEditing(true)
     }
-
     
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
+    
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        textField.resignFirstResponder()
+    //        return true
+    //    }
     
     
     func currentUserName()->(String){
@@ -70,7 +70,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
             print("uid : ",uid)
         }
         return(uid)
-
+        
     }
     
     
@@ -104,7 +104,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
         }, completion: nil)
     }
     
-       
+    
     
     @IBAction func deliverWaysWasPressed(_ sender: Any) {
         waySources = ["宅配","711","全家便利商店"]
@@ -120,8 +120,8 @@ class HomeController: UIViewController,UITextFieldDelegate {
         addTransparent(frames: selectPaymentWayButton.frame)
     }
     
-
-
+    
+    
     
     @IBAction func signUpConfirmWasPressed(_ sender: Any) {
         var error = ""
@@ -132,61 +132,65 @@ class HomeController: UIViewController,UITextFieldDelegate {
             let phone = phoneTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             Database.database().reference(withPath:"users/\(self.uid)/Profile/phone").setValue(phone)
         }
-         Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
-        .child("Profile")
-        .queryOrderedByKey()
-        .observeSingleEvent(of: .value, with: { snapshot in 
-            guard let value = snapshot.value as? [String:Any] else{
-                print("Error")
-                return
-            }
-            
-            if (value["way"] as? String) == "google"{
-                let message = UIAlertController(title: "您已註冊成功", message: "", preferredStyle: .alert)
-                let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in 
-                    print("here go to profile page!")
-                    self.transitionToProfileScene()
-
-                })
-                message.addAction(confirmAction)
-                self.present(message, animated: true, completion: nil)
-
-            }else{
-                let message = UIAlertController(title: "註冊成功", message: nil, preferredStyle: .alert)
-                       let confirmAction = UIAlertAction(title: "返回登入頁面", style: .default, handler:
-                       {action in 
-                           print("here need to return login page!")
-                           self.transitionToLogInScene()
-                       })
-                       message.addAction(confirmAction)
-                       self.present(message, animated: true, completion: nil)
-            }
-            
-        })
+        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
+            .child("Profile")
+            .queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in 
+                guard let value = snapshot.value as? [String:Any] else{
+                    print("Error")
+                    return
+                }
+                
+                if (value["way"] as? String) == "google"{
+                    let message = UIAlertController(title: "您已註冊成功", message: "", preferredStyle: .alert)
+                    let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in 
+                        print("here go to profile page!")
+                        self.transitionToProfileScene()
+                        
+                    })
+                    message.addAction(confirmAction)
+                    self.present(message, animated: true, completion: nil)
+                    
+                }else{
+                    let message = UIAlertController(title: "註冊成功", message: nil, preferredStyle: .alert)
+                    let confirmAction = UIAlertAction(title: "返回登入頁面", style: .default, handler:
+                    {action in 
+                        print("here need to return login page!")
+                        self.transitionToLogInScene()
+                    })
+                    message.addAction(confirmAction)
+                    self.present(message, animated: true, completion: nil)
+                }
+                
+            })
         
-       
+        
     }
     
     //  go to logIn step
-        func transitionToLogInScene(){
-            let storyboard = UIStoryboard(name: "SignUpLogIn", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as! LogInController
-            self.navigationController?.pushViewController(vc,animated: true)
-        }
+    func transitionToLogInScene(){
+        let storyboard = UIStoryboard(name: "SignUpLogIn", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as! LogInController
+        self.navigationController?.pushViewController(vc,animated: true)
+    }
     func transitionToProfileScene(){
-               let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-               let vc = storyboard.instantiateViewController(withIdentifier: "ProfileControllerId") as! ProfileController
-               self.navigationController?.pushViewController(vc,animated: true)
-           }
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProfileControllerId") as! ProfileController
+        self.navigationController?.pushViewController(vc,animated: true)
+    }
+    
+    
+    
+    
 }
 
 
 
 extension HomeController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return waySources.count
-        }
-        
+        return waySources.count
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViews.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = waySources[indexPath.row]

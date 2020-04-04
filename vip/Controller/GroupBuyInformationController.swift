@@ -121,7 +121,7 @@ class GroupBuyInformationController: UIViewController {
                 if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                     print("empty:",snapshots.isEmpty)
                     if snapshots.isEmpty {
-                        let groupBuyRef = Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy/\(self.uid ?? "")").childByAutoId().child("JoinUser/users")
+                        let groupBuyRef = Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy/\(self.uid ?? "")").childByAutoId().child("JoinUser/users/\(self.uid ?? "")")
                         
                         groupBuyRef.setValue(String(self.uid ?? ""))
                         print(String(self.uid ?? "") + " 開團 ")
@@ -148,10 +148,16 @@ class GroupBuyInformationController: UIViewController {
                 }
                 
             })
-                
+        
         
     }
     
+    @IBAction func c(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyAddControllerId") as!  GroupBuyAddController
+        
+        self.navigationController?.pushViewController(vc,animated: true)
+    }
     
     
 }
@@ -171,8 +177,9 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
-        vc.index = indexPath.row        
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyJoinControllerId") as!  GroupBuyJoinController
+        vc.index = indexPath.row      
+        vc.productId = productId
         self.navigationController?.pushViewController(vc,animated: true)
         
     }
