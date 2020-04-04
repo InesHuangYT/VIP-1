@@ -11,48 +11,47 @@ import UIKit
 import Firebase
 
 
-struct CellData{
-    let id : String?
-    let image : String?
-    let productName : String?
-    let price : String?
-}
+
 
 class ShoppingCartController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     var ref: DatabaseReference!
-    var Data = [CellData]()
     var test:UILabel!
     var numCell:Int!
+    var name:[String] = []
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        loadData()
         tableView.delegate = self
         tableView.dataSource = self
-        loadData()
-        super.viewDidLoad()
-//        data = [CellData.init(image: "image", productName: "name", price: "$150")]
+        print("lookup name = ", self.name)
+        //        data = [CellData.init(image: "image", productName: "name", price: "$150")]
     }
-   
+    
     func loadData(){
-        Database.database().reference().child("ShoppingCart")
-                  .observeSingleEvent(of: .value, with: { snapshot in
+        ref = Database.database().reference()
+        let user = Auth.auth().currentUser!
+        let queue = DispatchQueue(label: "com.appcoda.myqueue")
+        queue.sync {
+            self.ref.child("ShoppingCart").child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
+                if let data = snapshot.children.allObjects as? [DataSnapshot] {
+                    print(data)
+                    let retriName = data.compactMap({($0.value as! [String:Any])["ProductName"]})
+                    print("retriName:",retriName)
+                    let retriprice = data.compactMap({($0.value as![String:Any])["Price"]})
+                    let imageURL = data.compactMap({
+                        ($0.value as! [String: Any])["imageURL"]
+                    })
+                    self.name = retriName as! [String]
                     
-                    if let data = snapshot.children.allObjects as? [DataSnapshot] {
-//                        let retriId = data.
-                        self.numCell = data.count
-                        let retriName = data.compactMap({($0.value as! [String:Any])["ProductName"]})
-                        print("retriName:",retriName)
-                        
-                        
-                    }
-                    
-                    
-          
-         
-
-          
-          })
+                }
+                
+            })
+        }
+        
+        
     }
     
     func numberOfSectionInTableView(tableView: UITableView) -> Int{
@@ -60,9 +59,10 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
-        //Count Products
-        return self.numCell
+        return 3
     }
+    
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! ShoppingCartCell
@@ -73,7 +73,7 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
-
+    
     @IBAction func OrderBtn(_ sender: Any) {
     }
     

@@ -83,7 +83,8 @@ class ProductInformationController: UIViewController {
                     self.evaluationLabel.text = "產品評價 " + (productEvaluationResults[index] as! String)
                     self.sellerEvaluationLabel.text = "商家評價 " + (sellerEvaluationResults[index] as! String)
                     self.productImage.image = UIImage(named:"logo")
-                    let productImageUrl = imageResults[index] 
+                    let productImageUrl = imageResults[index]
+                    self.imageURL = imageResults[index] as! String
                     if let imageUrl = URL(string: productImageUrl as! String){
                         URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                             if error != nil {
@@ -111,7 +112,8 @@ class ProductInformationController: UIViewController {
         let user = Auth.auth().currentUser!
         let newData = ["ProductName" : self.nameLabel.text, "Price" : self.priceLabel.text, "imageURL": self.imageURL]
         
-        self.ref.child("ShoppingCart").child(user.uid).child(self.ID).setValue(newData)
+    self.ref.child("ShoppingCart").child(user.uid).child(self.ID).setValue(newData)
+        
         showAlert(title:"message", message:"Add to cart successfully", handlerOK:{action in
             print("Add To CART!")
         })
