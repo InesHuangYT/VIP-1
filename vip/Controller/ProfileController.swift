@@ -4,7 +4,7 @@
 //
 //  Created by Ines on 2020/3/8.
 //  Copyright © 2020 Ines. All rights reserved.
-//
+// Full screen https://stackoverflow.com/questions/56435510/presenting-modal-in-ios-13-fullscreen
 
 import UIKit
 import GoogleSignIn
@@ -72,7 +72,6 @@ class ProfileController: UIViewController {
     @IBAction func signOutButtonWasPressed(_ sender: Any) {
         do{
             try Auth.auth().signOut()
-            transitionToLogInScene()
         } catch let err {
             print ("failed to sign out with error",err)
            
@@ -81,12 +80,15 @@ class ProfileController: UIViewController {
     }
     
     
-    func transitionToLogInScene(){
-        let storyboard = UIStoryboard(name: "SignUpLogIn", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as! LogInController
-        self.navigationController?.pushViewController(vc,animated: true)
-    }
-    
+//    func transitionToLogInScene(){
+//        let storyboard = UIStoryboard(name: "SignUpLogIn", bundle: nil)
+//        if let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as? LogInController{
+//            vc.modalPresentationStyle = .fullScreen
+//            self.present(vc, animated: true, completion: nil)
+//        }
+//        
+//    }
+//    
    
     
 }

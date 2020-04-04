@@ -4,7 +4,7 @@
 //
 //  Created by Ines on 2020/2/19.
 //  Copyright © 2020 Ines. All rights reserved.
-//
+//隱藏數字鍵盤 https://medium.com/@KaushElsewhere/how-to-dismiss-keyboard-in-a-view-controller-of-ios-3b1bfe973ad1
 
 import UIKit
 import GoogleSignIn
@@ -20,7 +20,6 @@ class HomeController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var selectPaymentWayButton: UIButton!
     @IBOutlet weak var signUpConfirm: UIButton!
     
-    @IBOutlet weak var currentUserlabel: UILabel!
 
     @IBOutlet weak var phoneTextField: UITextField!
     
@@ -41,23 +40,34 @@ class HomeController: UIViewController,UITextFieldDelegate {
         
         // To hideKeyboard
         phoneTextField.delegate = self
-        
+        setUpTextField()
         print("current user uidd : " , currentUserName())
      }
     
-    // To hideKeyboard
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-          textField.resignFirstResponder()
-          return true
+    func setUpTextField(){
+        let toolBar = UIToolbar(frame: CGRect(origin: .zero, size: .init(width:view.frame.size.width ,height:30)))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneBtn = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(doneButtonAction))
+        toolBar.setItems([flexSpace,doneBtn], animated: false)
+        toolBar.sizeToFit()
+        phoneTextField.inputAccessoryView = toolBar
     }
 
+    @objc func doneButtonAction (){
+        self.view.endEditing(true)
+    }
+
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
     
     
     func currentUserName()->(String){
         if let user = Auth.auth().currentUser{
             uid = user.uid
             print("uid : ",uid)
-            currentUserlabel.text = " login uid is : " + (uid)
         }
         return(uid)
 

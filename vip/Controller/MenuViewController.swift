@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -69,11 +70,18 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if cell.lblMenu.text! == "團購"
         {
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            let newFrontViewController = UINavigationController.init(rootViewController: desController)
-            
-            revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+            Database.database().reference().child("GroupBuy").observe(.value, with: { 
+                (snapshot) in 
+                let allKeys = snapshot.value as! [String : AnyObject]
+                let nodeToReturn = allKeys.keys
+                let counts = nodeToReturn.count
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "GroupBuy", bundle: nil)
+                let desController = mainStoryboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
+                desController.count = counts
+                let newFrontViewController = UINavigationController.init(rootViewController: desController)
+                
+                self.revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+            })
         }
         
         if cell.lblMenu.text! == "我的訂單"

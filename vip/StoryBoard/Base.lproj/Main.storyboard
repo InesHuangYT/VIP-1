@@ -11,7 +11,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5Yw-UO-NSI">
             <objects>
-                <navigationController navigationBarHidden="YES" id="PP3-7B-La8" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="PP3-7B-La8" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="leg-Nr-WEM">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -244,6 +244,9 @@
                                 <state key="normal" title="團購">
                                     <color key="titleColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="groupBuyButtonWasPresed:" destination="ucJ-28-r4v" eventType="touchUpInside" id="v8E-Yh-7lh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Tf-bO-tIW">
                                 <rect key="frame" x="0.0" y="138" width="155" height="208"/>
@@ -329,6 +332,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenu" destination="EAx-kE-tYd" id="4XY-Ia-vwc"/>
+                        <outlet property="groupBuyButton" destination="eud-Iw-3dz" id="e32-KZ-j0O"/>
                         <outlet property="searchTextField" destination="8Li-aT-IEE" id="YBE-tA-zg5"/>
                     </connections>
                 </viewController>
