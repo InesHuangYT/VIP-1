@@ -8,21 +8,50 @@
 
 import UIKit
 import Firebase
+import AVFoundation
 
 class GroupBuyOpenController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var openButton: UIButton!
+    @IBOutlet weak var pauseAndPlay: UIButton!
+    
     var index  = Int()
     var productId = String()
     var uid = Auth.auth().currentUser?.uid
-    
+    var audioPlayer: AVAudioPlayer?
+
+
+
+//    var backgroundAudio = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3") ?? "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
+        
+        let lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+        print(lemmonSound)
+        
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        try! AVAudioSession.sharedInstance().setActive(true)
+        
+        try! audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
+        audioPlayer!.prepareToPlay()
+        audioPlayer!.play()
+        pauseAndPlay.setImage(UIImage(named : "pause"), for: UIControl.State.normal)
+        pauseAndPlay.setImage(UIImage(named : "play"), for: UIControl.State.selected)
+
     }
     
+    @IBAction func pauseAndPlayButtonWasPressed(_ sender: UIButton) {
+        pauseAndPlay.isSelected = !sender.isSelected
+        if(audioPlayer?.isPlaying == true){
+            audioPlayer?.stop()
+        }else{
+            audioPlayer?.play()
+        }
+        
+    }
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
