@@ -13,7 +13,6 @@ import FirebaseAuth
 class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var groupBuyId: UILabel!
-    @IBOutlet weak var joinButton: UIButton!
     
     
     override func awakeFromNib() {

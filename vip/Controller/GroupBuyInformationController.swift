@@ -114,51 +114,16 @@ class GroupBuyInformationController: UIViewController {
     
     @IBAction func groupBuyOpenButtonWasPressed(_ sender: Any) {
         
-        Database.database().reference().child("GroupBuy").child(productId).child("openedBy").child(self.uid ?? "")
-            .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in 
-                
-                if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                    print("empty:",snapshots.isEmpty)
-                    if snapshots.isEmpty {
-                        let groupBuyRef = Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy/\(self.uid ?? "")").childByAutoId().child("JoinUser/users/\(self.uid ?? "")")
-                        
-                        groupBuyRef.setValue(String(self.uid ?? ""))
-                        print(String(self.uid ?? "") + " 開團 ")
-                        //  開團規則：一位使用者只能在一個商品內開一次團
-                        Database.database().reference().child("GroupBuy/\(self.productId)/openedBy/\(self.uid ?? "")")
-                            .queryOrderedByKey().observeSingleEvent(of: .value, with: { 
-                                snapshot in
-                                
-                                if let datas = snapshot.children.allObjects as? [DataSnapshot]{
-                                    
-                                    for snap in datas{
-                                        let key = snap.key
-                                        print(key)
-                                        Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : no currentUser")/GroupBuy/\(self.productId)/OpenGroupId").setValue(key)
-                                    }
-                                }
-                                
-                            })
-                    }else{
-                        print("group already exist, can't open the group")
-                        
-                    }
-                    
-                }
-                
-            })
-        
-        
-    }
-    
-    @IBAction func c(_ sender: Any) {
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyAddControllerId") as!  GroupBuyAddController
-        
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyOpenControllerId") as!  GroupBuyOpenController
+        vc.index = index
+        vc.productId = productId
         self.navigationController?.pushViewController(vc,animated: true)
+        
+        
     }
     
+   
     
 }
 
