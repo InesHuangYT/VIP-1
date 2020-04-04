@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bQs-hd-OWx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bQs-hd-OWx">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -271,23 +271,19 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="width" secondItem="Amf-ru-MsN" secondAttribute="width" multiplier="0.896" constant="39" id="CTJ-Ik-ui6"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="bottom" secondItem="Imw-Wd-ndg" secondAttribute="bottom" constant="8" id="Fwn-ie-5Pg"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="top" secondItem="Imw-Wd-ndg" secondAttribute="top" constant="8" id="GWm-pk-kdh"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="trailing" secondItem="Imw-Wd-ndg" secondAttribute="trailing" constant="39" id="kdx-BK-Zn5"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="leading" secondItem="Imw-Wd-ndg" secondAttribute="leading" id="tPj-ey-BJi"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="centerY" secondItem="Imw-Wd-ndg" secondAttribute="centerY" constant="8" id="uWp-ET-Q94"/>
+                                    <constraint firstAttribute="trailing" secondItem="HPn-zW-zQr" secondAttribute="trailing" id="Q4B-v9-Ffd"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="top" secondItem="YON-1F-v0p" secondAttribute="topMargin" id="bRZ-3Y-9rr"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="centerX" secondItem="YON-1F-v0p" secondAttribute="centerX" id="kD5-3k-e2t"/>
+                                    <constraint firstAttribute="bottom" secondItem="HPn-zW-zQr" secondAttribute="bottom" constant="-8" id="nIb-X8-WvN"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Imw-Wd-ndg"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="Amf-ru-MsN"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="YON-1F-v0p" firstAttribute="trailing" secondItem="cX1-BS-xU3" secondAttribute="trailing" id="6n3-qL-yhO"/>
-                            <constraint firstItem="YON-1F-v0p" firstAttribute="top" secondItem="cX1-BS-xU3" secondAttribute="top" id="JsW-e3-lMf"/>
-                            <constraint firstItem="YON-1F-v0p" firstAttribute="leading" secondItem="cX1-BS-xU3" secondAttribute="leading" id="h4D-8v-WAN"/>
-                            <constraint firstItem="YON-1F-v0p" firstAttribute="bottom" secondItem="cX1-BS-xU3" secondAttribute="bottom" id="hPt-ns-nBo"/>
+                            <constraint firstItem="YON-1F-v0p" firstAttribute="top" secondItem="cX1-BS-xU3" secondAttribute="top" id="DiM-Ew-r8a"/>
+                            <constraint firstItem="YON-1F-v0p" firstAttribute="bottom" secondItem="cX1-BS-xU3" secondAttribute="bottom" id="RAg-CY-ru7"/>
+                            <constraint firstItem="YON-1F-v0p" firstAttribute="centerX" secondItem="gpe-K1-j6N" secondAttribute="centerX" id="U4A-Hg-bHM"/>
+                            <constraint firstItem="YON-1F-v0p" firstAttribute="leading" secondItem="cX1-BS-xU3" secondAttribute="leading" id="Xxf-zK-sX3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cX1-BS-xU3"/>
                     </view>
@@ -347,6 +343,23 @@
                                     <action selector="openButtonWasPressed:" destination="aS1-pp-jMR" eventType="touchUpInside" id="idD-fn-hIr"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ibq-n7-KUO">
+                                <rect key="frame" x="160" y="563" width="118" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-p0-36x">
+                                <rect key="frame" x="93" y="547" width="61" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="播放" image="pause">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseAndPlayButtonWasPressed:" destination="aS1-pp-jMR" eventType="touchUpInside" id="JEU-3d-TAB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="7b8-Xz-2sP"/>
@@ -359,11 +372,12 @@
                     <connections>
                         <outlet property="btnMenu" destination="0Nd-TQ-Hhx" id="hYA-UG-Ay3"/>
                         <outlet property="openButton" destination="rKc-LQ-mXT" id="CAy-3v-Ucl"/>
+                        <outlet property="pauseAndPlay" destination="TgM-p0-36x" id="3y5-jQ-w8a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUE-Uy-w8H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1609" y="625"/>
+            <point key="canvasLocation" x="1608.8" y="624.73763118440786"/>
         </scene>
         <!--Create Group Buy Product Controller-->
         <scene sceneID="mlE-Uh-Rlu">
@@ -532,28 +546,25 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1000" id="lHx-Y3-Zz7"/>
+                                            <constraint firstAttribute="height" constant="1000" id="uEK-RO-ckR"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="bottom" secondItem="gLd-t5-7Lk" secondAttribute="bottom" id="7ri-Fq-n5n"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="trailing" secondItem="gLd-t5-7Lk" secondAttribute="trailing" id="ISf-M7-7zr"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="top" secondItem="gLd-t5-7Lk" secondAttribute="top" id="JAc-Lk-lAE"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="width" secondItem="e92-Ni-1RE" secondAttribute="width" id="Wdq-oU-xdQ"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="centerY" secondItem="gLd-t5-7Lk" secondAttribute="centerY" id="bal-Rg-gM0"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="leading" secondItem="gLd-t5-7Lk" secondAttribute="leading" id="fr3-zW-Hxa"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="top" secondItem="ICs-DN-9hI" secondAttribute="top" id="6aA-nx-GL7"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="bottom" secondItem="ICs-DN-9hI" secondAttribute="bottom" id="7ri-Fq-n5n"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="trailing" secondItem="ICs-DN-9hI" secondAttribute="trailing" id="ISf-M7-7zr"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="width" secondItem="ICs-DN-9hI" secondAttribute="width" id="Wdq-oU-xdQ"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="leading" secondItem="ICs-DN-9hI" secondAttribute="leading" id="fr3-zW-Hxa"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="gLd-t5-7Lk"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="e92-Ni-1RE"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.86058692120000002" green="1" blue="0.85274813790000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ICs-DN-9hI" firstAttribute="leading" secondItem="OZW-La-nQm" secondAttribute="leading" id="1hl-sH-I5r"/>
-                            <constraint firstItem="ICs-DN-9hI" firstAttribute="top" secondItem="OZW-La-nQm" secondAttribute="top" id="4S5-a3-U3l"/>
+                            <constraint firstItem="ICs-DN-9hI" firstAttribute="bottom" secondItem="OZW-La-nQm" secondAttribute="bottom" id="Eyn-1o-b4s"/>
+                            <constraint firstItem="ICs-DN-9hI" firstAttribute="top" secondItem="OZW-La-nQm" secondAttribute="top" id="Tco-ft-qKx"/>
                             <constraint firstItem="ICs-DN-9hI" firstAttribute="trailing" secondItem="OZW-La-nQm" secondAttribute="trailing" id="cgi-hL-Xqo"/>
-                            <constraint firstItem="ICs-DN-9hI" firstAttribute="bottom" secondItem="OZW-La-nQm" secondAttribute="bottom" id="t2m-CT-dUd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OZW-La-nQm"/>
                     </view>
@@ -575,7 +586,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gtc-23-vHq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-142" y="-546"/>
+            <point key="canvasLocation" x="-142" y="-858"/>
         </scene>
         <!--Group Buy Join Controller-->
         <scene sceneID="MnS-5J-APY">
@@ -637,6 +648,7 @@
         <image name="back" width="253" height="86"/>
         <image name="logo" width="175" height="166"/>
         <image name="logoAPP" width="175" height="166"/>
+        <image name="pause" width="512" height="512"/>
         <image name="support" width="33" height="33"/>
         <image name="加入團購" width="184" height="40"/>
         <image name="自己開團" width="159" height="86"/>
