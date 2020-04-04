@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="iUN-UH-uCb" kind="relationship" relationship="rootViewController" id="vUM-TY-BUp"/>
+                        <segue destination="1G4-2X-0WL" kind="relationship" relationship="rootViewController" id="1en-kp-m9n"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wqt-5F-oOo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -72,6 +72,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFn-Ga-lWq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2383" y="-1354"/>
+        </scene>
+        <!--ShoppingCart-->
+        <scene sceneID="r7t-ui-UOQ">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="ShoppingCart" storyboardName="ShoppingCart" id="1G4-2X-0WL" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="j7K-DH-HIW"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y6P-cX-3UB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2412" y="-1260"/>
         </scene>
         <!--Coupon Controller-->
         <scene sceneID="Fkh-MU-OHp">

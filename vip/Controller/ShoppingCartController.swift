@@ -10,16 +10,25 @@ import Foundation
 import UIKit
 import Firebase
 
+
+struct CellData{
+    let image : String?
+    let productName : String?
+    let price : String?
+}
+
 class ShoppingCartController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var data = [CellData]()
     
-    @IBOutlet weak var tableview: UITableView!
-
-    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         super.viewDidLoad()
-        loadData()
+        data = [CellData.init(image: "image", productName: "name", price: "$150")]
     }
    
     func loadData(){
@@ -40,9 +49,7 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
-    @IBAction func ListBtnTapped(_ sender: Any) {
-    }
-    
+
     @IBAction func OrderBtn(_ sender: Any) {
     }
     

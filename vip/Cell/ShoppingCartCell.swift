@@ -31,4 +31,13 @@ class ShoppingCartCell: UITableViewCell{
             sender.isSelected = true
         }
     }
+    @IBAction func ListBtnTapped(_ sender: UIButton) {
+        if sender.isSelected{
+            print("Like Button Selected!")
+            sender.isSelected = false
+        }else{
+            sender.isSelected = true
+        }
+    }
+    
 }
