@@ -4,7 +4,7 @@
 //
 //  Created by Ines on 2020/4/2.
 //  Copyright © 2020 Ines. All rights reserved.
-//
+// audioPlayer https://www.youtube.com/watch?v=Kq7eVJ6RSp8
 
 import UIKit
 import Firebase
@@ -15,15 +15,13 @@ class GroupBuyOpenController: UIViewController {
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var openButton: UIButton!
     @IBOutlet weak var pauseAndPlay: UIButton!
+    @IBOutlet weak var slider: UISlider!
     
     var index  = Int()
     var productId = String()
     var uid = Auth.auth().currentUser?.uid
     var audioPlayer: AVAudioPlayer?
-
-
-
-//    var backgroundAudio = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3") ?? "")
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,20 +36,44 @@ class GroupBuyOpenController: UIViewController {
         try! audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
         audioPlayer!.prepareToPlay()
         audioPlayer!.play()
-        pauseAndPlay.setImage(UIImage(named : "pause"), for: UIControl.State.normal)
-        pauseAndPlay.setImage(UIImage(named : "play"), for: UIControl.State.selected)
-
+        
+        pauseAndPlay.setImage(UIImage(named : "pause"), for: UIControl.State.normal) //停
+        pauseAndPlay.setImage(UIImage(named : "play"), for: UIControl.State.selected) //播
+        
+        slider.maximumValue = Float(audioPlayer?.duration ?? 0)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+        
     }
     
     @IBAction func pauseAndPlayButtonWasPressed(_ sender: UIButton) {
+       
         pauseAndPlay.isSelected = !sender.isSelected
+        
         if(audioPlayer?.isPlaying == true){
             audioPlayer?.stop()
+
         }else{
             audioPlayer?.play()
         }
-        
+
     }
+    
+    // drag slider
+    @IBAction func changeAudioTime(_ sender: Any) {
+        audioPlayer?.stop()
+        audioPlayer?.currentTime = TimeInterval(slider.value)
+        audioPlayer?.prepareToPlay()
+        audioPlayer?.play()
+    }
+    
+    
+    @objc func updateSlider(){
+        slider.value = Float(audioPlayer?.currentTime ?? 0)
+        NSLog("HHHHii")
+    }
+    
+    
+    
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))

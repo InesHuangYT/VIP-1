@@ -343,13 +343,8 @@
                                     <action selector="openButtonWasPressed:" destination="aS1-pp-jMR" eventType="touchUpInside" id="idD-fn-hIr"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ibq-n7-KUO">
-                                <rect key="frame" x="160" y="563" width="118" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </slider>
                             <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-p0-36x">
-                                <rect key="frame" x="93" y="547" width="61" height="61"/>
+                                <rect key="frame" x="66" y="547" width="61" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="播放" image="pause">
@@ -360,6 +355,14 @@
                                     <action selector="pauseAndPlayButtonWasPressed:" destination="aS1-pp-jMR" eventType="touchUpInside" id="JEU-3d-TAB"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ibq-n7-KUO">
+                                <rect key="frame" x="133" y="563" width="177" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeAudioTime:" destination="aS1-pp-jMR" eventType="valueChanged" id="Ejr-zN-hb1"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="7b8-Xz-2sP"/>
@@ -373,6 +376,7 @@
                         <outlet property="btnMenu" destination="0Nd-TQ-Hhx" id="hYA-UG-Ay3"/>
                         <outlet property="openButton" destination="rKc-LQ-mXT" id="CAy-3v-Ucl"/>
                         <outlet property="pauseAndPlay" destination="TgM-p0-36x" id="3y5-jQ-w8a"/>
+                        <outlet property="slider" destination="ibq-n7-KUO" id="tWv-vt-gcM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUE-Uy-w8H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
