@@ -12,6 +12,7 @@ import FirebaseStorage
 
 class ProductCollectionViewCell: UICollectionViewCell {
     var ref: DatabaseReference!
+    var productID:String!
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
@@ -36,7 +37,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
           Database.database().reference().child("Product")
               .queryOrderedByKey()
               .observeSingleEvent(of: .value, with: { snapshot in 
-
+               
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                    
                     let nameResults = datas.compactMap({

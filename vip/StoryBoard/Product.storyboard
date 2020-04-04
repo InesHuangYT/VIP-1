@@ -157,8 +157,11 @@
                                     <constraint firstAttribute="width" constant="150" id="XUh-1L-1Kq"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ctQ-8n-tM6">
+                                <rect key="frame" x="78" y="304" width="164" height="166"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNq-ry-dPV">
-                                <rect key="frame" x="111.5" y="488" width="97" height="45"/>
+                                <rect key="frame" x="29" y="503" width="97" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="UfU-kk-NRH"/>
                                     <constraint firstAttribute="width" constant="97" id="u1H-Pd-a6H"/>
@@ -170,19 +173,27 @@
                                     <action selector="back:" destination="jF0-c5-QSK" eventType="touchUpInside" id="BJ7-gc-xQ9"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ctQ-8n-tM6">
-                                <rect key="frame" x="78" y="304" width="164" height="166"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Lf-jV-y5K">
+                                <rect key="frame" x="141" y="503" width="154" height="45"/>
+                                <state key="normal" image="加入購物車"/>
+                                <connections>
+                                    <action selector="addToCart:" destination="jF0-c5-QSK" eventType="touchUpInside" id="gqK-gn-JCb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93471920490000004" green="0.95890384910000004" blue="0.90259689089999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="DNj-3Y-qss" firstAttribute="top" secondItem="Swt-2Q-zab" secondAttribute="top" constant="69" id="1O1-K4-cV6"/>
-                            <constraint firstItem="lNq-ry-dPV" firstAttribute="top" secondItem="ctQ-8n-tM6" secondAttribute="bottom" constant="18" id="Dxq-pL-OoV"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="1Lf-jV-y5K" secondAttribute="bottom" constant="20" id="3ew-fY-LUJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="1Lf-jV-y5K" secondAttribute="trailing" constant="9" id="Dw9-iQ-dmI"/>
+                            <constraint firstItem="lNq-ry-dPV" firstAttribute="top" secondItem="ctQ-8n-tM6" secondAttribute="bottom" constant="33" id="Dxq-pL-OoV"/>
                             <constraint firstItem="DNj-3Y-qss" firstAttribute="leading" secondItem="Swt-2Q-zab" secondAttribute="leading" constant="85" id="JG4-Wp-u0q"/>
+                            <constraint firstItem="1Lf-jV-y5K" firstAttribute="leading" secondItem="AhX-Sz-6cc" secondAttribute="leadingMargin" constant="125" id="MnJ-Ng-Y3b"/>
                             <constraint firstItem="Swt-2Q-zab" firstAttribute="trailing" secondItem="ctQ-8n-tM6" secondAttribute="trailing" constant="78" id="PC9-df-4Ji"/>
-                            <constraint firstItem="Swt-2Q-zab" firstAttribute="bottom" secondItem="lNq-ry-dPV" secondAttribute="bottom" constant="35" id="QO4-Tn-VRp"/>
-                            <constraint firstItem="lNq-ry-dPV" firstAttribute="centerX" secondItem="ctQ-8n-tM6" secondAttribute="centerX" id="Sys-rW-ZIY"/>
+                            <constraint firstItem="Swt-2Q-zab" firstAttribute="bottom" secondItem="lNq-ry-dPV" secondAttribute="bottom" constant="20" id="QO4-Tn-VRp"/>
+                            <constraint firstItem="lNq-ry-dPV" firstAttribute="centerX" secondItem="ctQ-8n-tM6" secondAttribute="centerX" constant="-82.5" id="Sys-rW-ZIY"/>
                             <constraint firstItem="ctQ-8n-tM6" firstAttribute="leading" secondItem="Swt-2Q-zab" secondAttribute="leading" constant="78" id="Za6-z8-liS"/>
+                            <constraint firstItem="1Lf-jV-y5K" firstAttribute="top" secondItem="AhX-Sz-6cc" secondAttribute="topMargin" constant="503" id="rWe-FO-5oC"/>
                             <constraint firstItem="ctQ-8n-tM6" firstAttribute="top" secondItem="DNj-3Y-qss" secondAttribute="bottom" constant="32.5" id="v9l-dz-dbe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Swt-2Q-zab"/>
@@ -213,5 +224,6 @@
         <image name="back" width="253" height="86"/>
         <image name="logo" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
+        <image name="加入購物車" width="319" height="86"/>
     </resources>
 </document>

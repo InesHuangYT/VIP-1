@@ -22,6 +22,7 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
     var ref: DatabaseReference!
     var Data = [CellData]()
     var test:UILabel!
+    var numCell:Int!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -36,10 +37,10 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
     func loadData(){
         Database.database().reference().child("ShoppingCart")
                   .observeSingleEvent(of: .value, with: { snapshot in
-                    print(snapshot.children.allObjects)
-//                    print("SNAP key:",snapshot.)
+                    
                     if let data = snapshot.children.allObjects as? [DataSnapshot] {
 //                        let retriId = data.
+                        self.numCell = data.count
                         let retriName = data.compactMap({($0.value as! [String:Any])["ProductName"]})
                         print("retriName:",retriName)
                         
@@ -60,11 +61,15 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
         //Count Products
-        return 3
+        return self.numCell
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! ShoppingCartCell
+        cell.ProductName.text = ""
+        cell.Price.text = ""
+        
+        
         return cell
     }
     

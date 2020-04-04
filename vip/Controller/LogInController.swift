@@ -71,7 +71,10 @@ class LogInController: UIViewController,GIDSignInDelegate {
             }else{
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+//                let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                // Go To Shopping Cart
+                // Just For Test
+                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
                 self.navigationController?.pushViewController(vc,animated: true)  
             }
             

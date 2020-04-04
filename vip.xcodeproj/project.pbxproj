@@ -49,6 +49,7 @@
 		C01A7AF1240FBF1B00E99EED /* CreateProductDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A7AF0240FBF1B00E99EED /* CreateProductDataController.swift */; };
 		C01F4AA7240EA844003E0AAF /* ShoppingCartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */; };
 		C02BD2E524101F2900BD3E1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B087D23123F56436001FAC9A /* Main.storyboard */; };
+		C02FAECA2438EAAA00E7A0E1 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02FAEC92438EAAA00E7A0E1 /* Alert.swift */; };
 		C0A511D8240FCFF100BABB14 /* ShoppingCart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0A511D7240FCFF100BABB14 /* ShoppingCart.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +280,7 @@
 		C0164266240E0C2A00B760B2 /* ShoppingCartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartController.swift; sourceTree = "<group>"; };
 		C01A7AF0240FBF1B00E99EED /* CreateProductDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductDataController.swift; sourceTree = "<group>"; };
 		C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartCell.swift; sourceTree = "<group>"; };
+		C02FAEC92438EAAA00E7A0E1 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		C0A511D7240FCFF100BABB14 /* ShoppingCart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShoppingCart.storyboard; sourceTree = "<group>"; };
 		D35856650B86EBD34153C837 /* Pods-vip.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vip.release.xcconfig"; path = "Target Support Files/Pods-vip/Pods-vip.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -401,6 +403,7 @@
 				02F25D68242096110041541E /* ViewController.swift */,
 				02F25D6B2420967A0041541E /* MenuViewController.swift */,
 				02F21D5C24210211003860F9 /* AddCouponController.swift */,
+				C02FAEC92438EAAA00E7A0E1 /* Alert.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 				B087D22E23F56436001FAC9A /* SceneDelegate.swift in Sources */,
 				C0164267240E0C2A00B760B2 /* ShoppingCartController.swift in Sources */,
 				B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */,
+				C02FAECA2438EAAA00E7A0E1 /* Alert.swift in Sources */,
 				B09ED5E52414EE0500D3C4A6 /* ProfileController.swift in Sources */,
 				02F25D6C2420967A0041541E /* MenuViewController.swift in Sources */,
 				B0EA38FD2436159F00AA7499 /* GroupBuyOpenController.swift in Sources */,

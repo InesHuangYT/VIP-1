@@ -35,6 +35,12 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHM-tI-Owh">
+                        <rect key="frame" x="103" y="26" width="28" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" image="unLike"/>
+                        <state key="selected" image="like"/>
+                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.94019311670000005" green="0.95578092339999998" blue="0.9028730989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,4 +54,8 @@
             <point key="canvasLocation" x="-372.80000000000001" y="51.724137931034484"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="like" width="27" height="27"/>
+        <image name="unLike" width="28" height="28"/>
+    </resources>
 </document>
