@@ -178,10 +178,6 @@ class HomeController: UIViewController,UITextFieldDelegate {
                let vc = storyboard.instantiateViewController(withIdentifier: "ProfileControllerId") as! ProfileController
                self.navigationController?.pushViewController(vc,animated: true)
            }
-        
-    
-
-    
 }
 
 
