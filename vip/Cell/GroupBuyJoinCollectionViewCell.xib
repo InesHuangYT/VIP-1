@@ -37,9 +37,6 @@
                         <state key="normal" title="去結帳加入團購" backgroundImage="加入團購按鈕">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
-                        <connections>
-                            <action selector="joinButtonWasPressed:" destination="gTV-IL-0wX" eventType="touchUpInside" id="xSZ-I6-LYW"/>
-                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -48,7 +45,6 @@
             <size key="customSize" width="407" height="124"/>
             <connections>
                 <outlet property="groupBuyId" destination="UsJ-Ce-NIk" id="lhX-Uk-LRg"/>
-                <outlet property="joinButton" destination="7Ei-rw-nAe" id="gAe-tU-Jc4"/>
                 <outlet property="userName" destination="dUL-UV-xgK" id="sRn-C8-xrc"/>
             </connections>
             <point key="canvasLocation" x="385.60000000000002" y="143.47826086956522"/>

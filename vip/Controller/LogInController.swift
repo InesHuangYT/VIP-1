@@ -70,13 +70,13 @@ class LogInController: UIViewController,GIDSignInDelegate {
                 self.errorLabel.textColor = UIColor.red
             }else{
                 
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-//                self.navigationController?.pushViewController(vc,animated: true)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                self.navigationController?.pushViewController(vc,animated: true)
                 
-                    let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
-                    let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutController") as! CheckoutController
-                    self.navigationController?.pushViewController(vc,animated: true)
+//                    let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
+//                    let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutController") as! CheckoutController
+//                    self.navigationController?.pushViewController(vc,animated: true)
             }
             
         }

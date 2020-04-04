@@ -20,6 +20,7 @@ class GroupBuyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var groupPeople: UILabel!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
@@ -82,4 +83,5 @@ class GroupBuyCollectionViewCell: UICollectionViewCell {
                 
             })
     }
+    
 }
