@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var groupBuyButton: UIButton!
@@ -19,8 +19,8 @@ class ViewController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
         setupTextField()
-       
-
+        
+        
     }
     private func setupTextField(){
         searchTextField.delegate = self
@@ -33,23 +33,38 @@ class ViewController: UIViewController {
     }
     
     @IBAction func groupBuyButtonWasPresed(_ sender: Any) {
-        Database.database().reference().child("GroupBuy").observe(.value, with: { 
-            (snapshot) in 
-            let allKeys = snapshot.value as! [String : AnyObject]
-            let nodeToReturn = allKeys.keys
-            let counts = nodeToReturn.count
-            print("nodeToReturn ",nodeToReturn)
-            let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
-            vc.count = counts
-            self.navigationController?.pushViewController(vc,animated: true)
-            
-        })
-        
+        Database.database().reference().child("GroupBuy")
+            .queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in
+                let allKeys = snapshot.value as! [String : AnyObject]
+                let nodeToReturn = allKeys.keys
+                let counts = nodeToReturn.count
+                print("nodeToReturn ",nodeToReturn)
+                let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
+                vc.count = counts
+                self.navigationController?.pushViewController(vc,animated: true)
+                
+            })
     }
+//    下面的程式 會導致後面要加入團購或是開團購時，一直導回 GroupBuyController Scene *(.observe)
+        //        Database.database().reference().child("GroupBuy").observe(.value, with: { 
+               //            (snapshot) in 
+               //            let allKeys = snapshot.value as! [String : AnyObject]
+               //            let nodeToReturn = allKeys.keys
+               //            let counts = nodeToReturn.count
+               //            print("nodeToReturn ",nodeToReturn)
+               //            let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
+               //            let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
+               //            vc.count = counts
+               //            self.navigationController?.pushViewController(vc,animated: true)
+               //            
+               //        })
+        
+  
     
     
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

@@ -54,18 +54,21 @@ class GroupBuyJoinController: UIViewController {
                                 .observeSingleEvent(of: .value, with: { snapshot in
                                     
                                     if let datass = snapshot.children.allObjects as? [DataSnapshot]{
-                                        for snap in datass{
-                                            let key = snap.key
-                                            if key == self.uid {
-                                                print("uid already inside ", key)
-                                                
-                                            }else{
-                                                ref.child(snapshots[self.index].key).child(datas[0].key).child("JoinUser/users").child(self.uid ?? "").setValue(self.uid)
-                                                
-                                                print("Join sucessfully !")
-                                                Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : NoCurrentUser")/GroupBuy/\(self.productId)/JoinGroupId/\(datas[0].key)").setValue(datas[0].key)
-                                            }
+                                        
+                                        if datass[0].key == self.uid {
+                                            
+                                            print("uid already inside ", datass[0].key )
+                                            self.setUpMessageNo()
                                         }
+                                            
+                                        else{
+                                            ref.child(snapshots[self.index].key).child(datas[0].key).child("JoinUser/users").child(self.uid ?? "").setValue(self.uid)
+                                            
+                                            print("Join sucessfully !")
+                                            Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : NoCurrentUser")/GroupBuy/\(self.productId)/JoinGroupId/\(datas[0].key)").setValue(datas[0].key)
+                                            self.setUpMessageOk()
+                                        }
+                                        
                                     }
                                 })
                             
@@ -81,4 +84,29 @@ class GroupBuyJoinController: UIViewController {
     }
     
     
+    func setUpMessageOk(){
+        let message = UIAlertController(title: "您已加入成功", message: "", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "回主畫面", style: .default, handler: {action in 
+            print("here go to Main Scene!")
+            self.transition()
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
+    }
+    
+    func setUpMessageNo(){
+        let message = UIAlertController(title: "您已加入過摟", message: "", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "回主畫面", style: .default, handler: {action in 
+            print("here go to Main Scene!")
+            self.transition()
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
+    }
+    
+    func transition(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        present(vc, animated: true, completion: nil)
+    }
 }
