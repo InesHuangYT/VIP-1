@@ -80,7 +80,7 @@ extension GroupBuyController : UICollectionViewDataSource{
                     print("peoples", peoples ?? 0)
                     vc.groupBuyPeople = Int(peoples ?? 0) 
                     
-                    Database.database().reference().child("GroupBuy").child(datas[indexPath.row].key).child("openedBy")
+                    Database.database().reference().child("GroupBuy").child(datas[indexPath.row].key).child("OpenGroupId")
                         .queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in 
                             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
