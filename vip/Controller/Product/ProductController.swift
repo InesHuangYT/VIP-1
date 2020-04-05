@@ -17,8 +17,8 @@ class ProductController: UIViewController {
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     
     //    let data = ["first","second","three","three","three","three"]
-    var estimatedWidth = 160.0
-    var cellMarginSize = 16.0
+    var estimatedWidth = 130.0
+    var cellMarginSize = 23.0
     var ref: DatabaseReference!
     var count = Int()
 //    var ref = Database.database().reference()    
@@ -97,7 +97,7 @@ extension ProductController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
 //        print(width,width*1.2)
-        return CGSize(width: width, height: width*1.2)
+        return CGSize(width: width, height: width*1.1)
     }
     func calculateWith()-> CGFloat{
         let estimateWidth = CGFloat(estimatedWidth)
