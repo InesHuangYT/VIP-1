@@ -82,6 +82,7 @@ class ProductInformationController: UIViewController {
                     self.sellerEvaluationLabel.text = "商家評價 " + (sellerEvaluationResults[index] as! String)
                     self.productImage.image = UIImage(named:"logo")
                     let productImageUrl = imageResults[index] 
+                    self.imageURL = imageResults[index] as? String
                     if let imageUrl = URL(string: productImageUrl as! String){
                         URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                             if error != nil {
