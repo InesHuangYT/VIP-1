@@ -236,6 +236,9 @@
                                 <state key="normal" title="購物車">
                                     <color key="titleColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="shoppingCartButtonWasPressed:" destination="ucJ-28-r4v" eventType="touchUpInside" id="BAu-fk-Mar"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eud-Iw-3dz">
                                 <rect key="frame" x="163" y="138" width="157" height="208"/>
@@ -334,6 +337,7 @@
                         <outlet property="btnMenu" destination="EAx-kE-tYd" id="4XY-Ia-vwc"/>
                         <outlet property="groupBuyButton" destination="eud-Iw-3dz" id="e32-KZ-j0O"/>
                         <outlet property="searchTextField" destination="8Li-aT-IEE" id="YBE-tA-zg5"/>
+                        <outlet property="shppingCartButton" destination="H67-1w-v6u" id="ggJ-Ll-3Le"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WPo-zy-wxc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

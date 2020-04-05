@@ -12,7 +12,7 @@ import Firebase
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var menuNameArr: Array = [String]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -95,32 +95,47 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if cell.lblMenu.text! == "購物車"
         {
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            let newFrontViewController = UINavigationController.init(rootViewController: desController)
             
-            revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+            let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
+            ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                let allKeys = snapshot.value as! [String : AnyObject]
+                let nodeToReturn = allKeys.keys
+                let counts = nodeToReturn.count
+                print("nodeToReturn ",nodeToReturn)
+                print("counts ",counts)
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+                let desController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+                let newFrontViewController = UINavigationController.init(rootViewController: desController)
+                desController.shoppingCount = counts
+                self.revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+                
+            })
+            
+            
+            
+            
         }
         
         if cell.lblMenu.text! == "個人資訊"
         {
-             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-             let desController = mainStoryboard.instantiateViewController(withIdentifier: "ProfileControllerId") as! ProfileController
-             let newFrontViewController = UINavigationController.init(rootViewController: desController)
-             
-             revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+            let desController = mainStoryboard.instantiateViewController(withIdentifier: "ProfileControllerId") as! ProfileController
+            let newFrontViewController = UINavigationController.init(rootViewController: desController)
+            
+            revealViewController().pushFrontViewController(newFrontViewController, animated: true)
         }
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
