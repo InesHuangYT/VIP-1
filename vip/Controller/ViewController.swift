@@ -9,17 +9,17 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var groupBuyButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
         setupTextField()
-       
 
     }
     private func setupTextField(){
@@ -47,14 +47,11 @@ class ViewController: UIViewController {
         })
         
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-}
-extension ViewController: UITextFieldDelegate{
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

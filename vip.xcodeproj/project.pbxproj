@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		024926822434DE1400CC22A8 /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 024926812434DE1400CC22A8 /* Checkout.storyboard */; };
 		024926A02434DE9E00CC22A8 /* CheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0249269F2434DE9E00CC22A8 /* CheckoutController.swift */; };
+		02AC60E9243A08FF00A7D94C /* OrderComfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC60E8243A08FF00A7D94C /* OrderComfirmController.swift */; };
 		02F21D5D24210211003860F9 /* AddCouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F21D5C24210211003860F9 /* AddCouponController.swift */; };
 		02F21D5F24210DAE003860F9 /* CouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F21D5E24210DAE003860F9 /* CouponController.swift */; };
 		02F25D64242095C00041541E /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F25D63242095C00041541E /* MenuTableViewCell.swift */; };
@@ -235,6 +236,7 @@
 /* Begin PBXFileReference section */
 		024926812434DE1400CC22A8 /* Checkout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
 		0249269F2434DE9E00CC22A8 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckoutController.swift; path = vip/StoryBoard/CheckoutController.swift; sourceTree = SOURCE_ROOT; };
+		02AC60E8243A08FF00A7D94C /* OrderComfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderComfirmController.swift; path = vip/StoryBoard/OrderComfirmController.swift; sourceTree = SOURCE_ROOT; };
 		02F21D5C24210211003860F9 /* AddCouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCouponController.swift; path = vip/StoryBoard/AddCouponController.swift; sourceTree = SOURCE_ROOT; };
 		02F21D5E24210DAE003860F9 /* CouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CouponController.swift; path = vip/StoryBoard/CouponController.swift; sourceTree = SOURCE_ROOT; };
 		02F25D63242095C00041541E /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -385,9 +387,9 @@
 		B0E0A31B23F9E55200BE8ECC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-
+				02AC60E8243A08FF00A7D94C /* OrderComfirmController.swift */,
 				B08376F924349732006D169E /* CreateGroupBuyProductController.swift */,
-        0249269F2434DE9E00CC22A8 /* CheckoutController.swift */,
+				0249269F2434DE9E00CC22A8 /* CheckoutController.swift */,
 				C01A7AF0240FBF1B00E99EED /* CreateProductDataController.swift */,
 				B08376ED2432630E006D169E /* CreateCategoryController.swift */,
 				B08376EB243262BD006D169E /* CategoryController.swift */,
@@ -779,14 +781,15 @@
 				B08376EC243262BD006D169E /* CategoryController.swift in Sources */,
 				02F21D5D24210211003860F9 /* AddCouponController.swift in Sources */,
 				B08376F824338185006D169E /* GroupBuyInformationController.swift in Sources */,
-        B08376F324337CF6006D169E /* GroupBuyCollectionViewCell.swift in Sources */,
-        024926A02434DE9E00CC22A8 /* CheckoutController.swift in Sources */,
+				B08376F324337CF6006D169E /* GroupBuyCollectionViewCell.swift in Sources */,
+				024926A02434DE9E00CC22A8 /* CheckoutController.swift in Sources */,
 				B0E618E623FD3C8000EB6E74 /* HomeController.swift in Sources */,
 				B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */,
 				C01F4AA7240EA844003E0AAF /* ShoppingCartCell.swift in Sources */,
 				02F21D5F24210DAE003860F9 /* CouponController.swift in Sources */,
 				B0E618EA2400042800EB6E74 /* Protocol.swift in Sources */,
 				B087D22E23F56436001FAC9A /* SceneDelegate.swift in Sources */,
+				02AC60E9243A08FF00A7D94C /* OrderComfirmController.swift in Sources */,
 				C0164267240E0C2A00B760B2 /* ShoppingCartController.swift in Sources */,
 				B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */,
 				B09ED5E52414EE0500D3C4A6 /* ProfileController.swift in Sources */,

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bQs-hd-OWx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bQs-hd-OWx">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -267,15 +267,13 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="width" secondItem="Amf-ru-MsN" secondAttribute="width" multiplier="0.896" constant="39" id="CTJ-Ik-ui6"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="bottom" secondItem="Imw-Wd-ndg" secondAttribute="bottom" constant="8" id="Fwn-ie-5Pg"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="top" secondItem="Imw-Wd-ndg" secondAttribute="top" constant="8" id="GWm-pk-kdh"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="trailing" secondItem="Imw-Wd-ndg" secondAttribute="trailing" constant="39" id="kdx-BK-Zn5"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="leading" secondItem="Imw-Wd-ndg" secondAttribute="leading" id="tPj-ey-BJi"/>
-                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="centerY" secondItem="Imw-Wd-ndg" secondAttribute="centerY" constant="8" id="uWp-ET-Q94"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="width" secondItem="YON-1F-v0p" secondAttribute="width" multiplier="0.896" constant="39" id="CTJ-Ik-ui6"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="bottom" secondItem="YON-1F-v0p" secondAttribute="bottom" constant="8" id="Fwn-ie-5Pg"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="top" secondItem="YON-1F-v0p" secondAttribute="top" constant="8" id="GWm-pk-kdh"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="trailing" secondItem="YON-1F-v0p" secondAttribute="trailing" constant="39" id="kdx-BK-Zn5"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="leading" secondItem="YON-1F-v0p" secondAttribute="leading" id="tPj-ey-BJi"/>
+                                    <constraint firstItem="HPn-zW-zQr" firstAttribute="centerY" secondItem="YON-1F-v0p" secondAttribute="centerY" constant="8" id="uWp-ET-Q94"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Imw-Wd-ndg"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="Amf-ru-MsN"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -352,11 +350,11 @@
         <scene sceneID="mlE-Uh-Rlu">
             <objects>
                 <viewController storyboardIdentifier="CreateGroupBuyProductControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="l3c-Bc-t4Q" customClass="CreateGroupBuyProductController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tdB-2g-B9e">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="tdB-2g-B9e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-DN-9hI">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ICs-DN-9hI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xR-sv-awR">
@@ -497,7 +495,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8b-WK-fus" userLabel="CreateData">
-                                                <rect key="frame" x="113" y="585" width="149" height="52"/>
+                                                <rect key="frame" x="113" y="561" width="149" height="52"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="CreateData"/>
                                                 <connections>
@@ -505,7 +503,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Dr-L9-5MH">
-                                                <rect key="frame" x="145" y="645" width="84" height="39"/>
+                                                <rect key="frame" x="145" y="621" width="84" height="39"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" backgroundImage="back"/>
                                                 <connections>
@@ -520,15 +518,13 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="bottom" secondItem="gLd-t5-7Lk" secondAttribute="bottom" id="7ri-Fq-n5n"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="trailing" secondItem="gLd-t5-7Lk" secondAttribute="trailing" id="ISf-M7-7zr"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="top" secondItem="gLd-t5-7Lk" secondAttribute="top" id="JAc-Lk-lAE"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="width" secondItem="e92-Ni-1RE" secondAttribute="width" id="Wdq-oU-xdQ"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="centerY" secondItem="gLd-t5-7Lk" secondAttribute="centerY" id="bal-Rg-gM0"/>
-                                    <constraint firstItem="4xR-sv-awR" firstAttribute="leading" secondItem="gLd-t5-7Lk" secondAttribute="leading" id="fr3-zW-Hxa"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="bottom" secondItem="ICs-DN-9hI" secondAttribute="bottom" id="7ri-Fq-n5n"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="trailing" secondItem="ICs-DN-9hI" secondAttribute="trailing" id="ISf-M7-7zr"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="top" secondItem="ICs-DN-9hI" secondAttribute="top" id="JAc-Lk-lAE"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="width" secondItem="ICs-DN-9hI" secondAttribute="width" id="Wdq-oU-xdQ"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="centerY" secondItem="ICs-DN-9hI" secondAttribute="centerY" id="bal-Rg-gM0"/>
+                                    <constraint firstItem="4xR-sv-awR" firstAttribute="leading" secondItem="ICs-DN-9hI" secondAttribute="leading" id="fr3-zW-Hxa"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="gLd-t5-7Lk"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="e92-Ni-1RE"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.86058692120000002" green="1" blue="0.85274813790000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -558,7 +554,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gtc-23-vHq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-142" y="-546"/>
+            <point key="canvasLocation" x="-143.19999999999999" y="-546.47676161919048"/>
         </scene>
     </scenes>
     <resources>
