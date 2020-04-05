@@ -12,21 +12,21 @@ import FirebaseAuth
 import GoogleSignIn
 
 class LogInController: UIViewController,GIDSignInDelegate {
- 
     
-
-//    UITextField
+    
+    
+    //    UITextField
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-//    UILabel
+    //    UILabel
     @IBOutlet weak var errorLabel: UILabel!
-//    UIButton
+    //    UIButton
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var forgetPasswordButtin: UIButton!
     @IBOutlet weak var googleConnectionButton: GIDSignInButton!
-   
-//    var
+    
+    //    var
     var uid = ""
     var account = ""
     var userName = ""
@@ -37,9 +37,21 @@ class LogInController: UIViewController,GIDSignInDelegate {
         setupTextField()
         GIDSignIn.sharedInstance().delegate = self
         if let user = Auth.auth().currentUser{
-            uid = user.uid            
+            uid = user.uid   
+            
         }
         
+        accountTextFieldColor()
+        passwordTextFieldColor()
+    }
+    
+    func accountTextFieldColor(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        accountTextField.attributedPlaceholder = NSAttributedString.init(string: "請輸入帳號", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
+    }
+    func passwordTextFieldColor(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        passwordTextField.attributedPlaceholder = NSAttributedString.init(string: "請輸入密碼", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
     }
     
     //private function 
@@ -56,7 +68,7 @@ class LogInController: UIViewController,GIDSignInDelegate {
         accountTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
-
+    
     @IBAction func signUpButtonWasPressed(_ sender: UIButton) {
     }
     
@@ -76,34 +88,34 @@ class LogInController: UIViewController,GIDSignInDelegate {
                 
                 // Go To Shopping Cart
                 // Just For Test
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
-//                self.navigationController?.pushViewController(vc,animated: true)
+                //                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                //                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+                //                self.navigationController?.pushViewController(vc,animated: true)
                 
-//                    let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
-//                    let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutController") as! CheckoutController
-//                    self.navigationController?.pushViewController(vc,animated: true)
+                //                    let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
+                //                    let vc = storyboard.instantiateViewController(withIdentifier: "CheckoutController") as! CheckoutController
+                //                    self.navigationController?.pushViewController(vc,animated: true)
             }
             
         }
     }
     
-//    connect google button 
+    //    connect google button 
     @IBAction func googleConnectionButtonWasPressed(_ sender: Any) {
-         GIDSignIn.sharedInstance()?.presentingViewController = self
-                GIDSignIn.sharedInstance()?.signIn()
-                // Automatically sign in the user.
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.signIn()
+        // Automatically sign in the user.
         if uid.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             print("no uid")
         }else{
             print("uid : ", uid)
         }
-//                GIDSignIn.sharedInstance()?.restorePreviousSignIn()
-                
+        //                GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        
     }
     
     @IBAction func forgetPasswordWasPressed(_ sender: Any) {
-            
+        
     }
     
     func currentUserName()->(uid: String, account: String, username: String){
@@ -116,69 +128,69 @@ class LogInController: UIViewController,GIDSignInDelegate {
             
         }
         return(uid,account,userName)
-
+        
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!){
-            
-            if let error  = error {
-                print("here is the erro occur : \(error.localizedDescription)")
-            }
-            else{
-                guard let authentication = user.authentication else {return}
-                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-                Auth.auth().signIn(with: credential) { (authresult, error) in
-                    if error != nil{
-                        print("faled to signIn and retrieve data with error")
-                        return
-                    }
-                    else{
-//                        self.currentUserName()
-                        print("start connect googleSignUp data to firebase!")
-                        let currentUser = self.currentUserName()
-                        let newUid = currentUser.uid
-                        let newAcoount = currentUser.account
-                        let newUserName = currentUser.username
-                        Database.database().reference(withPath: "users/\(newUid)/Profile/account").setValue(newAcoount)
-                        Database.database().reference(withPath: "users/\(newUid)/Profile/name").setValue(newUserName)
-                         Database.database().reference(withPath: "users/\(newUid)/Profile/way").setValue("google")
-                        let storyboard1 = UIStoryboard(name: "SignUpLogIn", bundle: nil)
-                        let vc1 = storyboard1.instantiateViewController(withIdentifier: "HomeControllerId") as! HomeController
-                        
-                        let storyboard2 = UIStoryboard(name: "Main", bundle: nil)
-                        let vc2 = storyboard2.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-                        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile")
-                            .queryOrderedByKey()
-                            .observeSingleEvent(of: .value, with: { snapshot in 
-                                guard let value = snapshot.value as? [String:Any]
+        
+        if let error  = error {
+            print("here is the erro occur : \(error.localizedDescription)")
+        }
+        else{
+            guard let authentication = user.authentication else {return}
+            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+            Auth.auth().signIn(with: credential) { (authresult, error) in
+                if error != nil{
+                    print("faled to signIn and retrieve data with error")
+                    return
+                }
+                else{
+                    //                        self.currentUserName()
+                    print("start connect googleSignUp data to firebase!")
+                    let currentUser = self.currentUserName()
+                    let newUid = currentUser.uid
+                    let newAcoount = currentUser.account
+                    let newUserName = currentUser.username
+                    Database.database().reference(withPath: "users/\(newUid)/Profile/account").setValue(newAcoount)
+                    Database.database().reference(withPath: "users/\(newUid)/Profile/name").setValue(newUserName)
+                    Database.database().reference(withPath: "users/\(newUid)/Profile/way").setValue("google")
+                    let storyboard1 = UIStoryboard(name: "SignUpLogIn", bundle: nil)
+                    let vc1 = storyboard1.instantiateViewController(withIdentifier: "HomeControllerId") as! HomeController
+                    
+                    let storyboard2 = UIStoryboard(name: "Main", bundle: nil)
+                    let vc2 = storyboard2.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile")
+                        .queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in 
+                            guard let value = snapshot.value as? [String:Any]
                                 else {
                                     print("Error")
                                     return
                             }
-                                if (value["deliverWays"] as? String == nil || value["paymentWays"] as? String == nil) {
-                                     self.navigationController?.pushViewController(vc1,animated: true)
-                                }else{
-                                     self.navigationController?.pushViewController(vc2,animated: true)
-                                }                            
+                            if (value["deliverWays"] as? String == nil || value["paymentWays"] as? String == nil) {
+                                self.navigationController?.pushViewController(vc1,animated: true)
+                            }else{
+                                self.navigationController?.pushViewController(vc2,animated: true)
+                            }                            
                         })
-                        
-                        
-//                        self.present(vc, animated: true, completion: nil)
-                               }
-                    }
+                    
+                    
+                    //                        self.present(vc, animated: true, completion: nil)
                 }
-//                let userId = user.userID;                // For client-side use only!
-//                let fullName = user.profile.name;
-//                let email = user.profile.email;
-//                let idToken = user.authentication.idToken; // Safe to send to the server
-//
-//                print("userId: ":userId!,"fullName: ":fullName!,"email: ":email!,"idToken: ":idToken!)
-                
             }
+        }
+        //                let userId = user.userID;                // For client-side use only!
+        //                let fullName = user.profile.name;
+        //                let email = user.profile.email;
+        //                let idToken = user.authentication.idToken; // Safe to send to the server
+        //
+        //                print("userId: ":userId!,"fullName: ":fullName!,"email: ":email!,"idToken: ":idToken!)
         
-        
+    }
+    
+    
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!){
-       
+        
         // Perform any operations when the user disconnects from app here.
         print("User has diconected!")
         
@@ -196,4 +208,4 @@ extension LogInController: UITextFieldDelegate{
 
 
 
-    
+
