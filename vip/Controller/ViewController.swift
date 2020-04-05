@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var groupBuyButton: UIButton!
+    @IBOutlet weak var shppingCartButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnMenu.target = self.revealViewController()
@@ -47,21 +49,43 @@ class ViewController: UIViewController {
                 
             })
     }
-//    下面的程式 會導致後面要加入團購或是開團購時，一直導回 GroupBuyController Scene *(.observe)
-        //        Database.database().reference().child("GroupBuy").observe(.value, with: { 
-               //            (snapshot) in 
-               //            let allKeys = snapshot.value as! [String : AnyObject]
-               //            let nodeToReturn = allKeys.keys
-               //            let counts = nodeToReturn.count
-               //            print("nodeToReturn ",nodeToReturn)
-               //            let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-               //            let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
-               //            vc.count = counts
-               //            self.navigationController?.pushViewController(vc,animated: true)
-               //            
-               //        })
+    
+    @IBAction func shoppingCartButtonWasPressed(_ sender: Any) {
         
-  
+        let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            let allKeys = snapshot.value as! [String : AnyObject]
+            let nodeToReturn = allKeys.keys
+            let counts = nodeToReturn.count
+            print("nodeToReturn ",nodeToReturn)
+            print("counts ",counts)
+            
+            let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+            vc.shoppingCount = counts
+            self.navigationController?.pushViewController(vc,animated: true)
+            
+        })
+        
+        
+        
+    }
+    //    下面的程式 會導致後面要加入團購或是開團購時，一直導回 GroupBuyController Scene *(.observe)
+    //        Database.database().reference().child("GroupBuy").observe(.value, with: { 
+    //            (snapshot) in 
+    //            let allKeys = snapshot.value as! [String : AnyObject]
+    //            let nodeToReturn = allKeys.keys
+    //            let counts = nodeToReturn.count
+    //            print("nodeToReturn ",nodeToReturn)
+    //            let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
+    //            let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
+    //            vc.count = counts
+    //            self.navigationController?.pushViewController(vc,animated: true)
+    //            
+    //        })
+    
+    
     
     
     
