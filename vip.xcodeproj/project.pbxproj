@@ -238,10 +238,10 @@
 
 /* Begin PBXFileReference section */
 		024926812434DE1400CC22A8 /* Checkout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
-		0249269F2434DE9E00CC22A8 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckoutController.swift; path = vip/StoryBoard/CheckoutController.swift; sourceTree = SOURCE_ROOT; };
-		02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderComfirmController.swift; sourceTree = "<group>"; };
-		02F21D5C24210211003860F9 /* AddCouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCouponController.swift; path = vip/StoryBoard/AddCouponController.swift; sourceTree = SOURCE_ROOT; };
-		02F21D5E24210DAE003860F9 /* CouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CouponController.swift; path = vip/StoryBoard/CouponController.swift; sourceTree = SOURCE_ROOT; };
+		0249269F2434DE9E00CC22A8 /* CheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckoutController.swift; path = vip/Controller/Checkout/CheckoutController.swift; sourceTree = SOURCE_ROOT; };
+		02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderComfirmController.swift; path = Checkout/OrderComfirmController.swift; sourceTree = "<group>"; };
+		02F21D5C24210211003860F9 /* AddCouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCouponController.swift; path = vip/Controller/Coupon/AddCouponController.swift; sourceTree = SOURCE_ROOT; };
+		02F21D5E24210DAE003860F9 /* CouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CouponController.swift; path = vip/Controller/Coupon/CouponController.swift; sourceTree = SOURCE_ROOT; };
 		02F25D63242095C00041541E /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		02F25D65242095F10041541E /* OrderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderController.swift; sourceTree = "<group>"; };
 		02F25D68242096110041541E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
