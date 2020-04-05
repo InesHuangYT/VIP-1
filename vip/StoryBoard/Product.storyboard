@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ff0-eZ-JaJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ff0-eZ-JaJ">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -159,10 +159,10 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNq-ry-dPV">
-                                <rect key="frame" x="138.5" y="587" width="97" height="45"/>
+                                <rect key="frame" x="16" y="587" width="107" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="UfU-kk-NRH"/>
-                                    <constraint firstAttribute="width" constant="97" id="u1H-Pd-a6H"/>
+                                    <constraint firstAttribute="width" constant="106.99999999999994" id="u1H-Pd-a6H"/>
                                 </constraints>
                                 <state key="normal" title="返回" backgroundImage="back">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -174,17 +174,28 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ctQ-8n-tM6">
                                 <rect key="frame" x="80" y="339" width="214" height="225"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6a-Dp-C7M" userLabel="addToCart">
+                                <rect key="frame" x="131" y="579" width="228" height="60"/>
+                                <state key="normal" image="加入購物車"/>
+                                <connections>
+                                    <action selector="addToCart:" destination="jF0-c5-QSK" eventType="touchUpInside" id="IQf-WA-SZn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93471920490000004" green="0.95890384910000004" blue="0.90259689089999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="DNj-3Y-qss" firstAttribute="top" secondItem="Swt-2Q-zab" secondAttribute="top" constant="69" id="1O1-K4-cV6"/>
                             <constraint firstItem="lNq-ry-dPV" firstAttribute="top" secondItem="ctQ-8n-tM6" secondAttribute="bottom" constant="23" id="Dxq-pL-OoV"/>
+                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="leading" secondItem="AhX-Sz-6cc" secondAttribute="leadingMargin" constant="115" id="J3G-PQ-mXF"/>
                             <constraint firstItem="DNj-3Y-qss" firstAttribute="leading" secondItem="Swt-2Q-zab" secondAttribute="leading" constant="85" id="JG4-Wp-u0q"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="C6a-Dp-C7M" secondAttribute="bottom" constant="28" id="LDm-ZH-T0y"/>
+                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="top" secondItem="AhX-Sz-6cc" secondAttribute="topMargin" constant="579" id="NuD-MF-CYI"/>
                             <constraint firstItem="Swt-2Q-zab" firstAttribute="trailing" secondItem="ctQ-8n-tM6" secondAttribute="trailing" constant="81" id="PC9-df-4Ji"/>
                             <constraint firstItem="Swt-2Q-zab" firstAttribute="bottom" secondItem="lNq-ry-dPV" secondAttribute="bottom" constant="35" id="QO4-Tn-VRp"/>
-                            <constraint firstItem="lNq-ry-dPV" firstAttribute="centerX" secondItem="ctQ-8n-tM6" secondAttribute="centerX" id="Sys-rW-ZIY"/>
+                            <constraint firstItem="lNq-ry-dPV" firstAttribute="centerX" secondItem="ctQ-8n-tM6" secondAttribute="centerX" constant="-117.50000000000003" id="Sys-rW-ZIY"/>
                             <constraint firstItem="ctQ-8n-tM6" firstAttribute="leading" secondItem="Swt-2Q-zab" secondAttribute="leading" constant="80" id="Za6-z8-liS"/>
                             <constraint firstItem="ctQ-8n-tM6" firstAttribute="top" secondItem="DNj-3Y-qss" secondAttribute="bottom" constant="67.5" id="v9l-dz-dbe"/>
+                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="trailing" secondItem="AhX-Sz-6cc" secondAttribute="trailingMargin" id="yDV-zK-ku0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Swt-2Q-zab"/>
                     </view>
@@ -214,5 +225,6 @@
         <image name="back" width="253" height="86"/>
         <image name="logo" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
+        <image name="加入購物車" width="319" height="86"/>
     </resources>
 </document>
