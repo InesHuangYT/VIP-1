@@ -307,6 +307,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02AC6139243A224800A7D94C /* Coupon */ = {
+			isa = PBXGroup;
+			children = (
+				02F21D5C24210211003860F9 /* AddCouponController.swift */,
+				02F21D5E24210DAE003860F9 /* CouponController.swift */,
+			);
+			name = Coupon;
+			sourceTree = "<group>";
+		};
+		02AC613A243A227300A7D94C /* Checkout */ = {
+			isa = PBXGroup;
+			children = (
+				0249269F2434DE9E00CC22A8 /* CheckoutController.swift */,
+				02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */,
+			);
+			name = Checkout;
+			sourceTree = "<group>";
+		};
 		5D55644732E6CFB2D245EF8D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,20 +419,18 @@
 		B0E0A31B23F9E55200BE8ECC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				02AC613A243A227300A7D94C /* Checkout */,
+				02AC6139243A224800A7D94C /* Coupon */,
 				B0EA39482438E35300AA7499 /* SignUpLogIn */,
 				B0EA39472438E33A00AA7499 /* CreateProduct */,
 				B0EA39462438E31100AA7499 /* Product */,
 				B0EA39452438E2DF00AA7499 /* GroupBuy */,
-				0249269F2434DE9E00CC22A8 /* CheckoutController.swift */,
-				02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */,
 				B08376EB243262BD006D169E /* CategoryController.swift */,
-				02F21D5E24210DAE003860F9 /* CouponController.swift */,
 				B09ED5E42414EE0500D3C4A6 /* ProfileController.swift */,
 				02F25D65242095F10041541E /* OrderController.swift */,
 				C015B2762439F0D5009F060D /* ShoppingCartController.swift */,
 				02F25D68242096110041541E /* ViewController.swift */,
 				02F25D6B2420967A0041541E /* MenuViewController.swift */,
-				02F21D5C24210211003860F9 /* AddCouponController.swift */,
 				C015B2582439F0A8009F060D /* Alert.swift */,
 				B019FFFE24392AD900E6BA3E /* Mp3 */,
 			);
