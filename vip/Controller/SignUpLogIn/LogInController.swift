@@ -39,6 +39,10 @@ class LogInController: UIViewController,GIDSignInDelegate {
         if let user = Auth.auth().currentUser{
             uid = user.uid            
         }
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+
+        accountTextField.attributedPlaceholder = NSAttributedString.init(string:"請輸入帳號", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
+        passwordTextField.attributedPlaceholder = NSAttributedString.init(string:"請輸入帳號", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
         
     }
     

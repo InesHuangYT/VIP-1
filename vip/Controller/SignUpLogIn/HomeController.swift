@@ -42,6 +42,12 @@ class HomeController: UIViewController,UITextFieldDelegate {
         phoneTextField.delegate = self
         setUpTextField()
         print("current user uidd : " , currentUserName())
+        phoneTextFieldColor()
+    }
+    
+    func phoneTextFieldColor(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        phoneTextField.attributedPlaceholder = NSAttributedString.init(string: "請輸入手機號碼", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
     }
     
     func setUpTextField(){
