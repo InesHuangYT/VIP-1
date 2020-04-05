@@ -158,44 +158,40 @@
                                     <constraint firstAttribute="width" constant="150" id="XUh-1L-1Kq"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNq-ry-dPV">
-                                <rect key="frame" x="16" y="587" width="107" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="UfU-kk-NRH"/>
-                                    <constraint firstAttribute="width" constant="106.99999999999994" id="u1H-Pd-a6H"/>
-                                </constraints>
-                                <state key="normal" title="返回" backgroundImage="back">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="back:" destination="jF0-c5-QSK" eventType="touchUpInside" id="BJ7-gc-xQ9"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ctQ-8n-tM6">
-                                <rect key="frame" x="80" y="339" width="214" height="225"/>
+                                <rect key="frame" x="80" y="339" width="214" height="166"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6a-Dp-C7M" userLabel="addToCart">
-                                <rect key="frame" x="131" y="579" width="228" height="60"/>
+                                <rect key="frame" x="46" y="566" width="228" height="60"/>
                                 <state key="normal" image="加入購物車"/>
                                 <connections>
                                     <action selector="addToCart:" destination="jF0-c5-QSK" eventType="touchUpInside" id="IQf-WA-SZn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2B-j5-EwZ" userLabel="Like">
+                                <rect key="frame" x="300" y="572" width="41" height="48"/>
+                                <state key="normal" image="unlike"/>
+                                <state key="selected" image="like"/>
+                                <connections>
+                                    <action selector="LikeButton:" destination="jF0-c5-QSK" eventType="touchUpInside" id="nbG-xX-z9s"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93471920490000004" green="0.95890384910000004" blue="0.90259689089999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="DNj-3Y-qss" firstAttribute="top" secondItem="Swt-2Q-zab" secondAttribute="top" constant="69" id="1O1-K4-cV6"/>
-                            <constraint firstItem="lNq-ry-dPV" firstAttribute="top" secondItem="ctQ-8n-tM6" secondAttribute="bottom" constant="23" id="Dxq-pL-OoV"/>
-                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="leading" secondItem="AhX-Sz-6cc" secondAttribute="leadingMargin" constant="115" id="J3G-PQ-mXF"/>
+                            <constraint firstItem="w2B-j5-EwZ" firstAttribute="top" secondItem="AhX-Sz-6cc" secondAttribute="topMargin" constant="572" id="4rX-y6-k0n"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="w2B-j5-EwZ" secondAttribute="trailing" constant="18" id="DZk-2l-OR3"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="w2B-j5-EwZ" secondAttribute="bottom" constant="47" id="Del-nN-eof"/>
+                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="leading" secondItem="AhX-Sz-6cc" secondAttribute="leadingMargin" constant="30" id="J3G-PQ-mXF"/>
                             <constraint firstItem="DNj-3Y-qss" firstAttribute="leading" secondItem="Swt-2Q-zab" secondAttribute="leading" constant="85" id="JG4-Wp-u0q"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="C6a-Dp-C7M" secondAttribute="bottom" constant="28" id="LDm-ZH-T0y"/>
-                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="top" secondItem="AhX-Sz-6cc" secondAttribute="topMargin" constant="579" id="NuD-MF-CYI"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="C6a-Dp-C7M" secondAttribute="bottom" constant="41" id="LDm-ZH-T0y"/>
+                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="top" secondItem="AhX-Sz-6cc" secondAttribute="topMargin" constant="566" id="NuD-MF-CYI"/>
                             <constraint firstItem="Swt-2Q-zab" firstAttribute="trailing" secondItem="ctQ-8n-tM6" secondAttribute="trailing" constant="81" id="PC9-df-4Ji"/>
-                            <constraint firstItem="Swt-2Q-zab" firstAttribute="bottom" secondItem="lNq-ry-dPV" secondAttribute="bottom" constant="35" id="QO4-Tn-VRp"/>
-                            <constraint firstItem="lNq-ry-dPV" firstAttribute="centerX" secondItem="ctQ-8n-tM6" secondAttribute="centerX" constant="-117.50000000000003" id="Sys-rW-ZIY"/>
                             <constraint firstItem="ctQ-8n-tM6" firstAttribute="leading" secondItem="Swt-2Q-zab" secondAttribute="leading" constant="80" id="Za6-z8-liS"/>
+                            <constraint firstItem="w2B-j5-EwZ" firstAttribute="leading" secondItem="AhX-Sz-6cc" secondAttribute="leadingMargin" constant="284" id="pNE-Ie-3mP"/>
                             <constraint firstItem="ctQ-8n-tM6" firstAttribute="top" secondItem="DNj-3Y-qss" secondAttribute="bottom" constant="67.5" id="v9l-dz-dbe"/>
-                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="trailing" secondItem="AhX-Sz-6cc" secondAttribute="trailingMargin" id="yDV-zK-ku0"/>
+                            <constraint firstItem="C6a-Dp-C7M" firstAttribute="trailing" secondItem="AhX-Sz-6cc" secondAttribute="trailingMargin" constant="-85" id="yDV-zK-ku0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Swt-2Q-zab"/>
                     </view>
@@ -205,7 +201,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="backButton" destination="lNq-ry-dPV" id="4tG-5U-VoC"/>
                         <outlet property="btnMenu" destination="e9C-Ga-Jds" id="p2b-6v-xvh"/>
                         <outlet property="descriptionLabel" destination="gCL-KL-2bF" id="hmx-0E-IGA"/>
                         <outlet property="evaluationLabel" destination="D6H-s9-i2O" id="3Ai-UZ-QLb"/>
@@ -222,9 +217,10 @@
     </scenes>
     <resources>
         <image name="List_button" width="18" height="11"/>
-        <image name="back" width="253" height="86"/>
+        <image name="like" width="27" height="27"/>
         <image name="logo" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
+        <image name="unlike" width="28" height="28"/>
         <image name="加入購物車" width="319" height="86"/>
     </resources>
 </document>

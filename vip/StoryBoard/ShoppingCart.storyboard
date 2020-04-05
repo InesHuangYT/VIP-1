@@ -25,6 +25,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="564" id="QKE-Ui-tBt"/>
                                         </constraints>
+                                        <color key="sectionIndexBackgroundColor" red="0.86058692120000002" green="1" blue="0.85274813790000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="153" id="gre-VM-njz">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="153"/>
@@ -48,7 +49,7 @@
                                         <state key="normal" image="delete"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.86058692120000002" green="1" blue="0.85274813790000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="7ab-M7-3Cj" firstAttribute="top" secondItem="jOz-S8-WcY" secondAttribute="top" constant="577" id="2nb-9V-k4H"/>
                                     <constraint firstItem="Zxq-97-XT3" firstAttribute="leading" secondItem="jOz-S8-WcY" secondAttribute="leading" id="Cjk-nN-ddu"/>

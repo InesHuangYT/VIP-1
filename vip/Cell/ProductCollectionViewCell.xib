@@ -35,15 +35,6 @@
                         <rect key="frame" x="15" y="63" width="122" height="99"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t3f-Zm-hSp">
-                        <rect key="frame" x="112" y="33" width="28" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" image="unlike"/>
-                        <state key="selected" image="like"/>
-                        <connections>
-                            <action selector="LikeButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="qRp-le-Qa4"/>
-                        </connections>
-                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.94019311670000005" green="0.95578092339999998" blue="0.9028730989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,8 +48,4 @@
             <point key="canvasLocation" x="-353.60000000000002" y="60.26986506746627"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="like" width="27" height="27"/>
-        <image name="unlike" width="28" height="28"/>
-    </resources>
 </document>
