@@ -115,6 +115,14 @@ class ProductInformationController: UIViewController {
         })
         
     }
+    @IBAction func LikeButton(_ sender: UIButton) {
+              if sender.isSelected{
+                  print("Like Button Selected!")
+                  sender.isSelected = false
+              }else{
+                  sender.isSelected = true
+              }
+          }
     
         
     @IBAction func back(_ sender: Any) {        

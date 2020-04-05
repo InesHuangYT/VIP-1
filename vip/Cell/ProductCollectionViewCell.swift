@@ -73,14 +73,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
               })
       }
     
-    @IBAction func LikeButton(_ sender: UIButton) {
-           if sender.isSelected{
-               print("Like Button Selected!")
-               sender.isSelected = false
-           }else{
-               sender.isSelected = true
-           }
-       }
+   
     
 //    失敗品 不要用
     func failed(index:Int){
