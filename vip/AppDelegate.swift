@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         let navigationBarBackColor = UINavigationBar.appearance()
-        navigationBarBackColor.tintColor = UIColor(red: 137/255, green: 136/255, blue: 128/255, alpha: 1)
+        navigationBarBackColor.tintColor = UIColor(red: 250/255, green: 238/255, blue: 175/255, alpha: 1)
         navigationBarBackColor.barTintColor = UIColor(red: CGFloat(137/255.0), green: CGFloat(137/255.0), blue: CGFloat(127/255.0), alpha: CGFloat(1.0) )
         
         GIDSignIn.sharedInstance().clientID = "170838114822-7ulfotevovsmh9ntemqvorlm6e1v1leu.apps.googleusercontent.com"

@@ -24,9 +24,31 @@ class SignUpController: UIViewController {
         super.viewDidLoad()
         setupTextField()
         if let user = Auth.auth().currentUser{
-                   uid = user.uid
-               }
+            uid = user.uid
+        }
+        accountTextFieldColor()
+        passwordTextFieldColor()
+        passwordConfirmTextFieldColor()
+        nameTextFieldColor()
     }
+    
+    func accountTextFieldColor(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        accountTextField.attributedPlaceholder = NSAttributedString.init(string: "請輸入帳號", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
+    }
+    func passwordTextFieldColor(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        passwordTextField.attributedPlaceholder = NSAttributedString.init(string: "請輸入密碼", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
+    }
+    func passwordConfirmTextFieldColor(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        passwordConfirmTextField.attributedPlaceholder = NSAttributedString.init(string: "請再次輸入密碼", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
+    }
+    func nameTextFieldColor(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        nameTextField.attributedPlaceholder = NSAttributedString.init(string: "請輸入姓名", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
+    }             
+    
     
     // To hideKeyboard
     private func setupTextField(){
@@ -34,21 +56,21 @@ class SignUpController: UIViewController {
         passwordTextField.delegate = self
         passwordConfirmTextField.delegate = self
         nameTextField.delegate = self
-         
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
-   }
+    }
     
     @objc private func hideKeyboard(){
         accountTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         passwordConfirmTextField.resignFirstResponder()
         nameTextField.resignFirstResponder()
-      }
-
+    }
+    
     @IBAction func signUpConfirmTap(_ sender: Any) {
         
-//        validate the fields
+        //        validate the fields
         let error = validateField()
         if error != nil{
             //something wrong with text fields, show error message
@@ -58,9 +80,9 @@ class SignUpController: UIViewController {
             let account = accountTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let name = nameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-           
             
-//        create the user 
+            
+            //        create the user 
             Auth.auth().createUser(withEmail: account, password: password) {(result,err) in 
                 if err != nil{
                     print("here err ! ",err as Any)
@@ -77,23 +99,23 @@ class SignUpController: UIViewController {
                     Database.database().reference(withPath: "users/\(self.uid)/Profile/password").setValue(password)
                     Database.database().reference(withPath: "users/\(self.uid)/Profile/name").setValue(name)
                     Database.database().reference(withPath: "users/\(self.uid)/Profile/way").setValue("directly")
-                   
-                        self.transitionToOtherScene()
-                   
-
-                      
+                    
+                    self.transitionToOtherScene()
+                    
+                    
+                    
                 }
                 
             }
         }
-
+        
     }
     
     @IBAction func backButtonWasPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-// check if signUp all fit the format
+    // check if signUp all fit the format
     func validateField() -> String? {
         
         //check that all fields are filled in  
@@ -114,22 +136,22 @@ class SignUpController: UIViewController {
     }
     
     
-//   if password is secured
+    //   if password is secured
     func isPasswordValid(_ password : String) -> Bool{
-//       at least more that eight charaters && at least one alphabet https://stackoverflow.com/questions/39284607/how-to-implement-a-regex-for-password-validation-in-swift
-//        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
+        //       at least more that eight charaters && at least one alphabet https://stackoverflow.com/questions/39284607/how-to-implement-a-regex-for-password-validation-in-swift
+        //        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
         let passwordTest = NSPredicate(format: "SELF MATCHES %@","^[0-9A-Za-z]{6,16}$")
         return passwordTest.evaluate(with: password)
     }
     
-//   error message
+    //   error message
     func showError(_ message : String){
         errorLabel.text = message
         errorLabel.textColor = UIColor.red
-//        errorLabel.alpha = 1
+        //        errorLabel.alpha = 1
     }
     
-//  go to next step
+    //  go to next step
     func transitionToOtherScene(){
         let storyboard = UIStoryboard(name: "SignUpLogIn", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "HomeControllerId") as! HomeController
@@ -142,5 +164,5 @@ extension SignUpController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true 
- }
+    }
 }
