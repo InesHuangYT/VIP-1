@@ -46,16 +46,16 @@ class GroupBuyOpenController: UIViewController {
     }
     
     @IBAction func pauseAndPlayButtonWasPressed(_ sender: UIButton) {
-       
+        
         pauseAndPlay.isSelected = !sender.isSelected
         
         if(audioPlayer?.isPlaying == true){
             audioPlayer?.stop()
-
+            
         }else{
             audioPlayer?.play()
         }
-
+        
     }
     
     // drag slider
@@ -81,41 +81,61 @@ class GroupBuyOpenController: UIViewController {
     
     @IBAction func openButtonWasPressed(_ sender: Any) {
         
-        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("openedBy").child(self.uid ?? "")
+        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
         
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             
-            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+            
+            
+            let reff = ref.childByAutoId()
+            reff.child("OpenBy").child(self.uid ?? "").setValue(self.uid ?? "")
+            reff.child("JoinBy").child(self.uid ?? "").setValue(self.uid ?? "")
+            
+            print(String(self.uid ?? "") + " 開團 ")
+            
+            //  開團規則：一位使用者可讚一個商品內開一次以上的團 
+            ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { 
+                snapshot in
                 
-                print("empty:",snapshots.isEmpty)
-                if snapshots.isEmpty {
+                if let datas = snapshot.children.allObjects as? [DataSnapshot]{
                     
-                    let groupBuyRef = Database.database().reference(withPath: "GroupBuy/\(self.productId)/openedBy/\(self.uid ?? "")").childByAutoId().child("JoinUser/users/\(self.uid ?? "")")
-                    
-                    groupBuyRef.setValue(String(self.uid ?? ""))
-                    print(String(self.uid ?? "") + " 開團 ")
-                    
-                    //  開團規則：一位使用者只能在一個商品內開一次團
-                    ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { 
-                        snapshot in
-                        
-                        if let datas = snapshot.children.allObjects as? [DataSnapshot]{
-                            
-                            for snap in datas{
-                                let key = snap.key
-                                print(key)
-                                Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : no currentUser")/GroupBuy/\(self.productId)/OpenGroupId/\(key)").setValue(key)
-                                self.setUpMessageOk()
-                            }
-                        }
-                        
-                    })
-                }else{
-                    print("group already exist, can't open the group")
-                    self.setUpMessageNo()
+                    for snap in datas{
+                        let key = snap.key
+                        print(key)
+                        Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(reff.key ?? "")/ProductId/\(self.productId)").setValue(self.productId)
+                        self.setUpMessageOk()
+                    }
                 }
                 
-            }
+            })
+            //                 if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+            //                print("empty:",snapshots.isEmpty)
+            //                if snapshots.isEmpty {
+            //                    
+            //                    ref.childByAutoId().child("JoinUser/\(self.uid ?? "")").setValue(String(self.uid ?? ""))
+            //                    print(String(self.uid ?? "") + " 開團 ")
+            //                    
+            //                    //  開團規則：一位使用者只能在一個商品內開一次團 
+            //                    ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { 
+            //                        snapshot in
+            //                        
+            //                        if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+            //                            
+            //                            for snap in datas{
+            //                                let key = snap.key
+            //                                print(key)
+            //                                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(key)/ProductId/\(self.productId)").setValue(self.productId)
+            //                                self.setUpMessageOk()
+            //                            }
+            //                        }
+            //                        
+            //                    })
+            //                }else{
+            //                    print("group already exist, can't open the group")
+            //                    self.setUpMessageNo()
+            //                }
+            
+            //            }
             
         })
     }

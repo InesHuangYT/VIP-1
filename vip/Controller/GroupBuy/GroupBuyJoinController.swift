@@ -35,45 +35,43 @@ class GroupBuyJoinController: UIViewController {
     
     @IBAction func joinButtonWasPressed(_ sender: Any) {
         
-        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("openedBy")
+        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
         
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                
+                print("snapshots[self.index].key",snapshots[self.index].key)
                 ref.child(snapshots[self.index].key)
                     .queryOrderedByKey()
                     .observeSingleEvent(of: .value, with: { snapshot in 
                         
-                        
-                        if let datas = snapshot.children.allObjects as? [DataSnapshot]{
-                            print("這這",datas[0].key) 
-                            
-                            
-                            ref.child(snapshots[self.index].key).child(datas[0].key).child("JoinUser/users")
+                                                                                
+                            ref.child(snapshots[self.index].key).child("JoinBy")
                                 .queryOrderedByKey()
                                 .observeSingleEvent(of: .value, with: { snapshot in
                                     
                                     if let datass = snapshot.children.allObjects as? [DataSnapshot]{
                                         
-                                        if datass[0].key == self.uid {
+                                        for i in datass{
                                             
-                                            print("uid already inside ", datass[0].key )
-                                            self.setUpMessageNo()
+                                            if i.key == self.uid {
+                                                
+                                                print("uid already inside ", i.key )
+                                                self.setUpMessageNo()
+                                            }  else{
+                                                ref.child(snapshots[self.index].key).child("JoinBy").child(self.uid ?? "").setValue(self.uid)
+                                                
+                                                print("Join sucessfully !")
+                                                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/JoinGroupId/\(snapshots[self.index].key)/ProductId/\(self.productId)").setValue(self.productId)
+                                                self.setUpMessageOk()
+                                            }
+                                            
                                         }
-                                            
-                                        else{
-                                            ref.child(snapshots[self.index].key).child(datas[0].key).child("JoinUser/users").child(self.uid ?? "").setValue(self.uid)
-                                            
-                                            print("Join sucessfully !")
-                                            Database.database().reference(withPath: "users/\(self.uid ?? "wrong message : NoCurrentUser")/GroupBuy/\(self.productId)/JoinGroupId/\(datas[0].key)").setValue(datas[0].key)
-                                            self.setUpMessageOk()
-                                        }
-                                        
+ 
                                     }
                                 })
                             
                             
-                        }
+                        
                         
                         
                     })
@@ -95,7 +93,7 @@ class GroupBuyJoinController: UIViewController {
     }
     
     func setUpMessageNo(){
-        let message = UIAlertController(title: "您已加入過摟", message: "", preferredStyle: .alert)
+        let message = UIAlertController(title: "您已經在此團購裡面摟", message: "", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "回主畫面", style: .default, handler: {action in 
             print("here go to Main Scene!")
             self.transition()
