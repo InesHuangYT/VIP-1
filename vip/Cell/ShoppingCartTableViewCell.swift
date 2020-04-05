@@ -82,6 +82,12 @@ class ShoppingCartTableViewCell: UITableViewCell {
     
     
     @IBAction func LikeButton(_ sender: UIButton) {
+        if sender.isSelected{
+            print("Like Button Selected!")
+            sender.isSelected = false
+        }else{
+            sender.isSelected = true
+        }
     }
     
     @IBAction func checkBoxTapped(_ sender: UIButton){
@@ -93,12 +99,7 @@ class ShoppingCartTableViewCell: UITableViewCell {
         }
     }
     @IBAction func ListBtnTapped(_ sender: UIButton) {
-        if sender.isSelected{
-            print("Like Button Selected!")
-            sender.isSelected = false
-        }else{
-            sender.isSelected = true
-        }
+        
     }
     
     
