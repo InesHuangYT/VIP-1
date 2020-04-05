@@ -10,38 +10,69 @@ import Foundation
 import UIKit
 import Firebase
 
-class ShoppingCartController : UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
-    @IBOutlet weak var tableview: UITableView!
 
+
+
+class ShoppingCartController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var ref: DatabaseReference!
+    var test:UILabel!
+    var count = Int()
+    var name:[Any] = []
     
+    
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
-    }
-   
-    func loadData(){
+        
+        ref = Database.database().reference()
+        let user = Auth.auth().currentUser!
+        
+        DispatchQueue.main.async {
+        self.ref.child("ShoppingCart").child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
+                if let data = snapshot.children.allObjects as? [DataSnapshot] {
+                let retriName = data.compactMap({($0.value as! [String:Any])["ProductName"]})
+                self.name = retriName
+                    
+            }
+            
+        })
+            self.tableView.reloadData()
+        }
+        print("num ITEM = ", self.name.count)
+        
+//        print("ViewCount2 self.count= ", self.count)
+//        print("ViewCount2 = ", count)
+//
+        
+        //        self.tableView.delegate = self
+        //        self.tableView.dataSource = self
         
     }
+    
+    
+    
+   
+   
     
     func numberOfSectionInTableView(tableView: UITableView) -> Int{
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
-        //Count Products
-        return 3
+               
+        return name.count
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! ShoppingCartCell
+        cell.loadData(index: indexPath.row)
+        
         return cell
     }
     
-    @IBAction func ListBtnTapped(_ sender: Any) {
-    }
     
     @IBAction func OrderBtn(_ sender: Any) {
     }

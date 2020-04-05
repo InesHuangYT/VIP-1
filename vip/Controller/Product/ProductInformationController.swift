@@ -20,6 +20,9 @@ class ProductInformationController: UIViewController {
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
+    var imageURL : String!
+    var productID:[String] = []
+    var ID:String!
 
     var index  = Int()
     override func viewDidLoad() {
@@ -42,7 +45,16 @@ class ProductInformationController: UIViewController {
     func setLabel(index:Int){
         Database.database().reference().child("Product")
             .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in 
+            .observeSingleEvent(of: .value, with: { snapshot in
+                
+                for snap in snapshot.children {
+                                   let userSnap = snap as! DataSnapshot
+                                   let id = userSnap.key
+                                   self.productID.append(id)
+                               }
+                print("This ID = ", self.productID[index])
+                self.ID = self.productID[index]
+                
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                     let nameResults = datas.compactMap({
                         ($0.value as! [String: Any])["ProductName"]
@@ -88,6 +100,20 @@ class ProductInformationController: UIViewController {
                 
                 
             })
+    }
+    
+    
+    @IBAction func addToCart(_ sender: Any) {
+        ref = Database.database().reference()
+        let user = Auth.auth().currentUser!
+        let newData = ["ProductName" : self.nameLabel.text, "Price" : self.priceLabel.text, "imageURL": self.imageURL]
+        
+    self.ref.child("ShoppingCart").child(user.uid).child(self.ID).setValue(newData)
+        
+        showAlert(title:"message", message:"Add to cart successfully", handlerOK:{action in
+            print("Add To CART!")
+        })
+        
     }
     
         
