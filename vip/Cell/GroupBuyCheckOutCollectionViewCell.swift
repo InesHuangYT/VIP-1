@@ -18,16 +18,21 @@ class GroupBuyCheckOutCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
-        layer.borderWidth = 5
-        layer.borderColor = myColor.cgColor
-        layer.cornerRadius = 45
-        image.image = UIImage(named: "logo")
-        image.layer.cornerRadius = 45
-        image.layer.borderWidth = 1
-        image.layer.borderColor = myColor.cgColor
+        cellColorSet()
+        
     }
     
+    func cellColorSet(){
+           let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+                 layer.borderWidth = 5
+                 layer.borderColor = myColor.cgColor
+                 layer.cornerRadius = 45
+                 image.image = UIImage(named: "logo")
+                 image.layer.cornerRadius = 20
+                 image.layer.borderWidth = 1
+                 image.layer.borderColor = myColor.cgColor
+           
+       }
     
     func setProductLabel(productId:String){
         let ref =  Database.database().reference().child("GroupBuy").child(productId)

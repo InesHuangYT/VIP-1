@@ -512,11 +512,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenu" destination="iqh-L8-XHg" id="oF1-C2-HBX"/>
+                        <outlet property="collectionView" destination="TNf-WM-4uc" id="vhO-79-mLN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eyY-rV-HsM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1145" y="761"/>
+            <point key="canvasLocation" x="1009" y="249"/>
         </scene>
         <!--Group Buy Check Out Controller-->
         <scene sceneID="fXi-lG-8wt">
@@ -877,6 +878,137 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIB-H9-qWj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="92" y="1297.1514242878561"/>
+        </scene>
+        <!--Group Buy Order Confirm Controller-->
+        <scene sceneID="YL6-C3-pZh">
+            <objects>
+                <viewController storyboardIdentifier="GroupBuyOrderConfirmControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cjK-C2-YYH" customClass="GroupBuyOrderConfirmController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OIA-lG-o60">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaY-z4-cSg">
+                                <rect key="frame" x="321" y="39" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <state key="normal" title="聯絡客服" image="support">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O5b-fl-d6w">
+                                <rect key="frame" x="22" y="158" width="330" height="3"/>
+                                <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="8n5-Jd-hTq"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="訂單編號：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IA-PH-8Q2">
+                                <rect key="frame" x="30" y="58" width="127" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="GEV-Bb-7Y4">
+                                <rect key="frame" x="30" y="169" width="104" height="85.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="付款金額顯示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ak6-0t-IH6">
+                                        <rect key="frame" x="0.0" y="0.0" width="104" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.53829288480000004" green="0.53505933279999995" blue="0.50309789179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款方式顯示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z22-56-tUn">
+                                        <rect key="frame" x="0.0" y="32.5" width="104" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.53829288480000004" green="0.53505933279999995" blue="0.50309789179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="運送資訊顯示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNf-LG-59c">
+                                        <rect key="frame" x="0.0" y="65" width="104" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.53829288480000004" green="0.53505933279999995" blue="0.50309789179999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f6a-uB-8qH">
+                                <rect key="frame" x="22" y="262" width="331" height="3"/>
+                                <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="P5i-1w-dZ7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顯示訂單編號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3H-mi-mNd">
+                                <rect key="frame" x="111.5" y="113" width="152" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14" id="F7o-Ac-Ru8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fwg-L4-R3F">
+                                <rect key="frame" x="11" y="284" width="352" height="276"/>
+                                <color key="backgroundColor" red="0.89101284739999997" green="0.97580343479999998" blue="0.87770527600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xe6-gi-Zal">
+                                    <size key="itemSize" width="289" height="113"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rXi-Ok-qJ1">
+                                        <rect key="frame" x="31.5" y="0.0" width="289" height="113"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5fm-wd-z4W">
+                                            <rect key="frame" x="0.0" y="0.0" width="289" height="113"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" red="0.89101284739999997" green="0.97580343479999998" blue="0.87770527600000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <size key="customSize" width="289" height="113"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="t3H-mi-mNd" firstAttribute="top" secondItem="7IA-PH-8Q2" secondAttribute="bottom" constant="25" id="1E2-Zj-IcJ"/>
+                            <constraint firstItem="Fwg-L4-R3F" firstAttribute="top" secondItem="f6a-uB-8qH" secondAttribute="bottom" constant="19" id="C88-hL-KvD"/>
+                            <constraint firstItem="JaY-z4-cSg" firstAttribute="top" secondItem="OgB-gf-4yK" secondAttribute="top" constant="39" id="DCE-Mx-kcR"/>
+                            <constraint firstItem="7IA-PH-8Q2" firstAttribute="leading" secondItem="OgB-gf-4yK" secondAttribute="leading" constant="30" id="FwX-kX-jCc"/>
+                            <constraint firstItem="O5b-fl-d6w" firstAttribute="centerX" secondItem="f6a-uB-8qH" secondAttribute="centerX" id="Hv4-8I-I8R"/>
+                            <constraint firstItem="OgB-gf-4yK" firstAttribute="bottom" secondItem="Fwg-L4-R3F" secondAttribute="bottom" constant="107" id="IGA-7Y-iG3"/>
+                            <constraint firstItem="O5b-fl-d6w" firstAttribute="leading" secondItem="f6a-uB-8qH" secondAttribute="leading" id="Ii2-7t-29R"/>
+                            <constraint firstItem="7IA-PH-8Q2" firstAttribute="leading" secondItem="GEV-Bb-7Y4" secondAttribute="leading" id="Sd8-xc-BcR"/>
+                            <constraint firstItem="JaY-z4-cSg" firstAttribute="trailing" secondItem="OIA-lG-o60" secondAttribute="trailingMargin" id="aKO-PB-aYK"/>
+                            <constraint firstItem="Fwg-L4-R3F" firstAttribute="centerX" secondItem="f6a-uB-8qH" secondAttribute="centerX" id="buQ-kw-gZN"/>
+                            <constraint firstItem="O5b-fl-d6w" firstAttribute="top" secondItem="t3H-mi-mNd" secondAttribute="bottom" constant="31" id="dL3-JM-9Od"/>
+                            <constraint firstItem="O5b-fl-d6w" firstAttribute="leading" secondItem="OIA-lG-o60" secondAttribute="leadingMargin" constant="6" id="irC-JB-RMD"/>
+                            <constraint firstItem="GEV-Bb-7Y4" firstAttribute="top" secondItem="O5b-fl-d6w" secondAttribute="bottom" constant="8" id="pA3-Zm-v71"/>
+                            <constraint firstItem="O5b-fl-d6w" firstAttribute="centerX" secondItem="OIA-lG-o60" secondAttribute="centerX" id="qdn-iG-JHV"/>
+                            <constraint firstItem="Fwg-L4-R3F" firstAttribute="leading" secondItem="OgB-gf-4yK" secondAttribute="leading" constant="11" id="rX0-MN-Ufg"/>
+                            <constraint firstItem="7IA-PH-8Q2" firstAttribute="top" secondItem="OgB-gf-4yK" secondAttribute="top" constant="58" id="wxS-Rw-cfz"/>
+                            <constraint firstItem="f6a-uB-8qH" firstAttribute="top" secondItem="GEV-Bb-7Y4" secondAttribute="bottom" constant="7.5" id="ydW-2j-FL7"/>
+                            <constraint firstItem="O5b-fl-d6w" firstAttribute="centerX" secondItem="t3H-mi-mNd" secondAttribute="centerX" id="zbr-YN-Lct"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OgB-gf-4yK"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="QVl-uS-tSo">
+                        <barButtonItem key="rightBarButtonItem" title="側邊欄" image="List_button" id="W1P-2H-4jj">
+                            <color key="tintColor" red="0.9252752662" green="0.96562939879999998" blue="0.90195304160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnMenu" destination="W1P-2H-4jj" id="4YQ-FM-RQJ"/>
+                        <outlet property="collectionView" destination="Fwg-L4-R3F" id="Kxp-L4-zwS"/>
+                        <outlet property="deliverWaysLabel" destination="LNf-LG-59c" id="Zvp-b8-GZ2"/>
+                        <outlet property="orderId" destination="t3H-mi-mNd" id="nrp-tZ-6yy"/>
+                        <outlet property="payfeeLabel" destination="ak6-0t-IH6" id="ffG-z4-pnf"/>
+                        <outlet property="paymentWaysLabel" destination="Z22-56-tUn" id="ktV-i1-Oif"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBU-em-CYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1008.8" y="1146.4767616191905"/>
         </scene>
     </scenes>
     <resources>
