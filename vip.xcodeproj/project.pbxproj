@@ -19,6 +19,9 @@
 		02F25D7924209C2A0041541E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F25D7724209C2A0041541E /* SWRevealViewController.m */; };
 		B0190011243A213C00E6BA3E /* ShoppingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */; };
 		B0190012243A213C00E6BA3E /* ShoppingCartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */; };
+		B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */; };
+		B0190091243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */; };
+		B0190092243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */; };
 		B019FFFD24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B019FFFC24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 */; };
 		B042F7F3241F8C72005982AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B042F7F2241F8C72005982AF /* Product.storyboard */; };
 		B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B042F7F4241F8CB2005982AF /* ProductController.swift */; };
@@ -257,6 +260,9 @@
 		B015C491242A4EC600068102 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartTableViewCell.swift; sourceTree = "<group>"; };
 		B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartTableViewCell.xib; sourceTree = "<group>"; };
+		B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyCheckOutController.swift; sourceTree = "<group>"; };
+		B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyCheckOutCollectionViewCell.swift; sourceTree = "<group>"; };
+		B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupBuyCheckOutCollectionViewCell.xib; sourceTree = "<group>"; };
 		B019FFFC24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Easy Lemon 30 Second.mp3"; sourceTree = "<group>"; };
 		B042F7F2241F8C72005982AF /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		B042F7F4241F8CB2005982AF /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
@@ -325,6 +331,7 @@
 			children = (
 				0249269F2434DE9E00CC22A8 /* CheckoutController.swift */,
 				02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */,
+				B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */,
 			);
 			name = Checkout;
 			sourceTree = "<group>";
@@ -495,6 +502,8 @@
 				C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */,
 				B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */,
 				B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */,
+				B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */,
+				B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -760,6 +769,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B019FFFD24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 in Resources */,
+				B0190092243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib in Resources */,
 				B087D23823F56439001FAC9A /* LaunchScreen.storyboard in Resources */,
 				B045A8642431FB5600F6CFE4 /* GroupBuy.storyboard in Resources */,
 				B0E618EE240FD58400EB6E74 /* SignUpLogIn.storyboard in Resources */,
@@ -860,10 +870,12 @@
 				C015B2772439F0D6009F060D /* ShoppingCartController.swift in Sources */,
 				C01F4AA7240EA844003E0AAF /* ShoppingCartCell.swift in Sources */,
 				B0190011243A213C00E6BA3E /* ShoppingCartTableViewCell.swift in Sources */,
+				B0190091243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift in Sources */,
 				02F21D5F24210DAE003860F9 /* CouponController.swift in Sources */,
 				B0E618EA2400042800EB6E74 /* Protocol.swift in Sources */,
 				B087D22E23F56436001FAC9A /* SceneDelegate.swift in Sources */,
 				B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */,
+				B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */,
 				B09ED5E52414EE0500D3C4A6 /* ProfileController.swift in Sources */,
 				02F25D6C2420967A0041541E /* MenuViewController.swift in Sources */,
 				B0EA391D243895C400AA7499 /* GroupBuyJoinController.swift in Sources */,
