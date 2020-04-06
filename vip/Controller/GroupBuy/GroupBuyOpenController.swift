@@ -8,70 +8,23 @@
 
 import UIKit
 import Firebase
-import AVFoundation
 
 class GroupBuyOpenController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var openButton: UIButton!
-    @IBOutlet weak var pauseAndPlay: UIButton!
-    @IBOutlet weak var slider: UISlider!
+
     
     var index  = Int()
     var productId = String()
     var uid = Auth.auth().currentUser?.uid
-    var audioPlayer: AVAudioPlayer?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
         
-        let lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
-        print(lemmonSound)
-        
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-        try! AVAudioSession.sharedInstance().setActive(true)
-        
-        try! audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
-        audioPlayer!.prepareToPlay()
-        audioPlayer!.play()
-        
-        pauseAndPlay.setImage(UIImage(named : "pause"), for: UIControl.State.normal) //停
-        pauseAndPlay.setImage(UIImage(named : "play"), for: UIControl.State.selected) //播
-        
-        slider.maximumValue = Float(audioPlayer?.duration ?? 0)
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-        
     }
-    
-    @IBAction func pauseAndPlayButtonWasPressed(_ sender: UIButton) {
-        
-        pauseAndPlay.isSelected = !sender.isSelected
-        
-        if(audioPlayer?.isPlaying == true){
-            audioPlayer?.stop()
-            
-        }else{
-            audioPlayer?.play()
-        }
-        
-    }
-    
-    // drag slider
-    @IBAction func changeAudioTime(_ sender: Any) {
-        audioPlayer?.stop()
-        audioPlayer?.currentTime = TimeInterval(slider.value)
-        audioPlayer?.prepareToPlay()
-        audioPlayer?.play()
-    }
-    
-    
-    @objc func updateSlider(){
-        slider.value = Float(audioPlayer?.currentTime ?? 0)
-        NSLog("HHHHii")
-    }
-    
     
     
     func btnAction(){
@@ -149,15 +102,7 @@ class GroupBuyOpenController: UIViewController {
         message.addAction(confirmAction)
         self.present(message, animated: true, completion: nil)
     }
-    func setUpMessageNo(){
-        let message = UIAlertController(title: "您已開團過摟", message: "", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "回主畫面", style: .default, handler: {action in 
-            print("here go to Main Scene!")
-            self.transition()
-        })
-        message.addAction(confirmAction)
-        self.present(message, animated: true, completion: nil)
-    }
+    
     
     func transition(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

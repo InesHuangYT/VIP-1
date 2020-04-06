@@ -8,22 +8,27 @@
 
 import UIKit
 import Firebase
+import AVFoundation
 
 class ProductInformationController: UIViewController {
     var ref: DatabaseReference!
-
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var evaluationLabel: UILabel!
     @IBOutlet weak var sellerEvaluationLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
+    @IBOutlet weak var pauseAndPlay: UIButton!
+    @IBOutlet weak var slider: UISlider!
+    
     var imageURL : String!
     var productID:[String] = []
     var ID:String!
-
+    var audioPlayer: AVAudioPlayer?
+    
+    
     var index  = Int()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +39,61 @@ class ProductInformationController: UIViewController {
         productImage.layer.borderWidth = 1
         productImage.layer.borderColor = myColor.cgColor
         btnAction()
-
+        audioPlay()
+        
     }
     
+    func audioPlay(){
+        let lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+        print(lemmonSound)
+        
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        try! AVAudioSession.sharedInstance().setActive(true)
+        
+        try! audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
+        audioPlayer!.prepareToPlay()
+        audioPlayer!.play()
+        
+        pauseAndPlay.setImage(UIImage(named : "pause"), for: UIControl.State.normal) //停
+        pauseAndPlay.setImage(UIImage(named : "play"), for: UIControl.State.selected) //播
+        
+        slider.maximumValue = Float(audioPlayer?.duration ?? 0)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+    }
+    
+    @IBAction func pauseAndPlayButtonWasPressed(_ sender: UIButton) {
+        
+        pauseAndPlay.isSelected = !sender.isSelected
+        
+        if(audioPlayer?.isPlaying == true){
+            audioPlayer?.stop()
+            
+        }else{
+            audioPlayer?.play()
+        }
+        
+    }
+    
+    // drag slider
+    @IBAction func changeAudioTime(_ sender: Any) {
+        audioPlayer?.stop()
+        audioPlayer?.currentTime = TimeInterval(slider.value)
+        audioPlayer?.prepareToPlay()
+        audioPlayer?.play()
+    }
+    
+    
+    @objc func updateSlider(){
+        slider.value = Float(audioPlayer?.currentTime ?? 0)
+        NSLog("HHHHii")
+    }
+    
+    
+    
     func btnAction(){
-           btnMenu.target = self.revealViewController()
-           btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
-       }
+        btnMenu.target = self.revealViewController()
+        btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+    }
     
     func setLabel(index:Int){
         Database.database().reference().child("Product")
@@ -48,10 +101,10 @@ class ProductInformationController: UIViewController {
             .observeSingleEvent(of: .value, with: { snapshot in
                 
                 for snap in snapshot.children {
-                                   let userSnap = snap as! DataSnapshot
-                                   let id = userSnap.key
-                                   self.productID.append(id)
-                               }
+                    let userSnap = snap as! DataSnapshot
+                    let id = userSnap.key
+                    self.productID.append(id)
+                }
                 print("This ID = ", self.productID[index])
                 self.ID = self.productID[index]
                 
@@ -70,7 +123,7 @@ class ProductInformationController: UIViewController {
                     })
                     let sellerEvaluationResults = datas.compactMap({
                         ($0.value as! [String: Any])["SellerEvaluation"]
-                                       })
+                    })
                     let imageResults = datas.compactMap({
                         ($0.value as! [String: Any])["imageURL"]
                     })
@@ -109,7 +162,7 @@ class ProductInformationController: UIViewController {
         let user = Auth.auth().currentUser!
         let newData = ["ProductName" : self.nameLabel.text, "Price" : self.priceLabel.text, "imageURL": self.imageURL]
         
-    self.ref.child("ShoppingCart").child(user.uid).child(self.ID).setValue(newData)
+        self.ref.child("ShoppingCart").child(user.uid).child(self.ID).setValue(newData)
         
         showAlert(title:"message", message:"Add to cart successfully", handlerOK:{action in
             print("Add To CART!")
@@ -117,20 +170,17 @@ class ProductInformationController: UIViewController {
         
     }
     @IBAction func LikeButton(_ sender: UIButton) {
-              if sender.isSelected{
-                  print("Like Button Selected!")
-                  sender.isSelected = false
-              }else{
-                  sender.isSelected = true
-              }
-          }
-    
-        
-    @IBAction func back(_ sender: Any) {        
-        self.navigationController?.popViewController(animated: true)
-        
+        if sender.isSelected{
+            print("Like Button Selected!")
+            sender.isSelected = false
+        }else{
+            sender.isSelected = true
+        }
     }
     
     
-
+    
+    
+    
+    
 }
