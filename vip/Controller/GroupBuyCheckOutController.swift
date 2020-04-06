@@ -104,11 +104,24 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
+    
+    
     @IBAction func confirmOrderButtonWasPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "OrderComfirmController") as!  OrderComfirmController
-        vc.productId = productId
-        self.navigationController?.pushViewController(vc,animated: true)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyOrderConfirmControllerId") as!  GroupBuyOrderConfirmController
+        let ref =  Database.database().reference().child("GroupBuy").child(productId)
+        
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            let value = snapshot.value as? NSDictionary
+            let price = value?["Price"] as? String ?? ""
+            let payment = Int(price)
+            let allPay = (payment ?? 0) as Int + 60
+            vc.payFee = String(allPay) 
+            vc.productId = self.productId
+            self.navigationController?.pushViewController(vc,animated: true)
+        })
+        
     }
     
     
