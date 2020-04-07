@@ -55,16 +55,27 @@ class ViewController: UIViewController {
         let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
             
-            let allKeys = snapshot.value as! [String : AnyObject]
-            let nodeToReturn = allKeys.keys
-            let counts = nodeToReturn.count
-            print("nodeToReturn ",nodeToReturn)
-            print("counts ",counts)
+            print("snapshot",snapshot.exists())
+            if (snapshot.exists()==false){
+                let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+                vc.shoppingCount = 0
+                self.navigationController?.pushViewController(vc,animated: true)
+            }else{
+                let allKeys = snapshot.value as! [String : AnyObject] 
+                let nodeToReturn = allKeys.keys
+                let counts = nodeToReturn.count
+                print("nodeToReturn ",nodeToReturn)
+                print("counts ",counts)
+                
+                let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+                vc.shoppingCount = counts
+                self.navigationController?.pushViewController(vc,animated: true)
+            }
             
-            let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
-            vc.shoppingCount = counts
-            self.navigationController?.pushViewController(vc,animated: true)
+            
+            
             
         })
         

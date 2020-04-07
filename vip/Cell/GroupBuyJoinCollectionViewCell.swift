@@ -26,50 +26,60 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
     
     
     func setProductLabel(productId:String,index:Int,groupBuyPeople:Int){
-        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("openedBy")
+        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
         
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                 
-                if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                    
-                    print(snapshots[index].key)    
-                    
+                print(snapshots[index].key)    
+                
                 ref.child(snapshots[index].key)
                     .queryOrderedByKey()
                     .observeSingleEvent(of: .value, with: { snapshot in 
-                            
+                        
                         if let snapshotss = snapshot.children.allObjects as? [DataSnapshot]{
                             
                             print("這",snapshotss[0].key) 
-                            ref.child(snapshots[index].key).child(snapshotss[0].key).child("JoinUser/users").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                            ref.child(snapshots[index].key).child("JoinBy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                                 
                                 
                                 if let snapshotsss = snapshot.children.allObjects as? [DataSnapshot]{  self.groupBuyId.text = (String(snapshotsss.count)) + " 人參加  /  " + (String(groupBuyPeople)) + " 人成團"
                                     print("這個商品目前參加人數：",snapshotsss.count)     
-
+                                    
                                 }
                             })
                             
                             
+                            ref.child(snapshots[index].key).child("OpenBy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                                if let snapshotsss = snapshot.children.allObjects as? [DataSnapshot]{  
+                                    Database.database().reference().child("users").child(snapshotsss[0].key).child("Profile").child("name")
+                                        .queryOrderedByKey()
+                                        .observeSingleEvent(of: .value, with: { snapshot in 
+                                            print("name : ",snapshot.value as? String ?? "")
+                                            self.userName.text = "開團人 " + (snapshot.value as? String ?? "")
+                                        })
+                                }
+                                
+                                
+                                
+                            })
+                            
                         }
-                         
-                        })
-                    Database.database().reference().child("users").child(snapshots[index].key).child("Profile").child("name")
-                        .queryOrderedByKey()
-                        .observeSingleEvent(of: .value, with: { snapshot in 
-                            print("name : ",snapshot.value as? String ?? "")
-                            self.userName.text = "開團人 " + (snapshot.value as? String ?? "")
-                        })
-                    
-                    
-                    
-                }
+                        
+                    })
                 
-            })
+                
+                
+                
+                
+                
+            }
+            
+        })
     }
     
     
-   
-   
+    
+    
     
 }

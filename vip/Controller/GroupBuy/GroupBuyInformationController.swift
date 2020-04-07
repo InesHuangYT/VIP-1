@@ -112,10 +112,11 @@ class GroupBuyInformationController: UIViewController {
         
     }
     
+//   我要開團
     @IBAction func groupBuyOpenButtonWasPressed(_ sender: Any) {
         
-        let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyOpenControllerId") as!  GroupBuyOpenController
+        let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
         vc.index = index
         vc.productId = productId
         self.navigationController?.pushViewController(vc,animated: true)

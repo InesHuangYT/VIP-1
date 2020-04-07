@@ -73,6 +73,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
               })
       }
     
+   
+    
 //    失敗品 不要用
     func failed(index:Int){
 
