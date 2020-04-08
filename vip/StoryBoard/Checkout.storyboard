@@ -782,6 +782,13 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="顯示正在結賬" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEM-qo-eWY">
+                                                <rect key="frame" x="31" y="39" width="315" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <color key="textColor" red="0.53840774300000005" green="0.53482294080000004" blue="0.49931669239999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="kQt-5A-QdF" firstAttribute="leading" secondItem="sa2-8Z-3p3" secondAttribute="leading" constant="53" id="07Y-UE-KgA"/>
@@ -861,6 +868,7 @@
                         <outlet property="payfeeLabel" destination="z9r-0w-GeN" id="Zbf-IC-fyZ"/>
                         <outlet property="paymentWaysLabel" destination="9XE-go-ORK" id="rcH-3D-lz3"/>
                         <outlet property="phoneLabel" destination="Ftc-JB-CEw" id="Uyh-Ol-zfx"/>
+                        <outlet property="statusLabel" destination="nEM-qo-eWY" id="zB2-GV-0jU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIB-H9-qWj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -949,13 +957,19 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="Hn1-tq-0W9"/>
                                 </constraints>
-                                <state key="normal" title="結帳" image="結帳">
+                                <state key="normal" title="確認結帳" image="結帳">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="checkButtonWasPressed:" destination="cjK-C2-YYH" eventType="touchUpInside" id="35c-6K-4ql"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="確認訂單頁面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Pq-nB-KuH">
+                                <rect key="frame" x="28" y="45" width="152" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.53840774300000005" green="0.53482294080000004" blue="0.49931669239999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -966,6 +980,8 @@
                             <constraint firstItem="OgB-gf-4yK" firstAttribute="bottom" secondItem="Fwg-L4-R3F" secondAttribute="bottom" constant="107" id="IGA-7Y-iG3"/>
                             <constraint firstItem="yZL-2E-Twa" firstAttribute="trailing" secondItem="f6a-uB-8qH" secondAttribute="trailing" constant="-44" id="Kaj-wh-bIc"/>
                             <constraint firstItem="GEV-Bb-7Y4" firstAttribute="leading" secondItem="OgB-gf-4yK" secondAttribute="leading" constant="30" id="Sqe-xV-GmC"/>
+                            <constraint firstItem="5Pq-nB-KuH" firstAttribute="top" secondItem="OgB-gf-4yK" secondAttribute="top" constant="45" id="TDg-dr-b1w"/>
+                            <constraint firstItem="5Pq-nB-KuH" firstAttribute="leading" secondItem="OgB-gf-4yK" secondAttribute="leading" constant="28" id="YUb-LZ-Ola"/>
                             <constraint firstItem="Fwg-L4-R3F" firstAttribute="trailing" secondItem="JaY-z4-cSg" secondAttribute="trailing" id="ZQg-7r-s8C"/>
                             <constraint firstItem="JaY-z4-cSg" firstAttribute="trailing" secondItem="OIA-lG-o60" secondAttribute="trailingMargin" id="aKO-PB-aYK"/>
                             <constraint firstItem="Fwg-L4-R3F" firstAttribute="centerX" secondItem="f6a-uB-8qH" secondAttribute="centerX" id="buQ-kw-gZN"/>
@@ -1082,6 +1098,22 @@
                                 <color key="textColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單提示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAn-05-XhN">
+                                <rect key="frame" x="9.5" y="20" width="101.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" red="0.53840774300000005" green="0.53482294080000004" blue="0.49931669239999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XoP-nQ-lvw">
+                                <rect key="frame" x="92" y="596" width="190" height="63"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="回主畫面" backgroundImage="回主畫面">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMainPage:" destination="ENO-RG-aSE" eventType="touchUpInside" id="XpO-k1-8r4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -1091,6 +1123,7 @@
                             <constraint firstItem="hFj-PA-cuJ" firstAttribute="leading" secondItem="hBu-AN-9Gf" secondAttribute="leading" id="7uZ-By-SIw"/>
                             <constraint firstItem="hFj-PA-cuJ" firstAttribute="centerX" secondItem="7yJ-2s-CzT" secondAttribute="centerX" id="89m-O2-w8T"/>
                             <constraint firstItem="9St-Fh-7e3" firstAttribute="top" secondItem="sCM-IS-3Zt" secondAttribute="bottom" constant="8" id="ABg-pw-xm5"/>
+                            <constraint firstItem="OAn-05-XhN" firstAttribute="leading" secondItem="dUU-Jm-d7q" secondAttribute="leading" constant="9.5" id="BDk-4g-L6f"/>
                             <constraint firstItem="fyL-W7-Mkf" firstAttribute="top" secondItem="dUU-Jm-d7q" secondAttribute="top" constant="39" id="BwJ-pu-CC3"/>
                             <constraint firstItem="sCM-IS-3Zt" firstAttribute="top" secondItem="dUU-Jm-d7q" secondAttribute="top" constant="58" id="EPI-jm-U92"/>
                             <constraint firstItem="hBu-AN-9Gf" firstAttribute="top" secondItem="XwI-S6-HvC" secondAttribute="bottom" constant="7.5" id="FSE-iW-eVO"/>
@@ -1104,6 +1137,8 @@
                             <constraint firstItem="XwI-S6-HvC" firstAttribute="top" secondItem="hFj-PA-cuJ" secondAttribute="bottom" constant="8" id="sGf-dW-9Ir"/>
                             <constraint firstItem="dUU-Jm-d7q" firstAttribute="bottom" secondItem="Bzn-bK-vBP" secondAttribute="bottom" constant="107" id="tnr-Qo-BzN"/>
                             <constraint firstItem="sCM-IS-3Zt" firstAttribute="leading" secondItem="dUU-Jm-d7q" secondAttribute="leading" constant="30" id="wja-al-RnJ"/>
+                            <constraint firstItem="OAn-05-XhN" firstAttribute="centerX" secondItem="XwI-S6-HvC" secondAttribute="centerX" constant="-21.75" id="y8G-nb-M5J"/>
+                            <constraint firstItem="OAn-05-XhN" firstAttribute="top" secondItem="dUU-Jm-d7q" secondAttribute="top" constant="20" id="zLf-5d-MLT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dUU-Jm-d7q"/>
                     </view>
@@ -1119,6 +1154,7 @@
                         <outlet property="orderId" destination="9St-Fh-7e3" id="nwd-dY-kQ0"/>
                         <outlet property="payfeeLabel" destination="azl-CV-Td4" id="nJi-G9-yzu"/>
                         <outlet property="paymentWaysLabel" destination="Tsg-Te-0mO" id="YQ6-62-JGe"/>
+                        <outlet property="successLabel" destination="OAn-05-XhN" id="i6U-wA-fao"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6g-z2-Knt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1258,6 +1294,7 @@
         <image name="List_button" width="18" height="11"/>
         <image name="support" width="33" height="33"/>
         <image name="修改" width="54" height="26"/>
+        <image name="回主畫面" width="253" height="66"/>
         <image name="確認訂單" width="266" height="86"/>
         <image name="結帳" width="114" height="63"/>
         <image name="返回" width="114" height="63"/>

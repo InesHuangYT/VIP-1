@@ -15,6 +15,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     
     var index = Int()
     var productId = String()
+    var groupBuyStyle = String()
     
     let ref = Database.database().reference()
     var estimatedWidth = 280.0
@@ -22,6 +23,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
+    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
@@ -56,11 +58,25 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
                 self.setLabel(value: value)
             })
         getItemFeeLabel()
+        setStatus()
     }
     
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+    }
+    
+    func setStatus(){
+        if groupBuyStyle == "Open" {
+            print("Open")
+            statusLabel.text = "開團前先確認結帳資訊"
+        }
+        
+        if groupBuyStyle == "Join" {
+            print("Join")
+            statusLabel.text = "加入團購前先確認結帳資訊"
+            
+        }
     }
     
     
@@ -75,7 +91,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
         let phone = value["phone"] as? String
         
         nameLabel.text = "姓名            " + (name!)
-        emailLabel.text = "信箱            " + (account!)
+        emailLabel.text = "信箱    " + (account!)
         deliverWaysLabel.text = "寄送方式    " + (deliverWays!)
         paymentWaysLabel.text = "付款方式    " + (paymentWays!)
         phoneLabel.text = "手機號碼    " + (phone!)
@@ -110,6 +126,8 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     @IBAction func confirmOrderButtonWasPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyOrderConfirmControllerId") as!  GroupBuyOrderConfirmController
+        
+        
         let ref =  Database.database().reference().child("GroupBuy").child(productId)
         
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
@@ -117,10 +135,14 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
             let price = value?["Price"] as? String ?? ""
             let payment = Int(price)
             let allPay = (payment ?? 0) as Int + 60
+            vc.index = self.index
             vc.payFee = String(allPay) 
             vc.productId = self.productId
+            vc.groupBuyStyle = self.groupBuyStyle
             self.navigationController?.pushViewController(vc,animated: true)
         })
+        
+        
         
     }
     

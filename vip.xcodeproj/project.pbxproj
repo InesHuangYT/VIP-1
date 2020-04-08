@@ -35,7 +35,7 @@
 		B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376ED2432630E006D169E /* CreateCategoryController.swift */; };
 		B08376F324337CF6006D169E /* GroupBuyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376F124337CF6006D169E /* GroupBuyCollectionViewCell.swift */; };
 		B08376F424337CF6006D169E /* GroupBuyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08376F224337CF6006D169E /* GroupBuyCollectionViewCell.xib */; };
-		B08376F624337F80006D169E /* GroupBuyAddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376F524337F80006D169E /* GroupBuyAddController.swift */; };
+		B08376F624337F80006D169E /* MyGroupBuyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376F524337F80006D169E /* MyGroupBuyController.swift */; };
 		B08376F824338185006D169E /* GroupBuyInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376F724338185006D169E /* GroupBuyInformationController.swift */; };
 		B08376FA24349732006D169E /* CreateGroupBuyProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376F924349732006D169E /* CreateGroupBuyProductController.swift */; };
 		B087D22C23F56436001FAC9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B087D22B23F56436001FAC9A /* AppDelegate.swift */; };
@@ -283,7 +283,7 @@
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
 		B08376F124337CF6006D169E /* GroupBuyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyCollectionViewCell.swift; sourceTree = "<group>"; };
 		B08376F224337CF6006D169E /* GroupBuyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupBuyCollectionViewCell.xib; sourceTree = "<group>"; };
-		B08376F524337F80006D169E /* GroupBuyAddController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyAddController.swift; sourceTree = "<group>"; };
+		B08376F524337F80006D169E /* MyGroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyController.swift; sourceTree = "<group>"; };
 		B08376F724338185006D169E /* GroupBuyInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyInformationController.swift; sourceTree = "<group>"; };
 		B08376F924349732006D169E /* CreateGroupBuyProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupBuyProductController.swift; sourceTree = "<group>"; };
 		B087D22823F56436001FAC9A /* vip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -473,7 +473,7 @@
 				B08376F724338185006D169E /* GroupBuyInformationController.swift */,
 				B0EA38FC2436159F00AA7499 /* GroupBuyOpenController.swift */,
 				B0EA391C243895C300AA7499 /* GroupBuyJoinController.swift */,
-				B08376F524337F80006D169E /* GroupBuyAddController.swift */,
+				B08376F524337F80006D169E /* MyGroupBuyController.swift */,
 			);
 			path = GroupBuy;
 			sourceTree = "<group>";
@@ -626,6 +626,7 @@
 		B015C490242A4EB700068102 = {
 			isa = PBXReferenceProxy;
 			remoteRef = B015C48F242A4EB700068102 /* PBXContainerItemProxy */;
+			sourceTree = "<unknown>";
 		};
 		B015C4B1242A4EC600068102 /* absl.framework */ = {
 			isa = PBXReferenceProxy;
@@ -909,7 +910,7 @@
 				B042F801242266F8005982AF /* ProductCollectionViewCell.swift in Sources */,
 				C01A7AF1240FBF1B00E99EED /* CreateProductDataController.swift in Sources */,
 				02AC617E243DA43500A7D94C /* OrderCheckFinalController.swift in Sources */,
-				B08376F624337F80006D169E /* GroupBuyAddController.swift in Sources */,
+				B08376F624337F80006D169E /* MyGroupBuyController.swift in Sources */,
 				B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */,
 				B08376FA24349732006D169E /* CreateGroupBuyProductController.swift in Sources */,
 				B0E0A31823F9D18F00BE8ECC /* LogInController.swift in Sources */,

@@ -97,7 +97,7 @@ extension ProductController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
 //        print(width,width*1.2)
-        return CGSize(width: width, height: width*1.1)
+        return CGSize(width: width, height: width*1.25)
     }
     func calculateWith()-> CGFloat{
         let estimateWidth = CGFloat(estimatedWidth)
