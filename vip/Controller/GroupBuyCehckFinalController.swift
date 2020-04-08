@@ -13,6 +13,7 @@ class GroupBuyCehckFinalController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var orderId: UILabel!
+    @IBOutlet weak var successLabel: UILabel!
     @IBOutlet weak var payfeeLabel: UILabel!
     @IBOutlet weak var paymentWaysLabel: UILabel!
     @IBOutlet weak var deliverWaysLabel: UILabel!
@@ -23,12 +24,24 @@ class GroupBuyCehckFinalController: UIViewController {
     var cellMarginSize = 16.0
     var payFee = ""
     var orderAutoId = ""
+    var groupBuyStyle = String()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
         userInfo()  
         collectionViewDeclare()
+        
+        
+        if groupBuyStyle == "Open"{
+            successLabel.text = "已開團成功"
+            
+        }
+        if groupBuyStyle == "Join"{
+            successLabel.text = "已加入成功"
+            
+        }
         
     }
     
@@ -66,7 +79,14 @@ class GroupBuyCehckFinalController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
     }
-  
+    
+    @IBAction func backToMainPage(_ sender: Any) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        let newFrontViewController = UINavigationController.init(rootViewController: vc)
+        revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+    }
+    
     
     
     

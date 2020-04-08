@@ -22,12 +22,15 @@ class GroupBuyOrderConfirmController: UIViewController {
     
     @IBOutlet weak var checkButton: UIButton!
     
+    var index = Int()
     var productId = String()
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
     var payFee = ""
     let ref =  Database.database().reference().child("GroupBuy")
     var uid = Auth.auth().currentUser?.uid
+    var groupBuyStyle = String()
+    
     
     
     override func viewDidLoad() {
@@ -35,7 +38,7 @@ class GroupBuyOrderConfirmController: UIViewController {
         btnAction()
         collectionViewDeclare()
         userInfo()
-        
+        print("groupBuyStyle",groupBuyStyle)
     }
     
     
@@ -78,12 +81,38 @@ class GroupBuyOrderConfirmController: UIViewController {
     
     
     
-    //    加入開團資料庫 成立訂單
+    //   加入資料庫 成立訂單
     @IBAction func checkButtonWasPressed(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCehckFinalControllerId") as!  GroupBuyCehckFinalController
         
+        if groupBuyStyle == "Open" {
+            open(vc:vc)
+            print("Open")
+        }
+        
+        if groupBuyStyle == "Join" {
+            join(vc:vc)
+            print("Join")
+            
+            ref.child(productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                let value = snapshot.value as? NSDictionary
+                let price = value?["Price"] as? String ?? ""
+                let payment = Int(price)
+                let allPay = (payment ?? 0) as Int + 60
+                vc.payFee = String(allPay) 
+                vc.productId = self.productId
+                vc.groupBuyStyle = self.groupBuyStyle
+                self.navigationController?.pushViewController(vc,animated: true)
+                
+            })
+        }
+        
+        
+    }
+    
+    func open(vc:GroupBuyCehckFinalController){
         
         ref.child(productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             let reff = self.ref.child(self.productId).child("OpenGroupId").childByAutoId()
@@ -100,7 +129,11 @@ class GroupBuyOrderConfirmController: UIViewController {
                         print("keyyyyy",key)
                         Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(reff.key ?? "")/ProductId/\(self.productId)").setValue(self.productId)
                         
-//                        self.setUpMessageOk()
+                        let refOrder = Database.database().reference().child("Order").childByAutoId()
+                        let orderId = refOrder.key
+                        vc.orderAutoId = orderId ?? ""
+                        refOrder.child("OpenGroupId").child(reff.key ?? "").child("Uid").setValue(self.uid ?? "")
+                        
                     }
                 }
                 
@@ -112,18 +145,62 @@ class GroupBuyOrderConfirmController: UIViewController {
             let allPay = (payment ?? 0) as Int + 60
             vc.payFee = String(allPay) 
             vc.productId = self.productId
-            vc.orderAutoId = reff.key ?? ""
+            vc.groupBuyStyle = self.groupBuyStyle
             self.navigationController?.pushViewController(vc,animated: true)
         })
         
+        
+        
     }
+    
+    
+    func join(vc:GroupBuyCehckFinalController) {
+        
+        let refs = ref.child(productId).child("OpenGroupId")
+        
+        refs.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                print("snapshots[self.index].key",snapshots[self.index].key)
+                refs.child(snapshots[self.index].key)
+                    .queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in 
+                        
+                        
+                        refs.child(snapshots[self.index].key).child("JoinBy")
+                            .queryOrderedByKey()
+                            .observeSingleEvent(of: .value, with: { snapshot in
+                                
+                                
+                                refs.child(snapshots[self.index].key).child("JoinBy").child(self.uid ?? "").setValue(self.uid)
+                                
+                                print("Join sucessfully !")
+                                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/JoinGroupId/\(snapshots[self.index].key)/ProductId/\(self.productId)").setValue(self.productId)
+                                
+                                let refOrder = Database.database().reference().child("Order").childByAutoId()
+                                let orderId = refOrder.key
+                                vc.orderAutoId = orderId ?? ""
+                                refOrder.child("OpenGroupId").child(snapshots[self.index].key).child("Uid").setValue(self.uid ?? "")
+                                
+                                
+                                
+                                
+                            })   
+                        
+                    })
+            }
+            
+        })
+    }
+    
+
+    
     
     @IBAction func backButtonWasPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
     
-  
+    
     
 }
 extension GroupBuyOrderConfirmController : UICollectionViewDataSource{

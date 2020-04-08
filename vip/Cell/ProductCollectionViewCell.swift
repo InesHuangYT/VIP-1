@@ -23,7 +23,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         layer.borderWidth = 5
         layer.borderColor = myColor.cgColor
         layer.cornerRadius = 45   
-        productImage.layer.cornerRadius = 45
+        productImage.layer.cornerRadius = 30
         productImage.layer.borderWidth = 1
         productImage.layer.borderColor = myColor.cgColor
 

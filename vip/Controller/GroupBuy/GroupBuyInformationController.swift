@@ -112,23 +112,24 @@ class GroupBuyInformationController: UIViewController {
         
     }
     
-//   我要開團
+    //   我要open團
     @IBAction func groupBuyOpenButtonWasPressed(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
         vc.index = index
         vc.productId = productId
+        vc.groupBuyStyle = "Open"
         self.navigationController?.pushViewController(vc,animated: true)
         
         
     }
     
-   
+    
     
 }
 
-
+//   我要Join團
 extension GroupBuyInformationController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         return self.openByCount 
@@ -142,12 +143,75 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyJoinControllerId") as!  GroupBuyJoinController
+        let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
         vc.index = indexPath.row      
         vc.productId = productId
-        self.navigationController?.pushViewController(vc,animated: true)
+        vc.groupBuyStyle = "Join"
         
+        
+        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
+        
+        
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                print("index",indexPath.row      )
+                print("[self.index].key",snapshots[indexPath.row].key)
+                ref.child(snapshots[indexPath.row].key)
+                    .queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in 
+                        
+                        
+                        ref.child(snapshots[indexPath.row].key).child("JoinBy")
+                            .queryOrderedByKey()
+                            .observeSingleEvent(of: .value, with: { snapshot in
+                                
+                                if let datass = snapshot.children.allObjects as? [DataSnapshot]{
+                                    
+                                    for i in datass{
+                                        
+                                        if i.key == self.uid {
+                                            
+                                            print("uid already inside ", i.key )
+                                            self.setUpMessageNo()
+                                            
+                                        }  
+                                        else{
+                                            self.navigationController?.pushViewController(vc,animated: true)
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                            })   
+                        
+                    })
+            }
+        })
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    func setUpMessageNo(){
+        let message = UIAlertController(title: "您已經在此團購結帳過摟", message: "", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "導入回我的團購看訂單", style: .default, handler: {action in 
+            print("連到我的團購！！ !")
+//            連到我的團購！！
+            self.transition()
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
+    }
+    
+    func transition(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+        present(vc, animated: true, completion: nil)
     }
 }
 
