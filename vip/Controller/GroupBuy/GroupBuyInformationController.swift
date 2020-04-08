@@ -34,10 +34,7 @@ class GroupBuyInformationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.reloadData()
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.register(UINib(nibName: "GroupBuyJoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyJoinCollectionViewCell")
+        collectionViewDeclare()
         btnAction()
         self.setupGridView()
         setLabel(index:index)
@@ -53,6 +50,14 @@ class GroupBuyInformationController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
+    
+    func collectionViewDeclare(){
+        self.collectionView.reloadData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "GroupBuyJoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyJoinCollectionViewCell")
+    }
+    
     func setupGridView(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
@@ -201,7 +206,7 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         let message = UIAlertController(title: "您已經在此團購結帳過摟", message: "", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "導入回我的團購看訂單", style: .default, handler: {action in 
             print("連到我的團購！！ !")
-//            連到我的團購！！
+            //            連到我的團購！！
             self.transition()
         })
         message.addAction(confirmAction)

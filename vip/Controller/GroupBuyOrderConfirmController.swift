@@ -28,6 +28,7 @@ class GroupBuyOrderConfirmController: UIViewController {
     var cellMarginSize = 16.0
     var payFee = ""
     let ref =  Database.database().reference().child("GroupBuy")
+    let refUserGroupBuy =  Database.database().reference().child("UserGroupBuy")
     var uid = Auth.auth().currentUser?.uid
     var groupBuyStyle = String()
     
@@ -122,20 +123,22 @@ class GroupBuyOrderConfirmController: UIViewController {
             self.ref.child(self.productId).child("OpenGroupId").queryOrderedByKey().observeSingleEvent(of: .value, with: { 
                 snapshot in
                 
-                if let datas = snapshot.children.allObjects as? [DataSnapshot]{
-                    
-                    for snap in datas{
-                        let key = snap.key
-                        print("keyyyyy",key)
-                        Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(reff.key ?? "")/ProductId/\(self.productId)").setValue(self.productId)
-                        
-                        let refOrder = Database.database().reference().child("Order").childByAutoId()
-                        let orderId = refOrder.key
-                        vc.orderAutoId = orderId ?? ""
-                        refOrder.child("OpenGroupId").child(reff.key ?? "").child("Uid").setValue(self.uid ?? "")
-                        
-                    }
-                }
+                
+                
+                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(reff.key ?? "")/ProductId/\(self.productId)").setValue(self.productId)
+                
+                let refOrder = Database.database().reference().child("Order").childByAutoId()
+                let orderId = refOrder.key
+                vc.orderAutoId = orderId ?? ""
+                refOrder.child("OpenGroupId").child(reff.key ?? "").child("Uid").setValue(self.uid ?? "")
+                self.refUserGroupBuy.child(self.uid ?? "").child("OpenGroupId").child(reff.key ?? "").child("OrderId").child(orderId ?? "").setValue(orderId)
+                //if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                //                for snap in datas{
+                //                let key = snap.key
+                //                print("keyyyyy",key)
+                //                
+                //                }
+                //                }
                 
             })
             
@@ -161,7 +164,7 @@ class GroupBuyOrderConfirmController: UIViewController {
         refs.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                 print("snapshots[self.index].key",snapshots[self.index].key)
-                refs.child(snapshots[self.index].key)
+                refs.child(snapshots[self.index].key)  //choose the cell equal index
                     .queryOrderedByKey()
                     .observeSingleEvent(of: .value, with: { snapshot in 
                         
@@ -180,6 +183,7 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 let orderId = refOrder.key
                                 vc.orderAutoId = orderId ?? ""
                                 refOrder.child("OpenGroupId").child(snapshots[self.index].key).child("Uid").setValue(self.uid ?? "")
+                                self.refUserGroupBuy.child(self.uid ?? "").child("JoinGroupId").child(snapshots[self.index].key).child("OrderId").child(orderId ?? "").setValue(orderId)
                                 
                                 
                                 
@@ -192,7 +196,7 @@ class GroupBuyOrderConfirmController: UIViewController {
         })
     }
     
-
+    
     
     
     @IBAction func backButtonWasPressed(_ sender: Any) {

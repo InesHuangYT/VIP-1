@@ -99,10 +99,11 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcK-aK-8iJ">
-                                <rect key="frame" x="72" y="35" width="184" height="40"/>
-                                <state key="normal" title="我的團購" backgroundImage="加入團購">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcK-aK-8iJ">
+                                <rect key="frame" x="72" y="35" width="223" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <state key="normal" title="我的團購">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9k-A5-WdA">
@@ -128,10 +129,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YwN-nx-BLM"/>
                     </view>
+                    <navigationItem key="navigationItem" id="6sh-za-l6b">
+                        <barButtonItem key="rightBarButtonItem" title="側邊欄" image="List_button" id="OoD-9V-k72">
+                            <color key="tintColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnMenu" destination="OoD-9V-k72" id="tu1-OC-n5G"/>
+                        <outlet property="collectionView" destination="y1X-20-ASF" id="F4z-j2-eqw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DME-iY-gNj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="724" y="-857"/>
+            <point key="canvasLocation" x="-142" y="-783"/>
         </scene>
         <!--Group Buy Information Controller-->
         <scene sceneID="e4J-1u-LEv">
@@ -563,7 +573,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gtc-23-vHq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-142" y="-858"/>
+            <point key="canvasLocation" x="724" y="-783"/>
         </scene>
         <!--Group Buy Join Controller-->
         <scene sceneID="MnS-5J-APY">
@@ -625,7 +635,6 @@
         <image name="logo" width="175" height="166"/>
         <image name="logoAPP" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
-        <image name="加入團購" width="184" height="40"/>
         <image name="自己開團" width="159" height="86"/>
     </resources>
 </document>
