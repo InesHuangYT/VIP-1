@@ -11,9 +11,14 @@ import GoogleSignIn
 import FirebaseAuth
 import Firebase
 
-class CheckoutController: UIViewController, UITextFieldDelegate {
+class OrderCheckoutController: UIViewController, UITextFieldDelegate {
+    
+    var index = Int()
+    var productId = String()
     
     let ref = Database.database().reference()
+    var estimatedWidth = 280.0
+    var cellMarginSize = 16.0
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var nameLabel: UILabel!
@@ -26,6 +31,7 @@ class CheckoutController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var itemfeeLabel: UILabel!
     @IBOutlet weak var deliverfeeLabel: UILabel!
     @IBOutlet weak var payfeeLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         
@@ -78,6 +84,24 @@ class CheckoutController: UIViewController, UITextFieldDelegate {
         paymentWaysLabel.text = "付款方式    " + (paymentWays!)
     }
     
+    func getItemFeeLabel(){
+        
+        print("in",self.productId)
+        
+        let ref =  Database.database().reference().child("GroupBuy").child(productId)
+        
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            let value = snapshot.value as? NSDictionary
+            let price = value?["Price"] as? String ?? ""
+            self.itemfeeLabel.text = price + "元"
+            //       暫定
+            self.deliverfeeLabel.text = String(60)
+            let payment = Int(price)
+            let allPay = (payment ?? 0) as Int + 60
+            self.payfeeLabel.text = String(allPay) + "元"
+        })
+    }
+    
     func transitionToLogInScene(){
         let storyboard = UIStoryboard(name: "SignUpLogIn", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as! LogInController
@@ -89,4 +113,3 @@ class CheckoutController: UIViewController, UITextFieldDelegate {
            return true
     }
 }
-   
