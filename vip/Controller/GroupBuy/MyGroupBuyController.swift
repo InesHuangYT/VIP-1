@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupBuyAddController: UIViewController {
+class MyGroupBuyController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -70,10 +70,10 @@
             </objects>
             <point key="canvasLocation" x="-141.59999999999999" y="176.76161919040482"/>
         </scene>
-        <!--Group Buy Add Controller-->
+        <!--My Group Buy Controller-->
         <scene sceneID="4CB-wX-uzS">
             <objects>
-                <viewController storyboardIdentifier="GroupBuyAddControllerId" id="YfU-LJ-pRZ" customClass="GroupBuyAddController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyGroupBuyControllerId" id="YfU-LJ-pRZ" customClass="MyGroupBuyController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UhZ-7W-cdX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,7 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fcK-aK-8iJ">
                                 <rect key="frame" x="72" y="35" width="184" height="40"/>
-                                <state key="normal" title="加入團購頁面" backgroundImage="加入團購">
+                                <state key="normal" title="我的團購" backgroundImage="加入團購">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
