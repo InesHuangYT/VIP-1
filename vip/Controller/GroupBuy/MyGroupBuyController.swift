@@ -26,6 +26,11 @@ class MyGroupBuyController: UIViewController {
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     var count = Int()
+    var countWaiting = Int()
+    var countReady = Int()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
@@ -33,6 +38,10 @@ class MyGroupBuyController: UIViewController {
         checkFinishCount()
         checkWaitCount()
         checkHistoryCount()
+        print("countWaiting",countWaiting)
+        print("countReady",countReady)
+        
+        
     }
     
     
@@ -88,8 +97,19 @@ class MyGroupBuyController: UIViewController {
 
 extension MyGroupBuyController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
+        if collectionView.isEqual(finshCollectionView) {
+            return countReady
+            
+        }
+        else if collectionView.isEqual(waitCollectionView) {
+            return countWaiting
+            
+        }
+        else {
+            return 0
+            
+        }
         
-        return 2
         
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
@@ -97,6 +117,8 @@ extension MyGroupBuyController : UICollectionViewDataSource{
         if collectionView.isEqual(finshCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("finshCollectionView")
+            //            cell.setProductLabel()
+            
             return cell
             
         } 
@@ -109,7 +131,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("hostoryCollectionView")
-
+            
             return cell
             
         }

@@ -54,6 +54,12 @@
             <color key="backgroundColor" red="0.90992242099999998" green="0.97155016660000004" blue="0.90518772599999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="370" height="176"/>
+            <connections>
+                <outlet property="image" destination="0SI-2u-tA6" id="Beu-1R-F6W"/>
+                <outlet property="name" destination="qNi-T6-IEv" id="bY5-Dq-Ju4"/>
+                <outlet property="price" destination="F6K-Hn-2ej" id="Sdd-6c-frq"/>
+                <outlet property="status" destination="5xn-Ur-fDU" id="J7M-GB-vS9"/>
+            </connections>
             <point key="canvasLocation" x="86.956521739130437" y="115.17857142857142"/>
         </collectionViewCell>
     </objects>

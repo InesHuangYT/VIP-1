@@ -125,6 +125,8 @@ class GroupBuyInformationController: UIViewController {
         vc.index = index
         vc.productId = productId
         vc.groupBuyStyle = "Open"
+        vc.groupBuyPeople = self.groupBuyPeople
+
         self.navigationController?.pushViewController(vc,animated: true)
         
         
@@ -153,14 +155,14 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         vc.index = indexPath.row      
         vc.productId = productId
         vc.groupBuyStyle = "Join"
-        
+        vc.groupBuyPeople = self.groupBuyPeople
         
         let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
         
         
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                print("index",indexPath.row      )
+                print("index",indexPath.row)
                 print("[self.index].key",snapshots[indexPath.row].key)
                 ref.child(snapshots[indexPath.row].key)
                     .queryOrderedByKey()
@@ -171,19 +173,19 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
                             .queryOrderedByKey()
                             .observeSingleEvent(of: .value, with: { snapshot in
                                 
+                                var access = true
                                 if let datass = snapshot.children.allObjects as? [DataSnapshot]{
                                     
                                     for i in datass{
                                         
                                         if i.key == self.uid {
-                                            
                                             print("uid already inside ", i.key )
                                             self.setUpMessageNo()
-                                            
+                                            access = false   
                                         }  
-                                        else{
-                                            self.navigationController?.pushViewController(vc,animated: true)
-                                        }
+                                    }
+                                    if access == true{
+                                        self.navigationController?.pushViewController(vc,animated: true)
                                         
                                     }
                                     

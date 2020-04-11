@@ -19,12 +19,15 @@ class GroupBuyCehckFinalController: UIViewController {
     @IBOutlet weak var deliverWaysLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    let ref =  Database.database().reference().child("GroupBuy")
+    var index = Int()
     var productId = String()
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
     var payFee = ""
     var orderAutoId = ""
     var groupBuyStyle = String()
+    var groupBuyPeople = Int()
     
     
     override func viewDidLoad() {
@@ -32,7 +35,7 @@ class GroupBuyCehckFinalController: UIViewController {
         btnAction()
         userInfo()  
         collectionViewDeclare()
-        
+        setGroupBuyStatus(productId: productId, index: index, groupBuyPeople: groupBuyPeople,orderIds: orderAutoId)
         
         if groupBuyStyle == "Open"{
             successLabel.text = "已開團成功"
@@ -79,6 +82,36 @@ class GroupBuyCehckFinalController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
     }
+    
+    
+    func setGroupBuyStatus(productId:String,index:Int,groupBuyPeople:Int,orderIds:String){
+        let refs = ref.child(productId).child("OpenGroupId")
+//        let refUserGroupBuy =  Database.database().reference().child("UserGroupBuy")
+
+        refs.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                refs.child(snapshots[self.index].key).child("JoinBy")
+                    .queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in
+                        
+                        if let snapshotss = snapshot.children.allObjects as? [DataSnapshot]{
+                            print("這個商品目前參加人數：",snapshotss.count)
+                            let currentCount = snapshotss.count
+                            print("groupBuyPeople人數：",self.groupBuyPeople)
+                            if (currentCount >= self.groupBuyPeople){
+                                refs.child(snapshots[self.index].key).child("Status").setValue("Ready")
+                            }
+                        }
+                        
+                    })
+            }
+            
+        })
+        
+    }
+    
+    
+    
     
     @IBAction func backToMainPage(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

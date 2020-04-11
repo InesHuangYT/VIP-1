@@ -16,6 +16,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     var index = Int()
     var productId = String()
     var groupBuyStyle = String()
+    var groupBuyPeople = Int()
     
     let ref = Database.database().reference()
     var estimatedWidth = 280.0
@@ -139,6 +140,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
             vc.payFee = String(allPay) 
             vc.productId = self.productId
             vc.groupBuyStyle = self.groupBuyStyle
+            vc.groupBuyPeople = self.groupBuyPeople
             self.navigationController?.pushViewController(vc,animated: true)
         })
         

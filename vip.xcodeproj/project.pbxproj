@@ -479,9 +479,9 @@
 				B08376F924349732006D169E /* CreateGroupBuyProductController.swift */,
 				B08376CD2431FCC8006D169E /* GroupBuyController.swift */,
 				B08376F724338185006D169E /* GroupBuyInformationController.swift */,
+				B0FE0D7B243E3BFD00479B80 /* MyGroupBuyController.swift */,
 				B0EA38FC2436159F00AA7499 /* GroupBuyOpenController.swift */,
 				B0EA391C243895C300AA7499 /* GroupBuyJoinController.swift */,
-				B0FE0D7B243E3BFD00479B80 /* MyGroupBuyController.swift */,
 			);
 			path = GroupBuy;
 			sourceTree = "<group>";
