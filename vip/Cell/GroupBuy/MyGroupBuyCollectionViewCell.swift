@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class MyGroupBuyCollectionViewCell: UICollectionViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -18,8 +18,10 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
     
     
     func setProductLabel(productId:String){
-         
-          
-      }
-
+        
+        
+    }
+    
+    
+    
 }
