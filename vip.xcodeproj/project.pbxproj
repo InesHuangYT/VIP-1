@@ -64,6 +64,8 @@
 		B0FE0D7C243E3BFD00479B80 /* MyGroupBuyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FE0D7B243E3BFD00479B80 /* MyGroupBuyController.swift */; };
 		B0FE0D7F243E3DA700479B80 /* MyGroupBuyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FE0D7D243E3DA700479B80 /* MyGroupBuyCollectionViewCell.swift */; };
 		B0FE0D80243E3DA700479B80 /* MyGroupBuyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0FE0D7E243E3DA700479B80 /* MyGroupBuyCollectionViewCell.xib */; };
+		B0FE0D83243F50B900479B80 /* MyGroupBuyNoOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FE0D81243F50B900479B80 /* MyGroupBuyNoOrder.swift */; };
+		B0FE0D84243F50BA00479B80 /* MyGroupBuyNoOrder.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0FE0D82243F50B900479B80 /* MyGroupBuyNoOrder.xib */; };
 		C015B2752439F0A9009F060D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C015B2582439F0A8009F060D /* Alert.swift */; };
 		C015B2772439F0D6009F060D /* ShoppingCartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C015B2762439F0D5009F060D /* ShoppingCartController.swift */; };
 		C01A7AF1240FBF1B00E99EED /* CreateProductDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01A7AF0240FBF1B00E99EED /* CreateProductDataController.swift */; };
@@ -315,6 +317,8 @@
 		B0FE0D7B243E3BFD00479B80 /* MyGroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyController.swift; sourceTree = "<group>"; };
 		B0FE0D7D243E3DA700479B80 /* MyGroupBuyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0FE0D7E243E3DA700479B80 /* MyGroupBuyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyGroupBuyCollectionViewCell.xib; sourceTree = "<group>"; };
+		B0FE0D81243F50B900479B80 /* MyGroupBuyNoOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyNoOrder.swift; sourceTree = "<group>"; };
+		B0FE0D82243F50B900479B80 /* MyGroupBuyNoOrder.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyGroupBuyNoOrder.xib; sourceTree = "<group>"; };
 		C015B2582439F0A8009F060D /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		C015B2762439F0D5009F060D /* ShoppingCartController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartController.swift; sourceTree = "<group>"; };
 		C01A7AF0240FBF1B00E99EED /* CreateProductDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProductDataController.swift; sourceTree = "<group>"; };
@@ -510,27 +514,61 @@
 			path = SignUpLogIn;
 			sourceTree = "<group>";
 		};
-		C01F4AA8240EA8A1003E0AAF /* Cell */ = {
+		B0FE0D85243F50CE00479B80 /* MyGroupBuy */ = {
 			isa = PBXGroup;
 			children = (
-				02F25D63242095C00041541E /* MenuTableViewCell.swift */,
+				B0FE0D81243F50B900479B80 /* MyGroupBuyNoOrder.swift */,
+				B0FE0D82243F50B900479B80 /* MyGroupBuyNoOrder.xib */,
+			);
+			path = MyGroupBuy;
+			sourceTree = "<group>";
+		};
+		B0FE0D86243F604800479B80 /* Product */ = {
+			isa = PBXGroup;
+			children = (
 				B042F7FF242266F8005982AF /* ProductCollectionViewCell.swift */,
 				B042F800242266F8005982AF /* ProductCollectionViewCell.xib */,
-				B08376F124337CF6006D169E /* GroupBuyCollectionViewCell.swift */,
-				B08376F224337CF6006D169E /* GroupBuyCollectionViewCell.xib */,
-				B0EA38F82435FBA300AA7499 /* GroupBuyJoinCollectionViewCell.swift */,
-				B0EA38F92435FBA300AA7499 /* GroupBuyJoinCollectionViewCell.xib */,
-				C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */,
-				B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */,
-				B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		B0FE0D87243F606B00479B80 /* CheckOut */ = {
+			isa = PBXGroup;
+			children = (
 				B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */,
 				B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */,
 				B0FE0D17243BA52C00479B80 /* OrderComfirmCollectionViewCell.swift */,
 				B0FE0D18243BA52C00479B80 /* OrderComfirmCollectionViewCell.xib */,
 				B0FE0D59243D095500479B80 /* CehckFinalCollectionViewCell.swift */,
 				B0FE0D5A243D095500479B80 /* CehckFinalCollectionViewCell.xib */,
+			);
+			path = CheckOut;
+			sourceTree = "<group>";
+		};
+		B0FE0D88243F609900479B80 /* GroupBuy */ = {
+			isa = PBXGroup;
+			children = (
+				B08376F124337CF6006D169E /* GroupBuyCollectionViewCell.swift */,
+				B08376F224337CF6006D169E /* GroupBuyCollectionViewCell.xib */,
+				B0EA38F82435FBA300AA7499 /* GroupBuyJoinCollectionViewCell.swift */,
+				B0EA38F92435FBA300AA7499 /* GroupBuyJoinCollectionViewCell.xib */,
 				B0FE0D7D243E3DA700479B80 /* MyGroupBuyCollectionViewCell.swift */,
 				B0FE0D7E243E3DA700479B80 /* MyGroupBuyCollectionViewCell.xib */,
+			);
+			path = GroupBuy;
+			sourceTree = "<group>";
+		};
+		C01F4AA8240EA8A1003E0AAF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				02F25D63242095C00041541E /* MenuTableViewCell.swift */,
+				C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */,
+				B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */,
+				B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */,
+				B0FE0D87243F606B00479B80 /* CheckOut */,
+				B0FE0D86243F604800479B80 /* Product */,
+				B0FE0D88243F609900479B80 /* GroupBuy */,
+				B0FE0D85243F50CE00479B80 /* MyGroupBuy */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -805,6 +843,7 @@
 				B0E618EE240FD58400EB6E74 /* SignUpLogIn.storyboard in Resources */,
 				B0EA38FB2435FBA300AA7499 /* GroupBuyJoinCollectionViewCell.xib in Resources */,
 				B042F802242266F8005982AF /* ProductCollectionViewCell.xib in Resources */,
+				B0FE0D84243F50BA00479B80 /* MyGroupBuyNoOrder.xib in Resources */,
 				024926822434DE1400CC22A8 /* Checkout.storyboard in Resources */,
 				B042F7F3241F8C72005982AF /* Product.storyboard in Resources */,
 				B0190012243A213C00E6BA3E /* ShoppingCartTableViewCell.xib in Resources */,
@@ -909,6 +948,7 @@
 				B087D22E23F56436001FAC9A /* SceneDelegate.swift in Sources */,
 				B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */,
 				B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */,
+				B0FE0D83243F50B900479B80 /* MyGroupBuyNoOrder.swift in Sources */,
 				B09ED5E52414EE0500D3C4A6 /* ProfileController.swift in Sources */,
 				02F25D6C2420967A0041541E /* MenuViewController.swift in Sources */,
 				B0FE0D3A243CBFF100479B80 /* GroupBuyCehckFinalController.swift in Sources */,
