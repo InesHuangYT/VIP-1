@@ -31,6 +31,7 @@ class GroupBuyOrderConfirmController: UIViewController {
     let refUserGroupBuy =  Database.database().reference().child("UserGroupBuy")
     var uid = Auth.auth().currentUser?.uid
     var groupBuyStyle = String()
+    var groupBuyPeople = Int()
     
     
     
@@ -40,6 +41,8 @@ class GroupBuyOrderConfirmController: UIViewController {
         collectionViewDeclare()
         userInfo()
         print("groupBuyStyle",groupBuyStyle)
+        print("groupBuyPeople",groupBuyPeople)
+
     }
     
     
@@ -96,21 +99,8 @@ class GroupBuyOrderConfirmController: UIViewController {
         if groupBuyStyle == "Join" {
             join(vc:vc)
             print("Join")
-            
-            ref.child(productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
-                let value = snapshot.value as? NSDictionary
-                let price = value?["Price"] as? String ?? ""
-                let payment = Int(price)
-                let allPay = (payment ?? 0) as Int + 60
-                vc.payFee = String(allPay) 
-                vc.productId = self.productId
-                vc.groupBuyStyle = self.groupBuyStyle
-                self.navigationController?.pushViewController(vc,animated: true)
-                
-            })
         }
-        
-        
+
     }
     
     func open(vc:GroupBuyCehckFinalController){
@@ -119,6 +109,8 @@ class GroupBuyOrderConfirmController: UIViewController {
             let reff = self.ref.child(self.productId).child("OpenGroupId").childByAutoId()
             reff.child("OpenBy").child(self.uid ?? "").setValue(self.uid ?? "")
             reff.child("JoinBy").child(self.uid ?? "").setValue(self.uid ?? "")
+            reff.child("Status").setValue("Waiting")
+            
             
             self.ref.child(self.productId).child("OpenGroupId").queryOrderedByKey().observeSingleEvent(of: .value, with: { 
                 snapshot in
@@ -175,7 +167,6 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 
                                 
                                 refs.child(snapshots[self.index].key).child("JoinBy").child(self.uid ?? "").setValue(self.uid)
-                                
                                 print("Join sucessfully !")
                                 Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/JoinGroupId/\(snapshots[self.index].key)/ProductId/\(self.productId)").setValue(self.productId)
                                 
@@ -183,13 +174,25 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 let orderId = refOrder.key
                                 vc.orderAutoId = orderId ?? ""
                                 refOrder.child("OpenGroupId").child(snapshots[self.index].key).child("Uid").setValue(self.uid ?? "")
-                                self.refUserGroupBuy.child(self.uid ?? "").child("JoinGroupId").child(snapshots[self.index].key).child("OrderId").child(orderId ?? "").setValue(orderId)
-                                
-                                
-                                
+                                self.refUserGroupBuy.child(self.uid ?? "").child("JoinGroupId").child(snapshots[self.index].key).child("OrderId").child(orderId ?? "").setValue(orderId)    
                                 
                             })   
                         
+                        
+                        
+                        self.ref.child(self.productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                            let value = snapshot.value as? NSDictionary
+                            let price = value?["Price"] as? String ?? ""
+                            let payment = Int(price)
+                            let allPay = (payment ?? 0) as Int + 60
+                            vc.payFee = String(allPay) 
+                            vc.productId = self.productId
+                            vc.index = self.index
+                            vc.groupBuyStyle = self.groupBuyStyle
+                            vc.groupBuyPeople = self.groupBuyPeople
+                            self.navigationController?.pushViewController(vc,animated: true)
+                            
+                        })
                     })
             }
             

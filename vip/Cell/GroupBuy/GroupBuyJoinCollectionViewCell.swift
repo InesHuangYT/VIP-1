@@ -14,7 +14,6 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var groupBuyId: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
@@ -43,7 +42,8 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
                             ref.child(snapshots[index].key).child("JoinBy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                                 
                                 
-                                if let snapshotsss = snapshot.children.allObjects as? [DataSnapshot]{  self.groupBuyId.text = (String(snapshotsss.count)) + " 人參加  /  " + (String(groupBuyPeople)) + " 人成團"
+                                if let snapshotsss = snapshot.children.allObjects as? [DataSnapshot]{  
+                                    self.groupBuyId.text = (String(snapshotsss.count)) + " 人參加  /  " + (String(groupBuyPeople)) + " 人成團"
                                     print("這個商品目前參加人數：",snapshotsss.count)     
                                     
                                 }
