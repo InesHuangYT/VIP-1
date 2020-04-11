@@ -26,7 +26,26 @@ class OrderController: UIViewController {
     @IBAction func transitionToMyGroupBuyScene(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyControllerId") as! MyGroupBuyController
-        self.navigationController?.pushViewController(vc,animated: true)
+        let userGroupBuyRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
+        
+        userGroupBuyRef.child("Status").child("Ready/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                print("datas.count",datas.count)
+                vc.countReady = datas.count
+                
+                userGroupBuyRef.child("Status").child("Waiting/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                    if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                        vc.countWaiting = datas.count
+                        self.navigationController?.pushViewController(vc,animated: true)
+                    }
+                    
+                })
+                
+            }
+        })
+        
+        
+        
     }
     
     
@@ -79,7 +98,7 @@ class OrderController: UIViewController {
                     
                     
                 }
-
+                
             }
             
             
