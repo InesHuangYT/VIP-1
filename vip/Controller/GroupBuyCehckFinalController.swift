@@ -35,7 +35,7 @@ class GroupBuyCehckFinalController: UIViewController {
         btnAction()
         userInfo()  
         collectionViewDeclare()
-        setGroupBuyStatus(productId: productId, index: index, groupBuyPeople: groupBuyPeople)
+        setGroupBuyStatus(productId: productId, index: index, groupBuyPeople: groupBuyPeople,orderIds: orderAutoId)
         
         if groupBuyStyle == "Open"{
             successLabel.text = "已開團成功"
@@ -84,8 +84,10 @@ class GroupBuyCehckFinalController: UIViewController {
     }
     
     
-    func setGroupBuyStatus(productId:String,index:Int,groupBuyPeople:Int){
+    func setGroupBuyStatus(productId:String,index:Int,groupBuyPeople:Int,orderIds:String){
         let refs = ref.child(productId).child("OpenGroupId")
+//        let refUserGroupBuy =  Database.database().reference().child("UserGroupBuy")
+
         refs.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                 refs.child(snapshots[self.index].key).child("JoinBy")

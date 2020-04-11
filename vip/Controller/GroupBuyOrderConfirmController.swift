@@ -42,7 +42,7 @@ class GroupBuyOrderConfirmController: UIViewController {
         userInfo()
         print("groupBuyStyle",groupBuyStyle)
         print("groupBuyPeople",groupBuyPeople)
-
+        
     }
     
     
@@ -100,30 +100,35 @@ class GroupBuyOrderConfirmController: UIViewController {
             join(vc:vc)
             print("Join")
         }
-
+        
     }
     
     func open(vc:GroupBuyCehckFinalController){
         
         ref.child(productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
-            let reff = self.ref.child(self.productId).child("OpenGroupId").childByAutoId()
-            reff.child("OpenBy").child(self.uid ?? "").setValue(self.uid ?? "")
-            reff.child("JoinBy").child(self.uid ?? "").setValue(self.uid ?? "")
-            reff.child("Status").setValue("Waiting")
+            let openGroupRef = self.ref.child(self.productId).child("OpenGroupId").childByAutoId()
+            openGroupRef.child("OpenBy").child(self.uid ?? "").setValue(self.uid ?? "")
+            openGroupRef.child("JoinBy").child(self.uid ?? "").setValue(self.uid ?? "")
+            openGroupRef.child("Status").setValue("Waiting")
             
             
             self.ref.child(self.productId).child("OpenGroupId").queryOrderedByKey().observeSingleEvent(of: .value, with: { 
                 snapshot in
                 
                 
-                
-                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(reff.key ?? "")/ProductId/\(self.productId)").setValue(self.productId)
-                
                 let refOrder = Database.database().reference().child("Order").childByAutoId()
                 let orderId = refOrder.key
+                
+                //                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(openGroupRef.key ?? "")/ProductId/\(self.productId)").setValue(self.productId)
+                
+        
+                 Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OrderId/\(orderId ?? "")/ProductId/").setValue(self.productId)
+                
+                
                 vc.orderAutoId = orderId ?? ""
-                refOrder.child("OpenGroupId").child(reff.key ?? "").child("Uid").setValue(self.uid ?? "")
-                self.refUserGroupBuy.child(self.uid ?? "").child("OpenGroupId").child(reff.key ?? "").child("OrderId").child(orderId ?? "").setValue(orderId)
+                refOrder.child("OpenGroupId").setValue(openGroupRef.key ?? "")
+                //                self.refUserGroupBuy.child(self.uid ?? "").child("OpenGroupId").child(openGroupRef.key ?? "").child("OrderId").child(orderId ?? "").setValue(orderId)
+                
                 //if let datas = snapshot.children.allObjects as? [DataSnapshot]{
                 //                for snap in datas{
                 //                let key = snap.key
@@ -132,16 +137,20 @@ class GroupBuyOrderConfirmController: UIViewController {
                 //                }
                 //                }
                 
+                
+                let value = snapshot.value as? NSDictionary
+                let price = value?["Price"] as? String ?? ""
+                let payment = Int(price)
+                let allPay = (payment ?? 0) as Int + 60
+                vc.payFee = String(allPay) 
+                vc.productId = self.productId
+                vc.groupBuyStyle = self.groupBuyStyle
+                vc.groupBuyPeople = self.groupBuyPeople
+                self.navigationController?.pushViewController(vc,animated: true)
+                
             })
             
-            let value = snapshot.value as? NSDictionary
-            let price = value?["Price"] as? String ?? ""
-            let payment = Int(price)
-            let allPay = (payment ?? 0) as Int + 60
-            vc.payFee = String(allPay) 
-            vc.productId = self.productId
-            vc.groupBuyStyle = self.groupBuyStyle
-            self.navigationController?.pushViewController(vc,animated: true)
+            
         })
         
         
@@ -168,13 +177,17 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 
                                 refs.child(snapshots[self.index].key).child("JoinBy").child(self.uid ?? "").setValue(self.uid)
                                 print("Join sucessfully !")
-                                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/JoinGroupId/\(snapshots[self.index].key)/ProductId/\(self.productId)").setValue(self.productId)
-                                
                                 let refOrder = Database.database().reference().child("Order").childByAutoId()
                                 let orderId = refOrder.key
+                                
+                                //                                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/JoinGroupId/\(snapshots[self.index].key)/ProductId/\(self.productId)").setValue(self.productId)
+                                
+                                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/OrderId/\(orderId ?? "" )/ProductId/").setValue(self.productId)
+                                
+                                
                                 vc.orderAutoId = orderId ?? ""
-                                refOrder.child("OpenGroupId").child(snapshots[self.index].key).child("Uid").setValue(self.uid ?? "")
-                                self.refUserGroupBuy.child(self.uid ?? "").child("JoinGroupId").child(snapshots[self.index].key).child("OrderId").child(orderId ?? "").setValue(orderId)    
+                                refOrder.child("OpenGroupId").setValue(snapshots[self.index].key)
+                                //                                self.refUserGroupBuy.child(self.uid ?? "").child("JoinGroupId").child(snapshots[self.index].key).child("OrderId").child(orderId ?? "").setValue(orderId)    
                                 
                             })   
                         

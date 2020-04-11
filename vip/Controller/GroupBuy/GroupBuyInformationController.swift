@@ -125,6 +125,8 @@ class GroupBuyInformationController: UIViewController {
         vc.index = index
         vc.productId = productId
         vc.groupBuyStyle = "Open"
+        vc.groupBuyPeople = self.groupBuyPeople
+
         self.navigationController?.pushViewController(vc,animated: true)
         
         

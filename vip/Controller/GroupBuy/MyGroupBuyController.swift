@@ -26,6 +26,10 @@ class MyGroupBuyController: UIViewController {
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     var count = Int()
+    var countWaiting = Int()
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
@@ -33,6 +37,8 @@ class MyGroupBuyController: UIViewController {
         checkFinishCount()
         checkWaitCount()
         checkHistoryCount()
+        print("countWaiting",countWaiting)
+        
     }
     
     
@@ -97,6 +103,8 @@ extension MyGroupBuyController : UICollectionViewDataSource{
         if collectionView.isEqual(finshCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("finshCollectionView")
+//            cell.setProductLabel()
+
             return cell
             
         } 
