@@ -25,9 +25,9 @@ class MyGroupBuyController: UIViewController {
     
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
-    var count = Int()
-    var countWaiting = Int()
     var countReady = Int()
+    var countWaiting = Int()
+    var count = Int()
     
     
     
@@ -69,18 +69,18 @@ class MyGroupBuyController: UIViewController {
         
     }
     func checkFinishCount(){
-        if count == 0 {
+        if countReady == 0 {
             zeroFinishOrder.text = "目前無已成團訂單"
         }else{
-            zeroFinishOrder.text = "目前有"+String(count)+"筆訂單"
+            zeroFinishOrder.text = "目前有"+String(countReady)+"筆訂單"
         }
     }
     
     func checkWaitCount(){
-        if count == 0 {
+        if countWaiting == 0 {
             zeroWaitOrder.text = "目前無訂單"
         }else{
-            zeroWaitOrder.text = "目前有"+String(count)+"筆訂單"
+            zeroWaitOrder.text = "目前有"+String(countWaiting)+"筆訂單"
         }
     }
     
@@ -99,25 +99,21 @@ extension MyGroupBuyController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         if collectionView.isEqual(finshCollectionView) {
             return countReady
-            
         }
         else if collectionView.isEqual(waitCollectionView) {
             return countWaiting
-            
         }
         else {
             return 0
-            
         }
-        
-        
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         if collectionView.isEqual(finshCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("finshCollectionView")
-            //            cell.setProductLabel()
+            cell.setReadyLabel(index:indexPath.row,status:"Ready")
             
             return cell
             
@@ -125,6 +121,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
         else if collectionView.isEqual(waitCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("waitCollectionView")
+            cell.setReadyLabel(index:indexPath.row,status:"Waiting")
             return cell
             
         }
