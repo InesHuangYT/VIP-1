@@ -108,12 +108,6 @@ class OrderController: UIViewController {
         })
     }
     
-    func countWaitGroup(){
-        
-    }
-    
-    func countHistoryGroup(){
-        
-    }
+  
     
 }
