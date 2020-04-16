@@ -160,7 +160,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
         
         if collectionView.isEqual(finshCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
-            print("finshCollectionView")
+            print("finishCollectionView")
             cell.setReadyLabel(index:indexPath.row,status:"Ready")
             return cell
             
@@ -175,7 +175,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("hostoryCollectionView")
-            
+            cell.setReadyLabel(index:indexPath.row,status:"History")
             return cell
             
         }

@@ -91,8 +91,5 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
         })
     }
     
-    func setWaitLabel(index:Int){
-        
-    }
     
 }
