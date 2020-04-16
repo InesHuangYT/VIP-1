@@ -92,6 +92,54 @@ class MyGroupBuyController: UIViewController {
         }
     }
     
+    func getProductId(index:Int,status:String,vc:GroupBuyInformationController){
+        
+        let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
+        let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child(status).child("OrderId")
+        
+        let groupBuyRef = Database.database().reference().child("GroupBuy")
+        
+        userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                userGroupBuyOrderRef.child(snapshots[index].key).queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in 
+                        let userGroupBuyValue = snapshot.value as? NSDictionary
+                        let productId = userGroupBuyValue?["ProductId"] as? String ?? ""
+                        vc.productId = productId
+                        groupBuyRef.child(productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                            let groupBuyPeople = snapshot.value as? NSDictionary
+                            let people = groupBuyPeople?["GroupBuyPeople"] as! String
+                            vc.groupBuyPeople = Int(people) ?? 0
+                            print("groupBuyPeople",Int(people) ?? 0)
+                            
+                            
+                            Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
+                                .queryOrderedByKey()
+                                .observeSingleEvent(of: .value, with: { snapshot in 
+                                    if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                                        print("GroupBuy key count here : ",snapshots.count)
+                                        vc.openByCount = snapshots.count
+                                        vc.index = index
+                                        self.navigationController?.pushViewController(vc,animated: true)
+                                        
+                                    }
+                                })
+                        })
+                        
+                        
+                        
+                        
+                    }) 
+            }
+            
+            
+            
+        })
+        
+        
+    }
+    
+    
     
 }
 
@@ -114,7 +162,6 @@ extension MyGroupBuyController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("finshCollectionView")
             cell.setReadyLabel(index:indexPath.row,status:"Ready")
-            
             return cell
             
         } 
@@ -144,8 +191,22 @@ extension MyGroupBuyController : UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
-        
+        let storyboard = UIStoryboard(name:"GroupBuy",bundle:nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController          
+        if collectionView.isEqual(finshCollectionView){
+            vc.status = "Ready"
+            getProductId(index:indexPath.row , status: "Ready", vc: vc)
+        }
+            
+        else if collectionView.isEqual(waitCollectionView) {
+            vc.status = "Waiting"
+            getProductId(index:indexPath.row , status: "Waiting", vc: vc)
+            
+        }
+        else{
+            vc.status = "History"
+            getProductId(index:indexPath.row , status: "History", vc: vc)
+        }
     }
 }
 
