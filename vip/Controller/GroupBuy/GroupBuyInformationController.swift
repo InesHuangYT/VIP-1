@@ -31,13 +31,19 @@ class GroupBuyInformationController: UIViewController {
     var uid = Auth.auth().currentUser?.uid
     var openByCount = Int()
     var groupBuyPeople = Int()
+    var status = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewDeclare()
         btnAction()
         self.setupGridView()
-        setLabel(index:index)
+        if status == ""{
+            setLabel(index:index)
+        }
+        else {
+            setMyGroupBuyLabel(index:index)
+        }
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         groupBuyImage.layer.cornerRadius = 45
         groupBuyImage.layer.borderWidth = 1
@@ -117,6 +123,70 @@ class GroupBuyInformationController: UIViewController {
         
     }
     
+    func setMyGroupBuyLabel(index:Int){
+        let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
+        
+        let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child(status).child("OrderId")
+        
+        let groupBuyRef = Database.database().reference().child("GroupBuy")
+        
+        userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                print(snapshots[index].key)    
+                print("count ",snapshots.count)    
+                
+                userGroupBuyOrderRef.child(snapshots[index].key).queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in 
+                        let userGroupBuyValue = snapshot.value as? NSDictionary
+                        let productId = userGroupBuyValue?["ProductId"] as? String ?? ""
+                        
+                        groupBuyRef.child(productId).queryOrderedByKey()
+                            .observeSingleEvent(of: .value, with: { snapshot in 
+                                
+                                let productValue = snapshot.value as? NSDictionary
+                                let name = productValue?["ProductName"] as? String ?? ""
+                                let price = productValue?["Price"] as? String ?? ""
+                                let productDescription = productValue?["Description"] as? String ?? ""
+                                let productEvaluation = productValue?["ProductEvaluation"] as? String ?? ""
+                                let sellerEvaluation = productValue?["SellerEvaluation"] as? String ?? ""
+                                let url = productValue?["imageURL"] as? String ?? ""
+                                
+                                self.name.text = name
+                                self.price.text = price 
+                                self.productDescription.text = "產品描述 " + productDescription
+                                self.productEvaluation.text = "產品評價 " + productEvaluation
+                                self.sellerEvaluation.text = "商家評價 " + sellerEvaluation
+                                if let imageUrl = URL(string: url){
+                                    URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                                        if error != nil {
+                                            print("Download Image Task Fail: \(error!.localizedDescription)")
+                                        }
+                                        else if let imageData = data {
+                                            DispatchQueue.main.async { 
+                                                self.groupBuyImage.image = UIImage(data: imageData)
+                                            }
+                                        }
+                                        
+                                    }.resume()
+                                }
+                                
+                            })
+                        
+                        
+                    })
+                
+                
+                
+                
+                
+            }
+            
+            
+        })
+    }
+    
+    
     //   我要open團
     @IBAction func groupBuyOpenButtonWasPressed(_ sender: Any) {
         
@@ -126,7 +196,7 @@ class GroupBuyInformationController: UIViewController {
         vc.productId = productId
         vc.groupBuyStyle = "Open"
         vc.groupBuyPeople = self.groupBuyPeople
-
+        
         self.navigationController?.pushViewController(vc,animated: true)
         
         
@@ -145,10 +215,12 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyJoinCollectionViewCell", for: indexPath) as! GroupBuyJoinCollectionViewCell
         print("self.productId",self.productId)
+        
         cell.setProductLabel(productId: String(self.productId), index:indexPath.row, groupBuyPeople: self.groupBuyPeople)
         return cell
         
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
