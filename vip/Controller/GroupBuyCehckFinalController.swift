@@ -83,11 +83,9 @@ class GroupBuyCehckFinalController: UIViewController {
         collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
     }
     
-    
+//    status set to "Ready" when the number of people arrive
     func setGroupBuyStatus(productId:String,index:Int,groupBuyPeople:Int,orderIds:String){
         let refs = ref.child(productId).child("OpenGroupId")
-//        let refUserGroupBuy =  Database.database().reference().child("UserGroupBuy")
-
         refs.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                 refs.child(snapshots[self.index].key).child("JoinBy")

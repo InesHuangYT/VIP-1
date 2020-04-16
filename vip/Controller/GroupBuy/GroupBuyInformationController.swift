@@ -215,7 +215,6 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyJoinCollectionViewCell", for: indexPath) as! GroupBuyJoinCollectionViewCell
         print("self.productId",self.productId)
-        
         cell.setProductLabel(productId: String(self.productId), index:indexPath.row, groupBuyPeople: self.groupBuyPeople)
         return cell
         
