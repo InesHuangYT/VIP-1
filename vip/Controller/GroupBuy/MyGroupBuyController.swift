@@ -160,7 +160,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
         
         if collectionView.isEqual(finshCollectionView) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
-            print("finishCollectionView")
+            print("finishCollectionView") 
             cell.setReadyLabel(index:indexPath.row,status:"Ready")
             return cell
             

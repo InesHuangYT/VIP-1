@@ -420,58 +420,6 @@
             </objects>
             <point key="canvasLocation" x="724" y="176.31184407796104"/>
         </scene>
-        <!--Group Buy Open Controller-->
-        <scene sceneID="Ggi-gW-W2r">
-            <objects>
-                <viewController storyboardIdentifier="GroupBuyOpenControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aS1-pp-jMR" customClass="GroupBuyOpenController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="c5L-dd-HZg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="結帳後即成功開團" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Djp-Ns-Jdy">
-                                <rect key="frame" x="83" y="163" width="209" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="開團成功GroupBuyOpenController" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPf-et-ZJ8">
-                                <rect key="frame" x="40" y="241" width="295" height="73"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKc-LQ-mXT">
-                                <rect key="frame" x="126" y="368" width="122" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.8573053195" green="1" blue="0.49251753970000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="我要開團">
-                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="openButtonWasPressed:" destination="aS1-pp-jMR" eventType="touchUpInside" id="idD-fn-hIr"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="7b8-Xz-2sP"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="IC6-P3-e9J">
-                        <barButtonItem key="rightBarButtonItem" title="側邊欄" image="List_button" id="0Nd-TQ-Hhx">
-                            <color key="tintColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="btnMenu" destination="0Nd-TQ-Hhx" id="hYA-UG-Ay3"/>
-                        <outlet property="openButton" destination="rKc-LQ-mXT" id="CAy-3v-Ucl"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IUE-Uy-w8H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2422" y="-265"/>
-        </scene>
         <!--Create Group Buy Product Controller-->
         <scene sceneID="mlE-Uh-Rlu">
             <objects>
@@ -680,58 +628,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gtc-23-vHq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="724" y="-783"/>
-        </scene>
-        <!--Group Buy Join Controller-->
-        <scene sceneID="MnS-5J-APY">
-            <objects>
-                <viewController storyboardIdentifier="GroupBuyJoinControllerId" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hcS-rJ-bEN" customClass="GroupBuyJoinController" customModule="vip" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="grX-r5-Vvp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="結帳後即成功開團" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldS-Zs-4Cw">
-                                <rect key="frame" x="83" y="163" width="209" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="加入成功GroupBuyJoinController" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PiC-2b-bgF">
-                                <rect key="frame" x="31" y="241" width="312" height="108"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NjU-Ae-CYd">
-                                <rect key="frame" x="126" y="381" width="122" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.85730531954108125" green="1" blue="0.49251753969827139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="我要加入">
-                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="joinButtonWasPressed:" destination="hcS-rJ-bEN" eventType="touchUpInside" id="bX3-l4-Jp9"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="7Rc-Qe-4IZ"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="3vT-Xi-65j">
-                        <barButtonItem key="rightBarButtonItem" title="側邊欄" image="List_button" id="Dcl-rs-DzI">
-                            <color key="tintColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="btnMenu" destination="Dcl-rs-DzI" id="mCx-B9-7il"/>
-                        <outlet property="joinButton" destination="NjU-Ae-CYd" id="UxD-AF-Dec"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NYe-py-6he" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1724" y="-266"/>
         </scene>
     </scenes>
     <resources>
