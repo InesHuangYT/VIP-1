@@ -78,6 +78,7 @@ class OrderController: UIViewController {
                             productRef.child(productId).child("OpenGroupId").child(openGroupId).observeSingleEvent(of: .value, with: { snapshot in 
                                 let value = snapshot.value as? NSDictionary
                                 let status = value?["Status"] as? String ?? ""
+                                print("status",status)
                                 if status == "Ready" {
                                     userGroupBuyRef.child("Status").child("Ready").child("OrderId").child(snap.key).setValue(snap.key)
                                 }
@@ -85,6 +86,10 @@ class OrderController: UIViewController {
                                 if status == "Waiting" {
                                     userGroupBuyRef.child("Status").child("Waiting").child("OrderId").child(snap.key).setValue(snap.key)
                                     
+                                }
+                                if status == "Delivered" {
+                                    userGroupBuyRef.child("Status").child("History").child("OrderId").child(snap.key).setValue(snap.key)
+//                                    刪除在ready裡面的orderId
                                 }
                             })
                             
@@ -108,6 +113,6 @@ class OrderController: UIViewController {
         })
     }
     
-  
+    
     
 }
