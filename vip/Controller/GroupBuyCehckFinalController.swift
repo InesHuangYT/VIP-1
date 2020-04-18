@@ -21,7 +21,9 @@ class GroupBuyCehckFinalController: UIViewController {
     
     let ref =  Database.database().reference().child("GroupBuy")
     var index = Int()
+    var productIndex = Int()
     var productId = String()
+    var openId = String()
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
     var payFee = ""
@@ -35,7 +37,7 @@ class GroupBuyCehckFinalController: UIViewController {
         btnAction()
         userInfo()  
         collectionViewDeclare()
-        setGroupBuyStatus(productId: productId, index: index, groupBuyPeople: groupBuyPeople,orderIds: orderAutoId)
+        setGroupBuyStatus(productId: productId, index: productIndex, groupBuyPeople: groupBuyPeople,orderIds: orderAutoId)
         
         if groupBuyStyle == "Open"{
             successLabel.text = "已開團成功"
@@ -87,8 +89,9 @@ class GroupBuyCehckFinalController: UIViewController {
     func setGroupBuyStatus(productId:String,index:Int,groupBuyPeople:Int,orderIds:String){
         let refs = ref.child(productId).child("OpenGroupId")
         refs.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                refs.child(snapshots[self.index].key).child("JoinBy")
+                refs.child(self.openId).child("JoinBy")
                     .queryOrderedByKey()
                     .observeSingleEvent(of: .value, with: { snapshot in
                         
@@ -97,7 +100,7 @@ class GroupBuyCehckFinalController: UIViewController {
                             let currentCount = snapshotss.count
                             print("groupBuyPeople人數：",self.groupBuyPeople)
                             if (currentCount >= self.groupBuyPeople){
-                                refs.child(snapshots[self.index].key).child("Status").setValue("Ready")
+                                refs.child(self.openId).child("Status").setValue("Ready")
                                 
                             }
                         }
@@ -142,6 +145,9 @@ extension GroupBuyCehckFinalController : UICollectionViewDataSource{
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
         vc.productId = productId
+        vc.index = productIndex
+        vc.from = "Check"
+
         self.navigationController?.pushViewController(vc,animated: true)
     }
 }

@@ -4,7 +4,7 @@
 //
 //  Created by Ines on 2020/4/9.
 //  Copyright © 2020 Ines. All rights reserved.
-//
+// swift show alert with custom cell https://stackoverflow.com/questions/34219578/swift-show-alert-with-custom-cell
 
 import UIKit
 import Firebase
@@ -224,6 +224,7 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
             
         })
         message.addAction(confirmAction)
+//       在cell裡面增加button 讓controller跳出alert
         self.delegate?.present(message, animated: true, completion: nil)
     }
     

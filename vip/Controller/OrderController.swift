@@ -36,10 +36,22 @@ class OrderController: UIViewController {
                 userGroupBuyRef.child("Status").child("Waiting/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                     if let datas = snapshot.children.allObjects as? [DataSnapshot]{
                         vc.countWaiting = datas.count
-                        self.navigationController?.pushViewController(vc,animated: true)
+                        
+                        userGroupBuyRef.child("Status").child("History/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                                vc.countHistory = datas.count
+                                self.navigationController?.pushViewController(vc,animated: true)
+                            }
+                            
+                        })
+                        
+                        
+                        
+                        
                     }
                     
                 })
+                
                 
             }
         })
@@ -61,7 +73,7 @@ class OrderController: UIViewController {
             if let datas = snapshot.children.allObjects as? [DataSnapshot]{
                 
                 for snap in datas{
-                    print("snap",snap.key)
+                    print("snap",snap.key) // orderId
                     
                     //                  find productId
                     userGroupBuyOrderRef.child(snap.key).observeSingleEvent(of: .value, with: { snapshot in 
@@ -89,7 +101,9 @@ class OrderController: UIViewController {
                                 }
                                 if status == "Delivered" {
                                     userGroupBuyRef.child("Status").child("History").child("OrderId").child(snap.key).setValue(snap.key)
-//                                    刪除在ready裡面的orderId
+                                    let readyRef = userGroupBuyRef.child("Status").child("Ready").child("OrderId").child(snap.key)
+                                    
+                                    readyRef.removeValue()
                                 }
                             })
                             
