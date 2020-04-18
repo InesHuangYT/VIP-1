@@ -98,6 +98,7 @@ class GroupBuyCehckFinalController: UIViewController {
                             print("groupBuyPeople人數：",self.groupBuyPeople)
                             if (currentCount >= self.groupBuyPeople){
                                 refs.child(snapshots[self.index].key).child("Status").setValue("Ready")
+                                
                             }
                         }
                         

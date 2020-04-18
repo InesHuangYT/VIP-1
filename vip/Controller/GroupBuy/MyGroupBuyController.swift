@@ -162,6 +162,9 @@ extension MyGroupBuyController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("finishCollectionView") 
             cell.setReadyLabel(index:indexPath.row,status:"Ready")
+            cell.index = indexPath.row
+            cell.currentStatus = "Ready"
+            cell.delegate = self
             return cell
             
         } 
@@ -169,6 +172,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("waitCollectionView")
             cell.setReadyLabel(index:indexPath.row,status:"Waiting")
+            cell.delegate = self
             return cell
             
         }
@@ -176,6 +180,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyGroupBuyCollectionViewCell", for: indexPath) as! MyGroupBuyCollectionViewCell
             print("hostoryCollectionView")
             cell.setReadyLabel(index:indexPath.row,status:"History")
+            cell.delegate = self
             return cell
             
         }
