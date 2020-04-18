@@ -10,8 +10,6 @@ import UIKit
 import Firebase
 
 
-//var GroupBuyOrderConfirmVC = GroupBuyOrderConfirmController()
-
 class GroupBuyOrderConfirmController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
@@ -23,6 +21,7 @@ class GroupBuyOrderConfirmController: UIViewController {
     @IBOutlet weak var checkButton: UIButton!
     
     var index = Int()
+    var productIndex = Int()
     var productId = String()
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
@@ -126,7 +125,10 @@ class GroupBuyOrderConfirmController: UIViewController {
                 
                 
                 vc.orderAutoId = orderId ?? ""
+                vc.openId = openGroupRef.key ?? ""
                 refOrder.child("OpenGroupId").setValue(openGroupRef.key ?? "")
+                refOrder.child("Payment").setValue(self.payFee)
+
                 //                self.refUserGroupBuy.child(self.uid ?? "").child("OpenGroupId").child(openGroupRef.key ?? "").child("OrderId").child(orderId ?? "").setValue(orderId)
                 
                 //if let datas = snapshot.children.allObjects as? [DataSnapshot]{
@@ -144,6 +146,8 @@ class GroupBuyOrderConfirmController: UIViewController {
                 let allPay = (payment ?? 0) as Int + 60
                 vc.payFee = String(allPay) 
                 vc.productId = self.productId
+                vc.index = self.index
+                vc.productIndex = self.productIndex
                 vc.groupBuyStyle = self.groupBuyStyle
                 vc.groupBuyPeople = self.groupBuyPeople
                 self.navigationController?.pushViewController(vc,animated: true)
@@ -186,7 +190,10 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 
                                 
                                 vc.orderAutoId = orderId ?? ""
+                                vc.openId = snapshots[self.index].key
                                 refOrder.child("OpenGroupId").setValue(snapshots[self.index].key)
+                                refOrder.child("Payment").setValue(self.payFee)
+
                                 //                                self.refUserGroupBuy.child(self.uid ?? "").child("JoinGroupId").child(snapshots[self.index].key).child("OrderId").child(orderId ?? "").setValue(orderId)    
                                 
                             })   
@@ -200,7 +207,7 @@ class GroupBuyOrderConfirmController: UIViewController {
                             let allPay = (payment ?? 0) as Int + 60
                             vc.payFee = String(allPay) 
                             vc.productId = self.productId
-                            vc.index = self.index
+                            vc.productIndex = self.productIndex
                             vc.groupBuyStyle = self.groupBuyStyle
                             vc.groupBuyPeople = self.groupBuyPeople
                             self.navigationController?.pushViewController(vc,animated: true)
@@ -240,7 +247,9 @@ extension GroupBuyOrderConfirmController : UICollectionViewDataSource{
         
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
+        vc.index = productIndex
         vc.productId = productId
+        vc.from = "GroupBuy"
         self.navigationController?.pushViewController(vc,animated: true)
     }
 }

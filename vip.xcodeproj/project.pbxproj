@@ -30,6 +30,7 @@
 		B042F801242266F8005982AF /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B042F7FF242266F8005982AF /* ProductCollectionViewCell.swift */; };
 		B042F802242266F8005982AF /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B042F800242266F8005982AF /* ProductCollectionViewCell.xib */; };
 		B045A8642431FB5600F6CFE4 /* GroupBuy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B045A8632431FB5600F6CFE4 /* GroupBuy.storyboard */; };
+		B048EF5A244B699A0010E764 /* MyGroupBuyOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048EF59244B699A0010E764 /* MyGroupBuyOrderController.swift */; };
 		B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376CD2431FCC8006D169E /* GroupBuyController.swift */; };
 		B08376EC243262BD006D169E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376EB243262BD006D169E /* CategoryController.swift */; };
 		B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376ED2432630E006D169E /* CreateCategoryController.swift */; };
@@ -278,6 +279,7 @@
 		B042F7FF242266F8005982AF /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		B042F800242266F8005982AF /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		B045A8632431FB5600F6CFE4 /* GroupBuy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupBuy.storyboard; sourceTree = "<group>"; };
+		B048EF59244B699A0010E764 /* MyGroupBuyOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyOrderController.swift; sourceTree = "<group>"; };
 		B08376CD2431FCC8006D169E /* GroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyController.swift; sourceTree = "<group>"; };
 		B08376EB243262BD006D169E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				B08376CD2431FCC8006D169E /* GroupBuyController.swift */,
 				B08376F724338185006D169E /* GroupBuyInformationController.swift */,
 				B0FE0D7B243E3BFD00479B80 /* MyGroupBuyController.swift */,
+				B048EF59244B699A0010E764 /* MyGroupBuyOrderController.swift */,
 			);
 			path = GroupBuy;
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				02F25D6C2420967A0041541E /* MenuViewController.swift in Sources */,
 				B0FE0D3A243CBFF100479B80 /* GroupBuyCehckFinalController.swift in Sources */,
 				B042F801242266F8005982AF /* ProductCollectionViewCell.swift in Sources */,
+				B048EF5A244B699A0010E764 /* MyGroupBuyOrderController.swift in Sources */,
 				C01A7AF1240FBF1B00E99EED /* CreateProductDataController.swift in Sources */,
 				02AC617E243DA43500A7D94C /* OrderCheckFinalController.swift in Sources */,
 				B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */,

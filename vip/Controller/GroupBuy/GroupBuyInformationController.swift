@@ -26,12 +26,14 @@ class GroupBuyInformationController: UIViewController {
     
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
+    
     var index  = Int()
     var productId = String()
     var uid = Auth.auth().currentUser?.uid
     var openByCount = Int()
     var groupBuyPeople = Int()
     var status = ""
+    var from = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,11 @@ class GroupBuyInformationController: UIViewController {
         else {
             setMyGroupBuyLabel(index:index)
         }
+//        從哪一頁面過來
+        if from != "" {
+            groupBuyOpenButton.isHidden = true
+        }
+        
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         groupBuyImage.layer.cornerRadius = 45
         groupBuyImage.layer.borderWidth = 1
@@ -193,6 +200,7 @@ class GroupBuyInformationController: UIViewController {
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
         vc.index = index
+        vc.productIndex = index
         vc.productId = productId
         vc.groupBuyStyle = "Open"
         vc.groupBuyPeople = self.groupBuyPeople
@@ -223,7 +231,8 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
-        vc.index = indexPath.row      
+        vc.index = indexPath.row   
+        vc.productIndex = index
         vc.productId = productId
         vc.groupBuyStyle = "Join"
         vc.groupBuyPeople = self.groupBuyPeople
@@ -277,9 +286,8 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
     
     func setUpMessageNo(){
         let message = UIAlertController(title: "您已經在此團購結帳過摟", message: "", preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "導入回我的團購看訂單", style: .default, handler: {action in 
+        let confirmAction = UIAlertAction(title: "回我的訂單", style: .default, handler: {action in 
             print("連到我的團購！！ !")
-            //            連到我的團購！！
             self.transition()
         })
         message.addAction(confirmAction)
@@ -288,8 +296,9 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
     
     func transition(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-        present(vc, animated: true, completion: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "OrderController") as! OrderController
+        let newFrontViewController = UINavigationController.init(rootViewController: vc)
+        revealViewController().pushFrontViewController(newFrontViewController, animated: true)
     }
 }
 

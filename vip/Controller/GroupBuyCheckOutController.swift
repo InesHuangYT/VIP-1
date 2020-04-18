@@ -13,7 +13,8 @@ import Firebase
 
 class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     
-    var index = Int()
+    var index = Int() //參加第幾個cell的團
+    var productIndex = Int()
     var productId = String()
     var groupBuyStyle = String()
     var groupBuyPeople = Int()
@@ -137,6 +138,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
             let payment = Int(price)
             let allPay = (payment ?? 0) as Int + 60
             vc.index = self.index
+            vc.productIndex = self.productIndex
             vc.payFee = String(allPay) 
             vc.productId = self.productId
             vc.groupBuyStyle = self.groupBuyStyle
@@ -170,7 +172,9 @@ extension GroupBuyCheckOutController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
+        vc.index = productIndex
         vc.productId = productId
+        vc.from = "GroupBuy"
         self.navigationController?.pushViewController(vc,animated: true)
         
     }
