@@ -19,13 +19,25 @@ class ShoppingCartTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        cellColorSet()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func cellColorSet(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+              layer.borderWidth = 2
+              layer.borderColor = myColor.cgColor
+              layer.cornerRadius = 20
+              ProductImage.image = UIImage(named: "logo")
+              ProductImage.layer.cornerRadius = 20
+              ProductImage.layer.borderWidth = 1
+              ProductImage.layer.borderColor = myColor.cgColor
+        
     }
     
     func loadData(index:Int){

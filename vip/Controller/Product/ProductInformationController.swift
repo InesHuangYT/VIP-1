@@ -157,16 +157,21 @@ class ProductInformationController: UIViewController {
     }
     
     
-    @IBAction func addToCart(_ sender: Any) {
+    @IBAction func addToCart(_ sender: Any) { // 還沒做加入購物車過了
         ref = Database.database().reference()
         let user = Auth.auth().currentUser!
+        
         let newData = ["ProductName" : self.nameLabel.text, "Price" : self.priceLabel.text, "imageURL": self.imageURL]
         
         self.ref.child("ShoppingCart").child(user.uid).child(self.ID).setValue(newData)
         
-        showAlert(title:"message", message:"Add to cart successfully", handlerOK:{action in
-            print("Add To CART!")
+        let message = UIAlertController(title: "加入購物車成功", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+        {action in 
+            print(self.nameLabel.text ?? "" + "Add to ShoppingCart")
         })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
         
     }
     @IBAction func LikeButton(_ sender: UIButton) {

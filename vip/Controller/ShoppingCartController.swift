@@ -73,14 +73,14 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
         return self.shoppingCount
     }
     
-    
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartTableViewCell", for: indexPath) as! ShoppingCartTableViewCell
         cell.loadData(index: indexPath.row)
         
         return cell
     }
+    
+
     
     
     @IBAction func OrderBtn(_ sender: Any) {

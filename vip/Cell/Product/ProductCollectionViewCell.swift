@@ -16,7 +16,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,17 +31,13 @@ class ProductCollectionViewCell: UICollectionViewCell {
     
     
     
-     func setProductLabel(index:Int){
-          Database.database().reference().child("Product")
-//            .queryOrdered(byChild: "ProductName")
-              .queryOrderedByKey()
-//            .queryEqual(toValue: "drink")
-//            .observe(.value, with: {
-//                       (snapshot) in
-              .observeSingleEvent(of: .value, with: { snapshot in
-
+    func setProductLabel(index:Int){
+        Database.database().reference().child("Product")
+            .queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in
+                
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] {
-                   
+                    
                     let nameResults = datas.compactMap({
                         ($0.value as! [String: Any])["ProductName"]
                     })
@@ -51,8 +47,6 @@ class ProductCollectionViewCell: UICollectionViewCell {
                     let imageResults = datas.compactMap({
                         ($0.value as! [String: Any])["imageURL"]
                     })
-                    
-//                    if(nameResults[index] as? String == "drink"){
                     self.productLabel.text = nameResults[index] as? String
                     print(nameResults[index] as? String)
                     self.priceLabel.text = (priceResults[index] as! String) + "元" 
@@ -62,31 +56,60 @@ class ProductCollectionViewCell: UICollectionViewCell {
                     let productImageUrl = imageResults[index]
                     
                     if let imageUrl = URL(string: productImageUrl as! String){
-                       URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                            if error != nil {
+                                print("Download Image Task Fail: \(error!.localizedDescription)")
+                            }
+                            else if let imageData = data {
+                                DispatchQueue.main.async { 
+                                    self.productImage.image = UIImage(data: imageData)
+                                }
+                            }
+                            
+                        }.resume()
+                        
+                    }
+                    
+                }
+
+                
+            })
+    }
+    
+    
+    func setProductLabel(productId:String){
+        Database.database().reference().child("Product").child(productId)
+            .queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? [String:Any]
+                self.productLabel.text = value?["ProductName"] as? String ?? ""
+                self.priceLabel.text = value?["Price"] as? String ?? ""
+                let productImageUrl = value?["imageURL"] 
+                self.productImage.image = UIImage(named: "logo")
+                if let imageUrl = URL(string: productImageUrl as! String){
+                    URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                         if error != nil {
                             print("Download Image Task Fail: \(error!.localizedDescription)")
                         }
                         else if let imageData = data {
                             DispatchQueue.main.async { 
-                               self.productImage.image = UIImage(data: imageData)
+                                self.productImage.image = UIImage(data: imageData)
                             }
                         }
                         
-                        }.resume()
-
-                    }
-
+                    }.resume()
+                    
                 }
-//                }
-              
-              })
-      }
+                
+            })
+    }
     
-   
     
-//    失敗品 不要用
+    
+    
+    //    失敗品 不要用
     func failed(index:Int){
-
+        
         Database.database().reference().child("Product")
             .queryOrderedByKey()
             .observeSingleEvent(of: .value, with: { snapshot in 
@@ -133,7 +156,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
                         
                     })
                 })
-
+                
             })
         
         //                print("snapshot",snapshot.children.allObjects)
