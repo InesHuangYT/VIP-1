@@ -12,23 +12,24 @@ import Firebase
 class ViewController: UIViewController {
     
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var enterButton: UIButton!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var groupBuyButton: UIButton!
     @IBOutlet weak var shppingCartButton: UIButton!
+    
+    var search = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
         setupTextField()
-        
-        
     }
     private func setupTextField(){
         searchTextField.delegate = self
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapGesture)
+        let tapOnScreen :UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapOnScreen)
     }
     @objc private func hideKeyboard(){
         searchTextField.resignFirstResponder()
@@ -46,7 +47,6 @@ class ViewController: UIViewController {
                 let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyControllerId") as! GroupBuyController
                 vc.count = counts
                 self.navigationController?.pushViewController(vc,animated: true)
-                
             })
     }
     
@@ -73,15 +73,30 @@ class ViewController: UIViewController {
                 vc.shoppingCount = counts
                 self.navigationController?.pushViewController(vc,animated: true)
             }
-            
-            
-            
-            
         })
-        
-        
-        
     }
+    
+    @IBAction func enterButtonPressed(_ sender: UIButton) {
+        let search = searchTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if search != ""{
+            Database.database().reference().child("Product").queryOrdered(byChild: "ProductName").queryStarting(atValue : search)
+                .observe(.value, with: {
+                (snapshot) in
+                let allKeys = snapshot.value as! [String : AnyObject]
+                let nodeToReturn = allKeys.keys
+                let counts = nodeToReturn.count
+                print("nodeToReturn ",nodeToReturn)
+                let storyboard = UIStoryboard(name: "Product", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ProductControllerId") as!  ProductController
+                vc.count = counts
+
+                self.navigationController?.pushViewController(vc,animated: true)
+            })
+        }
+        print(search);
+    }
+    
     //    下面的程式 會導致後面要加入團購或是開團購時，一直導回 GroupBuyController Scene *(.observe)
     //        Database.database().reference().child("GroupBuy").observe(.value, with: { 
     //            (snapshot) in 
@@ -95,10 +110,6 @@ class ViewController: UIViewController {
     //            self.navigationController?.pushViewController(vc,animated: true)
     //            
     //        })
-    
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
