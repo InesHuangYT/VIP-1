@@ -163,7 +163,6 @@ extension GroupBuyCheckOutController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyCheckOutCollectionViewCell", for: indexPath) as! GroupBuyCheckOutCollectionViewCell
-        
         print("self.productId",self.productId)
         cell.setProductLabel(productId: String(self.productId))
         return cell
