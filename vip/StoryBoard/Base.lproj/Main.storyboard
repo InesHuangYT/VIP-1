@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -303,6 +303,9 @@
                                 <rect key="frame" x="334" y="104" width="41" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="搜尋" image="放大鏡"/>
+                                <connections>
+                                    <action selector="enterButtonPressed:" destination="ucJ-28-r4v" eventType="touchUpInside" id="bDH-Bh-j1b"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6ir-XE-DNJ">
                                 <rect key="frame" x="0.0" y="397" width="376" height="10"/>
@@ -335,6 +338,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenu" destination="EAx-kE-tYd" id="4XY-Ia-vwc"/>
+                        <outlet property="enterButton" destination="WQr-Kk-6kT" id="3RQ-tg-gCK"/>
                         <outlet property="groupBuyButton" destination="eud-Iw-3dz" id="e32-KZ-j0O"/>
                         <outlet property="searchTextField" destination="8Li-aT-IEE" id="YBE-tA-zg5"/>
                         <outlet property="shppingCartButton" destination="H67-1w-v6u" id="ggJ-Ll-3Le"/>

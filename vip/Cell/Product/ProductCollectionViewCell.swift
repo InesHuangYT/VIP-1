@@ -15,6 +15,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,16 +27,18 @@ class ProductCollectionViewCell: UICollectionViewCell {
         productImage.layer.cornerRadius = 30
         productImage.layer.borderWidth = 1
         productImage.layer.borderColor = myColor.cgColor
-
     }
     
-
-
+    
     
      func setProductLabel(index:Int){
           Database.database().reference().child("Product")
+//            .queryOrdered(byChild: "ProductName")
               .queryOrderedByKey()
-              .observeSingleEvent(of: .value, with: { snapshot in 
+//            .queryEqual(toValue: "drink")
+//            .observe(.value, with: {
+//                       (snapshot) in
+              .observeSingleEvent(of: .value, with: { snapshot in
 
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                    
@@ -48,10 +51,16 @@ class ProductCollectionViewCell: UICollectionViewCell {
                     let imageResults = datas.compactMap({
                         ($0.value as! [String: Any])["imageURL"]
                     })
+                    
+//                    if(nameResults[index] as? String == "drink"){
                     self.productLabel.text = nameResults[index] as? String
+                    print(nameResults[index] as? String)
                     self.priceLabel.text = (priceResults[index] as! String) + "元" 
-                    let productImageUrl = imageResults[index] 
+                    
                     self.productImage.image = UIImage(named: "logo")
+                    
+                    let productImageUrl = imageResults[index]
+                    
                     if let imageUrl = URL(string: productImageUrl as! String){
                        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                         if error != nil {
@@ -68,7 +77,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
                     }
 
                 }
-           
+//                }
               
               })
       }
