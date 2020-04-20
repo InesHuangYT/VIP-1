@@ -109,7 +109,11 @@ extension OrderComfirmController :UICollectionViewDataSource {
         
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-//        vc.ID = productId
+        vc.index = indexPath.row
+        vc.fromShoppingCart = true
+        vc.fromCheckOut = true
+        vc.selectProductId = self.selectProductId
+
         self.navigationController?.pushViewController(vc,animated: true)
     }
 }

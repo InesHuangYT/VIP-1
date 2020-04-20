@@ -28,25 +28,33 @@ class ProductInformationController: UIViewController {
     var productID:[String] = []
     var ID:String!
     var audioPlayer: AVAudioPlayer?
+    
+    var selectProductId = [String]()
     var fromShoppingCart = false
+    var fromCheckOut = false
     var price = String()
     
     var index  = Int()
     override func viewDidLoad() {
         super.viewDidLoad()
         print("index",index)
-        setLabel(index: index)
+        setLabel(index: index,selectProductId:selectProductId)
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         productImage.layer.cornerRadius = 45
         productImage.layer.borderWidth = 1
         productImage.layer.borderColor = myColor.cgColor
+        productImage.image = UIImage(named:"logo")
+        
         btnAction()
         audioPlay()
+        
         if(fromShoppingCart == true) {
             addShoppingCart.isHidden = true
         }
         
     }
+    
+    
     
     func audioPlay(){
         let lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
@@ -100,49 +108,26 @@ class ProductInformationController: UIViewController {
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
     
-    func setLabel(index:Int){
-        Database.database().reference().child("Product")
-            .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in
-                
-                for snap in snapshot.children {
-                    let userSnap = snap as! DataSnapshot
-                    let id = userSnap.key
-                    self.productID.append(id)
-                }
-                print("This ID = ", self.productID[index])
-                self.ID = self.productID[index]
-                
-                if let datas = snapshot.children.allObjects as? [DataSnapshot] {
-                    let nameResults = datas.compactMap({
-                        ($0.value as! [String: Any])["ProductName"]
-                    })
-                    let priceResults = datas.compactMap({
-                        ($0.value as! [String: Any])["Price"]
-                    })
-                    let descriptionResults = datas.compactMap({
-                        ($0.value as! [String: Any])["Description"]
-                    })
-                    let productEvaluationResults = datas.compactMap({
-                        ($0.value as! [String: Any])["ProductEvaluation"]
-                    })
-                    let sellerEvaluationResults = datas.compactMap({
-                        ($0.value as! [String: Any])["SellerEvaluation"]
-                    })
-                    let imageResults = datas.compactMap({
-                        ($0.value as! [String: Any])["imageURL"]
-                    })
-                    
-                    self.nameLabel.text = nameResults[index] as? String
-                    self.priceLabel.text = (priceResults[index] as! String) + "元"
-                    self.price = priceResults[index] as! String
-                    self.descriptionLabel.text = "產品描述 " + (descriptionResults[index] as! String)
-                    self.evaluationLabel.text = "產品評價 " + (productEvaluationResults[index] as! String)
-                    self.sellerEvaluationLabel.text = "商家評價 " + (sellerEvaluationResults[index] as! String)
-                    self.productImage.image = UIImage(named:"logo")
-                    let productImageUrl = imageResults[index] 
-                    self.imageURL = imageResults[index] as? String
-                    if let imageUrl = URL(string: productImageUrl as! String){
+    func setLabel(index:Int,selectProductId:[String]){
+        
+        let productRef = Database.database().reference().child("Product")
+        
+        if fromShoppingCart == true {
+            productRef.child(selectProductId[index]).queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    let value = snapshot.value as? NSDictionary
+                    let name = value?["ProductName"] as? String ?? ""
+                    let price = value?["Price"] as? String ?? ""
+                    let description = value?["Description"] as? String ?? ""
+                    let productEvaluation = value?["ProductEvaluation"] as? String ?? ""
+                    let sellerEvaluation = value?["SellerEvaluation"] as? String ?? ""
+                    self.nameLabel.text = name
+                    self.priceLabel.text = price + "元"
+                    self.descriptionLabel.text = "產品描述 " + description
+                    self.evaluationLabel.text = "產品評價 " + productEvaluation
+                    self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
+                    let url = value?["imageURL"] as? String ?? ""
+                    if let imageUrl = URL(string: url){
                         URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                             if error != nil {
                                 print("Download Image Task Fail: \(error!.localizedDescription)")
@@ -154,34 +139,75 @@ class ProductInformationController: UIViewController {
                             }
                             
                         }.resume()
-                        
-                    }
-                }
-                
-                
-            })
-    }
-    
-    func findIndex(selectProductId:String,vc:ProductInformationController){
-        let shoppingCartRef =  Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
-        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            let data = snapshot.children.allObjects as! [DataSnapshot]
+                    } 
+                })
             
-            for i in 1...data.count {
-                if data[i-1].key == selectProductId {
-                    print("find index", i-1)
-                    vc.index = i-1
+        }
+            
+        else{
+            
+            productRef.queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in
                     
-                }else{
-                    print("Not find index", i-1)
-                }
-            }
-            self.navigationController?.pushViewController(vc,animated: true)
+                    for snap in snapshot.children {
+                        let userSnap = snap as! DataSnapshot
+                        let id = userSnap.key
+                        self.productID.append(id)
+                    }
+                    
+                    print("This ID = ", self.productID[index])
+                    self.ID = self.productID[index]
+                    
+                    if let datas = snapshot.children.allObjects as? [DataSnapshot] {
+                        let nameResults = datas.compactMap({
+                            ($0.value as! [String: Any])["ProductName"]
+                        })
+                        let priceResults = datas.compactMap({
+                            ($0.value as! [String: Any])["Price"]
+                        })
+                        let descriptionResults = datas.compactMap({
+                            ($0.value as! [String: Any])["Description"]
+                        })
+                        let productEvaluationResults = datas.compactMap({
+                            ($0.value as! [String: Any])["ProductEvaluation"]
+                        })
+                        let sellerEvaluationResults = datas.compactMap({
+                            ($0.value as! [String: Any])["SellerEvaluation"]
+                        })
+                        let imageResults = datas.compactMap({
+                            ($0.value as! [String: Any])["imageURL"]
+                        })
+                        
+                        self.nameLabel.text = nameResults[index] as? String
+                        self.priceLabel.text = (priceResults[index] as! String) + "元"
+                        self.price = priceResults[index] as! String //給下面加入購物車使用
+                        self.descriptionLabel.text = "產品描述 " + (descriptionResults[index] as! String)
+                        self.evaluationLabel.text = "產品評價 " + (productEvaluationResults[index] as! String)
+                        self.sellerEvaluationLabel.text = "商家評價 " + (sellerEvaluationResults[index] as! String)
+                        let productImageUrl = imageResults[index] 
+                        self.imageURL = imageResults[index] as? String
+                        if let imageUrl = URL(string: productImageUrl as! String){
+                            URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                                if error != nil {
+                                    print("Download Image Task Fail: \(error!.localizedDescription)")
+                                }
+                                else if let imageData = data {
+                                    DispatchQueue.main.async { 
+                                        self.productImage.image = UIImage(data: imageData)
+                                    }
+                                }
+                                
+                            }.resume()
+                            
+                        }
+                    }
+                    
+                    
+                })
             
-            
-        })
-        
+        }
     }
+  
     
     
     @IBAction func addToCart(_ sender: Any) { // 還沒做加入購物車過了
