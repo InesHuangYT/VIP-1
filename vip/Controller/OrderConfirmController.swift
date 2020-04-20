@@ -19,11 +19,11 @@ class OrderComfirmController: UIViewController {
     @IBOutlet weak var checkoutbtn: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var productId = String()
-    var estimatedWidth = 280.0
+    var selectProductId = [String]()
+    var count = Int()
+    var estimatedWidth = 300.0
     var cellMarginSize = 16.0
-    var payFee = ""
-    let ref =  Database.database().reference().child("Product")
+    var payFee = String()
     var uid = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
@@ -31,6 +31,10 @@ class OrderComfirmController: UIViewController {
         btnAction()
         collectionViewDeclare()
         userInfo()
+        
+        
+        print("payFee",payFee)
+        
     }
     
     func userInfo(){
@@ -67,18 +71,37 @@ class OrderComfirmController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
+    
+    
+    @IBAction func checkButtonWasPressed(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckFinalControllerId") as!  OrderCheckFinalController
+        
+        
+        
+    }
+    
+    
+    @IBAction func backButtonWasPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    
+    
+    
 }
 
 extension OrderComfirmController :UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-        return 1
+        return count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OrderComfirmCollectionViewCell", for: indexPath) as! OrderComfirmCollectionViewCell
-        print("self.productId",self.productId)
-        cell.setProductLabel(productId: String(self.productId))
+        print("selectProductId[indexPath.row]",selectProductId[indexPath.row])
+        cell.setProductLabel(productId: selectProductId[indexPath.row],fromShoppingCart:true)
         return cell
         
     }
@@ -86,7 +109,7 @@ extension OrderComfirmController :UICollectionViewDataSource {
         
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        vc.ID = productId
+//        vc.ID = productId
         self.navigationController?.pushViewController(vc,animated: true)
     }
 }

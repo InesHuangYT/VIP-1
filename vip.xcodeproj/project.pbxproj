@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		024926822434DE1400CC22A8 /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 024926812434DE1400CC22A8 /* Checkout.storyboard */; };
-		02AC611B243A1BCA00A7D94C /* OrderComfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */; };
 		02AC617E243DA43500A7D94C /* OrderCheckFinalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC617D243DA43500A7D94C /* OrderCheckFinalController.swift */; };
 		02AC619D243DB48800A7D94C /* OrderCheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC619C243DB48800A7D94C /* OrderCheckoutController.swift */; };
 		02F21D5D24210211003860F9 /* AddCouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F21D5C24210211003860F9 /* AddCouponController.swift */; };
@@ -18,8 +17,6 @@
 		02F25D6A242096110041541E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F25D68242096110041541E /* ViewController.swift */; };
 		02F25D6C2420967A0041541E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F25D6B2420967A0041541E /* MenuViewController.swift */; };
 		02F25D7924209C2A0041541E /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F25D7724209C2A0041541E /* SWRevealViewController.m */; };
-		B0190011243A213C00E6BA3E /* ShoppingCartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */; };
-		B0190012243A213C00E6BA3E /* ShoppingCartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */; };
 		B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */; };
 		B0190091243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */; };
 		B0190092243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */; };
@@ -31,6 +28,9 @@
 		B042F802242266F8005982AF /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B042F800242266F8005982AF /* ProductCollectionViewCell.xib */; };
 		B045A8642431FB5600F6CFE4 /* GroupBuy.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B045A8632431FB5600F6CFE4 /* GroupBuy.storyboard */; };
 		B048EF5A244B699A0010E764 /* MyGroupBuyOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B048EF59244B699A0010E764 /* MyGroupBuyOrderController.swift */; };
+		B04A55CE244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A55CC244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift */; };
+		B04A55CF244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B04A55CD244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib */; };
+		B04A55D1244E223000AF9935 /* OrderConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A55D0244E223000AF9935 /* OrderConfirmController.swift */; };
 		B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376CD2431FCC8006D169E /* GroupBuyController.swift */; };
 		B08376EC243262BD006D169E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376EB243262BD006D169E /* CategoryController.swift */; };
 		B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376ED2432630E006D169E /* CreateCategoryController.swift */; };
@@ -251,7 +251,6 @@
 
 /* Begin PBXFileReference section */
 		024926812434DE1400CC22A8 /* Checkout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
-		02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderComfirmController.swift; sourceTree = "<group>"; };
 		02AC617D243DA43500A7D94C /* OrderCheckFinalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckFinalController.swift; sourceTree = "<group>"; };
 		02AC619C243DB48800A7D94C /* OrderCheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckoutController.swift; sourceTree = "<group>"; };
 		02F21D5C24210211003860F9 /* AddCouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCouponController.swift; path = vip/Controller/AddCouponController.swift; sourceTree = SOURCE_ROOT; };
@@ -267,8 +266,6 @@
 		48C404FB32D82B820BA2907F /* Pods_vip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B015C48B242A4EB700068102 /* vip.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = vip.xcodeproj; path = ../vip/vip.xcodeproj; sourceTree = "<group>"; };
 		B015C491242A4EC600068102 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
-		B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartTableViewCell.swift; sourceTree = "<group>"; };
-		B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartTableViewCell.xib; sourceTree = "<group>"; };
 		B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyCheckOutController.swift; sourceTree = "<group>"; };
 		B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyCheckOutCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupBuyCheckOutCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -280,6 +277,9 @@
 		B042F800242266F8005982AF /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		B045A8632431FB5600F6CFE4 /* GroupBuy.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupBuy.storyboard; sourceTree = "<group>"; };
 		B048EF59244B699A0010E764 /* MyGroupBuyOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyOrderController.swift; sourceTree = "<group>"; };
+		B04A55CC244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartCollectionViewCell.swift; sourceTree = "<group>"; };
+		B04A55CD244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartCollectionViewCell.xib; sourceTree = "<group>"; };
+		B04A55D0244E223000AF9935 /* OrderConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmController.swift; sourceTree = "<group>"; };
 		B08376CD2431FCC8006D169E /* GroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyController.swift; sourceTree = "<group>"; };
 		B08376EB243262BD006D169E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
@@ -346,7 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				02AC619C243DB48800A7D94C /* OrderCheckoutController.swift */,
-				02AC611A243A1BCA00A7D94C /* OrderComfirmController.swift */,
+				B04A55D0244E223000AF9935 /* OrderConfirmController.swift */,
 				02AC617D243DA43500A7D94C /* OrderCheckFinalController.swift */,
 				B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */,
 				B0FE0D37243BA61200479B80 /* GroupBuyOrderConfirmController.swift */,
@@ -452,6 +452,7 @@
 				B0EA39472438E33A00AA7499 /* CreateProduct */,
 				B0EA39452438E2DF00AA7499 /* GroupBuy */,
 				02AC613A243A227300A7D94C /* Checkout */,
+				B0EA39462438E31100AA7499 /* Product */,
 				B08376EB243262BD006D169E /* CategoryController.swift */,
 				B09ED5E42414EE0500D3C4A6 /* ProfileController.swift */,
 				02F25D65242095F10041541E /* OrderController.swift */,
@@ -459,7 +460,6 @@
 				02F25D68242096110041541E /* ViewController.swift */,
 				02F25D6B2420967A0041541E /* MenuViewController.swift */,
 				C015B2582439F0A8009F060D /* Alert.swift */,
-				B0EA39462438E31100AA7499 /* Product */,
 				02AC6139243A224800A7D94C /* Coupon */,
 				B0EA39482438E35300AA7499 /* SignUpLogIn */,
 				B019FFFE24392AD900E6BA3E /* Mp3 */,
@@ -547,11 +547,11 @@
 			children = (
 				02F25D63242095C00041541E /* MenuTableViewCell.swift */,
 				C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */,
-				B019000F243A213C00E6BA3E /* ShoppingCartTableViewCell.swift */,
-				B0190010243A213C00E6BA3E /* ShoppingCartTableViewCell.xib */,
 				B0FE0D87243F606B00479B80 /* CheckOut */,
 				B0FE0D86243F604800479B80 /* Product */,
 				B0FE0D88243F609900479B80 /* GroupBuy */,
+				B04A55CC244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift */,
+				B04A55CD244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -653,6 +653,7 @@
 		B015C490242A4EB700068102 = {
 			isa = PBXReferenceProxy;
 			remoteRef = B015C48F242A4EB700068102 /* PBXContainerItemProxy */;
+			sourceTree = "<unknown>";
 		};
 		B015C4B1242A4EC600068102 /* absl.framework */ = {
 			isa = PBXReferenceProxy;
@@ -819,6 +820,7 @@
 				B0190092243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib in Resources */,
 				B0FE0D5C243D095500479B80 /* CehckFinalCollectionViewCell.xib in Resources */,
 				B087D23823F56439001FAC9A /* LaunchScreen.storyboard in Resources */,
+				B04A55CF244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib in Resources */,
 				B0FE0D80243E3DA700479B80 /* MyGroupBuyCollectionViewCell.xib in Resources */,
 				B0FE0D1A243BA52C00479B80 /* OrderComfirmCollectionViewCell.xib in Resources */,
 				B045A8642431FB5600F6CFE4 /* GroupBuy.storyboard in Resources */,
@@ -827,7 +829,6 @@
 				B042F802242266F8005982AF /* ProductCollectionViewCell.xib in Resources */,
 				024926822434DE1400CC22A8 /* Checkout.storyboard in Resources */,
 				B042F7F3241F8C72005982AF /* Product.storyboard in Resources */,
-				B0190012243A213C00E6BA3E /* ShoppingCartTableViewCell.xib in Resources */,
 				B08376F424337CF6006D169E /* GroupBuyCollectionViewCell.xib in Resources */,
 				B0C77BB723F97A9100B8E5B7 /* GoogleService-Info.plist in Resources */,
 				C02BD2E524101F2900BD3E1D /* Main.storyboard in Resources */,
@@ -917,11 +918,10 @@
 				B08376F324337CF6006D169E /* GroupBuyCollectionViewCell.swift in Sources */,
 				B0FE0D19243BA52C00479B80 /* OrderComfirmCollectionViewCell.swift in Sources */,
 				B0E618E623FD3C8000EB6E74 /* HomeController.swift in Sources */,
-				02AC611B243A1BCA00A7D94C /* OrderComfirmController.swift in Sources */,
 				B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */,
 				C015B2772439F0D6009F060D /* ShoppingCartController.swift in Sources */,
 				C01F4AA7240EA844003E0AAF /* ShoppingCartCell.swift in Sources */,
-				B0190011243A213C00E6BA3E /* ShoppingCartTableViewCell.swift in Sources */,
+				B04A55D1244E223000AF9935 /* OrderConfirmController.swift in Sources */,
 				B0190091243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift in Sources */,
 				B0FE0D5B243D095500479B80 /* CehckFinalCollectionViewCell.swift in Sources */,
 				02F21D5F24210DAE003860F9 /* CouponController.swift in Sources */,
@@ -935,6 +935,7 @@
 				B042F801242266F8005982AF /* ProductCollectionViewCell.swift in Sources */,
 				B048EF5A244B699A0010E764 /* MyGroupBuyOrderController.swift in Sources */,
 				C01A7AF1240FBF1B00E99EED /* CreateProductDataController.swift in Sources */,
+				B04A55CE244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift in Sources */,
 				02AC617E243DA43500A7D94C /* OrderCheckFinalController.swift in Sources */,
 				B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */,
 				B08376FA24349732006D169E /* CreateGroupBuyProductController.swift in Sources */,
@@ -1091,7 +1092,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JMMDB6PMMN;
+				DEVELOPMENT_TEAM = 6NATB5LN22;
 				INFOPLIST_FILE = vip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1099,7 +1100,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = Ines.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1116,7 +1117,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JMMDB6PMMN;
+				DEVELOPMENT_TEAM = 6NATB5LN22;
 				INFOPLIST_FILE = vip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1124,7 +1125,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = Ines.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

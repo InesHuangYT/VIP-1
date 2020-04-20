@@ -22,12 +22,14 @@ class ProductInformationController: UIViewController {
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var pauseAndPlay: UIButton!
     @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var addShoppingCart: UIButton!
     
     var imageURL : String!
     var productID:[String] = []
     var ID:String!
     var audioPlayer: AVAudioPlayer?
-    
+    var fromShoppingCart = false
+    var price = String()
     
     var index  = Int()
     override func viewDidLoad() {
@@ -40,6 +42,9 @@ class ProductInformationController: UIViewController {
         productImage.layer.borderColor = myColor.cgColor
         btnAction()
         audioPlay()
+        if(fromShoppingCart == true) {
+            addShoppingCart.isHidden = true
+        }
         
     }
     
@@ -130,6 +135,7 @@ class ProductInformationController: UIViewController {
                     
                     self.nameLabel.text = nameResults[index] as? String
                     self.priceLabel.text = (priceResults[index] as! String) + "元"
+                    self.price = priceResults[index] as! String
                     self.descriptionLabel.text = "產品描述 " + (descriptionResults[index] as! String)
                     self.evaluationLabel.text = "產品評價 " + (productEvaluationResults[index] as! String)
                     self.sellerEvaluationLabel.text = "商家評價 " + (sellerEvaluationResults[index] as! String)
@@ -156,12 +162,33 @@ class ProductInformationController: UIViewController {
             })
     }
     
+    func findIndex(selectProductId:String,vc:ProductInformationController){
+        let shoppingCartRef =  Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
+        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            
+            for i in 1...data.count {
+                if data[i-1].key == selectProductId {
+                    print("find index", i-1)
+                    vc.index = i-1
+                    
+                }else{
+                    print("Not find index", i-1)
+                }
+            }
+            self.navigationController?.pushViewController(vc,animated: true)
+            
+            
+        })
+        
+    }
+    
     
     @IBAction func addToCart(_ sender: Any) { // 還沒做加入購物車過了
         ref = Database.database().reference()
         let user = Auth.auth().currentUser!
         
-        let newData = ["ProductName" : self.nameLabel.text, "Price" : self.priceLabel.text, "imageURL": self.imageURL]
+        let newData = ["ProductName" : self.nameLabel.text, "Price" : self.price, "imageURL": self.imageURL,"Status" : "Selected"]
         
         self.ref.child("ShoppingCart").child(user.uid).child(self.ID).setValue(newData)
         
@@ -170,10 +197,18 @@ class ProductInformationController: UIViewController {
         {action in 
             print(self.nameLabel.text ?? "" + "Add to ShoppingCart")
         })
+        
+        let shoppingCartAction = UIAlertAction(title: "去我的購物車", style: .default, handler:  {action in 
+            self.goToShoppingCart()
+            print(self.nameLabel.text ?? "" + "Add to ShoppingCart")
+        })
+        
         message.addAction(confirmAction)
+        message.addAction(shoppingCartAction)
         self.present(message, animated: true, completion: nil)
         
     }
+    
     @IBAction func LikeButton(_ sender: UIButton) {
         if sender.isSelected{
             print("Like Button Selected!")
@@ -181,6 +216,26 @@ class ProductInformationController: UIViewController {
         }else{
             sender.isSelected = true
         }
+    }
+    
+    func goToShoppingCart(){
+        let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+            print("snapshot",snapshot.exists())
+            if (snapshot.exists()==false){
+                vc.shoppingCount = 0
+                self.navigationController?.pushViewController(vc,animated: true)
+            }else{
+                let allKeys = snapshot.value as! [String : AnyObject] 
+                let nodeToReturn = allKeys.keys
+                let counts = nodeToReturn.count
+                vc.shoppingCount = counts
+                self.navigationController?.pushViewController(vc,animated: true)
+            }
+        })
+        
     }
     
     

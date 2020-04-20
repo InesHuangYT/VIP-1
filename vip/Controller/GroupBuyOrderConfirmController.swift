@@ -239,7 +239,7 @@ extension GroupBuyOrderConfirmController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OrderComfirmCollectionViewCell", for: indexPath) as! OrderComfirmCollectionViewCell
         print("self.productId",self.productId)
-        cell.setProductLabel(productId: String(self.productId))
+        cell.setProductLabel(productId: String(self.productId), fromShoppingCart: false)
         return cell
         
     }
