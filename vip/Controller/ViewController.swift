@@ -57,11 +57,11 @@ class ViewController: UIViewController {
         
         let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-            
+            let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
             print("snapshot",snapshot.exists())
             if (snapshot.exists()==false){
-                let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+                
                 vc.shoppingCount = 0
                 self.navigationController?.pushViewController(vc,animated: true)
             }else{
@@ -71,8 +71,7 @@ class ViewController: UIViewController {
                 print("nodeToReturn ",nodeToReturn)
                 print("counts ",counts)
                 
-                let storyboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+                
                 vc.shoppingCount = counts
                 self.navigationController?.pushViewController(vc,animated: true)
             }
@@ -87,7 +86,7 @@ class ViewController: UIViewController {
         print("searchText",searchText)
         if searchText != ""{
             print("here",searchText)
-
+            
             productRef.queryOrdered(byChild: "ProductName").queryStarting(atValue: searchText).queryEnding(atValue: searchText + "\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
                 let data = snapshot.children.allObjects as! [DataSnapshot]
                 let count = data.count
@@ -96,7 +95,7 @@ class ViewController: UIViewController {
                     vc.searchId.append(child.key)
                     
                 }
-
+                
                 vc.count = count
                 vc.fromSearch = true
                 
@@ -105,7 +104,7 @@ class ViewController: UIViewController {
             
             
         }
-  
+        
         
         
         //            

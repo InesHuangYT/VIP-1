@@ -32,33 +32,64 @@ class OrderComfirmCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func setProductLabel(productId:String){
-        let ref =  Database.database().reference().child("GroupBuy").child(productId)
-        
-        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
-            let value = snapshot.value as? NSDictionary
-            let name = value?["ProductName"] as? String ?? ""
-            let price = value?["Price"] as? String ?? ""
-            let url = value?["imageURL"] as? String ?? ""
-            if let imageUrl = URL(string: url){
-                URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                    if error != nil {
-                        print("Download Image Task Fail: \(error!.localizedDescription)")
-                    }
-                    else if let imageData = data {
-                        DispatchQueue.main.async { 
-                            self.image.image = UIImage(data: imageData)
-                        }
-                    }
-                    
-                }.resume()
-                
-            }
-            self.name.text = name
-            self.price.text = price + "元" 
-            
-        })
-        
-    }
     
+    func setProductLabel(productId:String,fromShoppingCart:Bool){
+//        一般商品購買
+        if fromShoppingCart == true {
+            let ref =  Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "").child(productId)
+            
+            ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                let value = snapshot.value as? NSDictionary
+                let name = value?["ProductName"] as? String ?? ""
+                let price = value?["Price"] as? String ?? ""
+                let url = value?["imageURL"] as? String ?? ""
+                if let imageUrl = URL(string: url){
+                    URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        if error != nil {
+                            print("Download Image Task Fail: \(error!.localizedDescription)")
+                        }
+                        else if let imageData = data {
+                            DispatchQueue.main.async { 
+                                self.image.image = UIImage(data: imageData)
+                            }
+                        }
+                        
+                    }.resume()
+                    
+                }
+                self.name.text = name
+                self.price.text = price + "元" 
+                
+            })
+            
+        }
+//        團購
+        if fromShoppingCart == false {
+            let ref =  Database.database().reference().child("GroupBuy").child(productId)
+            
+            ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                let value = snapshot.value as? NSDictionary
+                let name = value?["ProductName"] as? String ?? ""
+                let price = value?["Price"] as? String ?? ""
+                let url = value?["imageURL"] as? String ?? ""
+                if let imageUrl = URL(string: url){
+                    URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        if error != nil {
+                            print("Download Image Task Fail: \(error!.localizedDescription)")
+                        }
+                        else if let imageData = data {
+                            DispatchQueue.main.async { 
+                                self.image.image = UIImage(data: imageData)
+                            }
+                        }
+                        
+                    }.resume()
+                    
+                }
+                self.name.text = name
+                self.price.text = price + "元" 
+                
+            })
+        }
+    }
 }

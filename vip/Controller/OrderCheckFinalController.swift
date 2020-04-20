@@ -21,7 +21,7 @@ class OrderCheckFinalController: UIViewController {
     var productId = String()
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
-    var payFee = ""
+    var payFee = String()
     var orderAutoId = ""
 
     override func viewDidLoad() {

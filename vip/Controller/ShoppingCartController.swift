@@ -13,21 +13,25 @@ import Firebase
 
 
 
-class ShoppingCartController : UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var btnMenu: UIBarButtonItem!
+class ShoppingCartController : UIViewController{
     
+    @IBOutlet weak var btnMenu: UIBarButtonItem!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var estimatedWidth = 300.0
+    var cellMarginSize = 16.0
     var ref: DatabaseReference!
     var test:UILabel!
     var count = Int()
     var name:[Any] = []
     var shoppingCount = Int()
-
+    var selectProductId = [String]()
     
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
+        collectionViewDeclare()
         
         ref = Database.database().reference()
         let user = Auth.auth().currentUser!
@@ -41,18 +45,10 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
                 }
                 
             })
-            self.tableView.reloadData()
         }
         print("num ITEM = ", self.name.count)
         print("shoppingCount",shoppingCount)
         
-        //        print("ViewCount2 self.count= ", self.count)
-        //        print("ViewCount2 = ", count)
-        //
-        
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: "ShoppingCartTableViewCell", bundle: nil),forCellReuseIdentifier: "ShoppingCartTableViewCell")
         
     }
     
@@ -62,32 +58,105 @@ class ShoppingCartController : UIViewController, UITableViewDelegate, UITableVie
     }
     
     
-    
-    
-    func numberOfSectionInTableView(tableView: UITableView) -> Int{
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
+    func collectionViewDeclare(){
+        collectionView.reloadData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "ShoppingCartCollectionViewCell", bundle: nil),forCellWithReuseIdentifier: "ShoppingCartCollectionViewCell")
         
-        return self.shoppingCount
+        
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingCartTableViewCell", for: indexPath) as! ShoppingCartTableViewCell
+    
+    @IBAction func goToCheckButton(_ sender: Any) {
+        let shoppingCartRef = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
+        let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckoutControllerId") as! OrderCheckoutController
+        shoppingCartRef.queryOrdered(byChild: "Status").queryEqual(toValue: "Selected").observeSingleEvent(of: .value, with: { snapshot in
+            
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            
+            let count = data.count
+            for child in data {
+                print(child.key)
+                self.selectProductId.append(child.key)
+            }
+            
+            vc.selectProductId = self.selectProductId 
+            vc.count = count
+            
+            self.navigationController?.pushViewController(vc,animated: true)
+        })
+        
+        
+    }
+    
+    func findIndex(selectProductId:String,vc:ProductInformationController){
+        let shoppingCartRef =  Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
+        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            
+            for i in 1...data.count {
+                if data[i-1].key == selectProductId {
+                    print("find index", i-1)
+                    vc.index = i-1
+                    
+                }else{
+                    print("Not find index", i-1)
+                }
+            }
+            vc.fromShoppingCart = true
+            self.navigationController?.pushViewController(vc,animated: true)
+            
+            
+        })
+        
+    }
+    
+    
+    
+}
+
+extension ShoppingCartController : UICollectionViewDataSource{
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
+        return shoppingCount
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCartCollectionViewCell", for: indexPath) as! ShoppingCartCollectionViewCell
         cell.loadData(index: indexPath.row)
-        
+        cell.delegate = self
+        cell.index = indexPath.row
         return cell
     }
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Product", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
+        
+        let shoppingCartRef = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
+        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            self.findIndex(selectProductId: data[indexPath.row].key,vc: vc)
+            
+            
+        })
+        
+    }
+}
 
-    
-    
-    @IBAction func OrderBtn(_ sender: Any) {
+extension ShoppingCartController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = self.calculateWith()
+        return CGSize(width: width, height: width*0.45)
     }
-    
-    @IBAction func DeleteBtn(_ sender: Any) {
+    func calculateWith()-> CGFloat{
+        let estimateWidth = CGFloat(estimatedWidth)
+        let cellCount = floor(CGFloat(self.view.frame.size.width / estimateWidth))
+        let margin = CGFloat(cellMarginSize * 2)
+        let width = (self.view.frame.size.width - CGFloat(cellMarginSize)*(cellCount-1)-margin)/cellCount
+        return width
+        
     }
-    
-    
 }
