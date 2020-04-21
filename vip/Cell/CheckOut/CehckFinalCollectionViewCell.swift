@@ -18,6 +18,7 @@ class CehckFinalCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         cellColorSet()
+        
     }
     
     func cellColorSet(){

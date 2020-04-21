@@ -12,9 +12,8 @@ import Firebase
 
 
 class ProductController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var searchTextField: UISearchBar!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     
     //    let data = ["first","second","three","three","three","three"]
@@ -22,19 +21,20 @@ class ProductController: UIViewController {
     var cellMarginSize = 23.0
     var ref: DatabaseReference!
     var count = Int()
-//    var ref = Database.database().reference()    
-
+    var fromSearch = false
+    var searchId = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
         self.collectionView.reloadData()
         self.collectionView.delegate = self 
         self.collectionView.dataSource = self
-//        將ProductCollectionViewCell連進來 
+        //        將ProductCollectionViewCell連進來 
         self.collectionView.register(UINib(nibName: "ProductCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProductCollectionViewCell")
         self.setupGridView()
-        setupTextField()
         btnAction()
-
+        print("searchId",searchId)
+        
     }
     
     
@@ -42,62 +42,97 @@ class ProductController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
-
+    
     func setupGridView(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
         flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
     }
     
-    private func setupTextField(){
-        searchTextField.delegate = self
-        let tapOnScreen: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action : #selector(hideKeyboard))
-        tapOnScreen.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapOnScreen)
-        //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        //        view.addGestureRecognizer(tapGesture)
+    func findIndex(searchId:String,vc:ProductInformationController){
+        let productRef =  Database.database().reference().child("Product")
+        productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            
+            for i in 1...data.count {
+                if data[i-1].key == searchId {
+                    print("find index", i-1)
+                    vc.index = i-1
+
+                }else{
+                    print("Not find index", i-1)
+                    
+                }
+            }
+            self.navigationController?.pushViewController(vc,animated: true)
+
+            
+        })
         
     }
     
-    //actions
-    @objc private func hideKeyboard(){
-        searchTextField.resignFirstResponder()
-    }
+    //    private func setupTextField(){
+    //        let tapOnScreen: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action : #selector(hideKeyboard))
+    //        tapOnScreen.cancelsTouchesInView = false
+    //        view.addGestureRecognizer(tapOnScreen)
+    //        //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+    //        //        view.addGestureRecognizer(tapGesture)
+    //        
+    //    }
+    //    
+    //    //actions
+    //    @objc private func hideKeyboard(){
+    //        searchTextField.resignFirstResponder()
+    //    }
     
-    
-   
     
 }
 
 
 extension ProductController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-//        let productCount = Database.database().reference().child("Product").key?.count 
-//        新增商品後不會自動更新，改用前類別頁傳值
+        //        let productCount = Database.database().reference().child("Product").key?.count 
+        //        新增商品後不會自動更新，改用前類別頁傳值
         return count
-
+        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as! ProductCollectionViewCell
-//        cell.setProductLabel(text: self.dataProductName[indexPath.row])
-        cell.setProductLabel(index: indexPath.row)
+        //        cell.setProductLabel(text: self.dataProductName[indexPath.row])
+        if fromSearch == true {
+            cell.setProductLabel(productId: searchId[indexPath.row])
+            
+        }
+        else {
+            cell.setProductLabel(index: indexPath.row)
+            
+        }
         return cell
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        vc.index = indexPath.row        
-        self.navigationController?.pushViewController(vc,animated: true)
+        
+        if fromSearch == true {
+            findIndex(searchId:searchId[indexPath.row],vc:vc)
+            
+        }
+        else{
+            vc.index = indexPath.row        
+            self.navigationController?.pushViewController(vc,animated: true)
 
+        }
+        
+        
     }
 }
 
 extension ProductController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
-//        print(width,width*1.2)
+        //        print(width,width*1.2)
         return CGSize(width: width, height: width*1.25)
     }
     func calculateWith()-> CGFloat{
