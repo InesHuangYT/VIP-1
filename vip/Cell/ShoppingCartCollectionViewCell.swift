@@ -45,18 +45,37 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
         ProductImage.layer.borderWidth = 1
         ProductImage.layer.borderColor = myColor.cgColor
         
+        //        購物車選取按鈕設定
+        selectButton.setTitle("點擊以選取",for: UIControl.State.normal)
+        selectButton.setTitle("點擊以取消選取",for: UIControl.State.selected)
+        
     }
     
-    func loadData(index:Int){
-        ref = Database.database().reference()
+    func setSelectButton(status:String){
+        if status == "Selected"{
+            self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.normal)
+            
+        }
+        if status == "Canceled"{
+            self.selectButton.setImage(UIImage(named : "uncheck"), for: UIControl.State.selected)
+        }
         
-        self.ref.child("ShoppingCart").child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
+        
+    }
+    //    從首頁來
+    func loadData(index:Int){
+        ref = Database.database().reference().child("ShoppingCart").child(user.uid)
+        
+        self.ref.observeSingleEvent(of: .value, with: { snapshot in
             
             if let data = snapshot.children.allObjects as? [DataSnapshot] {
                 print(data)
                 let retriName = data.compactMap({($0.value as! [String:Any])["ProductName"]})
                 print("retriName:",retriName)
                 let retriprice = data.compactMap({($0.value as![String:Any])["Price"]})
+                let statusValue = data.compactMap({($0.value as![String:Any])["Status"]})
+                let status = statusValue[index]
+                self.setSelectButton(status:status as! String)
                 let imageURL = data.compactMap({
                     ($0.value as! [String: Any])["imageURL"]
                 })
@@ -86,6 +105,7 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
         
     }
     
+    //    
     func loadData(productId:String,hiddenSelectButton:Bool){
         if hiddenSelectButton == true {
             selectButton.isHidden = true
@@ -121,17 +141,21 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
     
     @IBAction func checkBoxTapped(_ sender: UIButton){
         let shoppingCartRef = Database.database().reference().child("ShoppingCart")
+        
         shoppingCartRef.child(user.uid).observeSingleEvent(of: .value, with: { snapshot in
             
             if let data = snapshot.children.allObjects as? [DataSnapshot] {
                 if sender.isSelected{
+                    self.selectButton.setImage(UIImage(named : "uncheck"), for: UIControl.State.normal)
                     sender.isSelected = false
-                    print("cancel Selected!")
+                    print("設定為canceled ",sender.isSelected)
                     print(self.index)
                     shoppingCartRef.child(self.user.uid).child(data[self.index].key).child("Status").setValue("Canceled")
                     
                 }else{
+                    self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.normal)
                     sender.isSelected = true
+                    print("設定為selected ",sender.isSelected)
                     shoppingCartRef.child(self.user.uid).child(data[self.index].key).child("Status").setValue("Selected")
                     
                 }

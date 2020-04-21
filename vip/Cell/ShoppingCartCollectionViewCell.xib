@@ -46,7 +46,6 @@
                         <rect key="frame" x="283" y="111" width="33" height="39"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="點擊以勾選" image="uncheck"/>
-                        <state key="selected" title="點擊以取消勾選" image="check"/>
                         <connections>
                             <action selector="checkBoxTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="QDw-d5-QwU"/>
                         </connections>
@@ -67,7 +66,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="check" width="33" height="33"/>
         <image name="logo" width="175" height="166"/>
         <image name="uncheck" width="33" height="33"/>
     </resources>
