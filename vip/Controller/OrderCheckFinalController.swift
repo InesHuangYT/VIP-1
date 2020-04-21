@@ -18,11 +18,14 @@ class OrderCheckFinalController: UIViewController {
     @IBOutlet weak var deliverWaysLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var selectProductId = [String]()
     var productId = String()
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
     var payFee = String()
-    var orderAutoId = ""
+    var orderAutoId = String()
+    var count = Int()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,18 +69,29 @@ class OrderCheckFinalController: UIViewController {
             collectionView.dataSource = self
             collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
         }
+    
+    
+    
+       @IBAction func backToMainPage(_ sender: Any) {
+           let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+           let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+           let newFrontViewController = UINavigationController.init(rootViewController: vc)
+           revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+       }
+    
+    
     }
 
     extension OrderCheckFinalController : UICollectionViewDataSource{
         
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-            return 1
+            return count
         }
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CehckFinalCollectionViewCell", for: indexPath) as! CehckFinalCollectionViewCell
             print("self.productId",self.productId)
-            cell.setProductLabel(productId: String(self.productId))
+            cell.setProductLabel(productId: selectProductId[indexPath.row],fromShoppingCart:true)
             return cell
             
         }
@@ -85,7 +99,9 @@ class OrderCheckFinalController: UIViewController {
             
             let storyboard = UIStoryboard(name: "Product", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as! ProductInformationController
-            vc.ID = productId
+            vc.index = indexPath.row
+            vc.selectProductId = selectProductId
+            vc.fromShoppingCart = true
             self.navigationController?.pushViewController(vc,animated: true)
         }
     }

@@ -37,7 +37,6 @@ class OrderComfirmCollectionViewCell: UICollectionViewCell {
 //        一般商品購買
         if fromShoppingCart == true {
             let ref =  Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "").child(productId)
-            
             ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                 let value = snapshot.value as? NSDictionary
                 let name = value?["ProductName"] as? String ?? ""
@@ -66,7 +65,6 @@ class OrderComfirmCollectionViewCell: UICollectionViewCell {
 //        團購
         if fromShoppingCart == false {
             let ref =  Database.database().reference().child("GroupBuy").child(productId)
-            
             ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                 let value = snapshot.value as? NSDictionary
                 let name = value?["ProductName"] as? String ?? ""

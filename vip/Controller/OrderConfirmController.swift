@@ -31,10 +31,7 @@ class OrderComfirmController: UIViewController {
         btnAction()
         collectionViewDeclare()
         userInfo()
-        
-        
-        print("payFee",payFee)
-        
+
     }
     
     func userInfo(){
@@ -74,9 +71,21 @@ class OrderComfirmController: UIViewController {
     
     
     @IBAction func checkButtonWasPressed(_ sender: Any) {
+        let orderRef = Database.database().reference().child("ProductOrder").childByAutoId()
+        let orderId = orderRef.key
         
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckFinalControllerId") as!  OrderCheckFinalController
+        
+        orderRef.child("Payment").setValue(payFee)
+        orderRef.child("ProductId").setValue(selectProductId)
+        orderRef.child("OrderStatus").setValue("Processing")
+
+        vc.payFee = payFee
+        vc.selectProductId = selectProductId
+        vc.orderAutoId = orderId ?? ""
+        vc.count = count
+        self.navigationController?.pushViewController(vc, animated: true)
         
         
         
@@ -113,7 +122,7 @@ extension OrderComfirmController :UICollectionViewDataSource {
         vc.fromShoppingCart = true
         vc.fromCheckOut = true
         vc.selectProductId = self.selectProductId
-
+        
         self.navigationController?.pushViewController(vc,animated: true)
     }
 }
