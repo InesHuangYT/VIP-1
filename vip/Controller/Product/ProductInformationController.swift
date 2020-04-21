@@ -101,6 +101,9 @@ class ProductInformationController: UIViewController {
         NSLog("HHHHii")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        audioPlayer?.stop()
+    }
     
     
     func btnAction(){

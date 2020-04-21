@@ -42,6 +42,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        setupTextField()
         btnAction()
         self.collectionView.reloadData()
         self.collectionView.delegate = self
@@ -66,6 +67,19 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+    }
+    private func setupTextField(){
+        couponTextField.delegate = self
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+       }
+    @objc private func hideKeyboard(){
+        couponTextField.resignFirstResponder()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           textField.resignFirstResponder()
+           return true
     }
     
     func setStatus(){
