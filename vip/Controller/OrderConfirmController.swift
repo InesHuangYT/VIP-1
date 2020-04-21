@@ -31,7 +31,7 @@ class OrderComfirmController: UIViewController {
         btnAction()
         collectionViewDeclare()
         userInfo()
-
+        
     }
     
     func userInfo(){
@@ -77,18 +77,32 @@ class OrderComfirmController: UIViewController {
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckFinalControllerId") as!  OrderCheckFinalController
         
+        //    時間戳看開始    
+        let now = Date()
+        let timeInterval:TimeInterval = now.timeIntervalSince1970
+        let timeStamp = String(timeInterval)
+        print("timeStamp：\(timeStamp)")
+        
+        let date = Date(timeIntervalSince1970: timeInterval)
+        //格式化
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        print("新增日期時間：\(dformatter.string(from: date))")
+        //    時間戳結束
+        
+        
         orderRef.child("Payment").setValue(payFee)
         orderRef.child("ProductId").setValue(selectProductId)
         orderRef.child("OrderStatus").setValue("Processing")
-
+        orderRef.child("OrderCreateTime").setValue(timeStamp)
+        
         vc.payFee = payFee
         vc.selectProductId = selectProductId
         vc.orderAutoId = orderId ?? ""
         vc.count = count
+        
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        
-        
+   
     }
     
     

@@ -1,31 +1,27 @@
 //
-//  GroupByController.swift
+//  ProcessingOrderController.swift
 //  vip
 //
-//  Created by Ines on 2020/3/30.
+//  Created by Ines on 2020/4/22.
 //  Copyright © 2020 Ines. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class GroupBuyController: UIViewController {
+class ProcessingOrderController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    var ref: DatabaseReference!
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
-    var count = Int()
-    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        collectionViewDeclare()
-        self.setupGridView()
         btnAction()
-        
-        
+        collectionViewDeclare()
+        setupGridView()
     }
     
     func btnAction(){
@@ -34,11 +30,11 @@ class GroupBuyController: UIViewController {
     }
     
     func collectionViewDeclare(){
-          self.collectionView.reloadData()
-          collectionView.delegate = self
-          collectionView.dataSource = self
-          collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
-      }
+        self.collectionView.reloadData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
+    }
     
     func setupGridView(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -46,14 +42,15 @@ class GroupBuyController: UIViewController {
         flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
     }
     
+    
 }
 
 
-
-extension GroupBuyController : UICollectionViewDataSource{
+// 改
+extension ProcessingOrderController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         
-        return count
+        return 1
         
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
@@ -78,7 +75,7 @@ extension GroupBuyController : UICollectionViewDataSource{
                     let groupBuyPeople = datas.compactMap({
                         ($0.value as! [String: Any])["GroupBuyPeople"]
                     }) 
-
+                    
                     let people = groupBuyPeople[indexPath.row] as! String
                     let peoples = Int64(people)
                     print("peoples", peoples ?? 0)
@@ -103,7 +100,7 @@ extension GroupBuyController : UICollectionViewDataSource{
     }
 }
 
-extension GroupBuyController: UICollectionViewDelegateFlowLayout{
+extension ProcessingOrderController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
         return CGSize(width: width, height: width*0.5)
@@ -118,9 +115,5 @@ extension GroupBuyController: UICollectionViewDelegateFlowLayout{
     }
 }
 
-extension GroupBuyController: UISearchBarDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true 
-    }
-}
+
+
