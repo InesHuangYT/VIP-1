@@ -48,7 +48,7 @@ class ShoppingCartController : UIViewController{
         }
         print("num ITEM = ", self.name.count)
         print("shoppingCount",shoppingCount)
-        
+
         
     }
     
@@ -136,12 +136,17 @@ extension ShoppingCartController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
         
         let shoppingCartRef = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
-        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-            let data = snapshot.children.allObjects as! [DataSnapshot]
-            self.findIndex(selectProductId: data[indexPath.row].key,vc: vc)
-            
-            
-        })
+        
+        vc.index = indexPath.row
+        vc.fromShoppingCart = true
+        self.navigationController?.pushViewController(vc,animated: true)
+
+//        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+//            let data = snapshot.children.allObjects as! [DataSnapshot]
+//            self.findIndex(selectProductId: data[indexPath.row].key,vc: vc)
+//            
+//            
+//        })
         
     }
 }

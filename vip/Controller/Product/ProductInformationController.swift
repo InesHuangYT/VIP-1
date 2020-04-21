@@ -33,8 +33,8 @@ class ProductInformationController: UIViewController {
     var fromShoppingCart = false
     var fromCheckOut = false
     var price = String()
-    
     var index  = Int()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("index",index)

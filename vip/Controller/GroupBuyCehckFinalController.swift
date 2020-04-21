@@ -136,7 +136,7 @@ extension GroupBuyCehckFinalController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CehckFinalCollectionViewCell", for: indexPath) as! CehckFinalCollectionViewCell
         print("self.productId",self.productId)
-        cell.setProductLabel(productId: String(self.productId))
+        cell.setProductLabel(productId: String(self.productId), fromShoppingCart: false)
         return cell
         
     }

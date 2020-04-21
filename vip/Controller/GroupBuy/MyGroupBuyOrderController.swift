@@ -90,7 +90,7 @@ extension MyGroupBuyOrderController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CehckFinalCollectionViewCell", for: indexPath) as! CehckFinalCollectionViewCell
         print("self.productId",self.productId)
-        cell.setProductLabel(productId: productId)
+        cell.setProductLabel(productId: productId, fromShoppingCart: false)
         return cell
         
     }
