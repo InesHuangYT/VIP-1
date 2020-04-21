@@ -53,11 +53,11 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
     
     func setSelectButton(status:String){
         if status == "Selected"{
-            self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.normal)
+            self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.selected)
             
         }
         if status == "Canceled"{
-            self.selectButton.setImage(UIImage(named : "uncheck"), for: UIControl.State.selected)
+            self.selectButton.setImage(UIImage(named : "uncheck"), for: UIControl.State.normal)
         }
         
         
@@ -146,16 +146,16 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
             
             if let data = snapshot.children.allObjects as? [DataSnapshot] {
                 if sender.isSelected{
+                    print("設定為canceled ",sender.isSelected)
                     self.selectButton.setImage(UIImage(named : "uncheck"), for: UIControl.State.normal)
                     sender.isSelected = false
-                    print("設定為canceled ",sender.isSelected)
                     print(self.index)
                     shoppingCartRef.child(self.user.uid).child(data[self.index].key).child("Status").setValue("Canceled")
                     
                 }else{
-                    self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.normal)
-                    sender.isSelected = true
                     print("設定為selected ",sender.isSelected)
+                    self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.selected)
+                    sender.isSelected = true
                     shoppingCartRef.child(self.user.uid).child(data[self.index].key).child("Status").setValue("Selected")
                     
                 }
