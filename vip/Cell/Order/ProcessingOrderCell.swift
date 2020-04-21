@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class ProcessingOrderCell: UICollectionViewCell {
 
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var progress: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

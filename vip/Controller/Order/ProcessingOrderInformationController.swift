@@ -11,8 +11,22 @@ import Firebase
 
 class ProcessingOrderInformationController: UIViewController {
     @IBOutlet weak var btnMenu: UIBarButtonItem!
+    @IBOutlet weak var orderId: UILabel!
+    @IBOutlet weak var progress: UILabel!
+    @IBOutlet weak var orderCreateTime: UILabel!
+    @IBOutlet weak var payTime: UILabel!
+    @IBOutlet weak var deliverStartTime: UILabel!
+    @IBOutlet weak var deliverArriveTime: UILabel!
+    @IBOutlet weak var orderFinishTime: UILabel!
     
-    override func viewDidLoad() {
+    @IBOutlet weak var payment: UILabel!
+    @IBOutlet weak var payWay: UILabel!
+    @IBOutlet weak var deliverWay: UILabel!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+
+        override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
     }
@@ -23,4 +37,14 @@ class ProcessingOrderInformationController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
+    
+    
+    
+    
+    
+    
+    @IBAction func backButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
