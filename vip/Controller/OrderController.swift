@@ -77,7 +77,7 @@ class OrderController: UIViewController {
         let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
         let userGroupBuyRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
         let productRef = Database.database().reference().child("GroupBuy")
-        let orderRef = Database.database().reference().child("Order")
+        let orderRef = Database.database().reference().child("GroupBuyOrder")
         
         
         userGroupBuyOrderRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 

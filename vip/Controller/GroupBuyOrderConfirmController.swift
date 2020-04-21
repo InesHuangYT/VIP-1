@@ -109,36 +109,25 @@ class GroupBuyOrderConfirmController: UIViewController {
             openGroupRef.child("OpenBy").child(self.uid ?? "").setValue(self.uid ?? "")
             openGroupRef.child("JoinBy").child(self.uid ?? "").setValue(self.uid ?? "")
             openGroupRef.child("Status").setValue("Waiting")
+            openGroupRef.child("GroupCreateTime").setValue(self.getTime())
+
             
             
             self.ref.child(self.productId).child("OpenGroupId").queryOrderedByKey().observeSingleEvent(of: .value, with: { 
                 snapshot in
                 
                 
-                let refOrder = Database.database().reference().child("Order").childByAutoId()
+                let refOrder = Database.database().reference().child("GroupBuyOrder").childByAutoId()
                 let orderId = refOrder.key
                 
-                //                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OpenGroupId/\(openGroupRef.key ?? "")/ProductId/\(self.productId)").setValue(self.productId)
-                
-        
-                 Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OrderId/\(orderId ?? "")/ProductId/").setValue(self.productId)
+                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : no currentUser")/OrderId/\(orderId ?? "")/ProductId/").setValue(self.productId)
                 
                 
                 vc.orderAutoId = orderId ?? ""
                 vc.openId = openGroupRef.key ?? ""
                 refOrder.child("OpenGroupId").setValue(openGroupRef.key ?? "")
                 refOrder.child("Payment").setValue(self.payFee)
-
-                //                self.refUserGroupBuy.child(self.uid ?? "").child("OpenGroupId").child(openGroupRef.key ?? "").child("OrderId").child(orderId ?? "").setValue(orderId)
-                
-                //if let datas = snapshot.children.allObjects as? [DataSnapshot]{
-                //                for snap in datas{
-                //                let key = snap.key
-                //                print("keyyyyy",key)
-                //                
-                //                }
-                //                }
-                
+                refOrder.child("OrderCreateTime").setValue(self.getTime())
                 
                 let value = snapshot.value as? NSDictionary
                 let price = value?["Price"] as? String ?? ""
@@ -151,6 +140,17 @@ class GroupBuyOrderConfirmController: UIViewController {
                 vc.groupBuyStyle = self.groupBuyStyle
                 vc.groupBuyPeople = self.groupBuyPeople
                 self.navigationController?.pushViewController(vc,animated: true)
+                
+                
+                //                self.refUserGroupBuy.child(self.uid ?? "").child("OpenGroupId").child(openGroupRef.key ?? "").child("OrderId").child(orderId ?? "").setValue(orderId)
+                
+                //if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                //                for snap in datas{
+                //                let key = snap.key
+                //                print("keyyyyy",key)
+                //                
+                //                }
+                //                }
                 
             })
             
@@ -181,10 +181,9 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 
                                 refs.child(snapshots[self.index].key).child("JoinBy").child(self.uid ?? "").setValue(self.uid)
                                 print("Join sucessfully !")
-                                let refOrder = Database.database().reference().child("Order").childByAutoId()
+                                let refOrder = Database.database().reference().child("GroupBuyOrder").childByAutoId()
                                 let orderId = refOrder.key
                                 
-                                //                                Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/JoinGroupId/\(snapshots[self.index].key)/ProductId/\(self.productId)").setValue(self.productId)
                                 
                                 Database.database().reference(withPath: "UserGroupBuy/\(self.uid ?? "wrong message : NoCurrentUser")/OrderId/\(orderId ?? "" )/ProductId/").setValue(self.productId)
                                 
@@ -193,8 +192,11 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 vc.openId = snapshots[self.index].key
                                 refOrder.child("OpenGroupId").setValue(snapshots[self.index].key)
                                 refOrder.child("Payment").setValue(self.payFee)
-
-                                //                                self.refUserGroupBuy.child(self.uid ?? "").child("JoinGroupId").child(snapshots[self.index].key).child("OrderId").child(orderId ?? "").setValue(orderId)    
+                                refOrder.child("OrderCreateTime").setValue(self.getTime())
+                                
+                                
+                                
+                                
                                 
                             })   
                         
@@ -217,6 +219,23 @@ class GroupBuyOrderConfirmController: UIViewController {
             }
             
         })
+    }
+    
+    func getTime() -> String {
+        //    時間戳看開始    
+        let now = Date()
+        let timeInterval:TimeInterval = now.timeIntervalSince1970
+        let timeStamp = String(timeInterval)
+        print("timeStamp：\(timeStamp)")
+        
+        let date = Date(timeIntervalSince1970: timeInterval)
+        //格式化
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        print("新增日期時間：\(dformatter.string(from: date))")
+        //    時間戳結束
+        
+        return timeStamp
     }
     
     

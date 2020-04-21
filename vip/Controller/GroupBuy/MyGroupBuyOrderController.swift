@@ -70,6 +70,9 @@ class MyGroupBuyOrderController: UIViewController {
         collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
     }
     
+    @IBAction func backButtonWasPressed(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
   
     

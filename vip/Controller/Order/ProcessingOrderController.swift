@@ -33,7 +33,7 @@ class ProcessingOrderController: UIViewController {
         self.collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
+        collectionView.register(UINib(nibName: "ProcessingOrderCell", bundle: nil), forCellWithReuseIdentifier: "ProcessingOrderCell")
     }
     
     func setupGridView(){
@@ -55,45 +55,17 @@ extension ProcessingOrderController : UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyCollectionViewCell", for: indexPath) as! GroupBuyCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProcessingOrderCell", for: indexPath) as! ProcessingOrderCell
         //        cell.setProductLabel(text: self.dataProductName[indexPath.row])
-        cell.setProductLabel(index: indexPath.row)
+        //        cell.setProductLabel(index: indexPath.row)
         return cell
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
-        vc.index = indexPath.row   
-        Database.database().reference().child("GroupBuy")
-            .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in 
-                if let datas = snapshot.children.allObjects as? [DataSnapshot] {
-                    print("key:" ,datas[indexPath.row].key)
-                    vc.productId = datas[indexPath.row].key
-                    
-                    let groupBuyPeople = datas.compactMap({
-                        ($0.value as! [String: Any])["GroupBuyPeople"]
-                    }) 
-                    
-                    let people = groupBuyPeople[indexPath.row] as! String
-                    let peoples = Int64(people)
-                    print("peoples", peoples ?? 0)
-                    vc.groupBuyPeople = Int(peoples ?? 0) 
-                    
-                    Database.database().reference().child("GroupBuy").child(datas[indexPath.row].key).child("OpenGroupId")
-                        .queryOrderedByKey()
-                        .observeSingleEvent(of: .value, with: { snapshot in 
-                            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                                
-                                print("GroupBuy key count : ",snapshots.count)
-                                vc.openByCount = snapshots.count
-                                self.navigationController?.pushViewController(vc,animated: true)
-                                
-                            }
-                        })
-                }
-            })
+        let storyboard = UIStoryboard(name: "Order", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProcessingOrderInformationControllerId") as!  ProcessingOrderInformationController
+        
+        self.navigationController?.pushViewController(vc,animated: true)
         
         
         

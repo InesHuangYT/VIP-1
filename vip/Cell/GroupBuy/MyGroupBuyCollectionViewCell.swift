@@ -43,7 +43,7 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
         let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
         
         let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child(status).child("OrderId")
-        let orderRef =  Database.database().reference().child("Order")
+        let orderRef =  Database.database().reference().child("GroupBuyOrder")
         let groupBuyRef = Database.database().reference().child("GroupBuy")
         
         userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
@@ -188,7 +188,7 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
             
             let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child(self.currentStatus).child("OrderId")
             let userGroupBuyOrderIdRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
-            let orderRef =  Database.database().reference().child("Order")
+            let orderRef =  Database.database().reference().child("GroupBuyOrder")
             let groupBuyRef = Database.database().reference().child("GroupBuy")
             
             userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 

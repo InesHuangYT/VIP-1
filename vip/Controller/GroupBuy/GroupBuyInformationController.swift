@@ -39,7 +39,7 @@ class GroupBuyInformationController: UIViewController {
         super.viewDidLoad()
         collectionViewDeclare()
         btnAction()
-        self.setupGridView()
+        setupGridView()
         if status == ""{
             setLabel(index:index)
         }
@@ -57,6 +57,12 @@ class GroupBuyInformationController: UIViewController {
         groupBuyImage.layer.borderColor = myColor.cgColor
         print("openByCount",self.openByCount)
         print("groupBuyPeople",self.groupBuyPeople)
+        print("from",from)
+        print("status",status)
+        print("index",index)
+
+
+
     }
     
     func btnAction(){

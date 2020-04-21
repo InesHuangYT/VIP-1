@@ -35,7 +35,7 @@ class OrderComfirmController: UIViewController {
     }
     
     func userInfo(){
-        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
+        Database.database().reference().child("users").child(uid ?? "")
             .child("Profile")
             .queryOrderedByKey()
             .observeSingleEvent(of: .value, with: { snapshot in
@@ -69,13 +69,16 @@ class OrderComfirmController: UIViewController {
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
     
-    
+    // 結帳建立資料
     @IBAction func checkButtonWasPressed(_ sender: Any) {
+        
         let orderRef = Database.database().reference().child("ProductOrder").childByAutoId()
         let orderId = orderRef.key
+        let userProductRef = Database.database().reference().child("UserProduct").child(uid ?? "")
         
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckFinalControllerId") as!  OrderCheckFinalController
+        
         
         //    時間戳看開始    
         let now = Date()
@@ -95,6 +98,9 @@ class OrderComfirmController: UIViewController {
         orderRef.child("ProductId").setValue(selectProductId)
         orderRef.child("OrderStatus").setValue("Processing")
         orderRef.child("OrderCreateTime").setValue(timeStamp)
+        userProductRef.child("OrderId").setValue(orderId)
+        userProductRef.child("OrderId").child(orderId ?? "").child("ProductId").setValue(selectProductId)
+        userProductRef.child("Status").child("Processing").child("OrderId").child(orderId ?? "").setValue(orderId)
         
         vc.payFee = payFee
         vc.selectProductId = selectProductId
