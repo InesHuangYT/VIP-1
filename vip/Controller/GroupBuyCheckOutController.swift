@@ -4,7 +4,7 @@
 //
 //  Created by Chun on 2020/4/1.
 //  Copyright © 2020 Ines. All rights reserved.
-//
+// https://stackoverflow.com/questions/39780373/didselectitemat-not-being-called
 
 import UIKit
 import GoogleSignIn
@@ -44,11 +44,7 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setupTextField()
         btnAction()
-        self.collectionView.reloadData()
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.register(UINib(nibName: "GroupBuyCheckOutCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCheckOutCollectionViewCell")
-        
+        collectionViewDeclare()
         Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
             .child("Profile")
             .queryOrderedByKey()
@@ -70,16 +66,25 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
     }
     private func setupTextField(){
         couponTextField.delegate = self
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false // didselectitemat-not-being-called 處理方法
         self.view.addGestureRecognizer(tapGesture)
-       }
+    }
+    
     @objc private func hideKeyboard(){
         couponTextField.resignFirstResponder()
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-           textField.resignFirstResponder()
-           return true
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func collectionViewDeclare(){
+        collectionView.reloadData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "GroupBuyCheckOutCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCheckOutCollectionViewCell")
     }
     
     func setStatus(){
@@ -94,8 +99,6 @@ class GroupBuyCheckOutController: UIViewController, UITextFieldDelegate {
             
         }
     }
-    
-    
     
     
     func setLabel(value:[String:Any]){
@@ -184,8 +187,7 @@ extension GroupBuyCheckOutController : UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
-        print("hereeeeeeeeeee")
+        let vc = storyboard.instantiateViewController(withIdentifier:"GroupBuyInformationControllerId") as!  GroupBuyInformationController
         vc.index = productIndex
         vc.productId = productId
         vc.from = "GroupBuy"
