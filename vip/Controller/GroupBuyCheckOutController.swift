@@ -185,6 +185,7 @@ extension GroupBuyCheckOutController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
+        print("hereeeeeeeeeee")
         vc.index = productIndex
         vc.productId = productId
         vc.from = "GroupBuy"

@@ -373,6 +373,9 @@
                                 <state key="normal" title="歷史紀錄">
                                     <color key="titleColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="transitionToHistoryOrder:" destination="5KQ-wt-k7H" eventType="touchUpInside" id="CIu-oj-wgC"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxo-aZ-FU9">
                                 <rect key="frame" x="0.0" y="464" width="376" height="203"/>
@@ -392,9 +395,12 @@
                                 <state key="normal" title="處理中訂單">
                                     <color key="titleColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="transitionToProcessingOrder:" destination="5KQ-wt-k7H" eventType="touchUpInside" id="zLA-FM-Qad"/>
+                                </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.92121618989999998" green="0.96406751869999996" blue="0.88675481079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="QIe-ff-gZ0"/>
                     </view>
                     <toolbarItems/>

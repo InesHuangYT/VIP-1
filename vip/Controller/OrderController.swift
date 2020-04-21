@@ -23,6 +23,18 @@ class OrderController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
+    @IBAction func transitionToProcessingOrder(_ sender: Any) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Order", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProcessingOrderControllerId") as! ProcessingOrderController
+        self.navigationController?.pushViewController(vc,animated: true)
+    }
+    
+    @IBAction func transitionToHistoryOrder(_ sender: Any) {
+    }
+    
+    
+    
     @IBAction func transitionToMyGroupBuyScene(_ sender: Any) {
         let storyboard: UIStoryboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyControllerId") as! MyGroupBuyController
@@ -65,7 +77,7 @@ class OrderController: UIViewController {
         let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
         let userGroupBuyRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
         let productRef = Database.database().reference().child("GroupBuy")
-        let orderRef = Database.database().reference().child("Order")
+        let orderRef = Database.database().reference().child("GroupBuyOrder")
         
         
         userGroupBuyOrderRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 

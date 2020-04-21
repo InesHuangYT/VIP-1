@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -712,6 +712,16 @@
                                 <color key="textColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XD8-3e-juZ">
+                                <rect key="frame" x="133" y="584" width="116" height="63"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="返回" image="返回">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonWasPressed:" destination="Ft8-h9-HEQ" eventType="touchUpInside" id="dhS-md-08U"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -764,5 +774,6 @@
         <image name="logoAPP" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
         <image name="自己開團" width="159" height="86"/>
+        <image name="返回" width="114" height="63"/>
     </resources>
 </document>

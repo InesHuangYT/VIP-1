@@ -31,11 +31,11 @@ class OrderComfirmController: UIViewController {
         btnAction()
         collectionViewDeclare()
         userInfo()
-
+        
     }
     
     func userInfo(){
-        Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
+        Database.database().reference().child("users").child(uid ?? "")
             .child("Profile")
             .queryOrderedByKey()
             .observeSingleEvent(of: .value, with: { snapshot in
@@ -69,26 +69,46 @@ class OrderComfirmController: UIViewController {
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
     
-    
+    // 結帳建立資料
     @IBAction func checkButtonWasPressed(_ sender: Any) {
+        
         let orderRef = Database.database().reference().child("ProductOrder").childByAutoId()
         let orderId = orderRef.key
+        let userProductRef = Database.database().reference().child("UserProduct").child(uid ?? "")
         
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckFinalControllerId") as!  OrderCheckFinalController
         
+        
+        //    時間戳看開始    
+        let now = Date()
+        let timeInterval:TimeInterval = now.timeIntervalSince1970
+        let timeStamp = String(timeInterval)
+        print("timeStamp：\(timeStamp)")
+        
+        let date = Date(timeIntervalSince1970: timeInterval)
+        //格式化
+        let dformatter = DateFormatter()
+        dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+        print("新增日期時間：\(dformatter.string(from: date))")
+        //    時間戳結束
+        
+        
         orderRef.child("Payment").setValue(payFee)
         orderRef.child("ProductId").setValue(selectProductId)
         orderRef.child("OrderStatus").setValue("Processing")
-
+        orderRef.child("OrderCreateTime").setValue(timeStamp)
+        userProductRef.child("OrderId").setValue(orderId)
+        userProductRef.child("OrderId").child(orderId ?? "").child("ProductId").setValue(selectProductId)
+        userProductRef.child("Status").child("Processing").child("OrderId").child(orderId ?? "").setValue(orderId)
+        
         vc.payFee = payFee
         vc.selectProductId = selectProductId
         vc.orderAutoId = orderId ?? ""
         vc.count = count
+        
         self.navigationController?.pushViewController(vc, animated: true)
-        
-        
-        
+   
     }
     
     

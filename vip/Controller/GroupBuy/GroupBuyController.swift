@@ -21,10 +21,7 @@ class GroupBuyController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.reloadData()
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
+        collectionViewDeclare()
         self.setupGridView()
         btnAction()
         
@@ -35,6 +32,13 @@ class GroupBuyController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
+    
+    func collectionViewDeclare(){
+          self.collectionView.reloadData()
+          collectionView.delegate = self
+          collectionView.dataSource = self
+          collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
+      }
     
     func setupGridView(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
