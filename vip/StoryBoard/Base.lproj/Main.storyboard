@@ -374,7 +374,7 @@
                                     <color key="titleColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="transitionToHistoryOrder:" destination="5KQ-wt-k7H" eventType="touchUpInside" id="CIu-oj-wgC"/>
+                                    <action selector="transitionToHistoryOrder:" destination="5KQ-wt-k7H" eventType="touchUpInside" id="Rwa-6i-6N3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxo-aZ-FU9">
@@ -396,7 +396,7 @@
                                     <color key="titleColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <action selector="transitionToProcessingOrder:" destination="5KQ-wt-k7H" eventType="touchUpInside" id="zLA-FM-Qad"/>
+                                    <action selector="transitionToProcessingOrder:" destination="5KQ-wt-k7H" eventType="touchUpInside" id="WH8-lE-HXf"/>
                                 </connections>
                             </button>
                         </subviews>

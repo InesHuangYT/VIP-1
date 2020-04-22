@@ -17,17 +17,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var groupBuyButton: UIButton!
     @IBOutlet weak var shppingCartButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
         setupTextField()
     }
-    
-    
-    
-    
+ 
     private func setupTextField(){
         searchTextField.delegate = self
         

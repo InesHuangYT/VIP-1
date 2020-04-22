@@ -14,7 +14,7 @@ import FirebaseStorage
 
 class GroupBuyCollectionViewCell: UICollectionViewCell {
     var ref: DatabaseReference!
-
+    
     @IBOutlet weak var groupBuyImage: UIImageView!
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var productPrice: UILabel!
@@ -23,6 +23,11 @@ class GroupBuyCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        cellColorSet()
+        
+    }
+    
+    func cellColorSet(){
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         layer.borderWidth = 5
         layer.borderColor = myColor.cgColor
@@ -31,9 +36,8 @@ class GroupBuyCollectionViewCell: UICollectionViewCell {
         groupBuyImage.layer.borderWidth = 1
         groupBuyImage.layer.borderColor = myColor.cgColor
         groupBuyImage.image = UIImage(named: "logo")
+        
     }
-
-    
     
     
     func setProductLabel(index:Int) {
