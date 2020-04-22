@@ -19,18 +19,54 @@ class OrderController: UIViewController {
         countStatus()
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    
     
     
     @IBAction func transitionToProcessingOrder(_ sender: Any) {
-        let storyboard: UIStoryboard = UIStoryboard(name: "Order", bundle: nil)
+        
+        
+        let storyboard = UIStoryboard(name: "Order", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProcessingOrderControllerId") as! ProcessingOrderController
-        self.navigationController?.pushViewController(vc,animated: true)
+        let myOderRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
+        var myOrderId = [String]()
+        myOderRef.child("Status").child("Processing/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                vc.myOrderCount = datas.count
+                
+                for data in datas {
+                    myOrderId.append(data.key)
+                }
+                vc.myOrderId = myOrderId
+                self.navigationController?.pushViewController(vc,animated: true)
+                
+                
+                
+                
+            }
+        })
+        
     }
     
     @IBAction func transitionToHistoryOrder(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Order", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "HistoryOrderControllerId") as! HistoryOrderController
+        let myOderRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
+        var myOrderId = [String]()
+        myOderRef.child("Status").child("History/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+//                vc.myOrderCount = datas.count
+                
+                for data in datas {
+                    myOrderId.append(data.key)
+                }
+//                vc.myOrderId = myOrderId
+                self.navigationController?.pushViewController(vc,animated: true)
+                
+                
+                
+                
+            }
+        })
     }
     
     
@@ -72,7 +108,7 @@ class OrderController: UIViewController {
         
     }
     
-    
+    //  Update UserGroupBuy Status  
     func countStatus(){
         let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
         let userGroupBuyRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "")

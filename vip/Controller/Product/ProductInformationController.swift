@@ -31,6 +31,8 @@ class ProductInformationController: UIViewController {
     
     var selectProductId = [String]()
     var fromShoppingCart = false
+    var productId = String()
+    var fromMyOrder = false
     var fromCheckOut = false
     var price = String()
     var index  = Int()
@@ -38,7 +40,14 @@ class ProductInformationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("index",index)
-        setLabel(index: index,selectProductId:selectProductId)
+        
+        //從訂單進來用productId  從購物車或一般商品查詢進來用index
+        if (fromMyOrder == true){
+            setLabel(productId:productId)
+        }else{
+            setLabel(index: index,selectProductId:selectProductId)
+        }
+        
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         productImage.layer.cornerRadius = 45
         productImage.layer.borderWidth = 1
@@ -48,7 +57,7 @@ class ProductInformationController: UIViewController {
         btnAction()
         audioPlay()
         
-        if(fromShoppingCart == true) {
+        if(fromShoppingCart == true || fromMyOrder == true) {
             addShoppingCart.isHidden = true
         }
         
@@ -210,7 +219,48 @@ class ProductInformationController: UIViewController {
             
         }
     }
-  
+    
+    // FromMyOrder
+    func setLabel(productId:String){
+        
+        let productRef = Database.database().reference().child("Product").child(productId)
+        productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            let value = snapshot.value as? NSDictionary
+            let name = value?["ProductName"] as? String ?? ""
+            let price = value?["Price"] as? String ?? "" 
+            let description = value?["Description"] as? String ?? "" 
+            let productEvaluation = value?["ProductEvaluation"] as? String ?? "" 
+            let sellerEvaluation = value?["SellerEvaluation"] as? String ?? "" 
+            let url = value?["imageURL"] as? String ?? ""
+            self.nameLabel.text = name
+            self.priceLabel.text = price
+            self.descriptionLabel.text = "產品描述 " + description
+            self.evaluationLabel.text = "產品評價 " + productEvaluation
+            self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
+            if let imageUrl = URL(string: url){
+                URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                    if error != nil {
+                        print("Download Image Task Fail: \(error!.localizedDescription)")
+                    }
+                    else if let imageData = data {
+                        DispatchQueue.main.async { 
+                            self.productImage.image = UIImage(data: imageData)
+                        }
+                    }
+                    
+                }.resume()
+                
+            }
+            
+            
+            
+            
+            
+            
+        })
+        
+    }
+    
     
     
     @IBAction func addToCart(_ sender: Any) { // 還沒做加入購物車過了
