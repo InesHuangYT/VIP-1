@@ -16,13 +16,14 @@ class ProductController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     
-    //    let data = ["first","second","three","three","three","three"]
     var estimatedWidth = 130.0
     var cellMarginSize = 23.0
     var ref: DatabaseReference!
     var count = Int()
     var fromSearch = false
     var searchId = [String]()
+    var fromCategory = false
+    var categoryId = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -34,6 +35,8 @@ class ProductController: UIViewController {
         self.setupGridView()
         btnAction()
         print("searchId",searchId)
+        print("categoryId",categoryId)
+        
         
     }
     
@@ -78,33 +81,18 @@ class ProductController: UIViewController {
                 if data[i-1].key == searchId {
                     print("find index", i-1)
                     vc.index = i-1
-
+                    
                 }else{
                     print("Not find index", i-1)
                     
                 }
             }
             self.navigationController?.pushViewController(vc,animated: true)
-
+            
             
         })
         
     }
-    
-    //    private func setupTextField(){
-    //        let tapOnScreen: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action : #selector(hideKeyboard))
-    //        tapOnScreen.cancelsTouchesInView = false
-    //        view.addGestureRecognizer(tapOnScreen)
-    //        //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-    //        //        view.addGestureRecognizer(tapGesture)
-    //        
-    //    }
-    //    
-    //    //actions
-    //    @objc private func hideKeyboard(){
-    //        searchTextField.resignFirstResponder()
-    //    }
-    
     
 }
 
@@ -119,14 +107,15 @@ extension ProductController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as! ProductCollectionViewCell
-        //        cell.setProductLabel(text: self.dataProductName[indexPath.row])
+        
         if fromSearch == true {
             cell.setProductLabel(productId: searchId[indexPath.row])
-            
+        }
+        else if fromCategory == true {
+            cell.setProductLabel(productId: categoryId[indexPath.row])
         }
         else {
             cell.setProductLabel(index: indexPath.row)
-            
         }
         return cell
         
@@ -136,13 +125,17 @@ extension ProductController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
         
         if fromSearch == true {
-            findIndex(searchId:searchId[indexPath.row],vc:vc)
+            findIndex(searchId: searchId[indexPath.row],vc:vc)
             
         }
+        else if fromCategory == true {
+            findIndex(searchId: categoryId[indexPath.row],vc:vc)
+        }
+            
         else{
             vc.index = indexPath.row        
             self.navigationController?.pushViewController(vc,animated: true)
-
+            
         }
         
         
@@ -152,7 +145,6 @@ extension ProductController : UICollectionViewDataSource{
 extension ProductController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWith()
-        //        print(width,width*1.2)
         return CGSize(width: width, height: width*1.25)
     }
     func calculateWith()-> CGFloat{

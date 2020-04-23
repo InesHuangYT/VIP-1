@@ -473,6 +473,9 @@
                                 <state key="normal" title="視覺相關" image="視覺相關">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="visuallyProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="vC1-uj-bui"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuH-kb-ohE">
                                 <rect key="frame" x="57" y="238" width="108" height="119"/>
@@ -480,6 +483,9 @@
                                 <state key="normal" title="美妝保健" image="美妝保健">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="makeupProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="7MV-wO-Pzx"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUZ-yn-6aR">
                                 <rect key="frame" x="209" y="238" width="109" height="119"/>
@@ -487,6 +493,9 @@
                                 <state key="normal" title="美食甜點" image="美食甜點">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="dessertProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="iek-n0-fGD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jc-Ny-0ie">
                                 <rect key="frame" x="57" y="385" width="108" height="119"/>
@@ -494,6 +503,9 @@
                                 <state key="normal" title="3C家電" image="3c家電">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="cProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="SF8-ic-Jil"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWF-Rl-K8s">
                                 <rect key="frame" x="209" y="385" width="109" height="119"/>
@@ -501,6 +513,9 @@
                                 <state key="normal" title="日用品" image="日用品">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="dailyProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="Qgg-kZ-NBH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DzP-98-9uD">
                                 <rect key="frame" x="210" y="528" width="108" height="119"/>
@@ -508,6 +523,9 @@
                                 <state key="normal" title="居家生活" image="居家生活">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="lifeProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="Eql-tT-VbR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQW-b5-tHn">
                                 <rect key="frame" x="57" y="527" width="108" height="119"/>
@@ -515,6 +533,9 @@
                                 <state key="normal" title="媽咪親子" image="媽咪親子">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="familyProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="ajb-uL-zYw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.9252752662" green="0.96562939879999998" blue="0.90195304160000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
