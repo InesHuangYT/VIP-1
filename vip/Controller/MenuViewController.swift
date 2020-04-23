@@ -43,21 +43,41 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if cell.lblMenu.text! == "我的最愛" // transit to ShoppingCart Storyboard
         {
-            let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
-            ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-                let allKeys = snapshot.value as! [String : AnyObject]
-                let nodeToReturn = allKeys.keys
-                let counts = nodeToReturn.count
-                print("nodeToReturn ",nodeToReturn)
-                print("counts ",counts)
+            let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser!.uid)
+            let likeListGroupRef = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser!.uid)
+            
+            // find LikeList productId
+            likeListRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                let likeListData = snapshot.children.allObjects as! [DataSnapshot]
+                let likeListCounts = likeListData.count
+                var likeListProductId = [String]()
+                var likeListGroupProductId = [String]()
+
+                for i in 0...likeListData.count-1 {
+                    likeListProductId.append(likeListData[i].key)
+                }
+                print("likeListCounts ",likeListCounts)
+                print("likeListProductId ",likeListProductId)
                 
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
-                let desController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
-                let newFrontViewController = UINavigationController.init(rootViewController: desController)
-                desController.shoppingCount = counts
-                self.revealViewController().pushFrontViewController(newFrontViewController, animated: true)
-                
+                // find LikeListGroupBuy productId
+                likeListGroupRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                    let likeListGroupData = snapshot.children.allObjects as! [DataSnapshot]
+                    let likeListGroupCounts = likeListGroupData.count
+                    for i in 0...likeListGroupData.count-1 {
+                        likeListGroupProductId.append(likeListGroupData[i].key)
+                    }
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+                    let desController = mainStoryboard.instantiateViewController(withIdentifier: "LikeListControllerId") as! LikeListController
+                    let newFrontViewController = UINavigationController.init(rootViewController: desController)
+                    desController.likeListCounts = likeListCounts
+                    desController.likeListProductId = likeListProductId
+                    desController.likeListGroupCounts = likeListGroupCounts
+                    desController.likeListGroupProductId = likeListGroupProductId
+                    self.revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+                })
             })
+            
+            
             
         }
         

@@ -44,7 +44,7 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
         ProductImage.layer.cornerRadius = 20
         ProductImage.layer.borderWidth = 1
         ProductImage.layer.borderColor = myColor.cgColor
-        
+
         //        購物車選取按鈕設定
         selectButton.setTitle("點擊以選取",for: UIControl.State.normal)
         selectButton.setTitle("點擊以取消選取",for: UIControl.State.selected)
@@ -105,38 +105,99 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
         
     }
     
-    //    
-    func loadData(productId:String,hiddenSelectButton:Bool){
+    //   from OrderCheckoutController & LikeList (LikeList&LikeListGroupBuy)
+    func loadData(productId:String,hiddenSelectButton:Bool,fromWhere:String){
         if hiddenSelectButton == true {
             selectButton.isHidden = true
-            lookInformation.isHidden = true
+            //            lookInformation.isHidden = true
         }
-        Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "").child(productId)
-            .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in
-                let value = snapshot.value as? [String:Any]
-                self.ProductName.text = value?["ProductName"] as? String ?? ""
-                self.Price.text = (value?["Price"] as? String ?? "") + "元"
-                let productImageUrl = value?["imageURL"] 
-                self.ProductImage.image = UIImage(named: "logo")
-                if let imageUrl = URL(string: productImageUrl as! String){
-                    URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                        if error != nil {
-                            print("Download Image Task Fail: \(error!.localizedDescription)")
-                        }
-                        else if let imageData = data {
-                            DispatchQueue.main.async { 
-                                self.ProductImage.image = UIImage(data: imageData)
+        
+        if fromWhere == "OrderCheckout" {
+            Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "").child(productId)
+                .queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    let value = snapshot.value as? [String:Any]
+                    self.ProductName.text = value?["ProductName"] as? String ?? ""
+                    self.Price.text = (value?["Price"] as? String ?? "") + "元"
+                    let productImageUrl = value?["imageURL"] 
+                    if let imageUrl = URL(string: productImageUrl as! String){
+                        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                            if error != nil {
+                                print("Download Image Task Fail: \(error!.localizedDescription)")
                             }
-                        }
+                            else if let imageData = data {
+                                DispatchQueue.main.async { 
+                                    self.ProductImage.image = UIImage(data: imageData)
+                                }
+                            }
+                            
+                        }.resume()
                         
-                    }.resume()
+                    }
                     
-                }
-                
-            })
+                }) 
+        }
+        if fromWhere == "LikeList" {
+            Database.database().reference().child("Product").child(productId)
+                .queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    print("productId",productId)
+
+                    self.ProductName.text = value?["ProductName"] as? String ?? ""
+
+                    self.Price.text = (value?["Price"] as? String ?? "") + "元"
+                    let productImageUrl = value?["imageURL"] 
+                    if let imageUrl = URL(string: productImageUrl as! String){
+                        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                            if error != nil {
+                                print("Download Image Task Fail: \(error!.localizedDescription)")
+                            }
+                            else if let imageData = data {
+                                DispatchQueue.main.async { 
+                                    self.ProductImage.image = UIImage(data: imageData)
+                                }
+                            }
+                            
+                        }.resume()
+                        
+                    }
+                    
+                }) 
+        }
+        
+        if fromWhere == "LikeListGroupBuy" {
+                   Database.database().reference().child("GroupBuy").child(productId)
+                       .queryOrderedByKey()
+                       .observeSingleEvent(of: .value, with: { snapshot in
+                           
+                           let value = snapshot.value as? NSDictionary
+                           self.ProductName.text = value?["ProductName"] as? String ?? ""
+                           self.Price.text = (value?["Price"] as? String ?? "") + "元"
+                           let productImageUrl = value?["imageURL"] 
+                           if let imageUrl = URL(string: productImageUrl as! String){
+                               URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                                   if error != nil {
+                                       print("Download Image Task Fail: \(error!.localizedDescription)")
+                                   }
+                                   else if let imageData = data {
+                                       DispatchQueue.main.async { 
+                                           self.ProductImage.image = UIImage(data: imageData)
+                                       }
+                                   }
+                                   
+                               }.resume()
+                               
+                           }
+                           
+                       }) 
+               }
+               
         
     }
+    
+    
     
     
     @IBAction func checkBoxTapped(_ sender: UIButton){
@@ -171,14 +232,6 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
     }
     
     
-    
-    @IBAction func LikeButton(_ sender: UIButton) {
-        if sender.isSelected{
-            print("Like Button Selected!")
-            sender.isSelected = false
-        }else{
-            sender.isSelected = true
-        }
-    }
+
     
 }
