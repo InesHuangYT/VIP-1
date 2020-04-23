@@ -84,17 +84,16 @@ class LogInController: UIViewController,GIDSignInDelegate {
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
-                self.navigationController?.pushViewController(vc,animated: true)
                 
-                // Go To Shopping Cart
-                // Just For Test
-                //                let storyboard = UIStoryboard(name: "Main", bundle: nil) 
-                //                let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
-                //                self.navigationController?.pushViewController(vc,animated: true)
-                
-                //                                    let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
-                //                                    let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckoutController") as! OrderCheckoutController
-                //                                    self.navigationController?.pushViewController(vc,animated: true)
+                let message = UIAlertController(title: "登入成功", message: nil, preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+                {action in
+                    print("login success")
+                    self.navigationController?.pushViewController(vc, animated: true)
+                })
+                message.addAction(confirmAction)
+                self.present(message, animated: true, completion: nil)
+//                self.navigationController?.pushViewController(vc,animated: true)
             }
             
         }
@@ -168,9 +167,25 @@ class LogInController: UIViewController,GIDSignInDelegate {
                                     return
                             }
                             if (value["deliverWays"] as? String == nil || value["paymentWays"] as? String == nil) {
-                                self.navigationController?.pushViewController(vc1,animated: true)
+                                let message = UIAlertController(title: "登入成功", message: nil, preferredStyle: .alert)
+                                let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+                                {action in
+                                    print("checkout success")
+                                    self.navigationController?.pushViewController(vc1, animated: true)
+                                })
+                                message.addAction(confirmAction)
+                                self.present(message, animated: true, completion: nil)
+//                                self.navigationController?.pushViewController(vc1,animated: true)
                             }else{
-                                self.navigationController?.pushViewController(vc2,animated: true)
+                                let message = UIAlertController(title: "登入成功", message: nil, preferredStyle: .alert)
+                                let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+                                {action in
+                                    print("checkout success")
+                                    self.navigationController?.pushViewController(vc2, animated: true)
+                                })
+                                message.addAction(confirmAction)
+                                self.present(message, animated: true, completion: nil)
+//                                self.navigationController?.pushViewController(vc2,animated: true)
                             }                            
                         })
                     

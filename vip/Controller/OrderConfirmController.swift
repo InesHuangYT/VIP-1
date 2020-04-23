@@ -34,6 +34,27 @@ class OrderComfirmController: UIViewController {
         
     }
     
+    @IBAction func callservice(_ sender: Any) {
+        if let callURL:URL = URL(string: "tel:\(+886961192398)") {
+
+                let application:UIApplication = UIApplication.shared
+
+                if (application.canOpenURL(callURL)) {
+                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                        application.openURL(callURL)
+                    })
+                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                        print("Canceled Call")
+                    })
+        
+                    alert.addAction(callAction)
+                    alert.addAction(noAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+    }
+    
     func userInfo(){
         Database.database().reference().child("users").child(uid ?? "")
             .child("Profile")
@@ -107,8 +128,14 @@ class OrderComfirmController: UIViewController {
         vc.orderAutoId = orderId ?? ""
         vc.count = count
         
-        self.navigationController?.pushViewController(vc, animated: true)
-   
+        let message = UIAlertController(title: "結帳成功", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+        {action in
+            print("checkout success")
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
     }
     
     
