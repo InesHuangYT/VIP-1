@@ -18,4 +18,24 @@ extension UIViewController{
             self.present(alert, animated: true, completion: nil)
         }
     }
+    
+    func alertLike(){
+        let message = UIAlertController(title: "以加入我的最愛", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+        {action in 
+            print("Add to LikeList")
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
+    }
+    
+    func alertUnLike(){
+        let message = UIAlertController(title: "以移除我的最愛", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+        {action in 
+            print("Add to LikeList")
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
+    }
 }
