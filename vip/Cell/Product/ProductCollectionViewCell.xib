@@ -44,7 +44,7 @@
                     </label>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.94019311670000005" green="0.95578092339999998" blue="0.9028730989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.91362911459999996" green="0.9726008773" blue="0.85087877509999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="164" height="164"/>
             <connections>
@@ -52,7 +52,7 @@
                 <outlet property="productImage" destination="2gh-Vc-7RR" id="RRd-0t-tjA"/>
                 <outlet property="productLabel" destination="h9P-f9-t9Y" id="TvR-gW-Ghf"/>
             </connections>
-            <point key="canvasLocation" x="-353.60000000000002" y="60.26986506746627"/>
+            <point key="canvasLocation" x="-347" y="60"/>
         </collectionViewCell>
     </objects>
 </document>
