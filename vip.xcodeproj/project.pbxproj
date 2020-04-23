@@ -12,6 +12,7 @@
 		0254A71E2450582C0005D575 /* DeadLineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0254A71D2450582C0005D575 /* DeadLineController.swift */; };
 		0254A721245075630005D575 /* DeadLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0254A71F245075630005D575 /* DeadLineCollectionViewCell.swift */; };
 		0254A722245075640005D575 /* DeadLineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0254A720245075630005D575 /* DeadLineCollectionViewCell.xib */; };
+		0254A72624516EC00005D575 /* DeadLineInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0254A72524516EC00005D575 /* DeadLineInformationController.swift */; };
 		02AC617E243DA43500A7D94C /* OrderCheckFinalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC617D243DA43500A7D94C /* OrderCheckFinalController.swift */; };
 		02AC619D243DB48800A7D94C /* OrderCheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC619C243DB48800A7D94C /* OrderCheckoutController.swift */; };
 		02F21D5D24210211003860F9 /* AddCouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F21D5C24210211003860F9 /* AddCouponController.swift */; };
@@ -270,6 +271,7 @@
 		0254A71D2450582C0005D575 /* DeadLineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadLineController.swift; sourceTree = "<group>"; };
 		0254A71F245075630005D575 /* DeadLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeadLineCollectionViewCell.swift; path = CheckOut/DeadLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		0254A720245075630005D575 /* DeadLineCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DeadLineCollectionViewCell.xib; path = CheckOut/DeadLineCollectionViewCell.xib; sourceTree = "<group>"; };
+		0254A72524516EC00005D575 /* DeadLineInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadLineInformationController.swift; sourceTree = "<group>"; };
 		02AC617D243DA43500A7D94C /* OrderCheckFinalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckFinalController.swift; sourceTree = "<group>"; };
 		02AC619C243DB48800A7D94C /* OrderCheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckoutController.swift; sourceTree = "<group>"; };
 		02F21D5C24210211003860F9 /* AddCouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCouponController.swift; path = vip/Controller/AddCouponController.swift; sourceTree = SOURCE_ROOT; };
@@ -512,6 +514,7 @@
 		B0E0A31B23F9E55200BE8ECC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0254A72524516EC00005D575 /* DeadLineInformationController.swift */,
 				0254A71D2450582C0005D575 /* DeadLineController.swift */,
 				B0BAC495244F5C65009D6162 /* Order */,
 				B0EA39472438E33A00AA7499 /* CreateProduct */,
@@ -1011,6 +1014,7 @@
 				B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */,
 				B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */,
 				B09ED5E52414EE0500D3C4A6 /* ProfileController.swift in Sources */,
+				0254A72624516EC00005D575 /* DeadLineInformationController.swift in Sources */,
 				02F25D6C2420967A0041541E /* MenuViewController.swift in Sources */,
 				B0FE0D3A243CBFF100479B80 /* GroupBuyCehckFinalController.swift in Sources */,
 				B042F801242266F8005982AF /* ProductCollectionViewCell.swift in Sources */,

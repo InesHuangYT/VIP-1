@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class DeadLineCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var time: UILabel!
@@ -22,18 +22,18 @@ class DeadLineCollectionViewCell: UICollectionViewCell {
     
     func cellColorSet(){
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
-              layer.borderWidth = 5
-              layer.borderColor = myColor.cgColor
-              layer.cornerRadius = 45
-              image.image = UIImage(named: "logo")
-              image.layer.cornerRadius = 20
-              image.layer.borderWidth = 1
-              image.layer.borderColor = myColor.cgColor
+        layer.borderWidth = 5
+        layer.borderColor = myColor.cgColor
+        layer.cornerRadius = 45
+        image.image = UIImage(named: "logo")
+        image.layer.cornerRadius = 20
+        image.layer.borderWidth = 1
+        image.layer.borderColor = myColor.cgColor
         
     }
     
     func setProductLabel(productId:String){
-        let ref =  Database.database().reference().child("GroupBuy").child(productId)
+        let ref =  Database.database().reference().child("Product").child(productId)
         
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? NSDictionary
@@ -41,27 +41,19 @@ class DeadLineCollectionViewCell: UICollectionViewCell {
             let time = value?["ExpDate"] as? String ?? ""
             let url = value?["imageURL"] as? String ?? ""
             if let imageUrl = URL(string: url){
-                                   URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                                       if error != nil {
-                                           print("Download Image Task Fail: \(error!.localizedDescription)")
-                                       }
-                                       else if let imageData = data {
-                                           DispatchQueue.main.async {
-                                               self.image.image = UIImage(data: imageData)
-                                           }
-                                       }
-                                   }.resume()
-                               }
-            
-            let timeStamp = Double(time) ?? 0
-            let timeInterval:TimeInterval = TimeInterval(timeStamp)
-            let date = Date(timeIntervalSince1970: timeInterval)
-            let dformatter = DateFormatter()
-            dformatter.dateFormat = "yyyy年MM月dd日"
-            
+                URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                    if error != nil {
+                        print("Download Image Task Fail: \(error!.localizedDescription)")
+                    }
+                    else if let imageData = data {
+                        DispatchQueue.main.async {
+                            self.image.image = UIImage(data: imageData)
+                        }
+                    }
+                }.resume()
+            }
             self.name.text = name
-            self.time.text = "有效期限：" + "\n" + dformatter.string(from: date)
-            
+            self.time.text = "有效期限：" + "\n" + time
         })
     }
 }

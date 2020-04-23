@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="fOs-f0-0yk" kind="relationship" relationship="rootViewController" id="Esl-Az-BhC"/>
+                        <segue destination="iUN-UH-uCb" kind="relationship" relationship="rootViewController" id="5e5-3X-9XP"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wqt-5F-oOo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -331,6 +331,9 @@
                                 <rect key="frame" x="333" y="63" width="34" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="24小時客服" image="support"/>
+                                <connections>
+                                    <action selector="callservice:" destination="ucJ-28-r4v" eventType="touchUpInside" id="ER8-hT-XMd"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qql-xR-0wG">
                                 <rect key="frame" x="183" y="138" width="10" height="529"/>

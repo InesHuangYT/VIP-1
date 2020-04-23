@@ -110,6 +110,7 @@ class HistoryOrderInformationController: UIViewController {
     @IBAction func detailInformationButtonWasPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "DeadLine", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "DeadLineController") as!  DeadLineController
+        vc.productIdString = productIdString
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
