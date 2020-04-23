@@ -16,7 +16,8 @@ class OrderController: UIViewController {
         super.viewDidLoad()
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
-        countStatus()
+        updateUserGroupBuyStatus()
+        updateUserProductStatus()
         
     }
     
@@ -52,18 +53,15 @@ class OrderController: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: "HistoryOrderControllerId") as! HistoryOrderController
         let myOderRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
         var myOrderId = [String]()
-        myOderRef.child("Status").child("History/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+        myOderRef.child("Status").child("Picked/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             if let datas = snapshot.children.allObjects as? [DataSnapshot]{
-//                vc.myOrderCount = datas.count
+                vc.myOrderCount = datas.count
                 
                 for data in datas {
                     myOrderId.append(data.key)
                 }
-//                vc.myOrderId = myOrderId
+                vc.myOrderId = myOrderId
                 self.navigationController?.pushViewController(vc,animated: true)
-                
-                
-                
                 
             }
         })
@@ -108,8 +106,72 @@ class OrderController: UIViewController {
         
     }
     
+    
+    //  Update UserProduct Status
+    func updateUserProductStatus(){
+        let userProductOrderRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
+        let userProductRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
+        let productRef = Database.database().reference().child("Product")
+        let orderRef = Database.database().reference().child("ProductOrder")
+        
+        userProductOrderRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            
+            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                for snap in datas{
+                    print("snap",snap.key) // orderId
+                    
+                    orderRef.child(snap.key).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                        let orderValue = snapshot.value as? NSDictionary
+                        let status = orderValue?["OrderStatus"] as? String ?? ""
+                        print("OrderStatus",status) // OrderStatus
+                        
+                        //  if status == "Processing" {} 訂單成立後已預設在OrderComfirmController
+                        
+                        if status == "Shipping"{
+                            userProductRef.child("Status").child("Shipping").child("OrderId").child(snap.key ).setValue(snap.key) 
+                            let processingRef = userProductRef.child("Status").child("Processing").child("OrderId").child(snap.key)
+                            processingRef.removeValue()
+                            
+                        }
+                        else if status == "Delivered"{
+                            userProductRef.child("Status").child("Delivered").child("OrderId").child(snap.key ).setValue(snap.key) 
+                            let processingRef = userProductRef.child("Status").child("Processing").child("OrderId").child(snap.key)
+                            processingRef.removeValue()
+                            
+                            
+                        }
+                        else if status == "Picked"{
+                            userProductRef.child("Status").child("Picked").child("OrderId").child(snap.key).setValue(snap.key) 
+                            let processingRef = userProductRef.child("Status").child("Processing").child("OrderId").child(snap.key)
+                            processingRef.removeValue()
+                            
+                        }
+                        
+                        
+                        
+                    })
+                    
+                    
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+        })
+        
+        
+        
+        
+        
+        
+    }
+    
+    
     //  Update UserGroupBuy Status  
-    func countStatus(){
+    func updateUserGroupBuyStatus(){
         let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
         let userGroupBuyRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
         let productRef = Database.database().reference().child("GroupBuy")
