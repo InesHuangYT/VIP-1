@@ -13,6 +13,7 @@ class DeadLineInformationController: UIViewController {
 
     @IBOutlet weak var btnMenu: UIBarButtonItem!
 
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var ManuDateLabel: UILabel!
@@ -20,7 +21,7 @@ class DeadLineInformationController: UIViewController {
     @IBOutlet weak var otherInfoLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
     
-    var productId = [String]()
+    var productId = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class DeadLineInformationController: UIViewController {
         productImage.layer.borderColor = myColor.cgColor
         productImage.image = UIImage(named:"logo")
         
-        setLabel(0)
+        setLabel(ProductId: productId)
 
     }
     
@@ -62,11 +63,11 @@ class DeadLineInformationController: UIViewController {
                 }
             }
         }
-    func setLabel(selectProductId:[String]){
+    func setLabel(ProductId:String){
         
-        let productRef = Database.database().reference().child("GroupBuy")
+        let productRef = Database.database().reference().child("Product")
         
-            productRef.child(selectProductId[index]).queryOrderedByKey()
+            productRef.child(ProductId).queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
                     let value = snapshot.value as? NSDictionary
                     let name = value?["ProductName"] as? String ?? ""
@@ -90,7 +91,6 @@ class DeadLineInformationController: UIViewController {
                                     self.productImage.image = UIImage(data: imageData)
                                 }
                             }
-                            
                         }.resume()
                     }
                 })

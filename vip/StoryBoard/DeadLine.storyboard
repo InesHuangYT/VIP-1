@@ -91,7 +91,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EuL-R7-jTP">
-                                <rect key="frame" x="328" y="60" width="31" height="30"/>
+                                <rect key="frame" x="328" y="75" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="客服專線" backgroundImage="support">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,8 +100,15 @@
                                     <action selector="callservice:" destination="nE6-fJ-blP" eventType="touchUpInside" id="5YP-cj-aqo"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="4ZB-Pm-xq3">
+                                <rect key="frame" x="80" y="437" width="214" height="166"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="214" id="2m1-Nl-z84"/>
+                                    <constraint firstAttribute="height" constant="166" id="NWo-RC-nw9"/>
+                                </constraints>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" id="sK9-zk-cJh">
-                                <rect key="frame" x="69" y="119" width="200" height="202.5"/>
+                                <rect key="frame" x="80" y="141" width="200" height="202.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名稱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RuN-lv-Oui">
@@ -149,15 +156,14 @@
                                 </subviews>
                                 <viewLayoutGuide key="safeArea" id="YLq-hS-6iF"/>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="4ZB-Pm-xq3">
-                                <rect key="frame" x="80" y="400" width="214" height="166"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="214" id="2m1-Nl-z84"/>
-                                    <constraint firstAttribute="height" constant="166" id="NWo-RC-nw9"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="4ZB-Pm-xq3" firstAttribute="top" secondItem="sK9-zk-cJh" secondAttribute="bottom" constant="93.5" id="48a-GR-o0Q"/>
+                            <constraint firstItem="CxQ-e5-9gr" firstAttribute="trailing" secondItem="4ZB-Pm-xq3" secondAttribute="trailing" constant="81" id="8UY-of-3ef"/>
+                            <constraint firstItem="4ZB-Pm-xq3" firstAttribute="leading" secondItem="CxQ-e5-9gr" secondAttribute="leading" constant="80" id="eIk-jm-a6f"/>
+                            <constraint firstItem="CxQ-e5-9gr" firstAttribute="bottom" secondItem="4ZB-Pm-xq3" secondAttribute="bottom" constant="64" id="p3H-nR-JMl"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="CxQ-e5-9gr"/>
                     </view>
                     <navigationItem key="navigationItem" id="KCF-Wo-OEd">
@@ -166,12 +172,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="ExpDateLabel" destination="VVD-IT-au4" id="rMb-wH-cKt"/>
-                        <outlet property="ManuDateLabel" destination="sK9-zk-cJh" id="uQ0-0Y-arq"/>
+                        <outlet property="ExpDateLabel" destination="csl-BQ-g4i" id="jku-1P-N02"/>
+                        <outlet property="ManuDateLabel" destination="ckD-VG-yVc" id="Jc6-u4-pVQ"/>
                         <outlet property="btnMenu" destination="GmD-vn-J3G" id="00H-n4-o77"/>
-                        <outlet property="nameLabel" destination="RuN-lv-Oui" id="TcI-Oh-o5V"/>
-                        <outlet property="otherInfoLabel" destination="VVD-IT-au4" id="KeX-wP-7jj"/>
-                        <outlet property="priceLabel" destination="ckD-VG-yVc" id="PFg-yq-Ss2"/>
+                        <outlet property="nameLabel" destination="RuN-lv-Oui" id="klk-Ty-sRP"/>
+                        <outlet property="otherInfoLabel" destination="VVD-IT-au4" id="JIA-ux-mKI"/>
+                        <outlet property="priceLabel" destination="HMK-Dq-IoI" id="u1r-py-FNH"/>
                         <outlet property="productImage" destination="4ZB-Pm-xq3" id="8ru-mG-qE0"/>
                     </connections>
                 </viewController>
