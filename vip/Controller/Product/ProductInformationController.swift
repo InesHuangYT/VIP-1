@@ -207,7 +207,12 @@ class ProductInformationController: UIViewController {
                             let value = snapshot.value as? [String:Any]
                             let likeStatus = value?["Status"] as? String ?? ""
                             print("likeStatus = ", likeStatus)
-                            self.setSelectButton(status: likeStatus)
+                            if likeStatus == ""{
+                                self.setSelectButton(status: likeStatus,select:false)
+                            }else{
+                                self.setSelectButton(status: likeStatus,select:true) 
+                            }
+                            
                         })
                     
                     if let datas = snapshot.children.allObjects as? [DataSnapshot] {
@@ -348,32 +353,38 @@ class ProductInformationController: UIViewController {
         
     }
     
-    func setSelectButton(status:String){
+    func setSelectButton(status:String,select:Bool){
+        
+        if select == false {
+            likeButton.isSelected = false
+        }
         if status == "Like"{
             print("like!!!!!!!")
             self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
         }
         if status == "Unlike"{
             print("unlike!!!!!!!")
-            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.normal)
         }
     }
     
     @IBAction func LikeButton(_ sender: UIButton) {
         
-        let ref = Database.database().reference().child("LikeList")
+        let ref = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
         if sender.isSelected  {
-            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)   
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.normal)   
             sender.isSelected = false
-            ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status").setValue("Like")
-            alertLike()
-        }
-        else{
-            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.selected)
-            sender.isSelected = true
-            let removeRef = ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status")
+            let removeRef = ref.child(self.ID).child("Status")
             removeRef.removeValue()
             alertUnLike()
+            
+            
+        }
+        else{
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
+            sender.isSelected = true
+            ref.child(self.ID).child("Status").setValue("Like")
+            alertLike()
         }
         
     }
