@@ -16,13 +16,17 @@ class GroupBuyJoinCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
-        layer.borderWidth = 2
-        layer.borderColor = myColor.cgColor
-        layer.cornerRadius = 25
+        cellColorSet()
         
     }
     
+    func cellColorSet(){
+          let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+          layer.borderWidth = 2
+          layer.borderColor = myColor.cgColor
+          layer.cornerRadius = 25
+          
+      }
     
     func setProductLabel(productId:String,index:Int,groupBuyPeople:Int){
         let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")

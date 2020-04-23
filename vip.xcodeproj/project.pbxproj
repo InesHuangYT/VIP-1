@@ -55,6 +55,10 @@
 		B0BAC49F244F64AF009D6162 /* ProcessingOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0BAC49D244F64AF009D6162 /* ProcessingOrderCell.xib */; };
 		B0BAC4A2244F64D9009D6162 /* ProcessingOrderInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC4A0244F64D9009D6162 /* ProcessingOrderInformationCell.swift */; };
 		B0BAC4A3244F64D9009D6162 /* ProcessingOrderInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0BAC4A1244F64D9009D6162 /* ProcessingOrderInformationCell.xib */; };
+		B0BAC4A72450C104009D6162 /* HistoryOrderInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC4A62450C104009D6162 /* HistoryOrderInformationController.swift */; };
+		B0BAC4AA2450C2A7009D6162 /* HistoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC4A82450C2A7009D6162 /* HistoryOrderCell.swift */; };
+		B0BAC4AB2450C2A7009D6162 /* HistoryOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0BAC4A92450C2A7009D6162 /* HistoryOrderCell.xib */; };
+		B0BAC4AD2450C5E5009D6162 /* HistoryOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC4AC2450C5E5009D6162 /* HistoryOrderController.swift */; };
 		B0C77BB723F97A9100B8E5B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0C77BB623F97A9100B8E5B7 /* GoogleService-Info.plist */; };
 		B0E0A31823F9D18F00BE8ECC /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0A31723F9D18F00BE8ECC /* LogInController.swift */; };
 		B0E0A31A23F9E45900BE8ECC /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0A31923F9E45900BE8ECC /* SignUpController.swift */; };
@@ -318,6 +322,10 @@
 		B0BAC49D244F64AF009D6162 /* ProcessingOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProcessingOrderCell.xib; sourceTree = "<group>"; };
 		B0BAC4A0244F64D9009D6162 /* ProcessingOrderInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingOrderInformationCell.swift; sourceTree = "<group>"; };
 		B0BAC4A1244F64D9009D6162 /* ProcessingOrderInformationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProcessingOrderInformationCell.xib; sourceTree = "<group>"; };
+		B0BAC4A62450C104009D6162 /* HistoryOrderInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrderInformationController.swift; sourceTree = "<group>"; };
+		B0BAC4A82450C2A7009D6162 /* HistoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrderCell.swift; sourceTree = "<group>"; };
+		B0BAC4A92450C2A7009D6162 /* HistoryOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryOrderCell.xib; sourceTree = "<group>"; };
+		B0BAC4AC2450C5E5009D6162 /* HistoryOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrderController.swift; sourceTree = "<group>"; };
 		B0C77BB623F97A9100B8E5B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0E0A31723F9D18F00BE8ECC /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		B0E0A31923F9E45900BE8ECC /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -473,6 +481,8 @@
 			children = (
 				B0BAC496244F5C9E009D6162 /* ProcessingOrderController.swift */,
 				B0BAC498244F5D1D009D6162 /* ProcessingOrderInformationController.swift */,
+				B0BAC4AC2450C5E5009D6162 /* HistoryOrderController.swift */,
+				B0BAC4A62450C104009D6162 /* HistoryOrderInformationController.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -484,6 +494,8 @@
 				B0BAC49D244F64AF009D6162 /* ProcessingOrderCell.xib */,
 				B0BAC4A0244F64D9009D6162 /* ProcessingOrderInformationCell.swift */,
 				B0BAC4A1244F64D9009D6162 /* ProcessingOrderInformationCell.xib */,
+				B0BAC4A82450C2A7009D6162 /* HistoryOrderCell.swift */,
+				B0BAC4A92450C2A7009D6162 /* HistoryOrderCell.xib */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -877,6 +889,7 @@
 				B0190092243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib in Resources */,
 				B0FE0D5C243D095500479B80 /* CehckFinalCollectionViewCell.xib in Resources */,
 				B087D23823F56439001FAC9A /* LaunchScreen.storyboard in Resources */,
+				B0BAC4AB2450C2A7009D6162 /* HistoryOrderCell.xib in Resources */,
 				B04A55CF244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib in Resources */,
 				B0FE0D80243E3DA700479B80 /* MyGroupBuyCollectionViewCell.xib in Resources */,
 				B0FE0D1A243BA52C00479B80 /* OrderComfirmCollectionViewCell.xib in Resources */,
@@ -993,6 +1006,7 @@
 				02F21D5F24210DAE003860F9 /* CouponController.swift in Sources */,
 				B0E618EA2400042800EB6E74 /* Protocol.swift in Sources */,
 				0254A71E2450582C0005D575 /* DeadLineController.swift in Sources */,
+				B0BAC4AD2450C5E5009D6162 /* HistoryOrderController.swift in Sources */,
 				B087D22E23F56436001FAC9A /* SceneDelegate.swift in Sources */,
 				B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */,
 				B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */,
@@ -1010,9 +1024,11 @@
 				B0FE0D7F243E3DA700479B80 /* MyGroupBuyCollectionViewCell.swift in Sources */,
 				B0E0A31A23F9E45900BE8ECC /* SignUpController.swift in Sources */,
 				C015B2752439F0A9009F060D /* Alert.swift in Sources */,
+				B0BAC4A72450C104009D6162 /* HistoryOrderInformationController.swift in Sources */,
 				B0FE0D7C243E3BFD00479B80 /* MyGroupBuyController.swift in Sources */,
 				02F25D64242095C00041541E /* MenuTableViewCell.swift in Sources */,
 				B0BAC497244F5C9E009D6162 /* ProcessingOrderController.swift in Sources */,
+				B0BAC4AA2450C2A7009D6162 /* HistoryOrderCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
