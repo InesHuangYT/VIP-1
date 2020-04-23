@@ -363,17 +363,17 @@ class ProductInformationController: UIViewController {
         
         let ref = Database.database().reference().child("LikeList")
         if sender.isSelected  {
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)   
             sender.isSelected = false
-            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.normal)   
-            ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status").setValue("Unlike")
-            alertUnLike()
-        }
-        else{
-        
-            sender.isSelected = true
-            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
             ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status").setValue("Like")
             alertLike()
+        }
+        else{
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.selected)
+            sender.isSelected = true
+            let removeRef = ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status")
+            removeRef.removeValue()
+            alertUnLike()
         }
         
     }

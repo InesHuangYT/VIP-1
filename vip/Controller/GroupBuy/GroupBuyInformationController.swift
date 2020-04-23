@@ -23,6 +23,7 @@ class GroupBuyInformationController: UIViewController {
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var groupBuyImage: UIImageView!
     @IBOutlet weak var groupBuyOpenButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
@@ -46,44 +47,51 @@ class GroupBuyInformationController: UIViewController {
         else {
             setMyGroupBuyLabel(index:index)
         }
-//        從哪一頁面過來
+        //        從哪一頁面過來
         if from != "" {
             groupBuyOpenButton.isHidden = true
         }
         
-        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
-        groupBuyImage.layer.cornerRadius = 45
-        groupBuyImage.layer.borderWidth = 1
-        groupBuyImage.layer.borderColor = myColor.cgColor
+        layOut()
         print("openByCount",self.openByCount)
         print("groupBuyPeople",self.groupBuyPeople)
         print("from",from)
         print("status",status)
         print("index",index)
-
-
-
+        
+        
+    }
+    
+    func layOut(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        groupBuyImage.layer.cornerRadius = 45
+        groupBuyImage.layer.borderWidth = 1
+        groupBuyImage.layer.borderColor = myColor.cgColor
+        
+        //        購物車選取按鈕設定
+        likeButton.setTitle("點擊以加入我的最愛",for: UIControl.State.normal)
+        likeButton.setTitle("點擊以取消我的最愛",for: UIControl.State.selected)
     }
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func btnAction(){
@@ -219,6 +227,38 @@ class GroupBuyInformationController: UIViewController {
             
         })
     }
+    
+    @IBAction func likeButtonAction(_ sender: UIButton) {
+        
+        let ref = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
+        if sender.isSelected  {
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal) 
+            sender.isSelected = false
+            ref.child(productId).child("Status").setValue("Like")
+            alertLike()
+            
+        }
+        else{
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.selected)
+            sender.isSelected = true
+            let removeRef = ref.child(productId).child("Status")
+            removeRef.removeValue()
+            alertUnLike()
+        }
+        
+    }
+    
+    func setSelectButton(status:String){
+        if status == "Like"{
+            print("like!!!!!!!")
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
+        }
+        if status == "Unlike"{
+            print("unlike!!!!!!!")
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)
+        }
+    }
+    
     
     
     //   我要open團

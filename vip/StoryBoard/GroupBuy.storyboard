@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -84,7 +84,7 @@
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fbk-cl-dD9">
                                                 <rect key="frame" x="0.0" y="101" width="375" height="214"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.90992242099999998" green="0.97155016660000004" blue="0.90518772599999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ct2-PC-1gC">
                                                     <size key="itemSize" width="375" height="178"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -99,6 +99,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </collectionViewCellContentView>
+                                                        <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <size key="customSize" width="375" height="178"/>
                                                     </collectionViewCell>
                                                 </cells>
@@ -120,7 +121,7 @@
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fQA-jr-uO0">
                                                 <rect key="frame" x="0.0" y="393" width="375" height="214"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.90992242099999998" green="0.97155016660000004" blue="0.90518772599999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ew1-Tc-R8g">
                                                     <size key="itemSize" width="375" height="178"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -149,7 +150,7 @@
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PIQ-Gr-tZd">
                                                 <rect key="frame" x="0.0" y="678" width="375" height="214"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.90992242099999998" green="0.97155016660000004" blue="0.90518772599999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wLZ-vU-Iz7">
                                                     <size key="itemSize" width="375" height="178"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -164,6 +165,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </collectionViewCellContentView>
+                                                        <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <size key="customSize" width="375" height="178"/>
                                                     </collectionViewCell>
                                                 </cells>
@@ -190,7 +192,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.90992242099999998" green="0.97155016660000004" blue="0.90518772599999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1000" id="MhQ-Li-r2I"/>
                                         </constraints>
@@ -341,6 +343,14 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHp-eW-7mi">
+                                                <rect key="frame" x="312" y="397" width="47" height="48"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="like-2"/>
+                                                <connections>
+                                                    <action selector="likeButtonAction:" destination="FF0-cw-sgC" eventType="touchUpInside" id="o13-YA-g8Q"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -412,6 +422,7 @@
                         <outlet property="collectionView" destination="xDl-2J-K6B" id="Seb-oe-q2G"/>
                         <outlet property="groupBuyImage" destination="8hV-8a-f3t" id="nyp-MO-lCc"/>
                         <outlet property="groupBuyOpenButton" destination="5OP-cd-CbJ" id="7Jg-Sx-zCH"/>
+                        <outlet property="likeButton" destination="eHp-eW-7mi" id="OvA-8z-m1f"/>
                         <outlet property="name" destination="h9w-51-9kW" id="nN5-8u-1LT"/>
                         <outlet property="price" destination="uUO-xB-sbe" id="vCD-hj-dlu"/>
                         <outlet property="productDescription" destination="2bu-Ii-w46" id="cCZ-4J-uFE"/>
@@ -782,6 +793,7 @@
         <image name="CreateData" width="253" height="86"/>
         <image name="List_button" width="18" height="11"/>
         <image name="back" width="253" height="86"/>
+        <image name="like-2" width="56" height="56"/>
         <image name="logo" width="175" height="166"/>
         <image name="logoAPP" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
