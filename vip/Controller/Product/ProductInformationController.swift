@@ -23,6 +23,7 @@ class ProductInformationController: UIViewController {
     @IBOutlet weak var pauseAndPlay: UIButton!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var addShoppingCart: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     
     var imageURL : String!
     var productID:[String] = []
@@ -39,20 +40,17 @@ class ProductInformationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print("index",index)
         
-        //從訂單進來用productId  從購物車或一般商品查詢進來用index
+        layOut()
+        
+        //從訂單進來用productId  從購物車或一般商品查詢/分類進來用index
         if (fromMyOrder == true){
             setLabel(productId:productId)
         }else{
             setLabel(index: index,selectProductId:selectProductId)
         }
-        
-        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
-        productImage.layer.cornerRadius = 45
-        productImage.layer.borderWidth = 1
-        productImage.layer.borderColor = myColor.cgColor
-        productImage.image = UIImage(named:"logo")
         
         btnAction()
         audioPlay()
@@ -63,26 +61,39 @@ class ProductInformationController: UIViewController {
         
     }
     
+    func layOut(){
+        let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
+        productImage.layer.cornerRadius = 45
+        productImage.layer.borderWidth = 1
+        productImage.layer.borderColor = myColor.cgColor
+        productImage.image = UIImage(named:"logo")
+        
+        //        購物車選取按鈕設定
+        likeButton.setTitle("點擊以加入我的最愛",for: UIControl.State.normal)
+        likeButton.setTitle("點擊以取消我的最愛",for: UIControl.State.selected)
+    }
+    
+    
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func audioPlay(){
@@ -189,6 +200,15 @@ class ProductInformationController: UIViewController {
                     
                     print("This ID = ", self.productID[index])
                     self.ID = self.productID[index]
+                    
+                    let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
+                    likeListRef.child(self.ID).queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in
+                            let value = snapshot.value as? [String:Any]
+                            let likeStatus = value?["Status"] as? String ?? ""
+                            print("likeStatus = ", likeStatus)
+                            self.setSelectButton(status: likeStatus)
+                        })
                     
                     if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                         let nameResults = datas.compactMap({
@@ -308,15 +328,6 @@ class ProductInformationController: UIViewController {
         
     }
     
-    @IBAction func LikeButton(_ sender: UIButton) {
-        if sender.isSelected{
-            print("Like Button Selected!")
-            sender.isSelected = false
-        }else{
-            sender.isSelected = true
-        }
-    }
-    
     func goToShoppingCart(){
         let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
@@ -337,8 +348,35 @@ class ProductInformationController: UIViewController {
         
     }
     
+    func setSelectButton(status:String){
+        if status == "Like"{
+            print("like!!!!!!!")
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
+        }
+        if status == "Unlike"{
+            print("unlike!!!!!!!")
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)
+        }
+    }
     
-    
+    @IBAction func LikeButton(_ sender: UIButton) {
+        
+        let ref = Database.database().reference().child("LikeList")
+        if sender.isSelected  {
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)   
+            sender.isSelected = false
+            ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status").setValue("Like")
+            alertLike()
+        }
+        else{
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.selected)
+            sender.isSelected = true
+            let removeRef = ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status")
+            removeRef.removeValue()
+            alertUnLike()
+        }
+        
+    }
     
     
     
