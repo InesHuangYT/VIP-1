@@ -159,7 +159,7 @@ class GroupBuyInformationController: UIViewController {
                             }
                         }.resume()
                     }
-                    
+                    //                    我的最愛
                     let likeListRef = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
                     likeListRef.child(datas[index].key).queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in
@@ -175,7 +175,7 @@ class GroupBuyInformationController: UIViewController {
                             
                         })
                     
-                    
+                    //                    
                     
                 }
             }
@@ -201,7 +201,23 @@ class GroupBuyInformationController: UIViewController {
                         let userGroupBuyValue = snapshot.value as? NSDictionary
                         let productId = userGroupBuyValue?["ProductId"] as? String ?? ""
                         
+                        //                    我的最愛
+                        let likeListRef = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
+                        likeListRef.child(productId).queryOrderedByKey()
+                            .observeSingleEvent(of: .value, with: { snapshot in
+                                let value = snapshot.value as? [String:Any]
+                                let likeStatus = value?["Status"] as? String ?? ""
+                                print("likeStatus = ", likeStatus)
+                                if likeStatus == ""{
+                                    self.setSelectButton(status: likeStatus,select:false)
+                                    
+                                }else{
+                                    self.setSelectButton(status: likeStatus,select:true) 
+                                }
+                                
+                            })
                         
+                        //   
                         
                         groupBuyRef.child(productId).queryOrderedByKey()
                             .observeSingleEvent(of: .value, with: { snapshot in 
@@ -269,7 +285,7 @@ class GroupBuyInformationController: UIViewController {
             ref.child(productId).child("Status").setValue("Like")
             alertLike()
         }
-    
+        
     }
     
     func setSelectButton(status:String,select:Bool){

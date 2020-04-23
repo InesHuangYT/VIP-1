@@ -40,10 +40,10 @@ class ProductInformationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print("index",index)
-        
+        btnAction()
         layOut()
+        audioPlay()
         
         //從訂單進來用productId  從購物車或一般商品查詢/分類進來用index
         if (fromMyOrder == true){
@@ -51,10 +51,7 @@ class ProductInformationController: UIViewController {
         }else{
             setLabel(index: index,selectProductId:selectProductId)
         }
-        
-        btnAction()
-        audioPlay()
-        
+        //hide addShoppingCart button
         if(fromShoppingCart == true || fromMyOrder == true) {
             addShoppingCart.isHidden = true
         }
@@ -183,6 +180,22 @@ class ProductInformationController: UIViewController {
                             
                         }.resume()
                     } 
+                    
+                    //                  我的最愛
+                    let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
+                    likeListRef.child(selectProductId[index]).queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in
+                            let value = snapshot.value as? [String:Any]
+                            let likeStatus = value?["Status"] as? String ?? ""
+                            print("likeStatus = ", likeStatus)
+                            if likeStatus == ""{
+                                self.setSelectButton(status: likeStatus,select:false)
+                            }else{
+                                self.setSelectButton(status: likeStatus,select:true) 
+                            }
+                            
+                        })
+                    //                  
                 })
             
         }
@@ -201,6 +214,7 @@ class ProductInformationController: UIViewController {
                     print("This ID = ", self.productID[index])
                     self.ID = self.productID[index]
                     
+                    //                  我的最愛
                     let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
                     likeListRef.child(self.ID).queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in
@@ -214,6 +228,7 @@ class ProductInformationController: UIViewController {
                             }
                             
                         })
+                    //                    
                     
                     if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                         let nameResults = datas.compactMap({

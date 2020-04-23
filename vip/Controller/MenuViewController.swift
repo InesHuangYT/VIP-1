@@ -41,13 +41,24 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell: MenuTableViewCell = tableView.cellForRow(at: indexPath) as! MenuTableViewCell
         
-        if cell.lblMenu.text! == "我的最愛"
+        if cell.lblMenu.text! == "我的最愛" // transit to ShoppingCart Storyboard
         {
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            let newFrontViewController = UINavigationController.init(rootViewController: desController)
+            let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
+            ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                let allKeys = snapshot.value as! [String : AnyObject]
+                let nodeToReturn = allKeys.keys
+                let counts = nodeToReturn.count
+                print("nodeToReturn ",nodeToReturn)
+                print("counts ",counts)
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+                let desController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+                let newFrontViewController = UINavigationController.init(rootViewController: desController)
+                desController.shoppingCount = counts
+                self.revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+                
+            })
             
-            revealViewController().pushFrontViewController(newFrontViewController, animated: true)
         }
         
         if cell.lblMenu.text! == "首頁"
