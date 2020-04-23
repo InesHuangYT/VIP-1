@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -52,7 +52,7 @@
                 <outlet property="name" destination="pmV-Xk-kbg" id="Zct-rR-YNZ"/>
                 <outlet property="price" destination="55o-Wx-ChR" id="avs-lR-efX"/>
             </connections>
-            <point key="canvasLocation" x="321.60000000000002" y="149.77511244377811"/>
+            <point key="canvasLocation" x="186" y="173"/>
         </collectionViewCell>
     </objects>
 </document>
