@@ -60,6 +60,7 @@
 		B0BAC4AA2450C2A7009D6162 /* HistoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC4A82450C2A7009D6162 /* HistoryOrderCell.swift */; };
 		B0BAC4AB2450C2A7009D6162 /* HistoryOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0BAC4A92450C2A7009D6162 /* HistoryOrderCell.xib */; };
 		B0BAC4AD2450C5E5009D6162 /* HistoryOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC4AC2450C5E5009D6162 /* HistoryOrderController.swift */; };
+		B0BAC50F24521FA0009D6162 /* LikeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC50E24521FA0009D6162 /* LikeListController.swift */; };
 		B0C77BB723F97A9100B8E5B7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0C77BB623F97A9100B8E5B7 /* GoogleService-Info.plist */; };
 		B0E0A31823F9D18F00BE8ECC /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0A31723F9D18F00BE8ECC /* LogInController.swift */; };
 		B0E0A31A23F9E45900BE8ECC /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E0A31923F9E45900BE8ECC /* SignUpController.swift */; };
@@ -328,6 +329,7 @@
 		B0BAC4A82450C2A7009D6162 /* HistoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrderCell.swift; sourceTree = "<group>"; };
 		B0BAC4A92450C2A7009D6162 /* HistoryOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryOrderCell.xib; sourceTree = "<group>"; };
 		B0BAC4AC2450C5E5009D6162 /* HistoryOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrderController.swift; sourceTree = "<group>"; };
+		B0BAC50E24521FA0009D6162 /* LikeListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListController.swift; sourceTree = "<group>"; };
 		B0C77BB623F97A9100B8E5B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0E0A31723F9D18F00BE8ECC /* LogInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInController.swift; sourceTree = "<group>"; };
 		B0E0A31923F9E45900BE8ECC /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				B09ED5E42414EE0500D3C4A6 /* ProfileController.swift */,
 				02F25D65242095F10041541E /* OrderController.swift */,
 				C015B2762439F0D5009F060D /* ShoppingCartController.swift */,
+				B0BAC50E24521FA0009D6162 /* LikeListController.swift */,
 				02F25D68242096110041541E /* ViewController.swift */,
 				02F25D6B2420967A0041541E /* MenuViewController.swift */,
 				C015B2582439F0A8009F060D /* Alert.swift */,
@@ -982,6 +985,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0BAC50F24521FA0009D6162 /* LikeListController.swift in Sources */,
 				B0FE0D38243BA61200479B80 /* GroupBuyOrderConfirmController.swift in Sources */,
 				B0BAC49E244F64AF009D6162 /* ProcessingOrderCell.swift in Sources */,
 				02F25D66242095F10041541E /* OrderController.swift in Sources */,
