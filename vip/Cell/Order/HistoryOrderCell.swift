@@ -47,7 +47,7 @@ class HistoryOrderCell: UICollectionViewCell {
             let timeInterval:TimeInterval = TimeInterval(timeStamp)
             let date = Date(timeIntervalSince1970: timeInterval)
             let dformatter = DateFormatter()
-            dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+            dformatter.dateFormat = "yyyy年MM月dd日 HH:mm"
             print("新增日期時間：\(dformatter.string(from: date))")
             self.progress.text = "訂單完成時間\n" + dformatter.string(from: date)
             
