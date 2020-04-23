@@ -153,7 +153,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
                     let message = UIAlertController(title: "您已註冊成功", message: "", preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in 
                         print("here go to profile page!")
-                        self.transitionToProfileScene()
+                        self.transitionToLogInScene()
                         
                     })
                     message.addAction(confirmAction)

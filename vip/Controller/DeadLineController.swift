@@ -17,10 +17,11 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
 
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
-    var productId = String()
+    var productId = [String]()
     var titles = String()
     var time = String()
     var deadline = Date()
+    var
     
     
     override func viewDidLoad() {
@@ -41,8 +42,12 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
 
                 Database.database().reference().child("GroupBuy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
                     if let datas = snapshot.children.allObjects as? [DataSnapshot] {
-                        print("key:" ,datas[0].key)
-                        self.productId = datas[0].key
+                        for i in 0...datas.count-1{
+                            print("key:" ,i.key)
+                            productId[i].append(<#T##c: Character##Character#>)
+                            i.key = productId
+                        }
+                        
                         cell.setProductLabel(productId: self.productId)
 
                     Database.database().reference().child("GroupBuy").child(self.productId)
@@ -53,6 +58,16 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
                         self.time = value?["ExpDate"] as? String ?? ""
         
                         })
+                    }
+                })
+    }
+    
+    func jumpdata(vc:DeadLineInformationController){
+                Database.database().reference().child("GroupBuy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                    if let datas = snapshot.children.allObjects as? [DataSnapshot] {
+                        print("key:" ,datas[0].key)
+                        self.productId = datas[0].key
+                        vc.setLabel(selectProductId: self.productId)
                     }
                 })
     }
@@ -161,6 +176,13 @@ extension DeadLineController : UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DeadLineCollectionViewCell", for: indexPath) as! DeadLineCollectionViewCell
         readdata(cell : cell)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let storyboard = UIStoryboard(name: "DeadLine", bundle: nil)
+    let vc = storyboard.instantiateViewController(withIdentifier: "DeadLineInformationController") as!  DeadLineInformationController
+        jumpdata(vc: vc)
+        self.navigationController?.pushViewController(vc,animated: true)
     }
 }
 
