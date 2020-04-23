@@ -19,7 +19,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cFw-KQ-aAd">
                                 <rect key="frame" x="0.0" y="58" width="375" height="609"/>
-                                <color key="backgroundColor" red="0.94019311670000005" green="0.95578092339999998" blue="0.9028730989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.91362911459999996" green="0.9726008773" blue="0.85087877509999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="4aM-WR-gz8">
                                     <size key="itemSize" width="141" height="145"/>
                                     <size key="estimatedItemSize" width="141" height="145"/>
@@ -50,7 +50,7 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.93471920490000004" green="0.95890384910000004" blue="0.90259689089999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.91362911459999996" green="0.9726008773" blue="0.85087877509999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="spm-mz-4tm" firstAttribute="trailing" secondItem="EAe-to-SJu" secondAttribute="trailing" constant="16" id="5hv-Fw-8ej"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cFw-KQ-aAd" secondAttribute="trailing" constant="-16" id="CUY-4m-LsB"/>
