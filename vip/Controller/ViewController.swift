@@ -19,11 +19,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnMenu.target = self.revealViewController()
-        btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+        btnAction()
         setupTextField()
     }
- 
+    
+    func btnAction(){
+        btnMenu.target = self.revealViewController()
+        btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+    }
+    
     private func setupTextField(){
         searchTextField.delegate = self
         
@@ -36,24 +40,24 @@ class ViewController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
         }
+    }
     
     @IBAction func groupBuyButtonWasPresed(_ sender: Any) {
         Database.database().reference().child("GroupBuy")
@@ -110,35 +114,14 @@ class ViewController: UIViewController {
                 for child in data {
                     print(child.key)
                     vc.searchId.append(child.key)
-                    
                 }
-                
                 vc.count = count
                 vc.fromSearch = true
-                
                 self.navigationController?.pushViewController(vc,animated: true)
             })
             
             
         }
-        
-        
-        
-        //            
-        //            Database.database().reference().child("Product").queryOrdered(byChild: "ProductName").queryEqual(toValue : search)
-        //                .observe(.value, with: {
-        //                (snapshot) in
-        //                let allKeys = snapshot.value as! [String : AnyObject]
-        //                let nodeToReturn = allKeys.keys
-        //                let counts = nodeToReturn.count
-        //                print("nodeToReturn ",nodeToReturn)
-        //                let storyboard = UIStoryboard(name: "Product", bundle: nil)
-        //                let vc = storyboard.instantiateViewController(withIdentifier: "ProductControllerId") as!  ProductController
-        //                vc.count = counts
-        //
-        //                self.navigationController?.pushViewController(vc,animated: true)
-        //            })
-        
         
     }
     
