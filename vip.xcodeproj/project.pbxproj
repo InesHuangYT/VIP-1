@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		024926822434DE1400CC22A8 /* Checkout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 024926812434DE1400CC22A8 /* Checkout.storyboard */; };
+		0254A700245057A90005D575 /* DeadLine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0254A6FF245057A90005D575 /* DeadLine.storyboard */; };
+		0254A71E2450582C0005D575 /* DeadLineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0254A71D2450582C0005D575 /* DeadLineController.swift */; };
+		0254A721245075630005D575 /* DeadLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0254A71F245075630005D575 /* DeadLineCollectionViewCell.swift */; };
+		0254A722245075640005D575 /* DeadLineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0254A720245075630005D575 /* DeadLineCollectionViewCell.xib */; };
 		02AC617E243DA43500A7D94C /* OrderCheckFinalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC617D243DA43500A7D94C /* OrderCheckFinalController.swift */; };
 		02AC619D243DB48800A7D94C /* OrderCheckoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC619C243DB48800A7D94C /* OrderCheckoutController.swift */; };
 		02F21D5D24210211003860F9 /* AddCouponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F21D5C24210211003860F9 /* AddCouponController.swift */; };
@@ -258,6 +262,10 @@
 
 /* Begin PBXFileReference section */
 		024926812434DE1400CC22A8 /* Checkout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Checkout.storyboard; sourceTree = "<group>"; };
+		0254A6FF245057A90005D575 /* DeadLine.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeadLine.storyboard; sourceTree = "<group>"; };
+		0254A71D2450582C0005D575 /* DeadLineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadLineController.swift; sourceTree = "<group>"; };
+		0254A71F245075630005D575 /* DeadLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeadLineCollectionViewCell.swift; path = CheckOut/DeadLineCollectionViewCell.swift; sourceTree = "<group>"; };
+		0254A720245075630005D575 /* DeadLineCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DeadLineCollectionViewCell.xib; path = CheckOut/DeadLineCollectionViewCell.xib; sourceTree = "<group>"; };
 		02AC617D243DA43500A7D94C /* OrderCheckFinalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckFinalController.swift; sourceTree = "<group>"; };
 		02AC619C243DB48800A7D94C /* OrderCheckoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCheckoutController.swift; sourceTree = "<group>"; };
 		02F21D5C24210211003860F9 /* AddCouponController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCouponController.swift; path = vip/Controller/AddCouponController.swift; sourceTree = SOURCE_ROOT; };
@@ -492,6 +500,7 @@
 		B0E0A31B23F9E55200BE8ECC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0254A71D2450582C0005D575 /* DeadLineController.swift */,
 				B0BAC495244F5C65009D6162 /* Order */,
 				B0EA39472438E33A00AA7499 /* CreateProduct */,
 				B0EA39452438E2DF00AA7499 /* GroupBuy */,
@@ -589,6 +598,8 @@
 		C01F4AA8240EA8A1003E0AAF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				0254A71F245075630005D575 /* DeadLineCollectionViewCell.swift */,
+				0254A720245075630005D575 /* DeadLineCollectionViewCell.xib */,
 				02F25D63242095C00041541E /* MenuTableViewCell.swift */,
 				C01F4AA6240EA843003E0AAF /* ShoppingCartCell.swift */,
 				B0FE0D87243F606B00479B80 /* CheckOut */,
@@ -611,6 +622,7 @@
 				B042F7F2241F8C72005982AF /* Product.storyboard */,
 				B045A8632431FB5600F6CFE4 /* GroupBuy.storyboard */,
 				024926812434DE1400CC22A8 /* Checkout.storyboard */,
+				0254A6FF245057A90005D575 /* DeadLine.storyboard */,
 				B0BAC477244F5BFB009D6162 /* Order.storyboard */,
 			);
 			path = StoryBoard;
@@ -877,9 +889,11 @@
 				B042F7F3241F8C72005982AF /* Product.storyboard in Resources */,
 				B08376F424337CF6006D169E /* GroupBuyCollectionViewCell.xib in Resources */,
 				B0C77BB723F97A9100B8E5B7 /* GoogleService-Info.plist in Resources */,
+				0254A700245057A90005D575 /* DeadLine.storyboard in Resources */,
 				B0BAC478244F5BFB009D6162 /* Order.storyboard in Resources */,
 				C02BD2E524101F2900BD3E1D /* Main.storyboard in Resources */,
 				B087D23523F56439001FAC9A /* Assets.xcassets in Resources */,
+				0254A722245075640005D575 /* DeadLineCollectionViewCell.xib in Resources */,
 				B09ED5E32414E9B300D3C4A6 /* Profile.storyboard in Resources */,
 				B0BAC4A3244F64D9009D6162 /* ProcessingOrderInformationCell.xib in Resources */,
 				C0A511D8240FCFF100BABB14 /* ShoppingCart.storyboard in Resources */,
@@ -974,9 +988,11 @@
 				C01F4AA7240EA844003E0AAF /* ShoppingCartCell.swift in Sources */,
 				B04A55D1244E223000AF9935 /* OrderConfirmController.swift in Sources */,
 				B0190091243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift in Sources */,
+				0254A721245075630005D575 /* DeadLineCollectionViewCell.swift in Sources */,
 				B0FE0D5B243D095500479B80 /* CehckFinalCollectionViewCell.swift in Sources */,
 				02F21D5F24210DAE003860F9 /* CouponController.swift in Sources */,
 				B0E618EA2400042800EB6E74 /* Protocol.swift in Sources */,
+				0254A71E2450582C0005D575 /* DeadLineController.swift in Sources */,
 				B087D22E23F56436001FAC9A /* SceneDelegate.swift in Sources */,
 				B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */,
 				B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */,
@@ -1144,7 +1160,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6NATB5LN22;
+				DEVELOPMENT_TEAM = JMMDB6PMMN;
 				INFOPLIST_FILE = vip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1152,7 +1168,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = Ines.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1169,7 +1185,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6NATB5LN22;
+				DEVELOPMENT_TEAM = JMMDB6PMMN;
 				INFOPLIST_FILE = vip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1177,7 +1193,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = Ines.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
