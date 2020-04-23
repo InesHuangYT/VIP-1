@@ -311,6 +311,9 @@
                                 <rect key="frame" x="297" y="110" width="24" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="語音輸入" image="microphone"/>
+                                <connections>
+                                    <action selector="microphoneTapped:" destination="ucJ-28-r4v" eventType="touchUpInside" id="YxG-Wn-5gA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-Kk-6kT">
                                 <rect key="frame" x="334" y="104" width="41" height="33"/>
@@ -356,6 +359,7 @@
                         <outlet property="btnMenu" destination="EAx-kE-tYd" id="4XY-Ia-vwc"/>
                         <outlet property="enterButton" destination="WQr-Kk-6kT" id="3RQ-tg-gCK"/>
                         <outlet property="groupBuyButton" destination="eud-Iw-3dz" id="e32-KZ-j0O"/>
+                        <outlet property="microphoneButton" destination="PXt-GE-z1V" id="NNu-Ae-7as"/>
                         <outlet property="searchTextField" destination="8Li-aT-IEE" id="YBE-tA-zg5"/>
                         <outlet property="shppingCartButton" destination="H67-1w-v6u" id="ggJ-Ll-3Le"/>
                     </connections>
