@@ -45,12 +45,15 @@ class ProductInformationController: UIViewController {
         layOut()
         audioPlay()
         
-        //從訂單進來用productId  從購物車或一般商品查詢/分類進來用index
+//        從訂單進來 用productId & 
         if (fromMyOrder == true){
             setLabel(productId:productId)
-        }else{
+        }
+//        從購物車或一般商品查詢或我的最愛或分類進來 用index
+        else{
             setLabel(index: index,selectProductId:selectProductId)
         }
+        
         //hide addShoppingCart button
         if(fromShoppingCart == true || fromMyOrder == true) {
             addShoppingCart.isHidden = true

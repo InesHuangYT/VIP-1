@@ -20,22 +20,20 @@ class LikeListController: UIViewController {
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     var ref: DatabaseReference!
-    var test:UILabel!
-    var count = Int()
-    var name:[Any] = []
-    var shoppingCount = Int()
-    var selectProductId = [String]()
+    
+    // value from MenuController
+    var likeListCounts = Int()
+    var likeListGroupCounts = Int()
+    var likeListProductId = [String]()
+    var likeListGroupProductId = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
         collectionViewDeclare()
-        
         ref = Database.database().reference()
-        let user = Auth.auth().currentUser!
-        
-        print("shoppingCount",shoppingCount)
+        print("likeListProductId",likeListProductId)
         
         
     }
@@ -59,31 +57,61 @@ class LikeListController: UIViewController {
     }
     
     
-    @IBAction func goToCheckButton(_ sender: Any) {
-        let shoppingCartRef = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
-        let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "OrderCheckoutControllerId") as! OrderCheckoutController
-        shoppingCartRef.queryOrdered(byChild: "Status").queryEqual(toValue: "Selected").observeSingleEvent(of: .value, with: { snapshot in
-            
+    func findProductIndex(searchId:String,vc:ProductInformationController){
+        let productRef =  Database.database().reference().child("Product")
+        productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             let data = snapshot.children.allObjects as! [DataSnapshot]
-            
-            let count = data.count
-            for child in data {
-                print(child.key)
-                self.selectProductId.append(child.key)
+            for i in 1...data.count {
+                if data[i-1].key == searchId {
+                    print("find index", i-1)
+                    vc.index = i-1
+                }else{
+                    print("Not find index", i-1)
+                }
             }
-            
-            vc.selectProductId = self.selectProductId 
-            vc.count = count
-            
             self.navigationController?.pushViewController(vc,animated: true)
+            
+            
         })
-        
         
     }
     
-
-    
+    func findGroupBuyProductIndex(searchId:String,vc:GroupBuyInformationController){
+        let groupBuyRef =  Database.database().reference().child("GroupBuy")
+        groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            for i in 1...data.count {
+                if data[i-1].key == searchId {
+                    print("find index", i-1)
+                    vc.index = i-1
+                }else{
+                    print("Not find index", i-1)
+                }
+            }
+            
+            groupBuyRef.child(searchId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                
+                let value = snapshot.value as? NSDictionary
+                let groupBuyPeople = value?["GroupBuyPeople"] as? String ?? ""
+                let peoples = Int64(groupBuyPeople)
+                vc.groupBuyPeople = Int(peoples ?? 0)
+                
+                groupBuyRef.child(searchId).child("OpenGroupId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                    if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                        
+                        print("GroupBuy key count : ",snapshots.count)
+                        vc.openByCount = snapshots.count
+                        self.navigationController?.pushViewController(vc,animated: true)
+                        
+                    }
+                })
+                
+            })
+            
+        })
+        
+    }
     
     
 }
@@ -93,54 +121,46 @@ extension LikeListController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         
         if collectionView.isEqual(productCollectionView){
-            return shoppingCount
+            return likeListCounts
         }
         else{
             
-            return shoppingCount
+            return likeListGroupCounts
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCartCollectionViewCell", for: indexPath) as! ShoppingCartCollectionViewCell
+        
+        
         if collectionView.isEqual(productCollectionView){
-            cell.loadData(index: indexPath.row)
-            cell.delegate = self
-            cell.index = indexPath.row
+            cell.loadData(productId: likeListProductId[indexPath.row], hiddenSelectButton: true, fromWhere: "LikeList")
             return cell
         }
-        else{
-            cell.loadData(index: indexPath.row)
-            cell.delegate = self
-            cell.index = indexPath.row
+        else {
+            cell.loadData(productId: likeListGroupProductId[indexPath.row], hiddenSelectButton: true, fromWhere: "LikeListGroupBuy")
             return cell
         }
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let storyboard = UIStoryboard(name: "Product", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
+        let productStoryboard = UIStoryboard(name: "Product", bundle: nil)
+        let groupBuyStoryboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         
-        let shoppingCartRef = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
+        let vc = productStoryboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
+        let vcGroup = groupBuyStoryboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
         
-        vc.index = indexPath.row
-        vc.fromShoppingCart = true
-        
-        shoppingCartRef.queryOrdered(byChild: "Status").queryEqual(toValue: "Selected").observeSingleEvent(of: .value, with: { snapshot in
+        if collectionView.isEqual(productCollectionView){
+            findProductIndex(searchId: likeListProductId[indexPath.row], vc: vc)
+        }
             
-            let data = snapshot.children.allObjects as! [DataSnapshot]
-            for child in data {
-                print(child.key)
-                self.selectProductId.append(child.key)
-            }
+        else{
+            vcGroup.productId = likeListGroupProductId[indexPath.row]
+            findGroupBuyProductIndex(searchId: likeListGroupProductId[indexPath.row], vc:vcGroup )
             
-            vc.selectProductId = self.selectProductId 
-            
-            self.navigationController?.pushViewController(vc,animated: true)
-        })
-        
+        }
         
     }
 }
