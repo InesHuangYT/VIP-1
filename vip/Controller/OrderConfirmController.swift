@@ -107,8 +107,14 @@ class OrderComfirmController: UIViewController {
         vc.orderAutoId = orderId ?? ""
         vc.count = count
         
-        self.navigationController?.pushViewController(vc, animated: true)
-   
+        let message = UIAlertController(title: "結帳成功", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+        {action in
+            print("checkout success")
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
     }
     
     

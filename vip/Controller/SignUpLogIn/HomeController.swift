@@ -181,12 +181,6 @@ class HomeController: UIViewController,UITextFieldDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as! LogInController
         self.navigationController?.pushViewController(vc,animated: true)
     }
-    func transitionToProfileScene(){
-        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ProfileControllerId") as! ProfileController
-        self.navigationController?.pushViewController(vc,animated: true)
-    }
-    
 }
 
 
