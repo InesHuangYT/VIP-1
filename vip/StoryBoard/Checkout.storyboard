@@ -229,6 +229,9 @@
                                                 <state key="normal" title="聯絡客服" image="support">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="callservice:" destination="hyL-cd-91f" eventType="touchUpInside" id="E6P-Cu-b1O"/>
+                                                </connections>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o9D-cv-gsc">
                                                 <rect key="frame" x="0.0" y="116" width="375" height="171"/>
@@ -384,6 +387,9 @@
                                 <state key="normal" title="聯絡客服" image="support">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="callservice:" destination="Ac3-tQ-501" eventType="touchUpInside" id="DzW-wI-LEd"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Crj-Vw-KlO">
                                 <rect key="frame" x="23" y="142" width="330" height="3"/>
@@ -543,6 +549,9 @@
                                                 <state key="normal" title="聯絡客服" image="support">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="callservice:" destination="vGi-Bt-Bow" eventType="touchUpInside" id="DmA-ZO-Wzb"/>
+                                                </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ztG-ig-NBe">
                                                 <rect key="frame" x="31" y="293" width="245" height="85.5"/>
@@ -904,6 +913,9 @@
                                 <state key="normal" title="聯絡客服" image="support">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="callservice:" destination="cjK-C2-YYH" eventType="touchUpInside" id="YQD-Cm-s2n"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="GEV-Bb-7Y4">
                                 <rect key="frame" x="30" y="95" width="104" height="85.5"/>
@@ -1039,6 +1051,9 @@
                                 <state key="normal" title="聯絡客服" image="support">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="callservice:" destination="ENO-RG-aSE" eventType="touchUpInside" id="PFb-0b-W5V"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hFj-PA-cuJ">
                                 <rect key="frame" x="22" y="158" width="330" height="3"/>
@@ -1191,6 +1206,9 @@
                                 <state key="normal" title="聯絡客服" image="support">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="callservice:" destination="Xn7-0w-bJm" eventType="touchUpInside" id="8br-z5-NEJ"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bQh-wT-Ns2">
                                 <rect key="frame" x="30" y="95" width="104" height="85.5"/>

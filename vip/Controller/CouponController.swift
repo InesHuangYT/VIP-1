@@ -41,6 +41,27 @@ class CouponController: UIViewController {
         }
        
     )}
+    @IBAction func callservice(_ sender: Any) {
+        if let callURL:URL = URL(string: "tel:\(+886961192398)") {
+
+                let application:UIApplication = UIApplication.shared
+
+                if (application.canOpenURL(callURL)) {
+                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                        application.openURL(callURL)
+                    })
+                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                        print("Canceled Call")
+                    })
+        
+                    alert.addAction(callAction)
+                    alert.addAction(noAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+    }
+    
     func setLabel(value:[String:Any]){
         let first = value["head"] as? String
         let second = value["body"] as? String
