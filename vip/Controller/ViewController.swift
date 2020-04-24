@@ -10,6 +10,7 @@
 import UIKit
 import Firebase
 import Speech
+import AVFoundation
 
 class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     
@@ -20,10 +21,16 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     @IBOutlet weak var shppingCartButton: UIButton!
     @IBOutlet weak var microphoneButton: UIButton!
     
-    private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "zh_CN")) //"en-US"
+    private var speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "zh_TW")) //"en-US"
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
+    
+    
+    
+    var audioPlayer: AVAudioPlayer?
+    let pianoSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +44,13 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     }
     
     func microphoneaccess(){
-        microphoneButton.isEnabled = false  //2
-        speechRecognizer?.delegate = self  //3
-        SFSpeechRecognizer.requestAuthorization { (authStatus) in  //4
+        microphoneButton.isEnabled = false
+        speechRecognizer?.delegate = self
+        SFSpeechRecognizer.requestAuthorization { (authStatus) in
             
             var isButtonEnabled = false
             
-            switch authStatus {  //5
+            switch authStatus {
             case .authorized:
                 isButtonEnabled = true
                 
@@ -66,19 +73,35 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         }
     }
     
+    func audioPlay(){
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        try! AVAudioSession.sharedInstance().setActive(true)
+
+        try! audioPlayer = AVAudioPlayer(contentsOf: pianoSound)
+        audioPlayer?.play()
+    }
+    
     @IBAction func microphoneTapped(_ sender: Any) {
         microphoneaccess()
-        print("Speech")
-        if audioEngine.isRunning {
-            audioEngine.stop()
-            recognitionRequest?.endAudio()
-            microphoneButton.isEnabled = false
-        } else {
-            startRecording()
-        }
+            if audioEngine.isRunning {
+                audioEngine.stop()
+                recognitionTask?.cancel()
+                recognitionRequest?.endAudio()
+                microphoneButton.isEnabled = false
+                microphoneButton.setTitle( "開始語音輸入", for: .normal)
+                microphoneButton.setImage(UIImage(named: "microphone"), for: .normal)
+            } else {
+                try! audioPlayer = AVAudioPlayer(contentsOf: pianoSound)
+                audioPlayer?.play()
+                
+                startRecording()
+                microphoneButton.setTitle( "語音輸入完成", for: .normal)
+                microphoneButton.setImage(UIImage(named: "microphone-2"), for: .normal)
+            }
     }
     
     func startRecording() {
+        
         if recognitionTask != nil {
             recognitionTask?.cancel()
             recognitionTask = nil
@@ -88,7 +111,7 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         do {
             try audioSession.setCategory(AVAudioSession.Category.record)
             try audioSession.setMode(AVAudioSession.Mode.measurement)
-            //           try audioSession.setActive(true,with: .notifyOthersOnDeactivation)
+            try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         } catch {
             print("audioSession properties weren't set because of an error.")
         }
@@ -96,15 +119,16 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
         let inputNode = audioEngine.inputNode
-        //        else do {
-        //            fatalError("Audio engine has no input node")
-        //        }
+        //        else {
+        //        fatalError("Audio engine has no input node")
+        //    }
         
         guard let recognitionRequest = recognitionRequest else {
             fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
         }
         
         recognitionRequest.shouldReportPartialResults = true
+        
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
             
             var isFinal = false
