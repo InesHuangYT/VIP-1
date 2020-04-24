@@ -25,9 +25,7 @@ class DeadLineInformationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         btnAction()
-        
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         productImage.layer.cornerRadius = 45
         productImage.layer.borderWidth = 1

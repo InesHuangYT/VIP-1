@@ -31,29 +31,59 @@ class DeadLineCollectionViewCell: UICollectionViewCell {
         image.layer.borderColor = myColor.cgColor
         
     }
+
     
-    func setProductLabel(productId:String){
-        let ref =  Database.database().reference().child("Product").child(productId)
+    func setProductLabel(productId:String,fromGroupBuy:Bool){
         
-        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-            let value = snapshot.value as? NSDictionary
-            let name = value?["ProductName"] as? String ?? ""
-            let time = value?["ExpDate"] as? String ?? ""
-            let url = value?["imageURL"] as? String ?? ""
-            if let imageUrl = URL(string: url){
-                URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                    if error != nil {
-                        print("Download Image Task Fail: \(error!.localizedDescription)")
-                    }
-                    else if let imageData = data {
-                        DispatchQueue.main.async {
-                            self.image.image = UIImage(data: imageData)
+        let productRef = Database.database().reference().child("Product").child(productId)
+        let groupBuyRef = Database.database().reference().child("GroupBuy").child(productId)
+        
+        if fromGroupBuy == true {
+            groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSDictionary
+                let name = value?["ProductName"] as? String ?? ""
+                let time = value?["ExpDate"] as? String ?? ""
+                let url = value?["imageURL"] as? String ?? ""
+                if let imageUrl = URL(string: url){
+                    URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        if error != nil {
+                            print("Download Image Task Fail: \(error!.localizedDescription)")
                         }
-                    }
-                }.resume()
-            }
-            self.name.text = name
-            self.time.text = "有效期限：" + "\n" + time
-        })
+                        else if let imageData = data {
+                            DispatchQueue.main.async {
+                                self.image.image = UIImage(data: imageData)
+                            }
+                        }
+                    }.resume()
+                }
+                self.name.text = name
+                self.time.text = "有效期限：" + "\n" + time
+            })
+            
+        }
+        else{
+            productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSDictionary
+                let name = value?["ProductName"] as? String ?? ""
+                let time = value?["ExpDate"] as? String ?? ""
+                let url = value?["imageURL"] as? String ?? ""
+                if let imageUrl = URL(string: url){
+                    URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                        if error != nil {
+                            print("Download Image Task Fail: \(error!.localizedDescription)")
+                        }
+                        else if let imageData = data {
+                            DispatchQueue.main.async {
+                                self.image.image = UIImage(data: imageData)
+                            }
+                        }
+                    }.resume()
+                }
+                self.name.text = name
+                self.time.text = "有效期限：" + "\n" + time
+            })
+        }
+        
+        
     }
 }

@@ -228,11 +228,11 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         if searchText != ""{
             print("here",searchText)
             
-            productRef.queryOrdered(byChild: "ProductName").queryStarting(atValue: searchText).queryEnding(atValue: "\u{f8ff}" + searchText + "\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
+            productRef.queryOrdered(byChild: "ProductName").queryStarting(atValue: searchText).queryEnding(atValue: searchText + "\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
                 let data = snapshot.children.allObjects as! [DataSnapshot]
                 let count = data.count
                 for child in data {
-                    print(child.key)
+                    print(child.key) 
                     vc.searchId.append(child.key)
                 }
                 vc.count = count
