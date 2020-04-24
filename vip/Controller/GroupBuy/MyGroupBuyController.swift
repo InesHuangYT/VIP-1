@@ -40,6 +40,8 @@ class MyGroupBuyController: UIViewController {
         checkHistoryCount()
         print("countWaiting",countWaiting)
         print("countReady",countReady)
+        print("countHistory",countHistory)
+        
         
         
     }
@@ -52,23 +54,23 @@ class MyGroupBuyController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func collectionViewDeclare(){
@@ -133,7 +135,7 @@ class MyGroupBuyController: UIViewController {
                         let payfee = orderValue?["Payment"] as? String ?? ""
                         vc.payFee = payfee
                         print("payFee",payfee)
-
+                        
                         
                         userGroupBuyOrderRef.child(snapshots[index].key).queryOrderedByKey()
                             .observeSingleEvent(of: .value, with: { snapshot in 
@@ -214,7 +216,9 @@ extension MyGroupBuyController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard(name:"GroupBuy",bundle:nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyOrderControllerId") as! MyGroupBuyOrderController     
+        let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyOrderControllerId") as! MyGroupBuyOrderController 
+        let storyboardDeadLine = UIStoryboard(name:"DeadLine",bundle:nil)
+        let vcDeadLine = storyboardDeadLine.instantiateViewController(withIdentifier: "DeadLineController") as! DeadLineController   
         
         if collectionView.isEqual(finshCollectionView){
             vc.status = "Ready"
@@ -228,9 +232,27 @@ extension MyGroupBuyController : UICollectionViewDataSource{
             getProductId(index:indexPath.row , status: "Waiting", vc: vc)
         }
         else{
-            vc.status = "History"
-            vc.index = indexPath.row
-            getProductId(index:indexPath.row , status: "History", vc: vc)
+            
+            let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
+            let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child("History").child("OrderId")
+            let orderRef = Database.database().reference().child("GroupBuyOrder")
+            
+            userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                    let orderId = snapshots[indexPath.row].key
+                    orderRef.child(orderId).queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in 
+                            userGroupBuyOrderRef.child(snapshots[indexPath.row].key).queryOrderedByKey()
+                                .observeSingleEvent(of: .value, with: { snapshot in 
+                                    let userGroupBuyValue = snapshot.value as? NSDictionary
+                                    let productId = userGroupBuyValue?["ProductId"] as? String ?? ""
+                                    vcDeadLine.fromGroupBuy = true
+                                    vcDeadLine.productIdString.append(productId)
+                                    self.navigationController?.pushViewController(vcDeadLine, animated: true)
+                                })
+                        })
+                }
+            })
         }
     }
 }

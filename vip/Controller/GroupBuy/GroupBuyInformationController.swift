@@ -60,6 +60,7 @@ class GroupBuyInformationController: UIViewController {
         print("index",index)
         
         
+        
     }
     
     func layOut(){
@@ -158,6 +159,23 @@ class GroupBuyInformationController: UIViewController {
                             }
                         }.resume()
                     }
+                    //                    我的最愛
+                    let likeListRef = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
+                    likeListRef.child(datas[index].key).queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in
+                            let value = snapshot.value as? [String:Any]
+                            let likeStatus = value?["Status"] as? String ?? ""
+                            print("likeStatus = ", likeStatus)
+                            if likeStatus == ""{
+                                self.setSelectButton(status: likeStatus,select:false)
+                                
+                            }else{
+                                self.setSelectButton(status: likeStatus,select:true) 
+                            }
+                            
+                        })
+                    
+                    //                    
                     
                 }
             }
@@ -182,6 +200,24 @@ class GroupBuyInformationController: UIViewController {
                     .observeSingleEvent(of: .value, with: { snapshot in 
                         let userGroupBuyValue = snapshot.value as? NSDictionary
                         let productId = userGroupBuyValue?["ProductId"] as? String ?? ""
+                        
+                        //                    我的最愛
+                        let likeListRef = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
+                        likeListRef.child(productId).queryOrderedByKey()
+                            .observeSingleEvent(of: .value, with: { snapshot in
+                                let value = snapshot.value as? [String:Any]
+                                let likeStatus = value?["Status"] as? String ?? ""
+                                print("likeStatus = ", likeStatus)
+                                if likeStatus == ""{
+                                    self.setSelectButton(status: likeStatus,select:false)
+                                    
+                                }else{
+                                    self.setSelectButton(status: likeStatus,select:true) 
+                                }
+                                
+                            })
+                        
+                        //   
                         
                         groupBuyRef.child(productId).queryOrderedByKey()
                             .observeSingleEvent(of: .value, with: { snapshot in 
@@ -216,9 +252,8 @@ class GroupBuyInformationController: UIViewController {
                             })
                         
                         
+                        
                     })
-                
-                
                 
                 
                 
@@ -232,30 +267,40 @@ class GroupBuyInformationController: UIViewController {
         
         let ref = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
         if sender.isSelected  {
-            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal) 
-            sender.isSelected = false
-            ref.child(productId).child("Status").setValue("Like")
-            alertLike()
             
-        }
-        else{
-            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.selected)
-            sender.isSelected = true
+            print("here")
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.normal) 
+            sender.isSelected = false
             let removeRef = ref.child(productId).child("Status")
             removeRef.removeValue()
             alertUnLike()
+            
+        }
+        else{
+            
+            print("hi")
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
+            sender.isSelected = true
+            
+            ref.child(productId).child("Status").setValue("Like")
+            alertLike()
         }
         
     }
     
-    func setSelectButton(status:String){
+    func setSelectButton(status:String,select:Bool){
+        
+        if select == false {
+            likeButton.isSelected = false
+        }
+        
         if status == "Like"{
             print("like!!!!!!!")
             self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
         }
         if status == "Unlike"{
             print("unlike!!!!!!!")
-            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.normal)
         }
     }
     

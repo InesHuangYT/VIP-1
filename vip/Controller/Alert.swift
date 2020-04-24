@@ -20,7 +20,7 @@ extension UIViewController{
     }
     
     func alertLike(){
-        let message = UIAlertController(title: "以加入我的最愛", message: nil, preferredStyle: .alert)
+        let message = UIAlertController(title: "已加入我的最愛", message: nil, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
         {action in 
             print("Add to LikeList")
@@ -30,7 +30,7 @@ extension UIViewController{
     }
     
     func alertUnLike(){
-        let message = UIAlertController(title: "以移除我的最愛", message: nil, preferredStyle: .alert)
+        let message = UIAlertController(title: "已移除我的最愛", message: nil, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
         {action in 
             print("Add to LikeList")

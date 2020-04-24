@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -310,13 +310,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXt-GE-z1V">
                                 <rect key="frame" x="297" y="110" width="24" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                <state key="normal" title="開始語音輸入" image="microphone">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="microphoneTapped:" destination="ucJ-28-r4v" eventType="touchUpInside" id="YxG-Wn-5gA"/>
-                                </connections>
+                                <state key="normal" title="語音輸入" image="microphone"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-Kk-6kT">
                                 <rect key="frame" x="334" y="104" width="41" height="33"/>
@@ -362,7 +356,6 @@
                         <outlet property="btnMenu" destination="EAx-kE-tYd" id="4XY-Ia-vwc"/>
                         <outlet property="enterButton" destination="WQr-Kk-6kT" id="3RQ-tg-gCK"/>
                         <outlet property="groupBuyButton" destination="eud-Iw-3dz" id="e32-KZ-j0O"/>
-                        <outlet property="microphoneButton" destination="PXt-GE-z1V" id="NNu-Ae-7as"/>
                         <outlet property="searchTextField" destination="8Li-aT-IEE" id="YBE-tA-zg5"/>
                         <outlet property="shppingCartButton" destination="H67-1w-v6u" id="ggJ-Ll-3Le"/>
                     </connections>
@@ -608,7 +601,7 @@
     <resources>
         <image name="3c家電" width="142" height="158"/>
         <image name="List_button" width="18" height="11"/>
-        <image name="microphone" width="512" height="512"/>
+        <image name="microphone" width="23" height="23"/>
         <image name="support" width="33" height="33"/>
         <image name="媽咪親子" width="142" height="158"/>
         <image name="居家生活" width="142" height="158"/>

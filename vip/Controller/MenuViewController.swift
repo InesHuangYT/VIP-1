@@ -41,13 +41,44 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell: MenuTableViewCell = tableView.cellForRow(at: indexPath) as! MenuTableViewCell
         
-        if cell.lblMenu.text! == "我的最愛"
+        if cell.lblMenu.text! == "我的最愛" // transit to ShoppingCart Storyboard
         {
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-            let newFrontViewController = UINavigationController.init(rootViewController: desController)
+            let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser!.uid)
+            let likeListGroupRef = Database.database().reference().child("LikeListGroupBuy").child(Auth.auth().currentUser!.uid)
             
-            revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+            // find LikeList productId
+            likeListRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                let likeListData = snapshot.children.allObjects as! [DataSnapshot]
+                let likeListCounts = likeListData.count
+                var likeListProductId = [String]()
+                var likeListGroupProductId = [String]()
+
+                for i in 0...likeListData.count-1 {
+                    likeListProductId.append(likeListData[i].key)
+                }
+                print("likeListCounts ",likeListCounts)
+                print("likeListProductId ",likeListProductId)
+                
+                // find LikeListGroupBuy productId
+                likeListGroupRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                    let likeListGroupData = snapshot.children.allObjects as! [DataSnapshot]
+                    let likeListGroupCounts = likeListGroupData.count
+                    for i in 0...likeListGroupData.count-1 {
+                        likeListGroupProductId.append(likeListGroupData[i].key)
+                    }
+                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+                    let desController = mainStoryboard.instantiateViewController(withIdentifier: "LikeListControllerId") as! LikeListController
+                    let newFrontViewController = UINavigationController.init(rootViewController: desController)
+                    desController.likeListCounts = likeListCounts
+                    desController.likeListProductId = likeListProductId
+                    desController.likeListGroupCounts = likeListGroupCounts
+                    desController.likeListGroupProductId = likeListGroupProductId
+                    self.revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+                })
+            })
+            
+            
+            
         }
         
         if cell.lblMenu.text! == "首頁"

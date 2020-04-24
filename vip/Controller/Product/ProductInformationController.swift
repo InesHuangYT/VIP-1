@@ -33,28 +33,30 @@ class ProductInformationController: UIViewController {
     var selectProductId = [String]()
     var fromShoppingCart = false
     var productId = String()
-    var fromMyOrder = false
+    var fromMyOrder = false //從訂單來
     var fromCheckOut = false
     var price = String()
     var index  = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print("index",index)
-        
+        btnAction()
         layOut()
+        audioPlay()
+        print("productId!!!!!!!!",productId)
         
-        //從訂單進來用productId  從購物車或一般商品查詢/分類進來用index
+        
+        //        從訂單進來 用productId 
         if (fromMyOrder == true){
             setLabel(productId:productId)
-        }else{
+        }
+            //        從購物車或一般商品查詢或我的最愛或分類進來 用index
+        else{
             setLabel(index: index,selectProductId:selectProductId)
         }
         
-        btnAction()
-        audioPlay()
-        
+        //hide addShoppingCart button
         if(fromShoppingCart == true || fromMyOrder == true) {
             addShoppingCart.isHidden = true
         }
@@ -151,11 +153,13 @@ class ProductInformationController: UIViewController {
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
     
-    func setLabel(index:Int,selectProductId:[String]){
-        
+    func setLabel(index:Int,selectProductId:[String]){    
         let productRef = Database.database().reference().child("Product")
         
         if fromShoppingCart == true {
+            
+            self.ID = selectProductId[index]
+            
             productRef.child(selectProductId[index]).queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
                     let value = snapshot.value as? NSDictionary
@@ -183,6 +187,22 @@ class ProductInformationController: UIViewController {
                             
                         }.resume()
                     } 
+                    
+                    //                  我的最愛
+                    let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
+                    likeListRef.child(selectProductId[index]).queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in
+                            let value = snapshot.value as? [String:Any]
+                            let likeStatus = value?["Status"] as? String ?? ""
+                            print("likeStatus = ", likeStatus)
+                            if likeStatus == ""{
+                                self.setSelectButton(status: likeStatus,select:false)
+                            }else{
+                                self.setSelectButton(status: likeStatus,select:true) 
+                            }
+                            
+                        })
+                    //                  
                 })
             
         }
@@ -191,24 +211,29 @@ class ProductInformationController: UIViewController {
             
             productRef.queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
-                    
                     for snap in snapshot.children {
                         let userSnap = snap as! DataSnapshot
                         let id = userSnap.key
                         self.productID.append(id)
                     }
-                    
                     print("This ID = ", self.productID[index])
                     self.ID = self.productID[index]
                     
+                    //                  我的最愛
                     let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
                     likeListRef.child(self.ID).queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in
                             let value = snapshot.value as? [String:Any]
                             let likeStatus = value?["Status"] as? String ?? ""
                             print("likeStatus = ", likeStatus)
-                            self.setSelectButton(status: likeStatus)
+                            if likeStatus == ""{
+                                self.setSelectButton(status: likeStatus,select:false)
+                            }else{
+                                self.setSelectButton(status: likeStatus,select:true) 
+                            }
+                            
                         })
+                    //                    
                     
                     if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                         let nameResults = datas.compactMap({
@@ -262,7 +287,7 @@ class ProductInformationController: UIViewController {
     
     // FromMyOrder
     func setLabel(productId:String){
-        
+        self.ID = productId            
         let productRef = Database.database().reference().child("Product").child(productId)
         productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             let value = snapshot.value as? NSDictionary
@@ -292,7 +317,21 @@ class ProductInformationController: UIViewController {
                 
             }
             
-            
+            //                  我的最愛
+            let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
+            likeListRef.child(self.ID).queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    let value = snapshot.value as? [String:Any]
+                    let likeStatus = value?["Status"] as? String ?? ""
+                    print("likeStatus = ", likeStatus)
+                    if likeStatus == ""{
+                        self.setSelectButton(status: likeStatus,select:false)
+                    }else{
+                        self.setSelectButton(status: likeStatus,select:true) 
+                    }
+                    
+                })
+            //                    
             
             
             
@@ -348,36 +387,38 @@ class ProductInformationController: UIViewController {
         
     }
     
-    func setSelectButton(status:String){
+    func setSelectButton(status:String,select:Bool){
+        
+        if select == false {
+            likeButton.isSelected = false
+        }
         if status == "Like"{
             print("like!!!!!!!")
             self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
         }
         if status == "Unlike"{
             print("unlike!!!!!!!")
-            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.normal)
         }
     }
     
     @IBAction func LikeButton(_ sender: UIButton) {
         
-        let ref = Database.database().reference().child("LikeList")
+        let ref = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
         if sender.isSelected  {
-            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.normal)   
+            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.normal)   
             sender.isSelected = false
-            ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status").setValue("Like")
-            alertLike()
-        }
-        else{
-            self.likeButton.setImage(UIImage(named : "like-2"), for: UIControl.State.selected)
-            sender.isSelected = true
-            let removeRef = ref.child(Auth.auth().currentUser?.uid ?? "").child(self.ID).child("Status")
+            let removeRef = ref.child(self.ID).child("Status")
             removeRef.removeValue()
             alertUnLike()
         }
+        else{
+            self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
+            sender.isSelected = true
+            ref.child(self.ID).child("Status").setValue("Like")
+            alertLike()
+        }
         
     }
-    
-    
     
 }

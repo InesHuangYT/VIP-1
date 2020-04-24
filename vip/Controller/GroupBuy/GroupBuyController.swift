@@ -24,15 +24,12 @@ class GroupBuyController: UIViewController {
         collectionViewDeclare()
         self.setupGridView()
         btnAction()
-        
-        
     }
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
 
                 let application:UIApplication = UIApplication.shared
-
                 if (application.canOpenURL(callURL)) {
                     let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
                     let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
@@ -41,7 +38,6 @@ class GroupBuyController: UIViewController {
                     let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
                         print("Canceled Call")
                     })
-        
                     alert.addAction(callAction)
                     alert.addAction(noAction)
                     self.present(alert, animated: true, completion: nil)
@@ -73,14 +69,11 @@ class GroupBuyController: UIViewController {
 
 extension GroupBuyController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-        
         return count
-        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyCollectionViewCell", for: indexPath) as! GroupBuyCollectionViewCell
-        //        cell.setProductLabel(text: self.dataProductName[indexPath.row])
         cell.setProductLabel(index: indexPath.row)
         return cell
         
@@ -99,10 +92,8 @@ extension GroupBuyController : UICollectionViewDataSource{
                     let groupBuyPeople = datas.compactMap({
                         ($0.value as! [String: Any])["GroupBuyPeople"]
                     }) 
-
                     let people = groupBuyPeople[indexPath.row] as! String
                     let peoples = Int64(people)
-                    print("peoples", peoples ?? 0)
                     vc.groupBuyPeople = Int(peoples ?? 0) 
                     
                     Database.database().reference().child("GroupBuy").child(datas[indexPath.row].key).child("OpenGroupId")
