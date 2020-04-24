@@ -33,7 +33,7 @@ class ProductInformationController: UIViewController {
     var selectProductId = [String]()
     var fromShoppingCart = false
     var productId = String()
-    var fromMyOrder = false
+    var fromMyOrder = false //從訂單來
     var fromCheckOut = false
     var price = String()
     var index  = Int()
@@ -44,12 +44,14 @@ class ProductInformationController: UIViewController {
         btnAction()
         layOut()
         audioPlay()
+        print("productId!!!!!!!!",productId)
         
-//        從訂單進來 用productId & 
+        
+        //        從訂單進來 用productId 
         if (fromMyOrder == true){
             setLabel(productId:productId)
         }
-//        從購物車或一般商品查詢或我的最愛或分類進來 用index
+            //        從購物車或一般商品查詢或我的最愛或分類進來 用index
         else{
             setLabel(index: index,selectProductId:selectProductId)
         }
@@ -151,11 +153,13 @@ class ProductInformationController: UIViewController {
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
     
-    func setLabel(index:Int,selectProductId:[String]){
-        
+    func setLabel(index:Int,selectProductId:[String]){    
         let productRef = Database.database().reference().child("Product")
         
         if fromShoppingCart == true {
+            
+            self.ID = selectProductId[index]
+            
             productRef.child(selectProductId[index]).queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
                     let value = snapshot.value as? NSDictionary
@@ -207,13 +211,11 @@ class ProductInformationController: UIViewController {
             
             productRef.queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
-                    
                     for snap in snapshot.children {
                         let userSnap = snap as! DataSnapshot
                         let id = userSnap.key
                         self.productID.append(id)
                     }
-                    
                     print("This ID = ", self.productID[index])
                     self.ID = self.productID[index]
                     
@@ -285,7 +287,7 @@ class ProductInformationController: UIViewController {
     
     // FromMyOrder
     func setLabel(productId:String){
-        
+        self.ID = productId            
         let productRef = Database.database().reference().child("Product").child(productId)
         productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             let value = snapshot.value as? NSDictionary
@@ -315,7 +317,21 @@ class ProductInformationController: UIViewController {
                 
             }
             
-            
+            //                  我的最愛
+            let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
+            likeListRef.child(self.ID).queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    let value = snapshot.value as? [String:Any]
+                    let likeStatus = value?["Status"] as? String ?? ""
+                    print("likeStatus = ", likeStatus)
+                    if likeStatus == ""{
+                        self.setSelectButton(status: likeStatus,select:false)
+                    }else{
+                        self.setSelectButton(status: likeStatus,select:true) 
+                    }
+                    
+                })
+            //                    
             
             
             
@@ -395,8 +411,6 @@ class ProductInformationController: UIViewController {
             let removeRef = ref.child(self.ID).child("Status")
             removeRef.removeValue()
             alertUnLike()
-            
-            
         }
         else{
             self.likeButton.setImage(UIImage(named : "like"), for: UIControl.State.selected)
@@ -406,7 +420,5 @@ class ProductInformationController: UIViewController {
         }
         
     }
-    
-    
     
 }
