@@ -17,11 +17,13 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
     
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
-    var productId = [String]()
+    
+    //    var productId = [String]()
     var titles = String()
     var time = String()
     var deadline = Date()
     var productIdString = [String]()
+    var fromGroupBuy = false // from MyGroupBuyController
     
     
     override func viewDidLoad() {
@@ -30,7 +32,7 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
         collectionViewDeclare()
         self.setupGridView()
         btnAction()
-        
+        print("productIdString",productIdString)
         
     }
     
@@ -60,25 +62,22 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
     }
     
     @IBAction func btnAddEvent(_ sender: Any) {
+        
         let eventStore:EKEventStore = EKEventStore()
-        
-        let productCount = (productIdString.count) ?? 0 as Int
-        
-        for i in 0...productCount-1 {
-            Database.database().reference().child("Product").child(productIdString[i])
+        let productCount = (productIdString.count) 
+        if fromGroupBuy == true {
+            // 我的團購只有一個商品
+            Database.database().reference().child("GroupBuy").child(productIdString[0])
                 .queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
                     let value = snapshot.value as? NSDictionary
                     self.titles = value?["ProductName"] as? String ?? ""
                     self.time = value?["ExpDate"] as? String ?? ""
                     self.deadline = self.settime(self.time, dateFormat: "yyyy-MM-dd")
-                    
                     eventStore.requestAccess(to: .event) {(granted, error) in
-                        
                         if(granted) && (error == nil)
                         {
                             print("granted \(granted)")
-                            
                             let event:EKEvent = EKEvent(eventStore: eventStore)
                             event.title = self.titles + "有效期限"
                             event.startDate = self.deadline
@@ -88,7 +87,6 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
                             do{
                                 try eventStore.save(event, span: .thisEvent)
                             }catch let error as NSError{
-                                
                                 print("error \(error)")
                             }
                             print("Save Event")
@@ -96,7 +94,37 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
                     }
                 })
         }
-        
+        else {
+            for i in 0...productCount-1 {
+                Database.database().reference().child("Product").child(productIdString[i])
+                    .queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in
+                        let value = snapshot.value as? NSDictionary
+                        self.titles = value?["ProductName"] as? String ?? ""
+                        self.time = value?["ExpDate"] as? String ?? ""
+                        self.deadline = self.settime(self.time, dateFormat: "yyyy-MM-dd")
+                        eventStore.requestAccess(to: .event) {(granted, error) in
+                            if(granted) && (error == nil)
+                            {
+                                print("granted \(granted)")
+                                let event:EKEvent = EKEvent(eventStore: eventStore)
+                                event.title = self.titles + "有效期限"
+                                event.startDate = self.deadline
+                                event.endDate = self.deadline
+                                event.notes = self.titles + "到期囉"
+                                event.calendar = eventStore.defaultCalendarForNewEvents
+                                do{
+                                    try eventStore.save(event, span: .thisEvent)
+                                }catch let error as NSError{
+                                    
+                                    print("error \(error)")
+                                }
+                                print("Save Event")
+                            }
+                        }
+                    })
+            }
+        }
         let message = UIAlertController(title: "加入行事曆成功", message: nil, preferredStyle: .alert)
         let confirm = UIAlertAction(title: "確認", style: .default, handler:
         {action in})
@@ -134,7 +162,7 @@ extension DeadLineController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DeadLineCollectionViewCell", for: indexPath) as! DeadLineCollectionViewCell
-        cell.setProductLabel(productId: productIdString[indexPath.row])
+        cell.setProductLabel(productId: productIdString[indexPath.row], fromGroupBuy: true)
         print("productIdString Call",productIdString[indexPath.row])
         
         return cell

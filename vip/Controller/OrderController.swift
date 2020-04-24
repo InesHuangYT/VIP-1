@@ -209,7 +209,7 @@ class OrderController: UIViewController {
                                     userGroupBuyRef.child("Status").child("Waiting").child("OrderId").child(snap.key).setValue(snap.key)
                                     
                                 }
-                                if status == "Delivered" {
+                                if status == "History" {
                                     userGroupBuyRef.child("Status").child("History").child("OrderId").child(snap.key).setValue(snap.key)
                                     let readyRef = userGroupBuyRef.child("Status").child("Ready").child("OrderId").child(snap.key)
                                     
