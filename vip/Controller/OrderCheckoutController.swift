@@ -223,10 +223,11 @@ extension OrderCheckoutController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         return count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShoppingCartCollectionViewCell", for: indexPath) as! ShoppingCartCollectionViewCell
-        cell.loadData(productId:selectProductId[indexPath.row],hiddenSelectButton:true, fromWhere: "OrderCheckoutController")
+        cell.loadData(productId:selectProductId[indexPath.row],hiddenSelectButton:true, fromWhere: "OrderCheckout")
         return cell
         
     }

@@ -109,7 +109,6 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
     func loadData(productId:String,hiddenSelectButton:Bool,fromWhere:String){
         if hiddenSelectButton == true {
             selectButton.isHidden = true
-            //            lookInformation.isHidden = true
         }
         
         if fromWhere == "OrderCheckout" {
@@ -144,9 +143,7 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
                     
                     let value = snapshot.value as? NSDictionary
                     print("productId",productId)
-
                     self.ProductName.text = value?["ProductName"] as? String ?? ""
-
                     self.Price.text = (value?["Price"] as? String ?? "") + "元"
                     let productImageUrl = value?["imageURL"] 
                     if let imageUrl = URL(string: productImageUrl as! String){
