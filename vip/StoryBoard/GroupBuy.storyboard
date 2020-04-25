@@ -745,6 +745,16 @@
                                     <action selector="backButtonWasPressed:" destination="Ft8-h9-HEQ" eventType="touchUpInside" id="dhS-md-08U"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fM3-09-haN">
+                                <rect key="frame" x="81" y="603" width="25" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="取消訂單" backgroundImage="cross">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="Ft8-h9-HEQ" eventType="touchUpInside" id="O8Z-KO-Wzs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -793,6 +803,7 @@
         <image name="CreateData" width="253" height="86"/>
         <image name="List_button" width="18" height="11"/>
         <image name="back" width="253" height="86"/>
+        <image name="cross" width="25" height="25"/>
         <image name="like-2" width="56" height="56"/>
         <image name="logo" width="175" height="166"/>
         <image name="logoAPP" width="175" height="166"/>

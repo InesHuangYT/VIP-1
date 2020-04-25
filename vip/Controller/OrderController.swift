@@ -100,10 +100,7 @@ class OrderController: UIViewController {
                 
                 
             }
-        })
-        
-        
-        
+        })  
     }
     
     

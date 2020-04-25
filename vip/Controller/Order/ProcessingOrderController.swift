@@ -13,6 +13,8 @@ class ProcessingOrderController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var orderZero: UILabel!
+    @IBOutlet weak var backToMain: UIButton!
     
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
@@ -27,7 +29,9 @@ class ProcessingOrderController: UIViewController {
         collectionViewDeclare()
         setupGridView()
         print("myOrderId",myOrderId)
-        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     func btnAction(){
@@ -35,26 +39,37 @@ class ProcessingOrderController: UIViewController {
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
     
+    
     @IBAction func callservice(_ sender: Any) {
-        if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+        if let callURL:URL = URL(string: "tel:\(886961192398)") {
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
+    
+    @IBAction func backToMain(_ sender: Any) {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        let newFrontViewController = UINavigationController.init(rootViewController: desController)
+        
+        revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+    }
+    
+    
     func collectionViewDeclare(){
         self.collectionView.reloadData()
         collectionView.delegate = self
@@ -108,6 +123,11 @@ class ProcessingOrderController: UIViewController {
 
 extension ProcessingOrderController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
+        if myOrderCount != 0 {
+            print("Htttt")
+            orderZero.isHidden = true
+            backToMain.isHidden = true
+        }
         
         return myOrderCount
         
@@ -116,16 +136,16 @@ extension ProcessingOrderController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProcessingOrderCell", for: indexPath) as! ProcessingOrderCell
         cell.setLabel(orderId:myOrderId[indexPath.row])
+        cell.delegate = self
+        cell.orderId = myOrderId[indexPath.row]
+        cell.removeIndex = indexPath.row
         
         return cell
-        
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Order", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProcessingOrderInformationControllerId") as!  ProcessingOrderInformationController
         getOrderProductId(orderIndex: indexPath.row, orderId: myOrderId[indexPath.row], vc:vc )
-        
-        
         
     }
 }
@@ -145,5 +165,23 @@ extension ProcessingOrderController: UICollectionViewDelegateFlowLayout{
     }
 }
 
+//Delete Cell in UICollectionView Xcode 9.0 (Swift 4.0) https://www.youtube.com/watch?v=TlAkqQ2Z3uk
+
+//extension ProcessingOrderController: ProcessingOrderProtocol{
+//    func deleteData(index: Int) {
+//        let myOderRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
+//        myOderRef.child("Status").child("Processing/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+//            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+//                self.myOrderCount = datas.count
+//                
+//                for data in datas {
+//                    self.myOrderId.append(data.key)
+//                }
+//            }
+//            self.collectionView.reloadData()
+//
+//        })
+//    }
+//}
 
 

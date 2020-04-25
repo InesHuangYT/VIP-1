@@ -36,23 +36,23 @@ class MyGroupBuyOrderController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func btnAction(){
@@ -91,11 +91,107 @@ class MyGroupBuyOrderController: UIViewController {
         collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
     }
     
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        let cancelMessage = UIAlertController(title: "確認要取消訂單？", message: "", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in
+            let groupBuyOrderRef = Database.database().reference().child("GroupBuyOrder")
+            let groupBuyRef = Database.database().reference().child("GroupBuy")
+            let userGroupBuyOrderRef = Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
+            
+            groupBuyOrderRef.child(self.orderAutoId).queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in 
+                    let orderValue = snapshot.value as? NSDictionary
+                    let openGroupId = orderValue?["OpenGroupId"] as? String ?? ""
+                    
+                    userGroupBuyOrderRef.child("OrderId").child(self.orderAutoId).queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in 
+                            let orderValue = snapshot.value as? NSDictionary
+                            let productId = orderValue?["ProductId"] as? String ?? ""
+                            
+                            groupBuyRef.child(productId).child("OpenGroupId").child(openGroupId).child("OpenBy").queryOrderedByKey()
+                                .observeSingleEvent(of: .value, with: { snapshot in 
+                                    if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                                        if datas[0].key == Auth.auth().currentUser?.uid ?? "" {
+                                            print("im the opener!!!!!")
+                                            groupBuyRef.child(productId).child("OpenGroupId").child(openGroupId).removeValue()
+                                        }
+                                        else{
+                                            groupBuyRef.child(productId).child("OpenGroupId").child(openGroupId).child("JoinBy").child(Auth.auth().currentUser?.uid ?? "").removeValue()
+                                        }
+                                        
+                                        
+                                        groupBuyOrderRef.child(self.orderAutoId).removeValue()
+                                        userGroupBuyOrderRef.child("OrderId").child(self.orderAutoId).removeValue()
+                                        userGroupBuyOrderRef.child("Status").child("Waiting").child("OrderId").child(self.orderAutoId).removeValue()
+                                        print("remove orderId completed!")
+                                        
+                                    }
+                                    
+                                })  
+                        })
+                })
+            
+            
+            
+            let message = UIAlertController(title: "已取消訂單", message: "", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "確認", style: .default, handler: {action in
+                self.transitionToMyGroupBuyController()                
+            })
+            message.addAction(okAction)
+            //       在cell裡面增加button 讓controller跳出alert
+            self.present(message, animated: true, completion: nil)
+            
+        })
+        let backAction = UIAlertAction(title: "返回", style: .cancel, handler: {action in
+        })
+        cancelMessage.addAction(confirmAction)
+        cancelMessage.addAction(backAction)        
+        //       在cell裡面增加button 讓controller跳出alert
+        self.present(cancelMessage, animated: true, completion: nil)
+        
+        
+    }
+    
+    func transitionToMyGroupBuyController(){
+        let storyboard: UIStoryboard = UIStoryboard(name: "GroupBuy", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyControllerId") as! MyGroupBuyController
+        let userGroupBuyRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "")
+        
+        userGroupBuyRef.child("Status").child("Ready/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                print("datas.count",datas.count)
+                vc.countReady = datas.count
+                
+                userGroupBuyRef.child("Status").child("Waiting/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                    if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                        vc.countWaiting = datas.count
+                        
+                        userGroupBuyRef.child("Status").child("History/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                                vc.countHistory = datas.count
+                                self.navigationController?.pushViewController(vc,animated: true)
+                            }
+                            
+                        })
+                        
+                        
+                        
+                        
+                    }
+                    
+                })
+                
+                
+            }
+        }) 
+    }
+    
     @IBAction func backButtonWasPressed(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-  
+    
     
     
     

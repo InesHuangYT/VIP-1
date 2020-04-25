@@ -216,12 +216,6 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
                 }
             })
             
-            
-            
-            
-            
-            
-            
         })
         message.addAction(confirmAction)
 //       在cell裡面增加button 讓controller跳出alert
@@ -231,4 +225,5 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
     
     
 }
+
 
