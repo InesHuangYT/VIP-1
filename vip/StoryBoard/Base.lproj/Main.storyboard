@@ -601,7 +601,7 @@
     <resources>
         <image name="3c家電" width="142" height="158"/>
         <image name="List_button" width="18" height="11"/>
-        <image name="microphone" width="23" height="23"/>
+        <image name="microphone" width="512" height="512"/>
         <image name="support" width="33" height="33"/>
         <image name="媽咪親子" width="142" height="158"/>
         <image name="居家生活" width="142" height="158"/>

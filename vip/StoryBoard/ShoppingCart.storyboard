@@ -345,6 +345,9 @@
                                 <state key="normal" title="返回" backgroundImage="back">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="backButton:" destination="fwq-3j-zWu" eventType="touchUpInside" id="xhR-Bc-BhX"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cGP-qQ-aWs">
                                 <rect key="frame" x="0.0" y="318" width="375" height="223"/>
@@ -394,6 +397,7 @@
                     <connections>
                         <outlet property="btnMenu" destination="VKH-Xg-oy7" id="zWM-7u-ZBl"/>
                         <outlet property="groupBuyCollectionView" destination="cGP-qQ-aWs" id="3Xv-Qd-SkM"/>
+                        <outlet property="myLikeListLabel" destination="eQm-H1-kvp" id="YpY-Gh-gYn"/>
                         <outlet property="productCollectionView" destination="LdS-YP-KLR" id="6LM-Z2-tEA"/>
                     </connections>
                 </viewController>
