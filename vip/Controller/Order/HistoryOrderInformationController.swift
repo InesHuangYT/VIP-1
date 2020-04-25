@@ -136,12 +136,11 @@ class HistoryOrderInformationController: UIViewController {
     }
     
     @IBAction func commentButtonWasPressed(_ sender: Any) {
-        
-        //評論
-    
+        let storyboard = UIStoryboard(name: "Order", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CommentAllController") as!  CommentAllController
+        vc.productIdString = productIdString
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
     
 }
 extension HistoryOrderInformationController : UICollectionViewDataSource{
