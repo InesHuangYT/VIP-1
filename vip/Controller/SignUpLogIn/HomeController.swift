@@ -43,13 +43,13 @@ class HomeController: UIViewController,UITextFieldDelegate {
         setUpTextField()
         print("current user uidd : " , currentUserName())
         phoneTextFieldColor()
-
+        
     }
     
     func phoneTextFieldColor(){
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         phoneTextField.attributedPlaceholder = NSAttributedString.init(string: "請輸入手機號碼", attributes: [  NSAttributedString.Key.foregroundColor:myColor])
-    }             
+    }
     
     
     func setUpTextField(){
@@ -85,7 +85,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
     func addTransparent(frames:CGRect){
         let window = UIApplication.shared.keyWindow
         transparentView.frame = window?.frame ?? self.view.frame
-        self.view.addSubview(transparentView)  
+        self.view.addSubview(transparentView)
         self.view.addSubview(tableViews)
         tableViews.layer.cornerRadius = 8
         tableViews.frame = CGRect(x: frames.origin.x, y: frames.origin.y, width: frames.width, height: 0)
@@ -96,7 +96,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
             , action: #selector(removeTransparent))
         transparentView.addGestureRecognizer(tapGesture)
         transparentView.alpha = 0
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: { 
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
             self.transparentView.alpha = 0.5
             self.tableViews.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height + 5, width: frames.width, height: CGFloat(self.waySources.count * 50) )
         }, completion: nil)
@@ -106,7 +106,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
     @objc func removeTransparent(){
         let frames = selectDeliverWayButton.frame
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0,
-                       options: .curveEaseInOut, animations: { 
+                       options: .curveEaseInOut, animations: {
                         self.transparentView.alpha = 0
                         self.tableViews.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height + 5, width: frames.width, height: 0)
         }, completion: nil)
@@ -143,17 +143,17 @@ class HomeController: UIViewController,UITextFieldDelegate {
         Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)
             .child("Profile")
             .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in 
+            .observeSingleEvent(of: .value, with: { snapshot in
                 guard let value = snapshot.value as? [String:Any] else{
                     print("Error")
                     return
                 }
                 
                 if (value["way"] as? String) == "google"{
-                    let message = UIAlertController(title: "您已註冊成功", message: "", preferredStyle: .alert)
-                    let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in 
+                    let message = UIAlertController(title: "您已註冊 登入成功", message: "", preferredStyle: .alert)
+                    let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in
                         print("here go to profile page!")
-                        self.transitionToLogInScene()
+                        self.transitionToMain()
                         
                     })
                     message.addAction(confirmAction)
@@ -162,7 +162,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
                 }else{
                     let message = UIAlertController(title: "註冊成功", message: nil, preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "返回登入頁面", style: .default, handler:
-                    {action in 
+                    {action in
                         print("here need to return login page!")
                         self.transitionToLogInScene()
                     })
@@ -181,6 +181,14 @@ class HomeController: UIViewController,UITextFieldDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as! LogInController
         self.navigationController?.pushViewController(vc,animated: true)
     }
+    
+    func transitionToMain(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+            print("login success")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
 }
 
 
@@ -209,7 +217,3 @@ extension HomeController : UITableViewDelegate, UITableViewDataSource{
         removeTransparent()
     }
 }
-
-
-
-
