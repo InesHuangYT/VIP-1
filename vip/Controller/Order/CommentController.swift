@@ -24,11 +24,11 @@ class CommentController: UIViewController {
     var selectButton = UIButton()
     let transparentView = UIView()
     let tableViews = UITableView()
-    var productIdString = [String]()
+    var productIdString = String()
+    var productIdStringAll = [String]()
     var uid = ""
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         btnAction()
         collectionViewDeclare()
@@ -108,7 +108,7 @@ class CommentController: UIViewController {
         self.collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "CommentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CommentCollectionViewCell")
+        collectionView.register(UINib(nibName: "ProcessingOrderInformationCell", bundle: nil), forCellWithReuseIdentifier: "ProcessingOrderInformationCell")
     }
     
     func setupGridView(){
@@ -128,11 +128,30 @@ class CommentController: UIViewController {
     }
     
     @IBAction func comfirmButtonPressed(_ sender: Any) {
+        let message = UIAlertController(title: "評論成功", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "回首頁", style: .default, handler:
+        {action in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as!  ViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        
+        let commentCartAction = UIAlertAction(title: "繼續評論其他商品", style: .default, handler:  {action in
+            let storyboard: UIStoryboard = UIStoryboard(name: "Order", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "CommentAllController") as! CommentAllController
+            vc.productIdString = self.productIdStringAll
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        
+        message.addAction(confirmAction)
+        message.addAction(commentCartAction)
+        self.present(message, animated: true, completion: nil)
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Order", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentAllController") as!  CommentAllController
+        vc.productIdString = productIdStringAll
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -140,13 +159,13 @@ class CommentController: UIViewController {
 extension CommentController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         
-        return productIdString.count
+        return 1
     
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCollectionViewCell", for: indexPath) as! CommentCollectionViewCell
-        cell.setLabel(productId:productIdString[indexPath.row])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProcessingOrderInformationCell", for: indexPath) as! ProcessingOrderInformationCell
+        cell.setLabel(productId:productIdString)
         
         return cell
         
@@ -154,8 +173,6 @@ extension CommentController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        vc.fromMyOrder = true
-        vc.productId = productIdString[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
