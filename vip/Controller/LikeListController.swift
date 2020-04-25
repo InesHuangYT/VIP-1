@@ -16,6 +16,7 @@ class LikeListController: UIViewController {
     @IBOutlet weak var productCollectionView: UICollectionView!
     @IBOutlet weak var groupBuyCollectionView: UICollectionView!
     
+    @IBOutlet weak var myLikeListLabel: UILabel!
     
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
@@ -33,7 +34,11 @@ class LikeListController: UIViewController {
         btnAction()
         collectionViewDeclare()
         ref = Database.database().reference()
+        likeListLabel()
+        
         print("likeListProductId",likeListProductId)
+        print("likeListGroupProductId",likeListGroupProductId)
+        
         
         
     }
@@ -42,7 +47,6 @@ class LikeListController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
-    
     
     func collectionViewDeclare(){
         productCollectionView.reloadData()
@@ -56,6 +60,11 @@ class LikeListController: UIViewController {
         groupBuyCollectionView.register(UINib(nibName: "ShoppingCartCollectionViewCell", bundle: nil),forCellWithReuseIdentifier: "ShoppingCartCollectionViewCell")
     }
     
+    func likeListLabel(){
+        if  likeListGroupCounts==0 && likeListCounts==0 {
+            myLikeListLabel.text = "目前你的最愛是空的哦！" 
+        }
+    }
     
     func findProductIndex(searchId:String,vc:ProductInformationController){
         let productRef =  Database.database().reference().child("Product")
@@ -113,6 +122,13 @@ class LikeListController: UIViewController {
         
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+        let newFrontViewController = UINavigationController.init(rootViewController: desController)
+        
+        revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+    }
     
 }
 
