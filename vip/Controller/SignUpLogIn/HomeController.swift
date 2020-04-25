@@ -43,7 +43,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
         setUpTextField()
         print("current user uidd : " , currentUserName())
         phoneTextFieldColor()
-
+        
     }
     
     func phoneTextFieldColor(){
@@ -150,10 +150,10 @@ class HomeController: UIViewController,UITextFieldDelegate {
                 }
                 
                 if (value["way"] as? String) == "google"{
-                    let message = UIAlertController(title: "您已註冊成功", message: "", preferredStyle: .alert)
+                    let message = UIAlertController(title: "您已註冊 登入成功", message: "", preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in 
                         print("here go to profile page!")
-                        self.transitionToLogInScene()
+                        self.transitionToMain() 
                         
                     })
                     message.addAction(confirmAction)
@@ -181,6 +181,14 @@ class HomeController: UIViewController,UITextFieldDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "LogInControllerId") as! LogInController
         self.navigationController?.pushViewController(vc,animated: true)
     }
+    
+    func transitionToMain(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+            print("login success")
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
 }
 
 

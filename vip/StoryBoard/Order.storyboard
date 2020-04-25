@@ -48,15 +48,41 @@
                                     <action selector="callservice:" destination="rAk-Tz-KkJ" eventType="touchUpInside" id="s2a-Ga-YkD"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前尚無訂單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KR-y9-sKp">
+                                <rect key="frame" x="16" y="12" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9Q-wp-blD">
+                                <rect key="frame" x="143" y="5" width="109" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="8Zn-NB-ml2"/>
+                                    <constraint firstAttribute="width" constant="109" id="YNn-rX-kYg"/>
+                                </constraints>
+                                <state key="normal" title="返回首頁" backgroundImage="回主畫面">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backToMain:" destination="rAk-Tz-KkJ" eventType="touchUpInside" id="8nq-Qu-bW2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90458238120000001" green="0.96429640049999998" blue="0.84804666039999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ogs-bO-6Gm" firstAttribute="leading" secondItem="N9Q-wp-blD" secondAttribute="trailing" constant="85" id="5yh-wy-Pu6"/>
+                            <constraint firstItem="9KR-y9-sKp" firstAttribute="leading" secondItem="gly-yk-h9e" secondAttribute="leading" constant="16" id="DXn-vA-bcO"/>
                             <constraint firstItem="HCz-9g-gff" firstAttribute="bottom" secondItem="gly-yk-h9e" secondAttribute="bottom" id="Fd5-rc-saa"/>
                             <constraint firstItem="Ogs-bO-6Gm" firstAttribute="leading" secondItem="gly-yk-h9e" secondAttribute="leading" constant="337" id="HNg-ew-KCP"/>
                             <constraint firstItem="HCz-9g-gff" firstAttribute="top" secondItem="Ogs-bO-6Gm" secondAttribute="bottom" constant="8" id="L74-N7-QWC"/>
                             <constraint firstItem="Ogs-bO-6Gm" firstAttribute="trailing" secondItem="HCz-9g-gff" secondAttribute="trailing" id="aIV-D4-pqO"/>
+                            <constraint firstItem="HCz-9g-gff" firstAttribute="top" secondItem="N9Q-wp-blD" secondAttribute="bottom" constant="10" id="beE-mx-T7m"/>
+                            <constraint firstItem="HCz-9g-gff" firstAttribute="top" secondItem="9KR-y9-sKp" secondAttribute="bottom" constant="14" id="dbn-ZE-ibB"/>
                             <constraint firstItem="Ogs-bO-6Gm" firstAttribute="top" secondItem="gly-yk-h9e" secondAttribute="top" constant="6" id="faC-ht-V75"/>
                             <constraint firstItem="HCz-9g-gff" firstAttribute="centerX" secondItem="YkN-YT-Hno" secondAttribute="centerX" id="fsC-nE-D6r"/>
+                            <constraint firstItem="N9Q-wp-blD" firstAttribute="top" secondItem="gly-yk-h9e" secondAttribute="top" constant="5" id="h8P-3c-kPb"/>
+                            <constraint firstItem="N9Q-wp-blD" firstAttribute="leading" secondItem="9KR-y9-sKp" secondAttribute="trailing" constant="23" id="nc4-7Q-9fE"/>
+                            <constraint firstItem="9KR-y9-sKp" firstAttribute="top" secondItem="gly-yk-h9e" secondAttribute="top" constant="12" id="xF4-nd-nff"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gly-yk-h9e"/>
                     </view>
@@ -66,8 +92,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backToMain" destination="N9Q-wp-blD" id="hWq-q9-7WI"/>
                         <outlet property="btnMenu" destination="gRd-ci-0XL" id="CMI-ZI-Pj6"/>
                         <outlet property="collectionView" destination="HCz-9g-gff" id="Yaa-wZ-iWL"/>
+                        <outlet property="orderZero" destination="9KR-y9-sKp" id="LN1-XW-Z6L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KTk-pU-7CA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -153,18 +181,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLY-Sl-3Sw">
-                                <rect key="frame" x="140" y="620" width="95" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="bRR-eR-Vri"/>
-                                </constraints>
-                                <state key="normal" title="返回" backgroundImage="back">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="backButton:" destination="x92-hv-euh" eventType="touchUpInside" id="rsj-Cv-edm"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94l-Pe-8Pr">
                                 <rect key="frame" x="330" y="7" width="38" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="1"/>
@@ -210,14 +226,36 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLY-Sl-3Sw">
+                                <rect key="frame" x="163" y="619" width="95" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="bRR-eR-Vri"/>
+                                </constraints>
+                                <state key="normal" title="返回" backgroundImage="back">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="x92-hv-euh" eventType="touchUpInside" id="rsj-Cv-edm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hry-zQ-fiy">
+                                <rect key="frame" x="116" y="626" width="25" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="取消訂單" backgroundImage="cross">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="x92-hv-euh" eventType="touchUpInside" id="vSP-aj-dOV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Xwp-t4-Mfh" firstAttribute="bottom" secondItem="LLY-Sl-3Sw" secondAttribute="bottom" constant="8" id="1ZT-rR-Rcx"/>
+                            <constraint firstItem="Xwp-t4-Mfh" firstAttribute="bottom" secondItem="LLY-Sl-3Sw" secondAttribute="bottom" constant="9" id="1ZT-rR-Rcx"/>
                             <constraint firstItem="Yte-Tz-iI7" firstAttribute="centerX" secondItem="8C6-ZM-KJs" secondAttribute="centerX" id="2O3-Wq-l6v"/>
                             <constraint firstItem="W1S-F0-gzq" firstAttribute="top" secondItem="1Um-W7-6of" secondAttribute="bottom" constant="12" id="5r1-40-8Dp"/>
                             <constraint firstItem="Yte-Tz-iI7" firstAttribute="centerX" secondItem="xEa-0q-F68" secondAttribute="centerX" id="9Pp-zE-jqz"/>
-                            <constraint firstItem="LLY-Sl-3Sw" firstAttribute="leading" secondItem="Xwp-t4-Mfh" secondAttribute="leading" constant="140" id="D5l-Nm-drG"/>
+                            <constraint firstItem="LLY-Sl-3Sw" firstAttribute="leading" secondItem="Xwp-t4-Mfh" secondAttribute="leading" constant="163" id="D5l-Nm-drG"/>
                             <constraint firstItem="ixD-n7-twr" firstAttribute="top" secondItem="si0-eN-G8e" secondAttribute="bottom" constant="8" id="FOU-99-UXf"/>
                             <constraint firstItem="4Ec-6a-tfr" firstAttribute="leading" secondItem="si0-eN-G8e" secondAttribute="leading" id="G4f-7g-xri"/>
                             <constraint firstItem="4Ec-6a-tfr" firstAttribute="top" secondItem="sZy-yz-Tu6" secondAttribute="bottom" id="IoI-Hj-yNH"/>
@@ -232,14 +270,14 @@
                             <constraint firstItem="W1S-F0-gzq" firstAttribute="leading" secondItem="Xwp-t4-Mfh" secondAttribute="leading" constant="57" id="ezn-U1-av8"/>
                             <constraint firstItem="1Um-W7-6of" firstAttribute="leading" secondItem="Xwp-t4-Mfh" secondAttribute="leading" constant="22" id="hFY-pg-3dN"/>
                             <constraint firstItem="8C6-ZM-KJs" firstAttribute="top" secondItem="Yte-Tz-iI7" secondAttribute="bottom" constant="8" id="kPv-PX-5Xh"/>
-                            <constraint firstItem="LLY-Sl-3Sw" firstAttribute="top" secondItem="ixD-n7-twr" secondAttribute="bottom" constant="19" id="kSA-Pn-0Dg"/>
+                            <constraint firstItem="LLY-Sl-3Sw" firstAttribute="top" secondItem="ixD-n7-twr" secondAttribute="bottom" constant="18" id="kSA-Pn-0Dg"/>
                             <constraint firstItem="yCc-Mx-EDS" firstAttribute="top" secondItem="Xwp-t4-Mfh" secondAttribute="top" constant="20" id="m2v-LB-XEP"/>
                             <constraint firstItem="8C6-ZM-KJs" firstAttribute="trailing" secondItem="si0-eN-G8e" secondAttribute="trailing" id="nEa-Mb-q2q"/>
                             <constraint firstItem="sZy-yz-Tu6" firstAttribute="leading" secondItem="4Ec-6a-tfr" secondAttribute="leading" id="nfo-1d-DMh"/>
                             <constraint firstItem="ryj-mV-NcL" firstAttribute="leading" secondItem="sZy-yz-Tu6" secondAttribute="leading" id="pze-II-cGG"/>
                             <constraint firstItem="Yte-Tz-iI7" firstAttribute="top" secondItem="yCc-Mx-EDS" secondAttribute="bottom" constant="8" id="rCc-RS-Rk9"/>
                             <constraint firstItem="94l-Pe-8Pr" firstAttribute="top" secondItem="Xwp-t4-Mfh" secondAttribute="top" constant="7" id="vUa-pM-kHz"/>
-                            <constraint firstItem="ixD-n7-twr" firstAttribute="centerX" secondItem="LLY-Sl-3Sw" secondAttribute="centerX" id="wTE-0R-ukz"/>
+                            <constraint firstItem="ixD-n7-twr" firstAttribute="centerX" secondItem="LLY-Sl-3Sw" secondAttribute="centerX" constant="-23" id="wTE-0R-ukz"/>
                             <constraint firstItem="sZy-yz-Tu6" firstAttribute="top" secondItem="ryj-mV-NcL" secondAttribute="bottom" constant="1" id="xlu-MC-k3n"/>
                             <constraint firstItem="1Um-W7-6of" firstAttribute="leading" secondItem="ryj-mV-NcL" secondAttribute="leading" id="xtl-C5-OnZ"/>
                             <constraint firstItem="Xwp-t4-Mfh" firstAttribute="trailing" secondItem="94l-Pe-8Pr" secondAttribute="trailing" constant="7" id="zHO-X2-OGc"/>
@@ -554,7 +592,9 @@
         <image name="List_button" width="18" height="11"/>
         <image name="back" width="253" height="86"/>
         <image name="comment" width="118" height="80"/>
+        <image name="cross" width="25" height="25"/>
         <image name="detailInformation" width="118" height="80"/>
         <image name="support" width="33" height="33"/>
+        <image name="回主畫面" width="253" height="66"/>
     </resources>
 </document>

@@ -27,7 +27,7 @@ class ProcessingOrderInformationController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     //processing order cpntroller 傳值過來
-    var orderIndex = Int()
+    var orderIndex = Int() //not use
     var orderIds = String()
     var productIdString = [String]()
     var progresss = String()
@@ -44,31 +44,31 @@ class ProcessingOrderInformationController: UIViewController {
         collectionViewDeclare()
         setupGridView()
         setLabel()
-    
+        
         print("productIdString",productIdString)
     }
     
     
     
     @IBAction func callservice(_ sender: Any) {
-        if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+        if let callURL:URL = URL(string: "tel:\(886961192398)") {
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     func btnAction(){
         btnMenu.target = self.revealViewController()
@@ -103,7 +103,7 @@ class ProcessingOrderInformationController: UIViewController {
         if progresss == "Delivered" {
             progress.text = "此訂單已到貨"
         } 
-
+        
         //time
         let timeStamp = Double(orderCreateTimes) ?? 1000000000
         let timeInterval:TimeInterval = TimeInterval(timeStamp)
@@ -128,6 +128,55 @@ class ProcessingOrderInformationController: UIViewController {
                 self.payWay.text = "付款方式    " + (paymentWays!)
                 self.deliverWay.text = "寄送方式    " + (deliverWays!)
             })
+    }
+    
+    
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        let cancelMessage = UIAlertController(title: "確認要取消訂單？", message: "", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in
+            let productOrderRef = Database.database().reference().child("ProductOrder")
+            let userProductOrderRef = Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
+            productOrderRef.child(self.orderIds).removeValue()
+            userProductOrderRef.child("OrderId").child(self.orderIds).removeValue()
+            userProductOrderRef.child("Status").child("Processing").child("OrderId").child(self.orderIds).removeValue()
+            print("remove orderId completed!")
+            
+            let message = UIAlertController(title: "已取消訂單", message: "", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "確認", style: .default, handler: {action in
+                self.transitionToProcessingOrder(myOderRef: userProductOrderRef)
+            })
+            message.addAction(okAction)
+            //       在cell裡面增加button 讓controller跳出alert
+            self.present(message, animated: true, completion: nil)
+            
+        })
+        let backAction = UIAlertAction(title: "返回", style: .cancel, handler: {action in
+        })
+        cancelMessage.addAction(confirmAction)
+        cancelMessage.addAction(backAction)        
+        //       在cell裡面增加button 讓controller跳出alert
+        self.present(cancelMessage, animated: true, completion: nil)
+        
+        
+    }
+    
+    func transitionToProcessingOrder(myOderRef:DatabaseReference){
+        let storyboard = UIStoryboard(name: "Order", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ProcessingOrderControllerId") as! ProcessingOrderController
+        let myOderRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
+        var myOrderId = [String]()
+        myOderRef.child("Status").child("Processing/OrderId").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let datas = snapshot.children.allObjects as? [DataSnapshot]{
+                vc.myOrderCount = datas.count
+                
+                for data in datas {
+                    myOrderId.append(data.key)
+                }
+                vc.myOrderId = myOrderId
+                self.navigationController?.pushViewController(vc,animated: true) 
+            }
+        })
     }
     
     
