@@ -9,7 +9,15 @@
 import UIKit
 import Firebase
 
+
+//protocol ProcessingOrderProtocol{
+//    func deleteData(index:Int)
+//}
+
 class ProcessingOrderCell: UICollectionViewCell {
+    
+    var delegate: UIViewController?
+//    var delegates: ProcessingOrderProtocol?
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var name: UILabel!
@@ -17,9 +25,13 @@ class ProcessingOrderCell: UICollectionViewCell {
     @IBOutlet weak var progress: UILabel!
     @IBOutlet weak var payment: UILabel!
     
+    var orderId = String()
+    var removeIndex = Int()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         cellColorSet()
+        print("removeIndex",removeIndex)
     }
     
     func cellColorSet(){
@@ -50,10 +62,10 @@ class ProcessingOrderCell: UICollectionViewCell {
             if orderProgress == "Delivered" {
                 self.progress.text = "此訂單已到貨"
             } 
-//            if orderProgress == "Picked" {
-//                self.progress.text = "已取貨"
-//            } 
-  
+            //            if orderProgress == "Picked" {
+            //                self.progress.text = "已取貨"
+            //            } 
+            
             
             self.payment.text = "付款總金額" + (payment) + "元"
             
@@ -82,14 +94,14 @@ class ProcessingOrderCell: UICollectionViewCell {
                 }
                 self.name.text = name as? String
                 self.price.text = price 
-                
-                
             })
-            
-            
-            
-            
             
         })
     }
+    
+    
+    
+   
+    
+    
 }

@@ -183,7 +183,7 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     }
     
     @IBAction func callservice(_ sender: Any) {
-        if let callURL:URL = URL(string: "tel:\(+886961192398)") {
+        if let callURL:URL = URL(string: "tel:\(886961192398)") {
             
             let application:UIApplication = UIApplication.shared
             

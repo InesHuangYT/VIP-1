@@ -119,7 +119,6 @@ class OrderComfirmController: UIViewController {
         orderRef.child("ProductId").setValue(selectProductId)
         orderRef.child("OrderStatus").setValue("Processing")
         orderRef.child("OrderCreateTime").setValue(timeStamp)
-        userProductRef.child("OrderId").setValue(orderId)
         userProductRef.child("OrderId").child(orderId ?? "").child("ProductId").setValue(selectProductId)
         userProductRef.child("Status").child("Processing").child("OrderId").child(orderId ?? "").setValue(orderId)
         
