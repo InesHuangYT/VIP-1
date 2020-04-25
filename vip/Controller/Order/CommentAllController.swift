@@ -56,7 +56,7 @@ class CommentAllController: UIViewController {
         self.collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "ProcessingOrderInformationCell", bundle: nil), forCellWithReuseIdentifier: "ProcessingOrderInformationCell")
+        collectionView.register(UINib(nibName: "CommentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CommentCollectionViewCell")
     }
     
     func setupGridView(){
@@ -74,17 +74,17 @@ extension CommentAllController : UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProcessingOrderInformationCell", for: indexPath) as! ProcessingOrderInformationCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCollectionViewCell", for: indexPath) as! CommentCollectionViewCell
         cell.setLabel(productId:productIdString[indexPath.row])
         
         return cell
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Product", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        vc.fromMyOrder = true
-        vc.productId = productIdString[indexPath.row]
+        let storyboard = UIStoryboard(name: "Order", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CommentController") as!  CommentController
+        vc.productIdString = productIdString[indexPath.row]
+        vc.productIdStringAll = productIdString
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
