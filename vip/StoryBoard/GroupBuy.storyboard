@@ -787,6 +787,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnMenu" destination="dfR-rC-VJd" id="CG0-nm-0f4"/>
+                        <outlet property="cancelButton" destination="fM3-09-haN" id="gnE-oo-H87"/>
                         <outlet property="collectionView" destination="GZ3-1O-1XY" id="Ynl-wH-K22"/>
                         <outlet property="deliverWaysLabel" destination="HXV-D5-GIV" id="vfO-Mb-x7A"/>
                         <outlet property="orderID" destination="Trb-ww-dLw" id="oIb-sh-EQ8"/>

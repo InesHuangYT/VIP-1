@@ -28,7 +28,6 @@ class DeadLineController: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionViewDeclare()
         self.setupGridView()
         btnAction()
@@ -162,7 +161,7 @@ extension DeadLineController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DeadLineCollectionViewCell", for: indexPath) as! DeadLineCollectionViewCell
-        cell.setProductLabel(productId: productIdString[indexPath.row], fromGroupBuy: false)
+        cell.setProductLabel(productId: productIdString[indexPath.row], fromGroupBuy: fromGroupBuy)
         print("productIdString Call",productIdString[indexPath.row])
         
         return cell
@@ -172,6 +171,7 @@ extension DeadLineController : UICollectionViewDataSource{
         let storyboard = UIStoryboard(name: "DeadLine", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "DeadLineInformationController") as!  DeadLineInformationController
         vc.productId = productIdString[indexPath.row]
+        vc.fromGroupBuy = true
         self.navigationController?.pushViewController(vc,animated: true)
     }
 }
