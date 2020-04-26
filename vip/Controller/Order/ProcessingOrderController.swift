@@ -62,11 +62,12 @@ class ProcessingOrderController: UIViewController {
     }
     
     @IBAction func backToMain(_ sender: Any) {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
-        let newFrontViewController = UINavigationController.init(rootViewController: desController)
-        
-        revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let desController = mainStoryboard.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+//        let newFrontViewController = UINavigationController.init(rootViewController: desController)
+//        
+//        revealViewController().pushFrontViewController(newFrontViewController, animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -124,9 +125,8 @@ class ProcessingOrderController: UIViewController {
 extension ProcessingOrderController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         if myOrderCount != 0 {
-            print("Htttt")
             orderZero.isHidden = true
-            backToMain.isHidden = true
+//            backToMain.isHidden = true
         }
         
         return myOrderCount
