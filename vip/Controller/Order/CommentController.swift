@@ -37,6 +37,7 @@ class CommentController: UIViewController ,SFSpeechRecognizerDelegate, UITextFie
     let tableViews = UITableView()
     var productIdString = String()
     var productIdStringAll = [String]()
+    var orderIds = String()
     var fromGroupBuy = false
     var uid = ""
 
@@ -54,7 +55,7 @@ class CommentController: UIViewController ,SFSpeechRecognizerDelegate, UITextFie
         commentTextField.delegate = self
 
         print(productIdString)
-        print("current user uidd : " , currentUserName())
+        print("orderIds" , orderIds)
     }
 
     func currentUserName()->(String){
@@ -383,6 +384,8 @@ extension CommentController : UITableViewDelegate, UITableViewDataSource{
         print("cell:",cells?.textLabel?.text! ?? 0)
 
             Database.database().reference(withPath: "Product/\(self.productIdString)/ProductEvaluation/\(self.uid)/grade").setValue(cells?.textLabel?.text!)
+            Database.database().reference(withPath: "ProductOrder/\(orderIds)/Comment/").setValue("true")
+            Database.database().reference(withPath: "ProductOrder/\(orderIds)/CommentProductId/\(productIdString)").setValue("true")
             removeTransparent()
     }
 }

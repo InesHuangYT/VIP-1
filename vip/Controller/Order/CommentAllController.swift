@@ -16,11 +16,14 @@ class CommentAllController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var commentLabel: UILabel!
+
     
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     
     var uid = ""
+    var orderIds = String()
     var productIdString = [String]()
     var fromGroupBuy = false
     //    var commentfinish = [BooleanLiteralType]()
@@ -33,6 +36,10 @@ class CommentAllController: UIViewController {
         collectionViewDeclare()
         setupGridView()
         
+        if productIdString.isEmpty {
+            commentLabel.font = UIFont(name: "Helvetica-Light", size: 20)
+            commentLabel.text = "這個訂單商品已評論完"
+        }
         
         //        for i in 0...productIdString.count-1{
         //            commentfinish.append(true)
@@ -56,6 +63,7 @@ class CommentAllController: UIViewController {
         return(uid)
     }
     
+
     @IBAction func servicecall(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
             
@@ -116,6 +124,7 @@ extension CommentAllController : UICollectionViewDataSource{
         vc.productIdString = productIdString[indexPath.row]
         vc.productIdStringAll = productIdString
         vc.fromGroupBuy = fromGroupBuy
+        vc.orderIds = orderIds
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
