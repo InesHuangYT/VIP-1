@@ -76,28 +76,28 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     func audioPlay(){
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         try! AVAudioSession.sharedInstance().setActive(true)
-
+        
         try! audioPlayer = AVAudioPlayer(contentsOf: Sound)
         audioPlayer?.play()
     }
     
     @IBAction func microphoneTapped(_ sender: Any) {
         microphoneaccess()
-            if audioEngine.isRunning {
-                audioEngine.stop()
-                recognitionTask?.cancel()
-                recognitionRequest?.endAudio()
-                microphoneButton.isEnabled = false
-                microphoneButton.setTitle( "開始語音輸入", for: .normal)
-                microphoneButton.setImage(UIImage(named: "microphone"), for: .normal)
-            } else {
-                try! audioPlayer = AVAudioPlayer(contentsOf: Sound)
-                audioPlayer?.play()
-                
-                startRecording()
-                microphoneButton.setTitle( "語音輸入完成", for: .normal)
-                microphoneButton.setImage(UIImage(named: "microphone-2"), for: .normal)
-            }
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionTask?.cancel()
+            recognitionRequest?.endAudio()
+            microphoneButton.isEnabled = false
+            microphoneButton.setTitle( "開始語音輸入", for: .normal)
+            microphoneButton.setImage(UIImage(named: "microphone"), for: .normal)
+        } else {
+            try! audioPlayer = AVAudioPlayer(contentsOf: Sound)
+            audioPlayer?.play()
+            
+            startRecording()
+            microphoneButton.setTitle( "語音輸入完成", for: .normal)
+            microphoneButton.setImage(UIImage(named: "microphone-2"), for: .normal)
+        }
     }
     
     func startRecording() {

@@ -127,6 +127,7 @@ class MyGroupBuyController: UIViewController {
         userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
                 
+                vc.status = status
                 let orderId = snapshots[index].key
                 vc.orderAutoId = orderId
                 orderRef.child(orderId).queryOrderedByKey()
@@ -231,7 +232,7 @@ extension MyGroupBuyController : UICollectionViewDataSource{
             vc.index = indexPath.row
             getProductId(index:indexPath.row , status: "Waiting", vc: vc)
         }
-        else{
+        else if collectionView.isEqual(historyCollectionView){
             
             let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
             let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child("History").child("OrderId")

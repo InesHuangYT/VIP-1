@@ -15,6 +15,7 @@ class MyGroupBuyOrderController: UIViewController {
     @IBOutlet weak var payFeeLabel: UILabel!
     @IBOutlet weak var payWaysLabel: UILabel!
     @IBOutlet weak var deliverWaysLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -32,6 +33,11 @@ class MyGroupBuyOrderController: UIViewController {
         btnAction()
         userInfo()
         collectionViewDeclare()
+        
+        if (status == "Ready" || status == "History")   {
+            cancelButton.isHidden = true //已成團無法刪除訂單
+        }
+        
     }
     
     @IBAction func callservice(_ sender: Any) {

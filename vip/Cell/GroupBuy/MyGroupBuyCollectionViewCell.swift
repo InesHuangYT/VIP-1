@@ -72,7 +72,7 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
                                     let url = productValue?["imageURL"] as? String ?? ""
                                     
                                     self.name.text = name
-                                    self.price.text = price 
+                                    self.price.text = price + "元"
                                     
                                     
                                     groupBuyRef.child(productId).child("OpenGroupId").child(openGroupId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
@@ -140,7 +140,7 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
             //     開團者已通知商家
         else if status == "Already Notify to Seller" {
             
-            self.status.text = "已通知商家出貨"
+            self.status.text = "開團者已通知商家出貨"
         }
             
         else if status == "Seller Shipped"{

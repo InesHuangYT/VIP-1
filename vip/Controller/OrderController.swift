@@ -25,7 +25,6 @@ class OrderController: UIViewController {
     
     @IBAction func transitionToProcessingOrder(_ sender: Any) {
         
-        
         let storyboard = UIStoryboard(name: "Order", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProcessingOrderControllerId") as! ProcessingOrderController
         let myOderRef =  Database.database().reference().child("UserProduct").child(Auth.auth().currentUser?.uid ?? "")
@@ -39,10 +38,7 @@ class OrderController: UIViewController {
                 }
                 vc.myOrderId = myOrderId
                 self.navigationController?.pushViewController(vc,animated: true)
-                
-                
-                
-                
+ 
             }
         })
         
