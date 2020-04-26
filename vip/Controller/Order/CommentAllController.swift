@@ -102,6 +102,10 @@ class CommentAllController: UIViewController {
         flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
     }
     
+    @IBAction func backButton(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
 extension CommentAllController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
@@ -111,10 +115,7 @@ extension CommentAllController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCollectionViewCell", for: indexPath) as! CommentCollectionViewCell
-        
-        //        if(commentfinish[indexPath.row] == false){
         cell.setLabel(productId:productIdString[indexPath.row],fromGroupBuy: fromGroupBuy)
-        //        }
         return cell
         
     }

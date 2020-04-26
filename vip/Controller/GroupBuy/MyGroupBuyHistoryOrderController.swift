@@ -117,9 +117,24 @@ class MyGroupBuyHistoryOrderController: UIViewController {
         let storyboardDeadLine = UIStoryboard(name:"Order",bundle:nil)
         let vc = storyboardDeadLine.instantiateViewController(withIdentifier: "CommentAllController") as! CommentAllController 
         vc.fromGroupBuy = true
-        vc.productIdString.append(productId)
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.orderIds = orderAutoId
+        checkIfCommentBefore(vc:vc)
+    }
+    
+    
+    func checkIfCommentBefore(vc:CommentAllController){
+        let orderRef = Database.database().reference().child("GroupBuyOrder").child(orderAutoId)
+        orderRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            let value = snapshot.value as? NSDictionary
+            let comment = value?["Comment"] as? String
+            print("comment",comment ?? "")      
+            if comment == "false"{
+                vc.productIdString.append(self.productId)
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else{
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        })
     }
     
     @IBAction func detailInformation(_ sender: Any) {

@@ -164,22 +164,13 @@ class HistoryOrderInformationController: UIViewController {
                             needComment.append(i)
                         }
                     }
-                    
                    print("needComment 沒評論過的有",needComment)
                     vc.productIdString = needComment
                     self.navigationController?.pushViewController(vc, animated: true)
-                
-                    
-                    
+ 
                 })
             }
-            
-            
-            
         })
-        
-        
-        
         
     }
     
