@@ -12,6 +12,14 @@ class MyGroupBuyOrderController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var orderID: UILabel!
+    @IBOutlet weak var progress: UILabel!
+    @IBOutlet weak var orderCreateTime: UILabel!
+    @IBOutlet weak var payTime: UILabel!
+    @IBOutlet weak var deliverStartTime: UILabel!
+    @IBOutlet weak var deliverArriveTime: UILabel!
+    @IBOutlet weak var orderFinishTime: UILabel!
+    @IBOutlet weak var notificateToSeller: UIButton!
+    
     @IBOutlet weak var payFeeLabel: UILabel!
     @IBOutlet weak var payWaysLabel: UILabel!
     @IBOutlet weak var deliverWaysLabel: UILabel!
@@ -19,9 +27,11 @@ class MyGroupBuyOrderController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var productId = String()
     var estimatedWidth = 280.0
     var cellMarginSize = 16.0
+    
+    var productId = String()
+    var openGroupId = String()
     var payFee = String()
     var orderAutoId = String()
     var status = String()
@@ -33,18 +43,17 @@ class MyGroupBuyOrderController: UIViewController {
         btnAction()
         userInfo()
         collectionViewDeclare()
-        
-        if (status == "Ready" || status == "History")   {
-            cancelButton.isHidden = true //已成團無法刪除訂單
+        print("index",index)
+
+        if status == "Ready" {
+            cancelButton.isHidden = true //已成團就無法刪除訂單
         }
         
     }
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-            
             let application:UIApplication = UIApplication.shared
-            
             if (application.canOpenURL(callURL)) {
                 let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
                 let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
@@ -53,7 +62,6 @@ class MyGroupBuyOrderController: UIViewController {
                 let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
                     print("Canceled Call")
                 })
-                
                 alert.addAction(callAction)
                 alert.addAction(noAction)
                 self.present(alert, animated: true, completion: nil)
@@ -81,7 +89,73 @@ class MyGroupBuyOrderController: UIViewController {
     }
     
     func setLabel(value:[String:Any]){
+        //        progress
+        let groupBuyStatusRef = Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId").child(openGroupId)
+        let groupBuyRef = Database.database().reference().child("GroupBuy")
+        let groupBuyOrderRef = Database.database().reference().child("GroupBuyOrder")
         
+        
+        groupBuyStatusRef.queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in
+                let statusValue = snapshot.value as? NSDictionary
+                let status = statusValue?["Status"] as? String ?? ""
+                
+                //已成團
+                if status == "Ready" {
+                    self.notificateToSeller.isHidden = false
+                    groupBuyStatusRef.child("OpenBy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                        if let snapshot1 = snapshot.children.allObjects as? [DataSnapshot]{  
+                            print("snapshot1[0]",snapshot1[0].key)
+                            if((Auth.auth().currentUser?.uid ?? "") as String == snapshot1[0].key){                                self.progress.text = "已成團"
+                            }
+                            else{
+                                self.progress.text = "等候開團者通知商家出貨"
+                            }
+                        }
+                    })   
+                } 
+                
+                if status == "Already Notify to Seller" {
+                    self.progress.text = "已通知商家出貨"
+                } 
+                if status == "Seller Shipped" {
+                    self.progress.text = "商家已出貨"
+                } 
+                if status == "Waiting" {
+                    
+                    groupBuyRef.child(self.productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                        let groupBuyPeople = snapshot.value as? NSDictionary
+                        let people = groupBuyPeople?["GroupBuyPeople"] as! String
+                        let intPeople = Int(people)
+                        print("people",Int(people) ?? 0)
+                        
+                        groupBuyStatusRef.child("JoinBy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                            if let snapshot1 = snapshot.children.allObjects as? [DataSnapshot]{  
+                                print("這個商品目前參加人數：",snapshot1.count)  
+                                let overage = intPeople! - snapshot1.count
+                                self.progress.text = "剩餘" + String(overage) + "人即成團"
+                            }
+                        })  
+                    })                    
+                } 
+            })
+        
+//        time
+        groupBuyOrderRef.child(self.orderAutoId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            let timeValue = snapshot.value as? NSDictionary
+            let orderCreateTimes = timeValue?["OrderCreateTime"] as! String
+            let timeStamp = Double(orderCreateTimes) ?? 1000000000
+            let timeInterval:TimeInterval = TimeInterval(timeStamp)
+            let date = Date(timeIntervalSince1970: timeInterval)
+            let dformatter = DateFormatter()
+            dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
+            print("新增日期時間：\(dformatter.string(from: date))")
+            self.orderCreateTime.text = "訂單成立時間    " + dformatter.string(from: date)
+            self.payTime.text = "付款時間    " + dformatter.string(from: date)
+        })
+        
+        
+        //       
         let deliverWays = value["deliverWays"] as? String
         let paymentWays = value["paymentWays"] as? String
         orderID.text = orderAutoId
@@ -95,6 +169,18 @@ class MyGroupBuyOrderController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
+    }
+    
+    @IBAction func notificatToSeller(_ sender: Any) {
+        let message = UIAlertController(title: "已幫您通知商家出貨摟", message: "", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in 
+            let groupBuyRef = Database.database().reference().child("GroupBuy")
+            groupBuyRef.child(self.productId).child("OpenGroupId").child(self.openGroupId).child("Status").setValue("Already Notify to Seller")
+            self.progress.text = "已通知商家出貨"
+            self.notificateToSeller.isHidden = true
+        })
+        message.addAction(confirmAction)
+        self.present(message, animated: true, completion: nil)
     }
     
     
@@ -180,9 +266,6 @@ class MyGroupBuyOrderController: UIViewController {
                             }
                             
                         })
-                        
-                        
-                        
                         
                     }
                     

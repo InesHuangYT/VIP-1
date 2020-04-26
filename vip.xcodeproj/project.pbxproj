@@ -40,6 +40,7 @@
 		B04A55CE244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A55CC244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift */; };
 		B04A55CF244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B04A55CD244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib */; };
 		B04A55D1244E223000AF9935 /* OrderConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A55D0244E223000AF9935 /* OrderConfirmController.swift */; };
+		B06E26C22455E99E0061627F /* MyGroupBuyHistoryOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */; };
 		B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376CD2431FCC8006D169E /* GroupBuyController.swift */; };
 		B08376EC243262BD006D169E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376EB243262BD006D169E /* CategoryController.swift */; };
 		B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376ED2432630E006D169E /* CreateCategoryController.swift */; };
@@ -310,6 +311,7 @@
 		B04A55CC244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCartCollectionViewCell.swift; sourceTree = "<group>"; };
 		B04A55CD244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartCollectionViewCell.xib; sourceTree = "<group>"; };
 		B04A55D0244E223000AF9935 /* OrderConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmController.swift; sourceTree = "<group>"; };
+		B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyHistoryOrderController.swift; sourceTree = "<group>"; };
 		B08376CD2431FCC8006D169E /* GroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyController.swift; sourceTree = "<group>"; };
 		B08376EB243262BD006D169E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 				B08376F724338185006D169E /* GroupBuyInformationController.swift */,
 				B0FE0D7B243E3BFD00479B80 /* MyGroupBuyController.swift */,
 				B048EF59244B699A0010E764 /* MyGroupBuyOrderController.swift */,
+				B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */,
 			);
 			path = GroupBuy;
 			sourceTree = "<group>";
@@ -740,6 +743,7 @@
 		B015C490242A4EB700068102 = {
 			isa = PBXReferenceProxy;
 			remoteRef = B015C48F242A4EB700068102 /* PBXContainerItemProxy */;
+			sourceTree = "<unknown>";
 		};
 		B015C4B1242A4EC600068102 /* absl.framework */ = {
 			isa = PBXReferenceProxy;
@@ -1011,6 +1015,7 @@
 				02F21D5D24210211003860F9 /* AddCouponController.swift in Sources */,
 				B08376F824338185006D169E /* GroupBuyInformationController.swift in Sources */,
 				02AC619D243DB48800A7D94C /* OrderCheckoutController.swift in Sources */,
+				B06E26C22455E99E0061627F /* MyGroupBuyHistoryOrderController.swift in Sources */,
 				B0BAC4A2244F64D9009D6162 /* ProcessingOrderInformationCell.swift in Sources */,
 				B08376F324337CF6006D169E /* GroupBuyCollectionViewCell.swift in Sources */,
 				B0FE0D19243BA52C00479B80 /* OrderComfirmCollectionViewCell.swift in Sources */,

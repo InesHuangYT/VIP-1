@@ -171,7 +171,7 @@ extension DeadLineController : UICollectionViewDataSource{
         let storyboard = UIStoryboard(name: "DeadLine", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "DeadLineInformationController") as!  DeadLineInformationController
         vc.productId = productIdString[indexPath.row]
-        vc.fromGroupBuy = true
+        vc.fromGroupBuy = fromGroupBuy
         self.navigationController?.pushViewController(vc,animated: true)
     }
 }

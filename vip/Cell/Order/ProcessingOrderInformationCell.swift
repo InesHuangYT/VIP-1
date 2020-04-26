@@ -43,7 +43,7 @@ class ProcessingOrderInformationCell: UICollectionViewCell {
             let price = value?["Price"] as? String ?? ""     
             let url = value?["imageURL"] as? String ?? ""
             self.name.text = name
-            self.price.text = price
+            self.price.text = price + "元"
             if let imageUrl = URL(string: url as! String){
                 URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                     if error != nil {
