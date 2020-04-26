@@ -231,7 +231,7 @@ class GroupBuyInformationController: UIViewController {
                                 let url = productValue?["imageURL"] as? String ?? ""
                                 
                                 self.name.text = name
-                                self.price.text = price 
+                                self.price.text = price + "元"
                                 self.productDescription.text = "產品描述 " + productDescription
                                 self.productEvaluation.text = "產品評價 " + productEvaluation
                                 self.sellerEvaluation.text = "商家評價 " + sellerEvaluation

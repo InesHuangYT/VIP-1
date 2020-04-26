@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class CommentCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var name: UILabel!
@@ -31,16 +31,21 @@ class CommentCollectionViewCell: UICollectionViewCell {
         
     }
     
-    func setLabel(productId:String){
-        
-        let productRef = Database.database().reference().child("Product").child(productId)
+    func setLabel(productId:String,fromGroupBuy:Bool){
+        var refName = String()
+        if fromGroupBuy == false{
+            refName = "Product"
+        }else{
+            refName = "GroupBuy"
+        }
+        let productRef = Database.database().reference().child(refName).child(productId)
         productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as? NSDictionary
             let name = value?["ProductName"] as? String ?? ""
-            let price = value?["Price"] as? String ?? ""
+            let price = value?["Price"] as? String ?? "" 
             let url = value?["imageURL"] as? String ?? ""
             self.name.text = name
-            self.price.text = price
+            self.price.text = price + "元"
             if let imageUrl = URL(string: url as! String){
                 URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
                     if error != nil {

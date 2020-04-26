@@ -37,6 +37,7 @@ class CommentController: UIViewController ,SFSpeechRecognizerDelegate, UITextFie
     let tableViews = UITableView()
     var productIdString = String()
     var productIdStringAll = [String]()
+    var fromGroupBuy = false
     var uid = ""
 
     override func viewDidLoad() {
@@ -132,7 +133,7 @@ class CommentController: UIViewController ,SFSpeechRecognizerDelegate, UITextFie
         self.collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "ProcessingOrderInformationCell", bundle: nil), forCellWithReuseIdentifier: "ProcessingOrderInformationCell")
+        collectionView.register(UINib(nibName: "CommentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CommentCollectionViewCell")
     }
 
     func setupGridView(){
@@ -334,8 +335,8 @@ extension CommentController : UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
 
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProcessingOrderInformationCell", for: indexPath) as! ProcessingOrderInformationCell
-        cell.setLabel(productId:productIdString)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCollectionViewCell", for: indexPath) as! CommentCollectionViewCell
+        cell.setLabel(productId:productIdString, fromGroupBuy: fromGroupBuy)
 
         return cell
 

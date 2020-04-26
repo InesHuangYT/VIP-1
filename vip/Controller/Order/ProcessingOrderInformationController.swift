@@ -112,6 +112,7 @@ class ProcessingOrderInformationController: UIViewController {
         dformatter.dateFormat = "yyyy年MM月dd日 HH:mm:ss"
         print("新增日期時間：\(dformatter.string(from: date))")
         orderCreateTime.text = dformatter.string(from: date)
+        payTime.text = dformatter.string(from: date)
         
         //payway deliverway
         let userProfileRef = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid)

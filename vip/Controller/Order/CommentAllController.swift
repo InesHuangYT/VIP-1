@@ -22,8 +22,9 @@ class CommentAllController: UIViewController {
     
     var uid = ""
     var productIdString = [String]()
-//    var commentfinish = [BooleanLiteralType]()
-//    var count = 0
+    var fromGroupBuy = false
+    //    var commentfinish = [BooleanLiteralType]()
+    //    var count = 0
     
     
     override func viewDidLoad() {
@@ -33,19 +34,19 @@ class CommentAllController: UIViewController {
         setupGridView()
         
         
-//        for i in 0...productIdString.count-1{
-//            commentfinish.append(true)
-//            print(commentfinish)
-//            Database.database().reference().child("Product").child(productIdString[i]).observeSingleEvent(of: .value, with: { snapshot in
-//                let value = snapshot.value as? NSDictionary
-//                let grade = value?["ProductEvaluation"] as? String ?? ""
-//                print(grade)
-//                if grade != ""{
-//                    self.commentfinish[i] = false
-//                    self.count = self.count+1
-//                }
-//            })
-//        }
+        //        for i in 0...productIdString.count-1{
+        //            commentfinish.append(true)
+        //            print(commentfinish)
+        //            Database.database().reference().child("Product").child(productIdString[i]).observeSingleEvent(of: .value, with: { snapshot in
+        //                let value = snapshot.value as? NSDictionary
+        //                let grade = value?["ProductEvaluation"] as? String ?? ""
+        //                print(grade)
+        //                if grade != ""{
+        //                    self.commentfinish[i] = false
+        //                    self.count = self.count+1
+        //                }
+        //            })
+        //        }
     }
     
     func currentUserName()->(String){
@@ -97,17 +98,15 @@ class CommentAllController: UIViewController {
 extension CommentAllController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         
-        return productIdString.count
-//        return self.count
-        
+        return productIdString.count        
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCollectionViewCell", for: indexPath) as! CommentCollectionViewCell
         
-//        if(commentfinish[indexPath.row] == false){
-        cell.setLabel(productId:productIdString[indexPath.row])
-//        }
+        //        if(commentfinish[indexPath.row] == false){
+        cell.setLabel(productId:productIdString[indexPath.row],fromGroupBuy: fromGroupBuy)
+        //        }
         return cell
         
     }
@@ -116,6 +115,7 @@ extension CommentAllController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentController") as!  CommentController
         vc.productIdString = productIdString[indexPath.row]
         vc.productIdStringAll = productIdString
+        vc.fromGroupBuy = fromGroupBuy
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

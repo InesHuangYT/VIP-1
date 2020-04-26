@@ -24,8 +24,6 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         cellColorSet()
-        
-        
     }
     
     func cellColorSet(){

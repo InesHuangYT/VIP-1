@@ -116,7 +116,7 @@ class MyGroupBuyController: UIViewController {
     }
     
     func getProductId(index:Int,status:String,vc:MyGroupBuyOrderController){
-        
+     
         let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
         let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child(status).child("OrderId")
         
@@ -133,8 +133,11 @@ class MyGroupBuyController: UIViewController {
                 orderRef.child(orderId).queryOrderedByKey()
                     .observeSingleEvent(of: .value, with: { snapshot in 
                         let orderValue = snapshot.value as? NSDictionary
+                        let openGroupId = orderValue?["OpenGroupId"] as? String ?? ""
+                        
                         let payfee = orderValue?["Payment"] as? String ?? ""
                         vc.payFee = payfee
+                        vc.openGroupId = openGroupId
                         print("payFee",payfee)
                         
                         
@@ -164,6 +167,62 @@ class MyGroupBuyController: UIViewController {
         
         
     }
+    
+    
+    
+    func getHistoryProductId(index:Int,status:String,vc:MyGroupBuyHistoryOrderController){
+     
+        let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
+        let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child(status).child("OrderId")
+        
+        let groupBuyRef = Database.database().reference().child("GroupBuy")
+        let orderRef = Database.database().reference().child("GroupBuyOrder")
+        
+        
+        userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                
+                vc.status = status
+                let orderId = snapshots[index].key
+                vc.orderAutoId = orderId
+                orderRef.child(orderId).queryOrderedByKey()
+                    .observeSingleEvent(of: .value, with: { snapshot in 
+                        let orderValue = snapshot.value as? NSDictionary
+                        let openGroupId = orderValue?["OpenGroupId"] as? String ?? ""
+                        
+                        let payfee = orderValue?["Payment"] as? String ?? ""
+                        vc.payFee = payfee
+                        vc.openGroupId = openGroupId
+                        print("payFee",payfee)
+                        
+                        
+                        userGroupBuyOrderRef.child(snapshots[index].key).queryOrderedByKey()
+                            .observeSingleEvent(of: .value, with: { snapshot in 
+                                let userGroupBuyValue = snapshot.value as? NSDictionary
+                                let productId = userGroupBuyValue?["ProductId"] as? String ?? ""
+                                vc.productId = productId
+                                groupBuyRef.child(productId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                                    let groupBuyPeople = snapshot.value as? NSDictionary
+                                    let people = groupBuyPeople?["GroupBuyPeople"] as! String
+                                    print("groupBuyPeople",Int(people) ?? 0)
+                                    self.navigationController?.pushViewController(vc,animated: true)
+                                    
+                                    
+                                })
+                                
+                            })   
+                        
+                        
+                    }) 
+            }
+            
+            
+            
+        })
+        
+        
+    }
+    
     
     
     
@@ -217,9 +276,9 @@ extension MyGroupBuyController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let storyboard = UIStoryboard(name:"GroupBuy",bundle:nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyOrderControllerId") as! MyGroupBuyOrderController 
-        let storyboardDeadLine = UIStoryboard(name:"DeadLine",bundle:nil)
-        let vcDeadLine = storyboardDeadLine.instantiateViewController(withIdentifier: "DeadLineController") as! DeadLineController   
+        let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyOrderControllerId") as! MyGroupBuyOrderController  
+        let historyVc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyHistoryOrderControllerId") as! MyGroupBuyHistoryOrderController  
+        
         
         if collectionView.isEqual(finshCollectionView){
             vc.status = "Ready"
@@ -232,28 +291,12 @@ extension MyGroupBuyController : UICollectionViewDataSource{
             vc.index = indexPath.row
             getProductId(index:indexPath.row , status: "Waiting", vc: vc)
         }
+            
         else if collectionView.isEqual(historyCollectionView){
+            vc.status = "History"
+            vc.index = indexPath.row
+            getHistoryProductId(index:indexPath.row , status: "History", vc: historyVc)
             
-            let userGroupBuyOrderRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("OrderId")
-            let userGroupBuyStatusRef =  Database.database().reference().child("UserGroupBuy").child(Auth.auth().currentUser?.uid ?? "").child("Status").child("History").child("OrderId")
-            let orderRef = Database.database().reference().child("GroupBuyOrder")
-            
-            userGroupBuyStatusRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-                if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                    let orderId = snapshots[indexPath.row].key
-                    orderRef.child(orderId).queryOrderedByKey()
-                        .observeSingleEvent(of: .value, with: { snapshot in 
-                            userGroupBuyOrderRef.child(snapshots[indexPath.row].key).queryOrderedByKey()
-                                .observeSingleEvent(of: .value, with: { snapshot in 
-                                    let userGroupBuyValue = snapshot.value as? NSDictionary
-                                    let productId = userGroupBuyValue?["ProductId"] as? String ?? ""
-                                    vcDeadLine.fromGroupBuy = true
-                                    vcDeadLine.productIdString.append(productId)
-                                    self.navigationController?.pushViewController(vcDeadLine, animated: true)
-                                })
-                        })
-                }
-            })
         }
     }
 }
