@@ -783,6 +783,8 @@
                     <connections>
                         <outlet property="btnMenu" destination="C8C-2e-j8r" id="h2d-6u-65Q"/>
                         <outlet property="collectionView" destination="8rv-Ii-iB1" id="S0q-Sd-Dbp"/>
+                        <outlet property="commentTextField" destination="AFc-Kh-WfC" id="NrC-5q-uGK"/>
+                        <outlet property="microphone" destination="Tcz-cZ-veG" id="Zwm-II-plJ"/>
                         <outlet property="selectGradeButton" destination="b2Q-yE-jho" id="naS-u1-rO8"/>
                     </connections>
                 </viewController>

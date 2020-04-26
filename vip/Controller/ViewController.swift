@@ -29,7 +29,7 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     
     
     var audioPlayer: AVAudioPlayer?
-    let pianoSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+    let Sound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
     
     
     override func viewDidLoad() {
@@ -77,7 +77,7 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         try! AVAudioSession.sharedInstance().setActive(true)
 
-        try! audioPlayer = AVAudioPlayer(contentsOf: pianoSound)
+        try! audioPlayer = AVAudioPlayer(contentsOf: Sound)
         audioPlayer?.play()
     }
     
@@ -91,7 +91,7 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
                 microphoneButton.setTitle( "開始語音輸入", for: .normal)
                 microphoneButton.setImage(UIImage(named: "microphone"), for: .normal)
             } else {
-                try! audioPlayer = AVAudioPlayer(contentsOf: pianoSound)
+                try! audioPlayer = AVAudioPlayer(contentsOf: Sound)
                 audioPlayer?.play()
                 
                 startRecording()

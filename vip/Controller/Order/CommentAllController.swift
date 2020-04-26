@@ -8,7 +8,9 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 import UIKit
+
 
 class CommentAllController: UIViewController {
     
@@ -18,13 +20,39 @@ class CommentAllController: UIViewController {
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     
+    var uid = ""
     var productIdString = [String]()
+//    var commentfinish = [BooleanLiteralType]()
+//    var count = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
         collectionViewDeclare()
         setupGridView()
+        
+        
+//        for i in 0...productIdString.count-1{
+//            commentfinish.append(true)
+//            print(commentfinish)
+//            Database.database().reference().child("Product").child(productIdString[i]).observeSingleEvent(of: .value, with: { snapshot in
+//                let value = snapshot.value as? NSDictionary
+//                let grade = value?["ProductEvaluation"] as? String ?? ""
+//                print(grade)
+//                if grade != ""{
+//                    self.commentfinish[i] = false
+//                    self.count = self.count+1
+//                }
+//            })
+//        }
+    }
+    
+    func currentUserName()->(String){
+        if let user = Auth.auth().currentUser{
+            uid = user.uid
+        }
+        return(uid)
     }
     
     @IBAction func servicecall(_ sender: Any) {
@@ -70,13 +98,16 @@ extension CommentAllController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
         
         return productIdString.count
+//        return self.count
         
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCollectionViewCell", for: indexPath) as! CommentCollectionViewCell
-        cell.setLabel(productId:productIdString[indexPath.row])
         
+//        if(commentfinish[indexPath.row] == false){
+        cell.setLabel(productId:productIdString[indexPath.row])
+//        }
         return cell
         
     }

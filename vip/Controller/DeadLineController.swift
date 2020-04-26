@@ -162,7 +162,7 @@ extension DeadLineController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DeadLineCollectionViewCell", for: indexPath) as! DeadLineCollectionViewCell
-        cell.setProductLabel(productId: productIdString[indexPath.row], fromGroupBuy: true)
+        cell.setProductLabel(productId: productIdString[indexPath.row], fromGroupBuy: false)
         print("productIdString Call",productIdString[indexPath.row])
         
         return cell
