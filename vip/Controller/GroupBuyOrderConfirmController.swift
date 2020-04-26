@@ -149,6 +149,8 @@ class GroupBuyOrderConfirmController: UIViewController {
                 refOrder.child("OpenGroupId").setValue(openGroupRef.key ?? "")
                 refOrder.child("Payment").setValue(self.payFee)
                 refOrder.child("OrderCreateTime").setValue(self.getTime())
+                refOrder.child("Comment").setValue("false")
+
                 
                 let value = snapshot.value as? NSDictionary
                 let price = value?["Price"] as? String ?? ""
@@ -169,18 +171,6 @@ class GroupBuyOrderConfirmController: UIViewController {
                 })
                 message.addAction(confirmAction)
                 self.present(message, animated: true, completion: nil)
-//                self.navigationController?.pushViewController(vc,animated: true)
-                
-                
-                //                self.refUserGroupBuy.child(self.uid ?? "").child("OpenGroupId").child(openGroupRef.key ?? "").child("OrderId").child(orderId ?? "").setValue(orderId)
-                
-                //if let datas = snapshot.children.allObjects as? [DataSnapshot]{
-                //                for snap in datas{
-                //                let key = snap.key
-                //                print("keyyyyy",key)
-                //                
-                //                }
-                //                }
                 
             })
             
@@ -223,7 +213,8 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 refOrder.child("OpenGroupId").setValue(snapshots[self.index].key)
                                 refOrder.child("Payment").setValue(self.payFee)
                                 refOrder.child("OrderCreateTime").setValue(self.getTime())
-                                
+                                refOrder.child("Comment").setValue("false")
+
                                 
                                 
                                 

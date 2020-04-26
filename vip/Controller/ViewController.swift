@@ -38,6 +38,7 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         setupTextField()
     }
     
+
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))

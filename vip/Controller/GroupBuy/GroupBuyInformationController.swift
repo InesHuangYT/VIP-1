@@ -130,7 +130,7 @@ class GroupBuyInformationController: UIViewController {
                         ($0.value as! [String: Any])["Description"]
                     })
                     let productEvaluation = datas.compactMap({
-                        ($0.value as![String: Any])["ProductEvaluation"]
+                        ($0.value as![String: Any])["ProductEvaluationAll"]
                     })
                     let sellerEvaluation = datas.compactMap({
                         ($0.value as! [String: Any])["SellerEvaluation"]
@@ -226,7 +226,7 @@ class GroupBuyInformationController: UIViewController {
                                 let name = productValue?["ProductName"] as? String ?? ""
                                 let price = productValue?["Price"] as? String ?? ""
                                 let productDescription = productValue?["Description"] as? String ?? ""
-                                let productEvaluation = productValue?["ProductEvaluation"] as? String ?? ""
+                                let productEvaluation = productValue?["ProductEvaluationAll"] as? String ?? ""
                                 let sellerEvaluation = productValue?["SellerEvaluation"] as? String ?? ""
                                 let url = productValue?["imageURL"] as? String ?? ""
                                 
