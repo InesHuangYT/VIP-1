@@ -9,46 +9,60 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import Speech
+import AVFoundation
 
-class CommentController: UIViewController {
+class CommentController: UIViewController ,SFSpeechRecognizerDelegate, UITextFieldDelegate, AVAudioRecorderDelegate{
 
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var selectGradeButton: UIButton!
+    @IBOutlet weak var microphone: UIButton!
+    @IBOutlet weak var commentTextField: UITextField!
+
+    private var speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "zh_TW")) //"en-US"
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var recognitionTask: SFSpeechRecognitionTask?
+    private let audioEngine = AVAudioEngine()
     
+    var audioPlayer: AVAudioPlayer?
+    let Sound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
-    
+
     var gradeSources = [String]()
-    var selectText = String()
     var selectButton = UIButton()
     let transparentView = UIView()
     let tableViews = UITableView()
     var productIdString = String()
     var productIdStringAll = [String]()
     var uid = ""
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         btnAction()
+    
         collectionViewDeclare()
         setupGridView()
-        
+
         tableViews.delegate = self
         tableViews.dataSource = self
         tableViews.register(CellClass.self, forCellReuseIdentifier: "Cell")
         
+        commentTextField.delegate = self
+
         print(productIdString)
         print("current user uidd : " , currentUserName())
     }
-    
+
     func currentUserName()->(String){
         if let user = Auth.auth().currentUser{
             uid = user.uid
         }
         return(uid)
     }
-    
+
     @IBAction func servicecall(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
 
@@ -62,19 +76,72 @@ class CommentController: UIViewController {
                     let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
                         print("Canceled Call")
                     })
-        
+
                     alert.addAction(callAction)
                     alert.addAction(noAction)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
     }
-    
+
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
+
+    func microphoneaccess(){
+        microphone.isEnabled = false
+        speechRecognizer?.delegate = self
+        SFSpeechRecognizer.requestAuthorization { (authStatus) in
+
+            var isButtonEnabled = false
+
+            switch authStatus {
+            case .authorized:
+                isButtonEnabled = true
+
+            case .denied:
+                isButtonEnabled = false
+                print("User denied access to speech recognition")
+
+            case .restricted:
+                isButtonEnabled = false
+                print("Speech recognition restricted on this device")
+
+            case .notDetermined:
+                isButtonEnabled = false
+                print("Speech recognition not yet authorized")
+            }
+
+            OperationQueue.main.addOperation() {
+                self.microphone.isEnabled = isButtonEnabled
+            }
+        }
+    }
+
+    func audioPlay(){
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        try! AVAudioSession.sharedInstance().setActive(true)
+
+        try! audioPlayer = AVAudioPlayer(contentsOf: Sound)
+        audioPlayer?.play()
+    }
     
+    //cell
+    func collectionViewDeclare(){
+        self.collectionView.reloadData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "ProcessingOrderInformationCell", bundle: nil), forCellWithReuseIdentifier: "ProcessingOrderInformationCell")
+    }
+
+    func setupGridView(){
+        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
+        flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
+    }
+
+    //grade button
     func addTransparent(frames:CGRect){
         let window = UIApplication.shared.keyWindow
         transparentView.frame = window?.frame ?? self.view.frame
@@ -82,7 +149,7 @@ class CommentController: UIViewController {
         self.view.addSubview(tableViews)
         tableViews.layer.cornerRadius = 8
         tableViews.frame = CGRect(x: frames.origin.x, y: frames.origin.y, width: frames.width, height: 0)
-        
+
         transparentView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         tableViews.reloadData()
         let tapGesture = UITapGestureRecognizer(target: self
@@ -94,7 +161,7 @@ class CommentController: UIViewController {
             self.tableViews.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height + 5, width: frames.width, height: CGFloat(self.gradeSources.count * 50) )
         }, completion: nil)
     }
-    
+
     @objc func removeTransparent(){
         let frames = selectGradeButton.frame
         UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0,
@@ -103,51 +170,154 @@ class CommentController: UIViewController {
                         self.tableViews.frame = CGRect(x: frames.origin.x, y: frames.origin.y + frames.height + 5, width: frames.width, height: 0)
         }, completion: nil)
     }
-    
-    func collectionViewDeclare(){
-        self.collectionView.reloadData()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "ProcessingOrderInformationCell", bundle: nil), forCellWithReuseIdentifier: "ProcessingOrderInformationCell")
-    }
-    
-    func setupGridView(){
-        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
-        flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
-    }
-    
+
     @IBAction func grade(_ sender: Any) {
         gradeSources = ["1分","2分","3分","4分","5分"]
         selectButton = selectGradeButton
-        selectText = "grade"
         addTransparent(frames: selectGradeButton.frame)
     }
     
+    //record button
     @IBAction func record(_ sender: Any) {
+        microphoneaccess()
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionTask?.cancel()
+            recognitionRequest?.endAudio()
+            microphone.isEnabled = false
+            microphone.setTitle( "開始錄音", for: .normal)
+            microphone.setImage(UIImage(named: "microphone"), for: .normal)
+        } else {
+            try! audioPlayer = AVAudioPlayer(contentsOf: Sound)
+            audioPlayer?.play()
+
+            startRecording()
+            microphone.setTitle( "錄音完成", for: .normal)
+            microphone.setImage(UIImage(named: "microphone-2"), for: .normal)
+        }
     }
     
+    //speech to text
+    func startRecording() {
+
+    if recognitionTask != nil {
+        recognitionTask?.cancel()
+        recognitionTask = nil
+    }
+
+    let audioSession = AVAudioSession.sharedInstance()
+    do {
+        try audioSession.setCategory(AVAudioSession.Category.record)
+        try audioSession.setMode(AVAudioSession.Mode.measurement)
+        try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+    } catch {
+        print("audioSession properties weren't set because of an error.")
+    }
+
+    recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+
+    let inputNode = audioEngine.inputNode
+    //        else {
+    //        fatalError("Audio engine has no input node")
+    //    }
+
+    guard let recognitionRequest = recognitionRequest else {
+        fatalError("Unable to create an SFSpeechAudioBufferRecognitionRequest object")
+    }
+
+    recognitionRequest.shouldReportPartialResults = true
+
+    recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
+
+        var isFinal = false
+
+        if result != nil {
+
+            self.commentTextField.text = result?.bestTranscription.formattedString
+            isFinal = (result?.isFinal)!
+        }
+
+        if error != nil || isFinal {
+            self.audioEngine.stop()
+            inputNode.removeTap(onBus: 0)
+
+            self.recognitionRequest = nil
+            self.recognitionTask = nil
+
+            self.microphone.isEnabled = true
+        }
+    })
+    let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
+            self.recognitionRequest?.append(buffer)
+        }
+
+        audioEngine.prepare()
+
+        do {
+            try audioEngine.start()
+        } catch {
+            print("audioEngine couldn't start because of an error.")
+        }
+    }
+
+    func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        if available {
+            microphone.isEnabled = true
+        } else {
+            microphone.isEnabled = false
+        }
+    }
+    
+    //keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       self.view.endEditing(true)
+       return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+
+    //down button
     @IBAction func comfirmButtonPressed(_ sender: Any) {
-        let message = UIAlertController(title: "評論成功", message: nil, preferredStyle: .alert)
-        let confirmAction = UIAlertAction(title: "回首頁", style: .default, handler:
+        let commemtText = commentTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let message = UIAlertController(title: "是否保存文字檔評論", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "是", style: .default, handler:
         {action in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as!  ViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+            Database.database().reference(withPath: "Product/\(self.productIdString)/ProductEvaluation/\(self.uid)/comment").setValue(commemtText)
+            self.comfirmAlert()
         })
-        
-        let commentCartAction = UIAlertAction(title: "繼續評論其他商品", style: .default, handler:  {action in
-            let storyboard: UIStoryboard = UIStoryboard(name: "Order", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CommentAllController") as! CommentAllController
-            vc.productIdString = self.productIdStringAll
-            self.navigationController?.pushViewController(vc, animated: true)
+
+        let commentCartAction = UIAlertAction(title: "否", style: .default, handler:  {action in
+            self.comfirmAlert()
         })
-        
+
         message.addAction(confirmAction)
         message.addAction(commentCartAction)
         self.present(message, animated: true, completion: nil)
     }
     
+    func comfirmAlert(){
+        let message2 = UIAlertController(title: "評論成功", message: nil, preferredStyle: .alert)
+        let confirmAction2 = UIAlertAction(title: "回首頁", style: .default, handler:
+        {action in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as!  ViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+
+        let commentCartAction2 = UIAlertAction(title: "繼續評論其他商品", style: .default, handler:  {action in
+            let storyboard: UIStoryboard = UIStoryboard(name: "Order", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "CommentAllController") as! CommentAllController
+            vc.productIdString = self.productIdStringAll
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+
+        message2.addAction(confirmAction2)
+        message2.addAction(commentCartAction2)
+        self.present(message2, animated: true, completion: nil)
+    }
+
     @IBAction func backButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Order", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentAllController") as!  CommentAllController
@@ -158,17 +328,17 @@ class CommentController: UIViewController {
 
 extension CommentController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-        
+
         return 1
-    
+
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
-        
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProcessingOrderInformationCell", for: indexPath) as! ProcessingOrderInformationCell
         cell.setLabel(productId:productIdString)
-        
+
         return cell
-        
+
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
@@ -188,14 +358,14 @@ extension CommentController: UICollectionViewDelegateFlowLayout{
         let margin = CGFloat(cellMarginSize * 2)
         let width = (self.view.frame.size.width - CGFloat(cellMarginSize)*(cellCount-1)-margin)/cellCount
         return width
-        
+
     }
 }
 extension CommentController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return gradeSources.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableViews.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = gradeSources[indexPath.row]
@@ -204,14 +374,16 @@ extension CommentController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectButton.setTitle(gradeSources[indexPath.row], for: .normal)
 
-        let cell = tableViews.cellForRow(at: indexPath) //
-        print("cell:",cell?.textLabel?.text! ?? 0)
-        
-            Database.database().reference(withPath: "Product/\(self.productIdString)/ProductEvaluation/\(self.uid)/\(selectText)").setValue(cell?.textLabel?.text!)
+        let cells = tableViews.cellForRow(at: indexPath) //
+        print("cell:",cells?.textLabel?.text! ?? 0)
+
+            Database.database().reference(withPath: "Product/\(self.productIdString)/ProductEvaluation/\(self.uid)/grade").setValue(cells?.textLabel?.text!)
             removeTransparent()
     }
 }
+
+

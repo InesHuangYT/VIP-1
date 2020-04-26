@@ -166,12 +166,12 @@ class ProductInformationController: UIViewController {
                     let name = value?["ProductName"] as? String ?? ""
                     let price = value?["Price"] as? String ?? ""
                     let description = value?["Description"] as? String ?? ""
-                    let productEvaluation = value?["ProductEvaluation"] as? String ?? ""
+                    let productEvaluationAll = value?["ProductEvaluationAll"] as? String ?? ""
                     let sellerEvaluation = value?["SellerEvaluation"] as? String ?? ""
                     self.nameLabel.text = name
                     self.priceLabel.text = price + "元"
                     self.descriptionLabel.text = "產品描述 " + description
-                    self.evaluationLabel.text = "產品評價 " + productEvaluation
+                    self.evaluationLabel.text = "產品評價 " + productEvaluationAll
                     self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
                     let url = value?["imageURL"] as? String ?? ""
                     if let imageUrl = URL(string: url){
@@ -232,6 +232,7 @@ class ProductInformationController: UIViewController {
                                 self.setSelectButton(status: likeStatus,select:true) 
                             }
                             
+                            
                         })
                     //                    
                     
@@ -246,7 +247,7 @@ class ProductInformationController: UIViewController {
                             ($0.value as! [String: Any])["Description"]
                         })
                         let productEvaluationResults = datas.compactMap({
-                            ($0.value as! [String: Any])["ProductEvaluation"]
+                            ($0.value as! [String: Any])["ProductEvaluationAll"]
                         })
                         let sellerEvaluationResults = datas.compactMap({
                             ($0.value as! [String: Any])["SellerEvaluation"]
@@ -294,13 +295,13 @@ class ProductInformationController: UIViewController {
             let name = value?["ProductName"] as? String ?? ""
             let price = value?["Price"] as? String ?? "" 
             let description = value?["Description"] as? String ?? "" 
-            let productEvaluation = value?["ProductEvaluation"] as? String ?? "" 
+            let productEvaluationAll = value?["ProductEvaluationAll"] as? String ?? ""
             let sellerEvaluation = value?["SellerEvaluation"] as? String ?? "" 
             let url = value?["imageURL"] as? String ?? ""
             self.nameLabel.text = name
             self.priceLabel.text = price
             self.descriptionLabel.text = "產品描述 " + description
-            self.evaluationLabel.text = "產品評價 " + productEvaluation
+            self.evaluationLabel.text = "產品評價 " + productEvaluationAll
             self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
             if let imageUrl = URL(string: url){
                 URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in

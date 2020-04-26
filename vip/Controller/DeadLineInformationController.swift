@@ -72,12 +72,12 @@ class DeadLineInformationController: UIViewController {
                     let price = value?["Price"] as? String ?? ""
                     let manuDate = value?["ManuDate"] as? String ?? ""
                     let expDate = value?["ExpDate"] as? String ?? ""
-                    let otherInfo = value?["OtherInfo"] as? String ?? ""
+                    let method = value?["Method"] as? String ?? ""
                     self.nameLabel.text = name
                     self.priceLabel.text = price + "元"
                     self.ManuDateLabel.text = "製造日期 " + manuDate
                     self.ExpDateLabel.text = "有效期限 " + expDate
-                    self.otherInfoLabel.text = "其他資訊 " + otherInfo
+                    self.otherInfoLabel.text = "使用方式 " + method
                     let url = value?["imageURL"] as? String ?? ""
                     if let imageUrl = URL(string: url){
                         URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
