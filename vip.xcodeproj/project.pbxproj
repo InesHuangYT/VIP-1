@@ -41,6 +41,8 @@
 		B04A55CF244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B04A55CD244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib */; };
 		B04A55D1244E223000AF9935 /* OrderConfirmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A55D0244E223000AF9935 /* OrderConfirmController.swift */; };
 		B06E26C22455E99E0061627F /* MyGroupBuyHistoryOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */; };
+		B06E26E3245655310061627F /* ProductComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26E1245655310061627F /* ProductComment.swift */; };
+		B06E26E4245655310061627F /* ProductComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = B06E26E2245655310061627F /* ProductComment.xib */; };
 		B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376CD2431FCC8006D169E /* GroupBuyController.swift */; };
 		B08376EC243262BD006D169E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376EB243262BD006D169E /* CategoryController.swift */; };
 		B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376ED2432630E006D169E /* CreateCategoryController.swift */; };
@@ -312,6 +314,8 @@
 		B04A55CD244E0F1D00AF9935 /* ShoppingCartCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCartCollectionViewCell.xib; sourceTree = "<group>"; };
 		B04A55D0244E223000AF9935 /* OrderConfirmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmController.swift; sourceTree = "<group>"; };
 		B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyHistoryOrderController.swift; sourceTree = "<group>"; };
+		B06E26E1245655310061627F /* ProductComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductComment.swift; sourceTree = "<group>"; };
+		B06E26E2245655310061627F /* ProductComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductComment.xib; sourceTree = "<group>"; };
 		B08376CD2431FCC8006D169E /* GroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyController.swift; sourceTree = "<group>"; };
 		B08376EB243262BD006D169E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
@@ -598,6 +602,8 @@
 			children = (
 				B042F7FF242266F8005982AF /* ProductCollectionViewCell.swift */,
 				B042F800242266F8005982AF /* ProductCollectionViewCell.xib */,
+				B06E26E1245655310061627F /* ProductComment.swift */,
+				B06E26E2245655310061627F /* ProductComment.xib */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -921,6 +927,7 @@
 				B042F802242266F8005982AF /* ProductCollectionViewCell.xib in Resources */,
 				024926822434DE1400CC22A8 /* Checkout.storyboard in Resources */,
 				B042F7F3241F8C72005982AF /* Product.storyboard in Resources */,
+				B06E26E4245655310061627F /* ProductComment.xib in Resources */,
 				B08376F424337CF6006D169E /* GroupBuyCollectionViewCell.xib in Resources */,
 				02525D7A2454B5F200FA1878 /* CommentCollectionViewCell.xib in Resources */,
 				B0C77BB723F97A9100B8E5B7 /* GoogleService-Info.plist in Resources */,
@@ -1017,6 +1024,7 @@
 				02AC619D243DB48800A7D94C /* OrderCheckoutController.swift in Sources */,
 				B06E26C22455E99E0061627F /* MyGroupBuyHistoryOrderController.swift in Sources */,
 				B0BAC4A2244F64D9009D6162 /* ProcessingOrderInformationCell.swift in Sources */,
+				B06E26E3245655310061627F /* ProductComment.swift in Sources */,
 				B08376F324337CF6006D169E /* GroupBuyCollectionViewCell.swift in Sources */,
 				B0FE0D19243BA52C00479B80 /* OrderComfirmCollectionViewCell.swift in Sources */,
 				B0E618E623FD3C8000EB6E74 /* HomeController.swift in Sources */,

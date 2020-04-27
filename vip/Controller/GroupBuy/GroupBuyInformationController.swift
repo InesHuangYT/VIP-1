@@ -13,7 +13,8 @@ import FirebaseAuth
 
 class GroupBuyInformationController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var joinCollectionView: UICollectionView!
+    @IBOutlet weak var commentCollectionView: UICollectionView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var productDescription: UILabel!
@@ -35,6 +36,8 @@ class GroupBuyInformationController: UIViewController {
     var groupBuyPeople = Int()
     var status = ""
     var from = String()
+    var commentCount = Int()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,16 +104,25 @@ class GroupBuyInformationController: UIViewController {
     }
     
     func collectionViewDeclare(){
-        self.collectionView.reloadData()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "GroupBuyJoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyJoinCollectionViewCell")
+        joinCollectionView.reloadData()
+        joinCollectionView.delegate = self
+        joinCollectionView.dataSource = self
+        joinCollectionView.register(UINib(nibName: "GroupBuyJoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyJoinCollectionViewCell")
+        
+        commentCollectionView.delegate = self
+        commentCollectionView.dataSource = self
+        commentCollectionView.register(UINib(nibName: "ProductComment", bundle: nil), forCellWithReuseIdentifier: "ProductComment")
+        
     }
     
     func setupGridView(){
-        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let flow = joinCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
         flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
+        
+        let flows = commentCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flows.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
+        flows.minimumLineSpacing = CGFloat(self.cellMarginSize)
     }
     
     
@@ -319,81 +331,6 @@ class GroupBuyInformationController: UIViewController {
         
         self.navigationController?.pushViewController(vc,animated: true)
         
-        
-    }
-    
-    
-    
-}
-
-//   我要Join團
-extension GroupBuyInformationController : UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
-        return self.openByCount 
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GroupBuyJoinCollectionViewCell", for: indexPath) as! GroupBuyJoinCollectionViewCell
-        print("self.productId",self.productId)
-        cell.setProductLabel(productId: String(self.productId), index:indexPath.row, groupBuyPeople: self.groupBuyPeople)
-        return cell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
-        vc.index = indexPath.row   
-        vc.productIndex = index
-        vc.productId = productId
-        vc.groupBuyStyle = "Join"
-        vc.groupBuyPeople = self.groupBuyPeople
-        
-        let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
-        
-        
-        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
-            if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                print("index",indexPath.row)
-                print("[self.index].key",snapshots[indexPath.row].key)
-                ref.child(snapshots[indexPath.row].key)
-                    .queryOrderedByKey()
-                    .observeSingleEvent(of: .value, with: { snapshot in 
-                        
-                        
-                        ref.child(snapshots[indexPath.row].key).child("JoinBy")
-                            .queryOrderedByKey()
-                            .observeSingleEvent(of: .value, with: { snapshot in
-                                
-                                var access = true
-                                if let datass = snapshot.children.allObjects as? [DataSnapshot]{
-                                    
-                                    for i in datass{
-                                        
-                                        if i.key == self.uid {
-                                            print("uid already inside ", i.key )
-                                            self.setUpMessageNo()
-                                            access = false   
-                                        }  
-                                    }
-                                    if access == true{
-                                        self.navigationController?.pushViewController(vc,animated: true)
-                                        
-                                    }
-                                    
-                                }
-                            })   
-                        
-                    })
-            }
-        })
-        
-        
-        
-        
-        
-        
-        
     }
     
     func setUpMessageNo(){
@@ -412,6 +349,87 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         let newFrontViewController = UINavigationController.init(rootViewController: vc)
         revealViewController().pushFrontViewController(newFrontViewController, animated: true)
     }
+    
+    
+    
+}
+
+//   我要Join團
+extension GroupBuyInformationController : UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
+        
+        if collectionView.isEqual(joinCollectionView){
+            return self.openByCount 
+        }else{
+            return commentCount
+            
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
+
+        if collectionView.isEqual(joinCollectionView){
+            let groupBuyJoinCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier:"GroupBuyJoinCollectionViewCell", for: indexPath) as! GroupBuyJoinCollectionViewCell
+            print("self.productId",self.productId)
+            groupBuyJoinCollectionViewCell.setProductLabel(productId:self.productId, index:indexPath.row, groupBuyPeople: self.groupBuyPeople)
+            return groupBuyJoinCollectionViewCell
+            
+        }else{
+            let productCommentCell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                "ProductComment", for: indexPath) as! ProductComment
+            productCommentCell.setLable(index: indexPath.row, groupProductId: productId)
+            return productCommentCell
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView.isEqual(joinCollectionView){ 
+            let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyCheckOutControllerId") as!  GroupBuyCheckOutController
+            vc.index = indexPath.row   
+            vc.productIndex = index
+            vc.productId = productId
+            vc.groupBuyStyle = "Join"
+            vc.groupBuyPeople = self.groupBuyPeople
+            
+            let ref =  Database.database().reference().child("GroupBuy").child(productId).child("OpenGroupId")
+            ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+                if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
+                    print("index",indexPath.row)
+                    print("[self.index].key",snapshots[indexPath.row].key)
+                    ref.child(snapshots[indexPath.row].key)
+                        .queryOrderedByKey()
+                        .observeSingleEvent(of: .value, with: { snapshot in 
+                            ref.child(snapshots[indexPath.row].key).child("JoinBy")
+                                .queryOrderedByKey()
+                                .observeSingleEvent(of: .value, with: { snapshot in
+                                    
+                                    var access = true
+                                    if let datass = snapshot.children.allObjects as? [DataSnapshot]{
+                                        for i in datass{
+                                            if i.key == self.uid {
+                                                print("uid already inside ", i.key )
+                                                self.setUpMessageNo()
+                                                access = false   
+                                            }  
+                                        }
+                                        if access == true{
+                                            self.navigationController?.pushViewController(vc,animated: true)
+                                        }
+                                        
+                                    }
+                                })   
+                            
+                        })
+                }
+            })
+            
+        }
+        
+    }
+    
+    
 }
 
 extension GroupBuyInformationController: UICollectionViewDelegateFlowLayout{

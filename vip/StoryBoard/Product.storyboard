@@ -128,6 +128,9 @@
                                         <rect key="frame" x="86" y="51" width="197" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="changeAudioTime:" destination="jF0-c5-QSK" eventType="valueChanged" id="7vA-yt-AxS"/>
+                                        </connections>
                                     </slider>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="ctQ-8n-tM6">
                                         <rect key="frame" x="77.5" y="333" width="214" height="166"/>
@@ -202,6 +205,30 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qWX-no-ri2">
+                                        <rect key="frame" x="0.0" y="580" width="375.5" height="163"/>
+                                        <color key="backgroundColor" red="0.92853921650000004" green="0.96240609880000005" blue="0.85296183820000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="163" id="UWH-rR-R8V"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="enl-vg-Ter">
+                                            <size key="itemSize" width="382" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="xVm-iw-UsR">
+                                                <rect key="frame" x="-3.5" y="0.0" width="382" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CB6-VH-d8R">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="128"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </collectionViewCellContentView>
+                                                <size key="customSize" width="382" height="128"/>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="xWk-S5-xYJ" firstAttribute="leading" secondItem="C6a-Dp-C7M" secondAttribute="trailing" constant="43" id="3Yl-fc-cDG"/>
@@ -214,6 +241,9 @@
                                     <constraint firstItem="d9q-7S-cP5" firstAttribute="top" secondItem="P38-bb-Fm7" secondAttribute="topMargin" id="NNc-no-V3x"/>
                                     <constraint firstItem="x1w-Pz-N2i" firstAttribute="top" secondItem="IsW-sd-d1T" secondAttribute="bottom" constant="20" id="R7y-xK-HJ1"/>
                                     <constraint firstItem="x1w-Pz-N2i" firstAttribute="centerX" secondItem="C6a-Dp-C7M" secondAttribute="centerX" id="T94-E4-N4f"/>
+                                    <constraint firstAttribute="trailing" secondItem="qWX-no-ri2" secondAttribute="trailing" id="aH0-hi-VdL"/>
+                                    <constraint firstItem="qWX-no-ri2" firstAttribute="top" secondItem="xWk-S5-xYJ" secondAttribute="bottom" constant="16" id="b5W-rp-UkK"/>
+                                    <constraint firstItem="qWX-no-ri2" firstAttribute="leading" secondItem="P38-bb-Fm7" secondAttribute="leading" id="b6c-0Q-0QE"/>
                                     <constraint firstAttribute="trailing" secondItem="ctQ-8n-tM6" secondAttribute="trailing" constant="84" id="by1-OT-x4x"/>
                                     <constraint firstAttribute="leading" secondItem="Al0-H7-9NM" secondAttribute="leading" constant="15" id="c92-le-eGl"/>
                                     <constraint firstItem="ctQ-8n-tM6" firstAttribute="centerX" secondItem="kU8-oa-WaM" secondAttribute="centerX" id="iKh-2f-hIH"/>
@@ -242,6 +272,7 @@
                     <connections>
                         <outlet property="addShoppingCart" destination="C6a-Dp-C7M" id="kuN-TW-z6a"/>
                         <outlet property="btnMenu" destination="e9C-Ga-Jds" id="p2b-6v-xvh"/>
+                        <outlet property="collectionView" destination="qWX-no-ri2" id="3z1-kw-N3P"/>
                         <outlet property="descriptionLabel" destination="gCL-KL-2bF" id="hmx-0E-IGA"/>
                         <outlet property="evaluationLabel" destination="D6H-s9-i2O" id="3Ai-UZ-QLb"/>
                         <outlet property="likeButton" destination="xWk-S5-xYJ" id="Ifo-lW-H5S"/>
@@ -255,7 +286,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="70o-YZ-dfa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-322.39999999999998" y="-200.14992503748127"/>
+            <point key="canvasLocation" x="-322.39999999999998" y="-200.59970014992504"/>
         </scene>
     </scenes>
     <resources>

@@ -50,7 +50,6 @@ class ProductCollectionViewCell: UICollectionViewCell {
                     self.productLabel.text = nameResults[index] as? String
                     print(nameResults[index] as? String)
                     self.priceLabel.text = (priceResults[index] as! String) + "元" 
-                    
                     self.productImage.image = UIImage(named: "logo")
                     
                     let productImageUrl = imageResults[index]
