@@ -316,6 +316,7 @@
 		B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyHistoryOrderController.swift; sourceTree = "<group>"; };
 		B06E26E1245655310061627F /* ProductComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductComment.swift; sourceTree = "<group>"; };
 		B06E26E2245655310061627F /* ProductComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductComment.xib; sourceTree = "<group>"; };
+		B06E27812456F5AA0061627F /* vip copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "vip copy-Info.plist"; path = "/Users/ines/Desktop/VIP-1/vip copy-Info.plist"; sourceTree = "<absolute>"; };
 		B08376CD2431FCC8006D169E /* GroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyController.swift; sourceTree = "<group>"; };
 		B08376EB243262BD006D169E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
@@ -464,6 +465,7 @@
 				B087D22923F56436001FAC9A /* Products */,
 				5D55644732E6CFB2D245EF8D /* Pods */,
 				D485BABE6F04E2B3F027C7C4 /* Frameworks */,
+				B06E27812456F5AA0061627F /* vip copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1212,7 +1214,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JMMDB6PMMN;
+				DEVELOPMENT_TEAM = 6NATB5LN22;
 				INFOPLIST_FILE = vip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1220,7 +1222,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = ines.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1237,7 +1239,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JMMDB6PMMN;
+				DEVELOPMENT_TEAM = 6NATB5LN22;
 				INFOPLIST_FILE = vip/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1245,7 +1247,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = ines.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
