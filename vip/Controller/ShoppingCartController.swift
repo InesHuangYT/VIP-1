@@ -17,7 +17,8 @@ class ShoppingCartController : UIViewController{
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var checkOutButton: UIButton!
+    @IBOutlet weak var zeroShoppingCart: UIButton!
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     var ref: DatabaseReference!
@@ -48,6 +49,10 @@ class ShoppingCartController : UIViewController{
         }
         print("num ITEM = ", self.name.count)
         print("shoppingCount",shoppingCount)
+        if shoppingCount == 0 {
+            checkOutButton.isHidden = true
+            zeroShoppingCart.isHidden = false
+        }
         
         
     }

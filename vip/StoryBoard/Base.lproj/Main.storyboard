@@ -317,11 +317,6 @@
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXt-GE-z1V">
-                                <rect key="frame" x="297" y="110" width="24" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="語音輸入" image="microphone"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-Kk-6kT">
                                 <rect key="frame" x="334" y="104" width="41" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -611,7 +606,6 @@
     <resources>
         <image name="3c家電" width="142" height="158"/>
         <image name="List_button" width="18" height="11"/>
-        <image name="microphone" width="512" height="512"/>
         <image name="support" width="33" height="33"/>
         <image name="媽咪親子" width="142" height="158"/>
         <image name="居家生活" width="142" height="158"/>
