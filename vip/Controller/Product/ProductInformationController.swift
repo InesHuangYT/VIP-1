@@ -36,6 +36,7 @@ class ProductInformationController: UIViewController {
     
     var selectProductId = [String]()
     var fromShoppingCart = false
+    var myShoppingCartId = [String]()
     var productId = String()
     var fromMyOrder = false //從訂單來
     var fromCheckOut = false
@@ -66,6 +67,7 @@ class ProductInformationController: UIViewController {
         if(fromShoppingCart == true || fromMyOrder == true) {
             addShoppingCart.isHidden = true
         }
+        print("fromShoppingCart",fromShoppingCart)
         
     }
     
@@ -176,9 +178,9 @@ class ProductInformationController: UIViewController {
         
         if fromShoppingCart == true {
             
-            self.ID = selectProductId[index]
-            
-            productRef.child(selectProductId[index]).queryOrderedByKey()
+            self.ID = myShoppingCartId[index]
+           
+            productRef.child(myShoppingCartId[index]).queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
                     let value = snapshot.value as? NSDictionary
                     let name = value?["ProductName"] as? String ?? ""
@@ -208,7 +210,7 @@ class ProductInformationController: UIViewController {
                     
                     //                  我的最愛
                     let likeListRef = Database.database().reference().child("LikeList").child(Auth.auth().currentUser?.uid ?? "")
-                    likeListRef.child(selectProductId[index]).queryOrderedByKey()
+                    likeListRef.child(self.myShoppingCartId[index]).queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in
                             let value = snapshot.value as? [String:Any]
                             let likeStatus = value?["Status"] as? String ?? ""
@@ -315,7 +317,7 @@ class ProductInformationController: UIViewController {
             let sellerEvaluation = value?["SellerEvaluation"] as? String ?? "" 
             let url = value?["imageURL"] as? String ?? ""
             self.nameLabel.text = name
-            self.priceLabel.text = price
+            self.priceLabel.text = price + "元"
             self.descriptionLabel.text = "產品描述 " + description
             self.evaluationLabel.text = "產品評價 " + productEvaluationAll + "星"
             self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
@@ -450,9 +452,9 @@ extension ProductInformationController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductComment", for: indexPath) as! ProductComment
         if fromShoppingCart == true {
-            cell.setLable(index: indexPath.row, productId: selectProductId[index])
+            cell.setLable(index: indexPath.row, productId: myShoppingCartId[index])
         }
-        if fromMyOrder == true{
+        else if fromMyOrder == true{
             cell.setLable(index: indexPath.row, productId: productId)
         }
         else{

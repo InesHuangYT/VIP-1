@@ -207,25 +207,35 @@ extension ProcessingOrderInformationController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
+        let productRef =  Database.database().reference().child("Product")
+        
         vc.fromMyOrder = true
         vc.productId = productIdString[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
+        productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            productRef.child(self.productIdString[indexPath.row]).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                let data = snapshot.children.allObjects as! [DataSnapshot]
+                vc.commentCount = data.count
+                print("commentCount",data.count)
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+        })
+            
+        }
     }
-}
-
-extension ProcessingOrderInformationController: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.calculateWith()
-        return CGSize(width: width, height: width*0.5)
-    }
-    func calculateWith()-> CGFloat{
-        let estimateWidth = CGFloat(estimatedWidth)
-        let cellCount = floor(CGFloat(self.view.frame.size.width / estimateWidth))
-        let margin = CGFloat(cellMarginSize * 2)
-        let width = (self.view.frame.size.width - CGFloat(cellMarginSize)*(cellCount-1)-margin)/cellCount
-        return width
-        
-    }
+    
+    extension ProcessingOrderInformationController: UICollectionViewDelegateFlowLayout{
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let width = self.calculateWith()
+            return CGSize(width: width, height: width*0.5)
+        }
+        func calculateWith()-> CGFloat{
+            let estimateWidth = CGFloat(estimatedWidth)
+            let cellCount = floor(CGFloat(self.view.frame.size.width / estimateWidth))
+            let margin = CGFloat(cellMarginSize * 2)
+            let width = (self.view.frame.size.width - CGFloat(cellMarginSize)*(cellCount-1)-margin)/cellCount
+            return width
+            
+        }
 }
 
 

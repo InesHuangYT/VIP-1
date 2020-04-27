@@ -134,31 +134,38 @@ extension ShoppingCartController : UICollectionViewDataSource{
         
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        
         let shoppingCartRef = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
+        let productRef =  Database.database().reference().child("Product")
+        var myShoppingCartId = [String]()
         
-        vc.index = indexPath.row
-        vc.fromShoppingCart = true
- 
-        shoppingCartRef.queryOrdered(byChild: "Status").queryEqual(toValue: "Selected").observeSingleEvent(of: .value, with: { snapshot in
-            
+        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             let data = snapshot.children.allObjects as! [DataSnapshot]
             for child in data {
                 print(child.key)
-                self.selectProductId.append(child.key)
+                myShoppingCartId.append(child.key)
             }
+            vc.myShoppingCartId = myShoppingCartId
+            productRef.child(myShoppingCartId[indexPath.row]).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                let data = snapshot.children.allObjects as! [DataSnapshot]
+                vc.commentCount = data.count
+            })
             
-            vc.selectProductId = self.selectProductId 
-            
-            self.navigationController?.pushViewController(vc,animated: true)
+            vc.index = indexPath.row
+            vc.fromShoppingCart = true
+            shoppingCartRef.queryOrdered(byChild: "Status").queryEqual(toValue: "Selected").observeSingleEvent(of: .value, with: { snapshot in
+                let data = snapshot.children.allObjects as! [DataSnapshot]
+                for child in data {
+                    print(child.key)
+                    self.selectProductId.append(child.key)
+                }
+                vc.selectProductId = self.selectProductId 
+                self.navigationController?.pushViewController(vc,animated: true)
+            })
         })
         
-//             shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-        //            let data = snapshot.children.allObjects as! [DataSnapshot]
-        //            self.findIndex(selectProductId: data[indexPath.row].key,vc: vc)
-        //            
-        //            
-        //        })
+        
+        
+        
         
     }
 }
