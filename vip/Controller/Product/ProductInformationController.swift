@@ -189,7 +189,7 @@ class ProductInformationController: UIViewController {
                     self.nameLabel.text = name
                     self.priceLabel.text = price + "元"
                     self.descriptionLabel.text = "產品描述 " + description
-                    self.evaluationLabel.text = "產品評價 " + productEvaluationAll
+                    self.evaluationLabel.text = "產品評價 " + productEvaluationAll + "星"
                     self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
                     let url = value?["imageURL"] as? String ?? ""
                     if let imageUrl = URL(string: url){
@@ -317,7 +317,7 @@ class ProductInformationController: UIViewController {
             self.nameLabel.text = name
             self.priceLabel.text = price
             self.descriptionLabel.text = "產品描述 " + description
-            self.evaluationLabel.text = "產品評價 " + productEvaluationAll
+            self.evaluationLabel.text = "產品評價 " + productEvaluationAll + "星"
             self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
             if let imageUrl = URL(string: url){
                 URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in

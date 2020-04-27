@@ -141,6 +141,13 @@ class HistoryOrderInformationController: UIViewController {
         let storyboard = UIStoryboard(name: "Order", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CommentAllController") as!  CommentAllController
         vc.orderIds = orderIds //要給 Comment Controller用
+        vc.orderIndex = orderIndex
+        vc.productIdString = productIdString
+        vc.productIdStringAll = productIdString
+        vc.progresss = progresss
+        vc.payment = payments
+        vc.orderCreateTimes = orderCreateTimes
+        vc.orderEndTime = orderEndTime
         checkIfCommentBefore(vc:vc)
     }
     

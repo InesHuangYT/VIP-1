@@ -18,6 +18,12 @@ class CommentAllController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var commentLabel: UILabel!
 
+    var orderIndex = Int()
+    var progresss = String()
+    var payment = String()
+    var orderCreateTimes = String()
+    var orderEndTime = String()
+    var productIdStringAll = [String]()
     
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
@@ -103,7 +109,17 @@ class CommentAllController: UIViewController {
     }
     
     @IBAction func backButton(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        let storyboard = UIStoryboard(name: "Order", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "HistoryOrderInformationControllerId") as!  HistoryOrderInformationController
+        vc.orderIds = orderIds
+        vc.orderIndex = orderIndex
+        vc.productIdString = productIdStringAll
+        vc.progresss = progresss
+        vc.payments = payment
+        vc.orderCreateTimes = orderCreateTimes
+        vc.orderEndTime = orderEndTime
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
