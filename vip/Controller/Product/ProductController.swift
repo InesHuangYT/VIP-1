@@ -73,16 +73,15 @@ class ProductController: UIViewController {
     }
     
     func findIndex(searchId:String,vc:ProductInformationController){
-        let productRef =  Database.database().reference().child("Product").child(searchId)
-        
-        productRef.child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
-            let data = snapshot.children.allObjects as! [DataSnapshot]
-            vc.commentCount = data.count
-            print("commentCount",data.count)
-        })
-        
+        let productRef =  Database.database().reference().child("Product")
         
         productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            productRef.child(searchId).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                let data = snapshot.children.allObjects as! [DataSnapshot]
+                vc.commentCount = data.count
+                print("commentCount",data.count)
+            })
             let data = snapshot.children.allObjects as! [DataSnapshot]
             for i in 1...data.count {
                 if data[i-1].key == searchId {
@@ -93,7 +92,7 @@ class ProductController: UIViewController {
                 }
             }
             self.navigationController?.pushViewController(vc,animated: true)
- 
+            
         })
         
     }
@@ -111,7 +110,6 @@ extension ProductController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCollectionViewCell", for: indexPath) as! ProductCollectionViewCell
-        
         if fromSearch == true {
             cell.setProductLabel(productId: searchId[indexPath.row])
         }
@@ -129,10 +127,13 @@ extension ProductController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
         
         if fromSearch == true {
+            print("csearchId[indexPath.row]",searchId[indexPath.row])
+            
             findIndex(searchId: searchId[indexPath.row],vc:vc)
             
         }
         else if fromCategory == true {
+            print("categoryId[indexPath.row]",categoryId[indexPath.row])
             findIndex(searchId: categoryId[indexPath.row],vc:vc)
         }
             
