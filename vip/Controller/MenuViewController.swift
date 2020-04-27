@@ -133,25 +133,25 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if cell.lblMenu.text! == "購物車"
         {
-            
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
+            let desController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
+            let newFrontViewController = UINavigationController.init(rootViewController: desController)
+
             let ref = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser!.uid)
             ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
+                if (snapshot.exists()==false){
+                    desController.shoppingCount = 0
+                    self.navigationController?.pushViewController(desController,animated: true)
+                }
                 let allKeys = snapshot.value as! [String : AnyObject]
                 let nodeToReturn = allKeys.keys
                 let counts = nodeToReturn.count
                 print("nodeToReturn ",nodeToReturn)
                 print("counts ",counts)
-                
-                let mainStoryboard: UIStoryboard = UIStoryboard(name: "ShoppingCart", bundle: nil)
-                let desController = mainStoryboard.instantiateViewController(withIdentifier: "ShoppingCart") as! ShoppingCartController
-                let newFrontViewController = UINavigationController.init(rootViewController: desController)
                 desController.shoppingCount = counts
                 self.revealViewController().pushFrontViewController(newFrontViewController, animated: true)
                 
             })
-            
-            
-            
             
         }
         

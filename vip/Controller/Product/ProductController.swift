@@ -75,11 +75,6 @@ class ProductController: UIViewController {
     func findIndex(searchId:String,vc:ProductInformationController){
         let productRef =  Database.database().reference().child("Product")
         productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            productRef.child(searchId).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
-                let data = snapshot.children.allObjects as! [DataSnapshot]
-                vc.commentCount = data.count
-                print("commentCount",data.count)
-            })
             let data = snapshot.children.allObjects as! [DataSnapshot]
             for i in 1...data.count {
                 if data[i-1].key == searchId {
@@ -89,7 +84,14 @@ class ProductController: UIViewController {
                     print("Not find index", i-1)
                 }
             }
-            self.navigationController?.pushViewController(vc,animated: true)
+            productRef.child(searchId).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                let data = snapshot.children.allObjects as! [DataSnapshot]
+                vc.commentCount = data.count
+                print("commentCount",data.count)
+                self.navigationController?.pushViewController(vc,animated: true)
+                
+            })
+            
             
         })
         
