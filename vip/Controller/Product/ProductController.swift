@@ -43,23 +43,23 @@ class ProductController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     func btnAction(){
         btnMenu.target = self.revealViewController()
@@ -73,23 +73,27 @@ class ProductController: UIViewController {
     }
     
     func findIndex(searchId:String,vc:ProductInformationController){
-        let productRef =  Database.database().reference().child("Product")
+        let productRef =  Database.database().reference().child("Product").child(searchId)
+        
+        productRef.child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            vc.commentCount = data.count
+            print("commentCount",data.count)
+        })
+        
+        
         productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
             let data = snapshot.children.allObjects as! [DataSnapshot]
-            
             for i in 1...data.count {
                 if data[i-1].key == searchId {
                     print("find index", i-1)
                     vc.index = i-1
-                    
                 }else{
                     print("Not find index", i-1)
-                    
                 }
             }
             self.navigationController?.pushViewController(vc,animated: true)
-            
-            
+ 
         })
         
     }

@@ -24,6 +24,10 @@ class ProductInformationController: UIViewController {
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var addShoppingCart: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var estimatedWidth = 200.0
+    var cellMarginSize = 16.0
     
     var imageURL : String!
     var productID:[String] = []
@@ -36,16 +40,18 @@ class ProductInformationController: UIViewController {
     var fromMyOrder = false //從訂單來
     var fromCheckOut = false
     var price = String()
-    var index  = Int()
+    var index = Int()
+    var commentCount = Int()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("index",index)
+        print("productId!!!!!!!!",productId)
         btnAction()
         layOut()
         audioPlay()
-        print("productId!!!!!!!!",productId)
-        
+        collectionViewDeclare()
+        setupGridView()
         
         //        從訂單進來 用productId 
         if (fromMyOrder == true){
@@ -61,6 +67,18 @@ class ProductInformationController: UIViewController {
             addShoppingCart.isHidden = true
         }
         
+    }
+    
+    
+    func collectionViewDeclare(){
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "ProductComment", bundle: nil), forCellWithReuseIdentifier: "ProductComment")
+    }
+    func setupGridView(){
+        let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        flow.minimumInteritemSpacing = CGFloat(self.cellMarginSize)
+        flow.minimumLineSpacing = CGFloat(self.cellMarginSize)
     }
     
     func layOut(){
@@ -231,8 +249,6 @@ class ProductInformationController: UIViewController {
                             }else{
                                 self.setSelectButton(status: likeStatus,select:true) 
                             }
-                            
-                            
                         })
                     //                    
                     
@@ -422,4 +438,55 @@ class ProductInformationController: UIViewController {
         
     }
     
+}
+
+
+extension ProductInformationController : UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
+        return commentCount
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductComment", for: indexPath) as! ProductComment
+        if fromShoppingCart == true {
+            cell.setLable(index: indexPath.row, productId:   selectProductId[index])
+        }
+        if fromMyOrder == true{
+            cell.setLable(index: indexPath.row, productId: productId)
+        }
+        else{
+            let productRef = Database.database().reference().child("Product")
+            productRef.queryOrderedByKey()
+            .observeSingleEvent(of: .value, with: { snapshot in
+                for snap in snapshot.children {
+                    let userSnap = snap as! DataSnapshot
+                    let id = userSnap.key
+                    self.productID.append(id)
+                }
+                cell.setLable(index: indexPath.row, productId: self.productID[self.index])
+            })
+            
+        }
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+    }
+}
+
+extension ProductInformationController: UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = self.calculateWith()
+        return CGSize(width: width, height: width*0.3)
+    }
+    func calculateWith()-> CGFloat{
+        let estimateWidth = CGFloat(estimatedWidth)
+        let cellCount = floor(CGFloat(self.view.frame.size.width / estimateWidth))
+        let margin = CGFloat(cellMarginSize * 2)
+        let width = (self.view.frame.size.width - CGFloat(cellMarginSize)*(cellCount-1)-margin)/cellCount
+        return width
+        
+    }
 }

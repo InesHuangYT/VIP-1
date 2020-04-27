@@ -28,21 +28,21 @@ class GroupBuyController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func btnAction(){
@@ -51,11 +51,11 @@ class GroupBuyController: UIViewController {
     }
     
     func collectionViewDeclare(){
-          self.collectionView.reloadData()
-          collectionView.delegate = self
-          collectionView.dataSource = self
-          collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
-      }
+        self.collectionView.reloadData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "GroupBuyCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GroupBuyCollectionViewCell")
+    }
     
     func setupGridView(){
         let flow = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -82,11 +82,19 @@ extension GroupBuyController : UICollectionViewDataSource{
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
         vc.index = indexPath.row   
-        Database.database().reference().child("GroupBuy")
-            .queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in 
+        
+        
+        let groupBuyRef =  Database.database().reference().child("GroupBuy")
+        
+        groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] {
                     print("key:" ,datas[indexPath.row].key)
+                    
+                    groupBuyRef.child(datas[indexPath.row].key).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                        let data = snapshot.children.allObjects as! [DataSnapshot]
+                        vc.commentCount = data.count
+                        print("commentCount",data.count)
+                    })
                     vc.productId = datas[indexPath.row].key
                     
                     let groupBuyPeople = datas.compactMap({
