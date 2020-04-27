@@ -450,7 +450,7 @@ extension ProductInformationController : UICollectionViewDataSource{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductComment", for: indexPath) as! ProductComment
         if fromShoppingCart == true {
-            cell.setLable(index: indexPath.row, productId:   selectProductId[index])
+            cell.setLable(index: indexPath.row, productId: selectProductId[index])
         }
         if fromMyOrder == true{
             cell.setLable(index: indexPath.row, productId: productId)
@@ -470,10 +470,7 @@ extension ProductInformationController : UICollectionViewDataSource{
         }
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
-    }
+  
 }
 
 extension ProductInformationController: UICollectionViewDelegateFlowLayout{
