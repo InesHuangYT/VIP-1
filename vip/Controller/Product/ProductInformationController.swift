@@ -278,7 +278,7 @@ class ProductInformationController: UIViewController {
                         self.priceLabel.text = (priceResults[index] as! String) + "元"
                         self.price = priceResults[index] as! String //給下面加入購物車使用
                         self.descriptionLabel.text = "產品描述 " + (descriptionResults[index] as! String)
-                        self.evaluationLabel.text = "產品評價 " + (productEvaluationResults[index] as! String)
+                        self.evaluationLabel.text = "產品評價 " + (productEvaluationResults[index] as! String) + "星"
                         self.sellerEvaluationLabel.text = "商家評價 " + (sellerEvaluationResults[index] as! String)
                         let productImageUrl = imageResults[index] 
                         self.imageURL = imageResults[index] as? String

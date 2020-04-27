@@ -688,23 +688,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8rv-Ii-iB1">
-                                <rect key="frame" x="0.0" y="98" width="373" height="228"/>
+                                <rect key="frame" x="0.0" y="97" width="375" height="239"/>
                                 <color key="backgroundColor" red="0.90985900159999999" green="0.96641892190000001" blue="0.87863266470000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Cfh-dO-8cl">
-                                    <size key="itemSize" width="374" height="223"/>
+                                    <size key="itemSize" width="359" height="194"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="t34-af-Chh">
-                                        <rect key="frame" x="-0.5" y="0.0" width="374" height="223"/>
+                                        <rect key="frame" x="8" y="0.0" width="359" height="194"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xFV-Og-bof">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="223"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="194"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="374" height="223"/>
+                                        <size key="customSize" width="359" height="194"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -720,7 +720,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IUA-V6-lao">
-                                <rect key="frame" x="22" y="86.5" width="329" height="3"/>
+                                <rect key="frame" x="22" y="86.5" width="437" height="3"/>
                                 <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="9qm-1q-gxa"/>
@@ -755,26 +755,13 @@
                                     <action selector="detailInformationButtonWasPressed:" destination="QaG-dA-S2V" eventType="touchUpInside" id="yVp-Zp-QWc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tcz-cZ-veG">
-                                <rect key="frame" x="118" y="373.5" width="137" height="49"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="ahR-Rz-npe"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                <state key="normal" title="錄音輸入評論" image="錄音">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="record:" destination="1IO-3X-wQz" eventType="touchUpInside" id="gBs-tp-tpp"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="評論文字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AFc-Kh-WfC">
                                 <rect key="frame" x="48" y="442.5" width="269" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2Q-yE-jho">
-                                <rect key="frame" x="56" y="334" width="261" height="30"/>
+                                <rect key="frame" x="111" y="393" width="153" height="30"/>
                                 <state key="normal" title="選擇評分（最高五分）">
                                     <color key="titleColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -789,28 +776,24 @@
                             <constraint firstItem="VCc-ay-UBv" firstAttribute="leading" secondItem="hcE-r1-tIa" secondAttribute="trailing" constant="25" id="5nS-nD-zcH"/>
                             <constraint firstItem="AFc-Kh-WfC" firstAttribute="trailing" secondItem="VCc-ay-UBv" secondAttribute="trailing" id="9Ow-LV-cTx"/>
                             <constraint firstItem="tJP-q9-BN9" firstAttribute="top" secondItem="njr-ni-yge" secondAttribute="top" constant="8" id="BRV-dy-Sgk"/>
-                            <constraint firstItem="b2Q-yE-jho" firstAttribute="trailing" secondItem="AFc-Kh-WfC" secondAttribute="trailing" id="BgO-7w-niF"/>
-                            <constraint firstItem="IUA-V6-lao" firstAttribute="centerX" secondItem="8rv-Ii-iB1" secondAttribute="centerX" id="Cbt-m1-vy7"/>
+                            <constraint firstItem="b2Q-yE-jho" firstAttribute="trailing" secondItem="AFc-Kh-WfC" secondAttribute="trailing" constant="-53" id="BgO-7w-niF"/>
+                            <constraint firstItem="IUA-V6-lao" firstAttribute="centerX" secondItem="8rv-Ii-iB1" secondAttribute="centerX" constant="53" id="Cbt-m1-vy7"/>
                             <constraint firstItem="8rv-Ii-iB1" firstAttribute="centerX" secondItem="b2Q-yE-jho" secondAttribute="centerX" id="CgE-GW-0gd"/>
                             <constraint firstItem="njr-ni-yge" firstAttribute="bottom" secondItem="hcE-r1-tIa" secondAttribute="bottom" constant="20" id="EPi-QM-suW"/>
                             <constraint firstItem="py5-EW-gpo" firstAttribute="top" secondItem="njr-ni-yge" secondAttribute="top" constant="20" id="Gpe-Tc-ulQ"/>
-                            <constraint firstItem="njr-ni-yge" firstAttribute="trailing" secondItem="b2Q-yE-jho" secondAttribute="trailing" constant="58" id="KqG-OU-el3"/>
-                            <constraint firstItem="AFc-Kh-WfC" firstAttribute="top" secondItem="Tcz-cZ-veG" secondAttribute="bottom" constant="20" id="N5C-aO-Igy"/>
+                            <constraint firstItem="njr-ni-yge" firstAttribute="trailing" secondItem="b2Q-yE-jho" secondAttribute="trailing" constant="111" id="KqG-OU-el3"/>
                             <constraint firstItem="8rv-Ii-iB1" firstAttribute="leading" secondItem="njr-ni-yge" secondAttribute="leading" id="TWt-YX-WJI"/>
                             <constraint firstItem="AFc-Kh-WfC" firstAttribute="leading" secondItem="njr-ni-yge" secondAttribute="leading" constant="48" id="XSS-oJ-MIp"/>
                             <constraint firstItem="hcE-r1-tIa" firstAttribute="baseline" secondItem="VCc-ay-UBv" secondAttribute="baseline" id="XTA-0O-LP6"/>
                             <constraint firstItem="hcE-r1-tIa" firstAttribute="top" secondItem="AFc-Kh-WfC" secondAttribute="bottom" constant="90.5" id="XUo-aE-Ygy"/>
-                            <constraint firstItem="Tcz-cZ-veG" firstAttribute="top" secondItem="b2Q-yE-jho" secondAttribute="bottom" constant="9.5" id="YT5-1r-SKs"/>
                             <constraint firstItem="py5-EW-gpo" firstAttribute="leading" secondItem="AFc-Kh-WfC" secondAttribute="leading" id="YWp-DF-XvG"/>
-                            <constraint firstItem="Tcz-cZ-veG" firstAttribute="centerX" secondItem="b2Q-yE-jho" secondAttribute="centerX" id="ZC1-mK-pev"/>
                             <constraint firstItem="IUA-V6-lao" firstAttribute="leading" secondItem="Q1M-om-EbO" secondAttribute="leadingMargin" constant="6" id="ZWf-fe-NMv"/>
                             <constraint firstItem="tJP-q9-BN9" firstAttribute="leading" secondItem="py5-EW-gpo" secondAttribute="trailing" constant="10" id="a7S-zg-Fbd"/>
-                            <constraint firstItem="8rv-Ii-iB1" firstAttribute="top" secondItem="IUA-V6-lao" secondAttribute="bottom" constant="8.5" id="c12-oj-3as"/>
-                            <constraint firstItem="Tcz-cZ-veG" firstAttribute="leading" secondItem="njr-ni-yge" secondAttribute="leading" constant="118" id="c9P-Ka-qqc"/>
+                            <constraint firstItem="8rv-Ii-iB1" firstAttribute="top" secondItem="IUA-V6-lao" secondAttribute="bottom" constant="7.5" id="c12-oj-3as"/>
                             <constraint firstItem="AFc-Kh-WfC" firstAttribute="leading" secondItem="hcE-r1-tIa" secondAttribute="leading" id="ink-Dt-ZPj"/>
-                            <constraint firstItem="njr-ni-yge" firstAttribute="trailing" secondItem="Tcz-cZ-veG" secondAttribute="trailing" constant="120" id="jIN-W3-Utc"/>
-                            <constraint firstItem="b2Q-yE-jho" firstAttribute="top" secondItem="8rv-Ii-iB1" secondAttribute="bottom" constant="8" id="ujf-Z3-60s"/>
-                            <constraint firstItem="py5-EW-gpo" firstAttribute="trailing" secondItem="b2Q-yE-jho" secondAttribute="trailing" id="wiA-rw-9Jv"/>
+                            <constraint firstItem="b2Q-yE-jho" firstAttribute="top" secondItem="8rv-Ii-iB1" secondAttribute="bottom" constant="57" id="ujf-Z3-60s"/>
+                            <constraint firstItem="AFc-Kh-WfC" firstAttribute="top" secondItem="b2Q-yE-jho" secondAttribute="bottom" constant="19.5" id="uz6-2d-d8E"/>
+                            <constraint firstItem="py5-EW-gpo" firstAttribute="trailing" secondItem="b2Q-yE-jho" secondAttribute="trailing" constant="53" id="wiA-rw-9Jv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="njr-ni-yge"/>
                     </view>
@@ -823,7 +806,6 @@
                         <outlet property="btnMenu" destination="C8C-2e-j8r" id="h2d-6u-65Q"/>
                         <outlet property="collectionView" destination="8rv-Ii-iB1" id="S0q-Sd-Dbp"/>
                         <outlet property="commentTextField" destination="AFc-Kh-WfC" id="NrC-5q-uGK"/>
-                        <outlet property="microphone" destination="Tcz-cZ-veG" id="Zwm-II-plJ"/>
                         <outlet property="selectGradeButton" destination="b2Q-yE-jho" id="naS-u1-rO8"/>
                     </connections>
                 </viewController>
@@ -840,6 +822,5 @@
         <image name="support" width="33" height="33"/>
         <image name="確認" width="132" height="80"/>
         <image name="返回2" width="130" height="79"/>
-        <image name="錄音" width="54" height="26"/>
     </resources>
 </document>
