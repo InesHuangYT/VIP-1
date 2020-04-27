@@ -31,6 +31,21 @@ class CommentController: UIViewController ,SFSpeechRecognizerDelegate, UITextFie
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     
+    //from history
+    var orderIndex = Int()
+    var progresss = String()
+    var payment = String()
+    var orderCreateTimes = String()
+    var orderEndTime = String()
+    var orderId = String()
+    
+    //from groupbuy
+    var openGroupId = String()
+    var payFee = String()
+    var orderAutoId = String()
+    var status = String()
+    var index = Int()
+    
     var gradeSources = [String]()
     var selectButton = UIButton()
     let transparentView = UIView()

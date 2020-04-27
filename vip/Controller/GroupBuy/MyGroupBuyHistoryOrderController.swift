@@ -117,7 +117,11 @@ class MyGroupBuyHistoryOrderController: UIViewController {
         let storyboardDeadLine = UIStoryboard(name:"Order",bundle:nil)
         let vc = storyboardDeadLine.instantiateViewController(withIdentifier: "CommentAllController") as! CommentAllController 
         vc.fromGroupBuy = true
-        vc.orderIds = orderAutoId
+        vc.openGroupId = openGroupId
+        vc.payFee = payFee
+        vc.orderAutoId = orderAutoId
+        vc.status = status
+        vc.index = index
         checkIfCommentBefore(vc:vc)
     }
     
@@ -130,8 +134,10 @@ class MyGroupBuyHistoryOrderController: UIViewController {
             print("comment",comment ?? "")      
             if comment == "false"{
                 vc.productIdString.append(self.productId)
+                vc.productIdAll.append(self.productId)
                 self.navigationController?.pushViewController(vc, animated: true)
             }else{
+                vc.productIdAll.append(self.productId)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         })
