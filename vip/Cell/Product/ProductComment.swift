@@ -40,10 +40,10 @@ class ProductComment: UICollectionViewCell {
                                     return
                             }
                             let name = value["name"] as? String
-                            self.username.text = name
+                            self.username.text = "評論者名稱 " + (name ?? "") 
                         })
                     print("data",datas)
-
+                    
                     self.textSet(data:datas,index:index)
                     
                     
@@ -58,22 +58,23 @@ class ProductComment: UICollectionViewCell {
         productRef.queryOrderedByKey()
             .observeSingleEvent(of: .value, with: { snapshot in
                 if let datas = snapshot.children.allObjects as? [DataSnapshot] { 
-                    let userId = datas[index].key
-                    Database.database().reference().child("users").child(userId)
-                        .child("Profile")
-                        .queryOrderedByKey()
-                        .observeSingleEvent(of: .value, with: { snapshot in
-                            guard let value = snapshot.value as? [String:Any]
-                                else {
-                                    print("Error")
-                                    return
-                            }
-                            let name = value["name"] as? String
-                            self.username.text = name
-                        })
-                    print("data",datas)
-                    self.textSet(data:datas,index:index)
-                    
+                    if (datas.isEmpty == false){
+                        let userId = datas[index].key
+                        Database.database().reference().child("users").child(userId)
+                            .child("Profile")
+                            .queryOrderedByKey()
+                            .observeSingleEvent(of: .value, with: { snapshot in
+                                guard let value = snapshot.value as? [String:Any]
+                                    else {
+                                        print("Error")
+                                        return
+                                }
+                                let name = value["name"] as? String
+                                self.username.text = "評論者名稱 " + (name ?? "")
+                            })
+                        print("data",datas)
+                        self.textSet(data:datas,index:index)
+                    }
                 }
                 
             })
@@ -90,16 +91,16 @@ class ProductComment: UICollectionViewCell {
         })
         
         if comment.isEmpty {
-            self.grade.text = (grade[index] as! String)
+            self.grade.text = "評分 " + (grade[index] as! String)
             self.comment.text = "無評論"
         }
         else if grade.isEmpty {
-            self.comment.text = (comment[index] as! String)  
+            self.comment.text = "評論 " + (comment[index] as! String)  
             self.grade.text = "無評分"
         }
         else {
-            self.comment.text = (comment[index] as! String)  
-            self.grade.text = (grade[index] as! String)
+            self.comment.text = "評論 " + (comment[index] as! String)  
+            self.grade.text = "評分 " + (grade[index] as! String)
         } 
     }
     

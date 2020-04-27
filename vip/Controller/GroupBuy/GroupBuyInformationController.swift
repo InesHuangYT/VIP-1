@@ -376,6 +376,8 @@ extension GroupBuyInformationController : UICollectionViewDataSource{
         }else{
             let productCommentCell = collectionView.dequeueReusableCell(withReuseIdentifier:
                 "ProductComment", for: indexPath) as! ProductComment
+            print("commentCount",commentCount)
+            print("productId",productId)
             productCommentCell.setLable(index: indexPath.row, groupProductId: productId)
             return productCommentCell
         }

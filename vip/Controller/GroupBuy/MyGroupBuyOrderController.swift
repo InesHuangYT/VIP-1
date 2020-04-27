@@ -44,7 +44,7 @@ class MyGroupBuyOrderController: UIViewController {
         userInfo()
         collectionViewDeclare()
         print("index",index)
-
+        
         if status == "Ready" {
             cancelButton.isHidden = true //已成團就無法刪除訂單
         }
@@ -102,11 +102,12 @@ class MyGroupBuyOrderController: UIViewController {
                 
                 //已成團
                 if status == "Ready" {
-                    self.notificateToSeller.isHidden = false
                     groupBuyStatusRef.child("OpenBy").queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
                         if let snapshot1 = snapshot.children.allObjects as? [DataSnapshot]{  
                             print("snapshot1[0]",snapshot1[0].key)
                             if((Auth.auth().currentUser?.uid ?? "") as String == snapshot1[0].key){                                self.progress.text = "已成團"
+                                self.notificateToSeller.isHidden = false
+                                
                             }
                             else{
                                 self.progress.text = "等候開團者通知商家出貨"
@@ -140,7 +141,7 @@ class MyGroupBuyOrderController: UIViewController {
                 } 
             })
         
-//        time
+        //        time
         groupBuyOrderRef.child(self.orderAutoId).queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             let timeValue = snapshot.value as? NSDictionary
             let orderCreateTimes = timeValue?["OrderCreateTime"] as! String

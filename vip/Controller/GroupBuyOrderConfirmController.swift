@@ -297,18 +297,18 @@ extension GroupBuyOrderConfirmController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
         let groupBuyRef =  Database.database().reference().child("GroupBuy")
         groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
-            if let datas = snapshot.children.allObjects as? [DataSnapshot] {
-                print("key:" ,datas[indexPath.row].key)
-                groupBuyRef.child(datas[indexPath.row].key).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
-                    let data = snapshot.children.allObjects as! [DataSnapshot]
-                    vc.commentCount = data.count
-                    vc.index = self.productIndex
-                    vc.productId = self.productId
-                    vc.from = "GroupBuy"
-                    self.navigationController?.pushViewController(vc,animated: true)
-                })
-                
-            }
+            
+            print("key:" ,self.productId)
+            groupBuyRef.child(self.productId).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                let data = snapshot.children.allObjects as! [DataSnapshot]
+                vc.commentCount = data.count
+                vc.index = self.productIndex
+                vc.productId = self.productId
+                vc.from = "GroupBuy"
+                self.navigationController?.pushViewController(vc,animated: true)
+            })
+            
+            
         })
         
         

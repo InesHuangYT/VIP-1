@@ -82,8 +82,6 @@ extension GroupBuyController : UICollectionViewDataSource{
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
         vc.index = indexPath.row   
-        
-        
         let groupBuyRef =  Database.database().reference().child("GroupBuy")
         
         groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
