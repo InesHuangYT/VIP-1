@@ -47,23 +47,23 @@ class GroupBuyOrderConfirmController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func userInfo(){
@@ -131,7 +131,7 @@ class GroupBuyOrderConfirmController: UIViewController {
             openGroupRef.child("JoinBy").child(self.uid ?? "").setValue(self.uid ?? "")
             openGroupRef.child("Status").setValue("Waiting")
             openGroupRef.child("GroupCreateTime").setValue(self.getTime())
-
+            
             
             
             self.ref.child(self.productId).child("OpenGroupId").queryOrderedByKey().observeSingleEvent(of: .value, with: { 
@@ -150,7 +150,7 @@ class GroupBuyOrderConfirmController: UIViewController {
                 refOrder.child("Payment").setValue(self.payFee)
                 refOrder.child("OrderCreateTime").setValue(self.getTime())
                 refOrder.child("Comment").setValue("false")
-
+                
                 
                 let value = snapshot.value as? NSDictionary
                 let price = value?["Price"] as? String ?? ""
@@ -214,7 +214,7 @@ class GroupBuyOrderConfirmController: UIViewController {
                                 refOrder.child("Payment").setValue(self.payFee)
                                 refOrder.child("OrderCreateTime").setValue(self.getTime())
                                 refOrder.child("Comment").setValue("false")
-
+                                
                                 
                                 
                                 
@@ -241,7 +241,7 @@ class GroupBuyOrderConfirmController: UIViewController {
                             })
                             message.addAction(confirmAction)
                             self.present(message, animated: true, completion: nil)
-//                            self.navigationController?.pushViewController(vc,animated: true)
+                            //                            self.navigationController?.pushViewController(vc,animated: true)
                             
                         })
                     })
@@ -295,10 +295,25 @@ extension GroupBuyOrderConfirmController : UICollectionViewDataSource{
         
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
-        vc.index = productIndex
-        vc.productId = productId
-        vc.from = "GroupBuy"
-        self.navigationController?.pushViewController(vc,animated: true)
+        let groupBuyRef =  Database.database().reference().child("GroupBuy")
+        groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let datas = snapshot.children.allObjects as? [DataSnapshot] {
+                print("key:" ,datas[indexPath.row].key)
+                groupBuyRef.child(datas[indexPath.row].key).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let data = snapshot.children.allObjects as! [DataSnapshot]
+                    vc.commentCount = data.count
+                    vc.index = self.productIndex
+                    vc.productId = self.productId
+                    vc.from = "GroupBuy"
+                    self.navigationController?.pushViewController(vc,animated: true)
+                })
+                
+            }
+        })
+        
+        
+        
+        
     }
 }
 

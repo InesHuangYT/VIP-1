@@ -109,7 +109,6 @@ class ProcessingOrderController: UIViewController {
             vc.progresss = orderProgress
             vc.payments = payment
             vc.orderCreateTimes = orderCreateTime
-            
             self.navigationController?.pushViewController(vc,animated: true)
             
         })

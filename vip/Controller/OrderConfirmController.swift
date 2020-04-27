@@ -36,23 +36,23 @@ class OrderComfirmController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func userInfo(){
@@ -120,6 +120,7 @@ class OrderComfirmController: UIViewController {
         orderRef.child("OrderStatus").setValue("Processing")
         orderRef.child("OrderCreateTime").setValue(timeStamp)
         orderRef.child("Comment").setValue("false")
+
         userProductRef.child("OrderId").child(orderId ?? "").child("ProductId").setValue(selectProductId)
         userProductRef.child("Status").child("Processing").child("OrderId").child(orderId ?? "").setValue(orderId)
         
@@ -165,12 +166,20 @@ extension OrderComfirmController :UICollectionViewDataSource {
         
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        vc.index = indexPath.row
-        vc.fromShoppingCart = true
-        vc.fromCheckOut = true
-        vc.selectProductId = self.selectProductId
+        let productRef =  Database.database().reference().child("Product")
+        productRef.child(selectProductId[indexPath.row]).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            vc.commentCount = data.count
+            vc.index = indexPath.row
+            vc.fromShoppingCart = true
+            vc.fromCheckOut = true
+            vc.selectProductId = self.selectProductId
+            self.navigationController?.pushViewController(vc,animated: true)
+        })
         
-        self.navigationController?.pushViewController(vc,animated: true)
+        
+        
+        
     }
 }
 

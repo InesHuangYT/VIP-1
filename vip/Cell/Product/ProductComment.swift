@@ -42,7 +42,8 @@ class ProductComment: UICollectionViewCell {
                             let name = value["name"] as? String
                             self.username.text = name
                         })
-                    
+                    print("data",datas)
+
                     self.textSet(data:datas,index:index)
                     
                     
@@ -70,8 +71,9 @@ class ProductComment: UICollectionViewCell {
                             let name = value["name"] as? String
                             self.username.text = name
                         })
-                    
+                    print("data",datas)
                     self.textSet(data:datas,index:index)
+                    
                 }
                 
             })

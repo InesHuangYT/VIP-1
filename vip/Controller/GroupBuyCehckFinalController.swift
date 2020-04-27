@@ -52,23 +52,23 @@ class GroupBuyCehckFinalController: UIViewController {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func btnAction(){
@@ -106,7 +106,7 @@ class GroupBuyCehckFinalController: UIViewController {
         collectionView.register(UINib(nibName: "CehckFinalCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CehckFinalCollectionViewCell")
     }
     
-//    status set to "Ready" when the number of people arrive
+    //    status set to "Ready" when the number of people arrive
     func setGroupBuyStatus(productId:String,index:Int,groupBuyPeople:Int,orderIds:String){
         let refs = ref.child(productId).child("OpenGroupId")
         refs.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
@@ -165,11 +165,20 @@ extension GroupBuyCehckFinalController : UICollectionViewDataSource{
         
         let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "GroupBuyInformationControllerId") as!  GroupBuyInformationController
-        vc.productId = productId
-        vc.index = productIndex
-        vc.from = "Check"
-
-        self.navigationController?.pushViewController(vc,animated: true)
+        let groupBuyRef =  Database.database().reference().child("GroupBuy")
+        groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            if let datas = snapshot.children.allObjects as? [DataSnapshot] {
+                print("key:" ,datas[indexPath.row].key)
+                groupBuyRef.child(datas[indexPath.row].key).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                    let data = snapshot.children.allObjects as! [DataSnapshot]
+                    vc.commentCount = data.count
+                    vc.productId = self.productId
+                    vc.index = self.productIndex
+                    vc.from = "Check"
+                    self.navigationController?.pushViewController(vc,animated: true)
+                })
+            }
+        })
     }
 }
 

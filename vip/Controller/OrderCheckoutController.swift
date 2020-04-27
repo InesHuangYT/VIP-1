@@ -62,23 +62,23 @@ class OrderCheckoutController: UIViewController, UITextFieldDelegate {
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(+886961192398)") {
-
-                let application:UIApplication = UIApplication.shared
-
-                if (application.canOpenURL(callURL)) {
-                    let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
-                    let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
-                        application.openURL(callURL)
-                    })
-                    let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
-                        print("Canceled Call")
-                    })
-        
-                    alert.addAction(callAction)
-                    alert.addAction(noAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
+            
+            let application:UIApplication = UIApplication.shared
+            
+            if (application.canOpenURL(callURL)) {
+                let alert = UIAlertController(title: "撥打客服專線", message: "", preferredStyle: .alert)
+                let callAction = UIAlertAction(title: "是", style: .default, handler: { (action) in
+                    application.openURL(callURL)
+                })
+                let noAction = UIAlertAction(title: "否", style: .cancel, handler: { (action) in
+                    print("Canceled Call")
+                })
+                
+                alert.addAction(callAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
             }
+        }
     }
     
     func btnAction(){
@@ -160,27 +160,27 @@ class OrderCheckoutController: UIViewController, UITextFieldDelegate {
     }
     
     
-//    func findIndex(selectProductId:String,vc:ProductInformationController){
-//        let shoppingCartRef =  Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
-//        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-//            let data = snapshot.children.allObjects as! [DataSnapshot]
-//            
-//            for i in 1...data.count {
-//                if data[i-1].key == selectProductId {
-//                    print("find index", i-1)
-//                    vc.index = i-1
-//                    
-//                }else{
-//                    print("Not find index", i-1)
-//                }
-//            }
-//            vc.fromShoppingCart = true
-//            self.navigationController?.pushViewController(vc,animated: true)
-//            
-//            
-//        })
-//        
-//    }
+    //    func findIndex(selectProductId:String,vc:ProductInformationController){
+    //        let shoppingCartRef =  Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
+    //        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+    //            let data = snapshot.children.allObjects as! [DataSnapshot]
+    //            
+    //            for i in 1...data.count {
+    //                if data[i-1].key == selectProductId {
+    //                    print("find index", i-1)
+    //                    vc.index = i-1
+    //                    
+    //                }else{
+    //                    print("Not find index", i-1)
+    //                }
+    //            }
+    //            vc.fromShoppingCart = true
+    //            self.navigationController?.pushViewController(vc,animated: true)
+    //            
+    //            
+    //        })
+    //        
+    //    }
     
     @IBAction func confirmOrderButtonWasPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Checkout", bundle: nil)
@@ -235,20 +235,18 @@ extension OrderCheckoutController : UICollectionViewDataSource{
         
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        vc.index = indexPath.row
-        vc.selectProductId = selectProductId
-        vc.fromShoppingCart = true
-
-        self.navigationController?.pushViewController(vc,animated: true)  
+        let productRef =  Database.database().reference().child("Product")
+        productRef.child(selectProductId[indexPath.row]).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+            let data = snapshot.children.allObjects as! [DataSnapshot]
+            vc.commentCount = data.count
+            vc.index = indexPath.row
+            vc.selectProductId = self.selectProductId
+            vc.fromShoppingCart = true
+            print("commentCount",data.count)
+            self.navigationController?.pushViewController(vc,animated: true)  
+            
+        })
         
-//        let shoppingCartRef = Database.database().reference().child("ShoppingCart").child(Auth.auth().currentUser?.uid ?? "")
-//        shoppingCartRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in
-//            let data = snapshot.children.allObjects as! [DataSnapshot]
-//            self.findIndex(selectProductId: data[indexPath.row].key,vc: vc)
-//            
-//            
-//            
-//        })
         
     }
     
