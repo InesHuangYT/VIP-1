@@ -18,23 +18,29 @@ class CommentAllController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var commentLabel: UILabel!
 
+    //from history
     var orderIndex = Int()
     var progresss = String()
     var payment = String()
     var orderCreateTimes = String()
     var orderEndTime = String()
     var productIdStringAll = [String]()
+    var orderIds = String()
+    
+    //from groupbuy
+    var productIdAll = [String]()
+    var openGroupId = String()
+    var payFee = String()
+    var orderAutoId = String()
+    var status = String()
+    var index = Int()
     
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     
-    var uid = ""
-    var orderIds = String()
     var productIdString = [String]()
+    var uid = ""
     var fromGroupBuy = false
-    //    var commentfinish = [BooleanLiteralType]()
-    //    var count = 0
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,20 +52,6 @@ class CommentAllController: UIViewController {
             commentLabel.font = UIFont(name: "Helvetica-Light", size: 20)
             commentLabel.text = "這個訂單商品已評論完"
         }
-        
-        //        for i in 0...productIdString.count-1{
-        //            commentfinish.append(true)
-        //            print(commentfinish)
-        //            Database.database().reference().child("Product").child(productIdString[i]).observeSingleEvent(of: .value, with: { snapshot in
-        //                let value = snapshot.value as? NSDictionary
-        //                let grade = value?["ProductEvaluation"] as? String ?? ""
-        //                print(grade)
-        //                if grade != ""{
-        //                    self.commentfinish[i] = false
-        //                    self.count = self.count+1
-        //                }
-        //            })
-        //        }
     }
     
     func currentUserName()->(String){
@@ -109,17 +101,31 @@ class CommentAllController: UIViewController {
     }
     
     @IBAction func backButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Order", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "HistoryOrderInformationControllerId") as!  HistoryOrderInformationController
-        vc.orderIds = orderIds
-        vc.orderIndex = orderIndex
-        vc.productIdString = productIdStringAll
-        vc.progresss = progresss
-        vc.payments = payment
-        vc.orderCreateTimes = orderCreateTimes
-        vc.orderEndTime = orderEndTime
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        if (fromGroupBuy == false){
+            let storyboard = UIStoryboard(name: "Order", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "HistoryOrderInformationControllerId") as!  HistoryOrderInformationController
+            vc.orderIds = orderIds
+            vc.orderIndex = orderIndex
+            vc.productIdString = productIdStringAll
+            vc.progresss = progresss
+            vc.payments = payment
+            vc.orderCreateTimes = orderCreateTimes
+            vc.orderEndTime = orderEndTime
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            let storyboard = UIStoryboard(name: "GroupBuy", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "MyGroupBuyHistoryOrderControllerId") as!  MyGroupBuyHistoryOrderController
+            
+            vc.productId = productIdAll[0]
+            vc.openGroupId = openGroupId
+            vc.payFee = payFee
+            vc.orderAutoId = orderAutoId
+            vc.status = status
+            vc.index = index
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 }
