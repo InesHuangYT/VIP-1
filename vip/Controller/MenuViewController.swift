@@ -108,7 +108,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if cell.lblMenu.text! == "團購"
         {
-            Database.database().reference().child("GroupBuy").observe(.value, with: { 
+            Database.database().reference().child("GroupBuy").queryOrderedByKey().observeSingleEvent(of: .value, with: { 
                 (snapshot) in 
                 let allKeys = snapshot.value as! [String : AnyObject]
                 let nodeToReturn = allKeys.keys

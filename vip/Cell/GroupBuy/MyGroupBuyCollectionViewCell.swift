@@ -208,7 +208,6 @@ class MyGroupBuyCollectionViewCell: UICollectionViewCell {
                             self.status.text = "已通知商家出貨"
                             self.notificateToSeller.isHidden = true
 
-                            
                         })
                     })
                 }

@@ -212,8 +212,8 @@ extension GroupBuyCheckOutController : UICollectionViewDataSource{
         let groupBuyRef =  Database.database().reference().child("GroupBuy")
         groupBuyRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             if let datas = snapshot.children.allObjects as? [DataSnapshot] {
-                print("key:" ,datas[indexPath.row].key)
-                groupBuyRef.child(datas[indexPath.row].key).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                print("key:" ,self.productId)
+                groupBuyRef.child(self.productId).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
                     let data = snapshot.children.allObjects as! [DataSnapshot]
                     vc.commentCount = data.count
                     print("commentCount",data.count)
