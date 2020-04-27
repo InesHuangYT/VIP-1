@@ -165,16 +165,16 @@ class HistoryOrderInformationController: UIViewController {
                     let value = snapshot.value as? NSDictionary
                     var needComment = [String]()
                     for i in self.productIdString {
-                         let commentProductId = value?[i] as? String
+                        let commentProductId = value?[i] as? String
                         if commentProductId == nil { //沒評論過
                             print("沒評論過",i )
                             needComment.append(i)
                         }
                     }
-                   print("needComment 沒評論過的有",needComment)
+                    print("needComment 沒評論過的有",needComment)
                     vc.productIdString = needComment
                     self.navigationController?.pushViewController(vc, animated: true)
- 
+                    
                 })
             }
         })
@@ -201,9 +201,18 @@ extension HistoryOrderInformationController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Product", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
-        vc.fromMyOrder = true
-        vc.productId = productIdString[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
+        let productRef =  Database.database().reference().child("Product")
+        productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
+            productRef.child(self.productIdString[indexPath.row]).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
+                let data = snapshot.children.allObjects as! [DataSnapshot]
+                vc.commentCount = data.count
+                print("commentCount",data.count)
+                vc.fromMyOrder = true
+                vc.productId = self.productIdString[indexPath.row]
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+        })
+        
     }
 }
 

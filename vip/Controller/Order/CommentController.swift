@@ -490,11 +490,13 @@ extension CommentController : UITableViewDelegate, UITableViewDataSource{
         
         if fromGroupBuy == false{
             Database.database().reference(withPath: "Product/\(self.productIdString)/ProductEvaluation/\(self.uid ?? "")/grade").setValue(cells?.textLabel?.text!)
+            Database.database().reference(withPath: "Product/\(self.productIdString)/ProductEvaluation/\(self.uid ?? "")/comment").setValue("")
             Database.database().reference(withPath: "ProductOrder/\(orderIds)/Comment/").setValue("true")
             Database.database().reference(withPath: "ProductOrder/\(orderIds)/CommentProductId/\(productIdString)").setValue("true")
             removeTransparent()
         }else{
             Database.database().reference(withPath: "GroupBuy/\(self.productIdString)/ProductEvaluation/\(self.uid ?? "")/grade").setValue(cells?.textLabel?.text!)
+            Database.database().reference(withPath: "GroupBuy/\(self.productIdString)/ProductEvaluation/\(self.uid ?? "")/comment").setValue("")
             Database.database().reference(withPath: "GroupBuyOrder/\(orderIds)/Comment/").setValue("true")
             Database.database().reference(withPath: "GroupBuyOrder/\(orderIds)/CommentProductId/\(productIdString)").setValue("true")
             removeTransparent()

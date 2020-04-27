@@ -74,9 +74,7 @@ class ProductController: UIViewController {
     
     func findIndex(searchId:String,vc:ProductInformationController){
         let productRef =  Database.database().reference().child("Product")
-        
         productRef.queryOrderedByKey().observeSingleEvent(of: .value, with: { (snapshot) in
-            
             productRef.child(searchId).child("ProductEvaluation").observeSingleEvent(of: .value, with: { (snapshot) in
                 let data = snapshot.children.allObjects as! [DataSnapshot]
                 vc.commentCount = data.count
@@ -127,8 +125,7 @@ extension ProductController : UICollectionViewDataSource{
         let vc = storyboard.instantiateViewController(withIdentifier: "ProductInformationControllerId") as!  ProductInformationController
         
         if fromSearch == true {
-            print("csearchId[indexPath.row]",searchId[indexPath.row])
-            
+            print("searchId[indexPath.row]",searchId[indexPath.row])
             findIndex(searchId: searchId[indexPath.row],vc:vc)
             
         }
