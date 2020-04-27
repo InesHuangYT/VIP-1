@@ -29,7 +29,6 @@
 		B019008E243B7FE400E6BA3E /* GroupBuyCheckOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */; };
 		B0190091243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */; };
 		B0190092243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */; };
-		B019FFFD24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B019FFFC24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 */; };
 		B042F7F3241F8C72005982AF /* Product.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B042F7F2241F8C72005982AF /* Product.storyboard */; };
 		B042F7F5241F8CB2005982AF /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B042F7F4241F8CB2005982AF /* ProductController.swift */; };
 		B042F7F7241F9064005982AF /* ProductInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B042F7F6241F9064005982AF /* ProductInformationController.swift */; };
@@ -43,6 +42,7 @@
 		B06E26C22455E99E0061627F /* MyGroupBuyHistoryOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */; };
 		B06E26E3245655310061627F /* ProductComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26E1245655310061627F /* ProductComment.swift */; };
 		B06E26E4245655310061627F /* ProductComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = B06E26E2245655310061627F /* ProductComment.xib */; };
+		B06E2783245726840061627F /* Easy Lemon 30 Second.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B06E2782245726830061627F /* Easy Lemon 30 Second.mp3 */; };
 		B08376CE2431FCC8006D169E /* GroupBuyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376CD2431FCC8006D169E /* GroupBuyController.swift */; };
 		B08376EC243262BD006D169E /* CategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376EB243262BD006D169E /* CategoryController.swift */; };
 		B08376EE2432630E006D169E /* CreateCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08376ED2432630E006D169E /* CreateCategoryController.swift */; };
@@ -302,7 +302,6 @@
 		B019008D243B7FE300E6BA3E /* GroupBuyCheckOutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyCheckOutController.swift; sourceTree = "<group>"; };
 		B019008F243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyCheckOutCollectionViewCell.swift; sourceTree = "<group>"; };
 		B0190090243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupBuyCheckOutCollectionViewCell.xib; sourceTree = "<group>"; };
-		B019FFFC24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Easy Lemon 30 Second.mp3"; sourceTree = "<group>"; };
 		B042F7F2241F8C72005982AF /* Product.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Product.storyboard; sourceTree = "<group>"; };
 		B042F7F4241F8CB2005982AF /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		B042F7F6241F9064005982AF /* ProductInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInformationController.swift; sourceTree = "<group>"; };
@@ -317,6 +316,7 @@
 		B06E26E1245655310061627F /* ProductComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductComment.swift; sourceTree = "<group>"; };
 		B06E26E2245655310061627F /* ProductComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductComment.xib; sourceTree = "<group>"; };
 		B06E27812456F5AA0061627F /* vip copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "vip copy-Info.plist"; path = "/Users/ines/Desktop/VIP-1/vip copy-Info.plist"; sourceTree = "<absolute>"; };
+		B06E2782245726830061627F /* Easy Lemon 30 Second.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Easy Lemon 30 Second.mp3"; sourceTree = "<group>"; };
 		B08376CD2431FCC8006D169E /* GroupBuyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBuyController.swift; sourceTree = "<group>"; };
 		B08376EB243262BD006D169E /* CategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryController.swift; sourceTree = "<group>"; };
 		B08376ED2432630E006D169E /* CreateCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCategoryController.swift; sourceTree = "<group>"; };
@@ -453,7 +453,7 @@
 		B019FFFE24392AD900E6BA3E /* Mp3 */ = {
 			isa = PBXGroup;
 			children = (
-				B019FFFC24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 */,
+				B06E2782245726830061627F /* Easy Lemon 30 Second.mp3 */,
 			);
 			path = Mp3;
 			sourceTree = "<group>";
@@ -914,7 +914,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B019FFFD24392AD600E6BA3E /* Easy Lemon 30 Second.mp3 in Resources */,
 				B0190092243B861000E6BA3E /* GroupBuyCheckOutCollectionViewCell.xib in Resources */,
 				B0FE0D5C243D095500479B80 /* CehckFinalCollectionViewCell.xib in Resources */,
 				B087D23823F56439001FAC9A /* LaunchScreen.storyboard in Resources */,
@@ -936,6 +935,7 @@
 				0254A700245057A90005D575 /* DeadLine.storyboard in Resources */,
 				B0BAC478244F5BFB009D6162 /* Order.storyboard in Resources */,
 				C02BD2E524101F2900BD3E1D /* Main.storyboard in Resources */,
+				B06E2783245726840061627F /* Easy Lemon 30 Second.mp3 in Resources */,
 				B087D23523F56439001FAC9A /* Assets.xcassets in Resources */,
 				0254A722245075640005D575 /* DeadLineCollectionViewCell.xib in Resources */,
 				B09ED5E32414E9B300D3C4A6 /* Profile.storyboard in Resources */,

@@ -13,6 +13,7 @@ class HistoryOrderController: UIViewController {
     
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var zeroOrder: UILabel!
     
     
     //layout
@@ -102,6 +103,10 @@ class HistoryOrderController: UIViewController {
         })
         
     }
+    @IBAction func backToMain(_ sender: Any) {
+
+        self.navigationController?.popViewController(animated: true)
+    }
     
     
     
@@ -111,6 +116,9 @@ class HistoryOrderController: UIViewController {
 
 extension HistoryOrderController : UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section:Int) -> Int {
+        if myOrderCount != 0 {
+            zeroOrder.isHidden = true
+        }
         return myOrderCount
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath:IndexPath) -> UICollectionViewCell{
