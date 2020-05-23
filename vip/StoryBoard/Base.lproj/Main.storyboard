@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gzH-Ez-zBH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gzH-Ez-zBH">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -131,7 +131,7 @@
                                 <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eH-JU-wrR">
-                                <rect key="frame" x="322" y="89" width="37" height="39"/>
+                                <rect key="frame" x="322" y="608" width="37" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="24小時客服" image="support"/>
                                 <connections>
@@ -335,19 +335,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qql-xR-0wG">
+                                <rect key="frame" x="183" y="138" width="10" height="529"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W5j-l6-V3L">
-                                <rect key="frame" x="333" y="63" width="34" height="41"/>
+                                <rect key="frame" x="325" y="617" width="34" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="24小時客服" image="support"/>
                                 <connections>
                                     <action selector="callservice:" destination="ucJ-28-r4v" eventType="touchUpInside" id="ER8-hT-XMd"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qql-xR-0wG">
-                                <rect key="frame" x="183" y="138" width="10" height="529"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.9174326062" green="0.96971505879999997" blue="0.89410835499999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="vS8-sW-G9I"/>
@@ -447,14 +447,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSI-9X-Ali">
-                                <rect key="frame" x="320" y="71" width="35" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="24小時客服" image="support"/>
-                                <connections>
-                                    <action selector="callservice:" destination="iO0-B2-UFs" eventType="touchUpInside" id="au4-pi-tza"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rhi-ZO-9Yk">
                                 <rect key="frame" x="212" y="51" width="0.0" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -540,6 +532,14 @@
                                 </state>
                                 <connections>
                                     <action selector="familyProductWasPresed:" destination="iO0-B2-UFs" eventType="touchUpInside" id="ajb-uL-zYw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSI-9X-Ali">
+                                <rect key="frame" x="324" y="613" width="35" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="24小時客服" image="support"/>
+                                <connections>
+                                    <action selector="callservice:" destination="iO0-B2-UFs" eventType="touchUpInside" id="au4-pi-tza"/>
                                 </connections>
                             </button>
                         </subviews>
