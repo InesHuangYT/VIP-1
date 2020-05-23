@@ -6,6 +6,7 @@
 //  Copyright © 2020 Ines. All rights reserved.
 //
 //Speech:https://www.appcoda.com.tw/siri-speech-framework/
+// hide keyboard https://stackoverflow.com/questions/24126678/close-ios-keyboard-by-touching-anywhere-using-swift
 
 import UIKit
 import Firebase
@@ -36,12 +37,21 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         super.viewDidLoad()
         btnAction()
         setupTextField()
+        self.hideKeyboardWhenTappedAround() 
+
+
     }
     
-
     func btnAction(){
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       
+        self.view.endEditing(true)
+        print("touchesBegan")
     }
     
     func microphoneaccess(){
@@ -175,7 +185,6 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     
     private func setupTextField(){
         searchTextField.delegate = self
-        
         let tapOnScreen :UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapOnScreen)
     }
@@ -294,3 +303,16 @@ extension ViewController: UITextFieldDelegate{
         return true
     }
 }
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false            
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
