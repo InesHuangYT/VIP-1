@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGi-Bt-Bow">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vGi-Bt-Bow">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -222,17 +222,6 @@
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pT4-08-x47">
-                                                <rect key="frame" x="314" y="72" width="38" height="33"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                                <state key="normal" title="聯絡客服" image="support">
-                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="callservice:" destination="hyL-cd-91f" eventType="touchUpInside" id="E6P-Cu-b1O"/>
-                                                </connections>
-                                            </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o9D-cv-gsc">
                                                 <rect key="frame" x="0.0" y="116" width="375" height="171"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -310,6 +299,17 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pT4-08-x47">
+                                                <rect key="frame" x="329" y="940" width="38" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <state key="normal" title="聯絡客服" image="support">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="callservice:" destination="hyL-cd-91f" eventType="touchUpInside" id="E6P-Cu-b1O"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.86657327409999996" green="0.9487647414" blue="0.85418230299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -381,16 +381,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ju-Ga-psb">
-                                <rect key="frame" x="321" y="39" width="38" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                <state key="normal" title="聯絡客服" image="support">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="callservice:" destination="Ac3-tQ-501" eventType="touchUpInside" id="DzW-wI-LEd"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Crj-Vw-KlO">
                                 <rect key="frame" x="23" y="142" width="330" height="3"/>
                                 <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -480,6 +470,16 @@
                                 <color key="textColor" red="0.53693288559999997" green="0.53778618570000003" blue="0.50195598600000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ju-Ga-psb">
+                                <rect key="frame" x="321" y="614" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <state key="normal" title="聯絡客服" image="support">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="callservice:" destination="Ac3-tQ-501" eventType="touchUpInside" id="DzW-wI-LEd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -503,7 +503,7 @@
                             <constraint firstItem="5ve-1y-J4t" firstAttribute="leading" secondItem="udh-on-38Q" secondAttribute="leading" constant="37" id="ePg-VP-LtX"/>
                             <constraint firstItem="EnA-0C-Xuf" firstAttribute="top" secondItem="5ve-1y-J4t" secondAttribute="bottom" constant="16.5" id="eXm-0E-TW1"/>
                             <constraint firstItem="udh-on-38Q" firstAttribute="trailing" secondItem="h4i-BJ-0db" secondAttribute="trailing" constant="105" id="gau-TX-KIT"/>
-                            <constraint firstItem="3ju-Ga-psb" firstAttribute="top" secondItem="udh-on-38Q" secondAttribute="top" constant="39" id="nbM-UW-k9o"/>
+                            <constraint firstItem="3ju-Ga-psb" firstAttribute="top" secondItem="udh-on-38Q" secondAttribute="top" constant="614" id="nbM-UW-k9o"/>
                             <constraint firstItem="5ve-1y-J4t" firstAttribute="top" secondItem="Crj-Vw-KlO" secondAttribute="bottom" constant="29" id="oeh-ih-vk5"/>
                             <constraint firstItem="EnA-0C-Xuf" firstAttribute="leading" secondItem="Crj-Vw-KlO" secondAttribute="leading" id="tPA-l7-XGe"/>
                             <constraint firstItem="5ve-1y-J4t" firstAttribute="top" secondItem="udh-on-38Q" secondAttribute="top" constant="174" id="udM-Om-TyZ"/>
@@ -542,17 +542,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sa2-8Z-3p3">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KI9-kK-bss">
-                                                <rect key="frame" x="329" y="8" width="38" height="33"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                                <state key="normal" title="聯絡客服" image="support">
-                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="callservice:" destination="vGi-Bt-Bow" eventType="touchUpInside" id="DmA-ZO-Wzb"/>
-                                                </connections>
-                                            </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ztG-ig-NBe">
                                                 <rect key="frame" x="31" y="293" width="245" height="85.5"/>
                                                 <subviews>
@@ -813,6 +802,17 @@
                                                 <color key="textColor" red="0.53840774300000005" green="0.53482294080000004" blue="0.49931669239999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KI9-kK-bss">
+                                                <rect key="frame" x="329" y="907" width="38" height="33"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                                <state key="normal" title="聯絡客服" image="support">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="callservice:" destination="vGi-Bt-Bow" eventType="touchUpInside" id="DmA-ZO-Wzb"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="kQt-5A-QdF" firstAttribute="leading" secondItem="sa2-8Z-3p3" secondAttribute="leading" constant="53" id="07Y-UE-KgA"/>
@@ -907,16 +907,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaY-z4-cSg">
-                                <rect key="frame" x="321" y="39" width="38" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                <state key="normal" title="聯絡客服" image="support">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="callservice:" destination="cjK-C2-YYH" eventType="touchUpInside" id="YQD-Cm-s2n"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="GEV-Bb-7Y4">
                                 <rect key="frame" x="30" y="95" width="104" height="85.5"/>
                                 <subviews>
@@ -997,13 +987,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JaY-z4-cSg">
+                                <rect key="frame" x="321" y="602" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <state key="normal" title="聯絡客服" image="support">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="callservice:" destination="cjK-C2-YYH" eventType="touchUpInside" id="YQD-Cm-s2n"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="yZL-2E-Twa" firstAttribute="top" secondItem="Fwg-L4-R3F" secondAttribute="bottom" constant="38" id="8Vf-nw-jug"/>
                             <constraint firstItem="GEV-Bb-7Y4" firstAttribute="top" secondItem="OgB-gf-4yK" secondAttribute="top" constant="95" id="8dt-9r-vdF"/>
                             <constraint firstItem="Fwg-L4-R3F" firstAttribute="top" secondItem="f6a-uB-8qH" secondAttribute="bottom" constant="8" id="C88-hL-KvD"/>
-                            <constraint firstItem="JaY-z4-cSg" firstAttribute="top" secondItem="OgB-gf-4yK" secondAttribute="top" constant="39" id="DCE-Mx-kcR"/>
+                            <constraint firstItem="JaY-z4-cSg" firstAttribute="top" secondItem="OgB-gf-4yK" secondAttribute="top" constant="602" id="DCE-Mx-kcR"/>
                             <constraint firstItem="OgB-gf-4yK" firstAttribute="bottom" secondItem="Fwg-L4-R3F" secondAttribute="bottom" constant="118" id="IGA-7Y-iG3"/>
                             <constraint firstItem="yZL-2E-Twa" firstAttribute="trailing" secondItem="f6a-uB-8qH" secondAttribute="trailing" constant="-44" id="Kaj-wh-bIc"/>
                             <constraint firstItem="GEV-Bb-7Y4" firstAttribute="leading" secondItem="OgB-gf-4yK" secondAttribute="leading" constant="30" id="Sqe-xV-GmC"/>
@@ -1045,16 +1045,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyL-W7-Mkf">
-                                <rect key="frame" x="321" y="39" width="38" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                <state key="normal" title="聯絡客服" image="support">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="callservice:" destination="ENO-RG-aSE" eventType="touchUpInside" id="PFb-0b-W5V"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hFj-PA-cuJ">
                                 <rect key="frame" x="22" y="158" width="330" height="3"/>
                                 <color key="backgroundColor" red="0.53689843420000005" green="0.53784304859999998" blue="0.49803376199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1145,6 +1135,16 @@
                                     <action selector="backToMainPage:" destination="ENO-RG-aSE" eventType="touchUpInside" id="XpO-k1-8r4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyL-W7-Mkf">
+                                <rect key="frame" x="321" y="604" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <state key="normal" title="聯絡客服" image="support">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="callservice:" destination="ENO-RG-aSE" eventType="touchUpInside" id="PFb-0b-W5V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -1155,7 +1155,7 @@
                             <constraint firstItem="hFj-PA-cuJ" firstAttribute="centerX" secondItem="7yJ-2s-CzT" secondAttribute="centerX" id="89m-O2-w8T"/>
                             <constraint firstItem="9St-Fh-7e3" firstAttribute="top" secondItem="sCM-IS-3Zt" secondAttribute="bottom" constant="8" id="ABg-pw-xm5"/>
                             <constraint firstItem="OAn-05-XhN" firstAttribute="leading" secondItem="dUU-Jm-d7q" secondAttribute="leading" constant="9.5" id="BDk-4g-L6f"/>
-                            <constraint firstItem="fyL-W7-Mkf" firstAttribute="top" secondItem="dUU-Jm-d7q" secondAttribute="top" constant="39" id="BwJ-pu-CC3"/>
+                            <constraint firstItem="fyL-W7-Mkf" firstAttribute="top" secondItem="dUU-Jm-d7q" secondAttribute="top" constant="604" id="BwJ-pu-CC3"/>
                             <constraint firstItem="sCM-IS-3Zt" firstAttribute="top" secondItem="dUU-Jm-d7q" secondAttribute="top" constant="58" id="EPI-jm-U92"/>
                             <constraint firstItem="hBu-AN-9Gf" firstAttribute="top" secondItem="XwI-S6-HvC" secondAttribute="bottom" constant="7.5" id="FSE-iW-eVO"/>
                             <constraint firstItem="9St-Fh-7e3" firstAttribute="leading" secondItem="dUU-Jm-d7q" secondAttribute="leading" constant="30" id="Q4I-cu-pg9"/>
@@ -1200,16 +1200,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nO-s7-0AB">
-                                <rect key="frame" x="321" y="39" width="38" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
-                                <state key="normal" title="聯絡客服" image="support">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="callservice:" destination="Xn7-0w-bJm" eventType="touchUpInside" id="8br-z5-NEJ"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bQh-wT-Ns2">
                                 <rect key="frame" x="30" y="95" width="104" height="85.5"/>
                                 <subviews>
@@ -1290,6 +1280,16 @@
                                 <color key="textColor" red="0.53840774300000005" green="0.53482294080000004" blue="0.49931669239999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nO-s7-0AB">
+                                <rect key="frame" x="321" y="602" width="38" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                <state key="normal" title="聯絡客服" image="support">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="callservice:" destination="Xn7-0w-bJm" eventType="touchUpInside" id="8br-z5-NEJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -1303,7 +1303,7 @@
                             <constraint firstItem="aFW-sW-k2K" firstAttribute="trailing" secondItem="5nO-s7-0AB" secondAttribute="trailing" id="SzT-l2-5MP"/>
                             <constraint firstItem="aFW-sW-k2K" firstAttribute="leading" secondItem="pvu-LG-6St" secondAttribute="leading" constant="11" id="Uny-jz-iDe"/>
                             <constraint firstItem="V8z-9M-5vU" firstAttribute="top" secondItem="pvu-LG-6St" secondAttribute="top" constant="45" id="Yib-il-n1Q"/>
-                            <constraint firstItem="5nO-s7-0AB" firstAttribute="top" secondItem="pvu-LG-6St" secondAttribute="top" constant="39" id="f5p-6K-RF5"/>
+                            <constraint firstItem="5nO-s7-0AB" firstAttribute="top" secondItem="pvu-LG-6St" secondAttribute="top" constant="602" id="f5p-6K-RF5"/>
                             <constraint firstItem="bQh-wT-Ns2" firstAttribute="leading" secondItem="pvu-LG-6St" secondAttribute="leading" constant="30" id="hVz-vV-VTQ"/>
                             <constraint firstItem="aFW-sW-k2K" firstAttribute="top" secondItem="beI-8f-oA3" secondAttribute="bottom" constant="19" id="sCw-O0-P2i"/>
                             <constraint firstItem="Ts9-jh-tE0" firstAttribute="trailing" secondItem="beI-8f-oA3" secondAttribute="trailing" constant="-44" id="sMi-uk-7gb"/>
