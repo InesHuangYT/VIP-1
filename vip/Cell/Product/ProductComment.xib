@@ -47,7 +47,7 @@
                     </button>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.9384064674" green="0.95282334089999998" blue="0.85733252760000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="351" height="95"/>
             <connections>

@@ -82,7 +82,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
             .observeSingleEvent(of: .value, with: { snapshot in
                 let value = snapshot.value as? [String:Any]
                 self.productLabel.text = value?["ProductName"] as? String ?? ""
-                self.priceLabel.text = value?["Price"] as? String ?? ""
+                self.priceLabel.text = (value?["Price"] as? String ?? "") + "元"
                 let productImageUrl = value?["imageURL"] 
                 self.productImage.image = UIImage(named: "logo")
                 if let imageUrl = URL(string: productImageUrl as! String){

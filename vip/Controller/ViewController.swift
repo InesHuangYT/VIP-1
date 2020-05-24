@@ -37,9 +37,9 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         super.viewDidLoad()
         btnAction()
         setupTextField()
-        self.hideKeyboardWhenTappedAround() 
-
-
+        hideKeyboardWhenTappedAround() 
+        ifNewUser()
+        
     }
     
     func btnAction(){
@@ -47,11 +47,38 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
     
+    func setupTextField(){
+        searchTextField.delegate = self
+        let tapOnScreen :UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapOnScreen)
+    }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       
-        self.view.endEditing(true)
-        print("touchesBegan")
+    @objc private func hideKeyboard(){
+        searchTextField.resignFirstResponder()
+    }
+    
+    func ifNewUser(){
+        let ref = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile")
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            let value = snapshot.value as? NSDictionary
+            let newUser = value?["newUser"] as? String ?? "" 
+            if newUser == "true"{
+                let alert = UIAlertController(title: "親愛的使用者您好，歡迎使用VIP，我們將提供商品語音自動播放服務，是否需要立即幫您開啟即可享受商品自動播放語音廣告服務", message: "", preferredStyle: .alert)
+                let openAction = UIAlertAction(title: "開啟自動播放服務", style: .default, handler: { (action) in
+                    ref.child("autoPlay").setValue("true")
+                })
+                let noAction = UIAlertAction(title: "之後再使用", style: .cancel, handler: { (action) in
+                    ref.child("autoPlay").setValue("false")
+                })
+                alert.addAction(openAction)
+                alert.addAction(noAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+             ref.child("newUser").setValue("false")
+            
+        })
+        
+        
     }
     
     func microphoneaccess(){
@@ -112,7 +139,6 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
     }
     
     func startRecording() {
-        
         if recognitionTask != nil {
             recognitionTask?.cancel()
             recognitionTask = nil
@@ -156,7 +182,6 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
                 
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
-                
                 self.microphoneButton.isEnabled = true
             }
         })
@@ -183,14 +208,10 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         }
     }
     
-    private func setupTextField(){
-        searchTextField.delegate = self
-        let tapOnScreen :UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapOnScreen)
-    }
-    @objc private func hideKeyboard(){
-        searchTextField.resignFirstResponder()
-    }
+    
+    
+    
+    
     
     @IBAction func callservice(_ sender: Any) {
         if let callURL:URL = URL(string: "tel:\(886961192398)") {
@@ -310,7 +331,7 @@ extension UIViewController {
         tap.cancelsTouchesInView = false            
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
