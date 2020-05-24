@@ -93,7 +93,7 @@ class LogInController: UIViewController,GIDSignInDelegate {
                 })
                 message.addAction(confirmAction)
                 self.present(message, animated: true, completion: nil)
-//                self.navigationController?.pushViewController(vc,animated: true)
+                
             }
             
         }
@@ -131,6 +131,7 @@ class LogInController: UIViewController,GIDSignInDelegate {
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!){
+        let ref =  Database.database()
         
         if let error  = error {
             print("here is the erro occur : \(error.localizedDescription)")
@@ -150,9 +151,10 @@ class LogInController: UIViewController,GIDSignInDelegate {
                     let newUid = currentUser.uid
                     let newAcoount = currentUser.account
                     let newUserName = currentUser.username
-                    Database.database().reference(withPath: "users/\(newUid)/Profile/account").setValue(newAcoount)
-                    Database.database().reference(withPath: "users/\(newUid)/Profile/name").setValue(newUserName)
-                    Database.database().reference(withPath: "users/\(newUid)/Profile/way").setValue("google")
+                    ref.reference(withPath: "users/\(newUid)/Profile/account").setValue(newAcoount)
+                    ref.reference(withPath: "users/\(newUid)/Profile/name").setValue(newUserName)
+                    ref.reference(withPath: "users/\(newUid)/Profile/way").setValue("google")
+                    ref.reference(withPath: "users/\(newUid)/Profile/newUser").setValue("true")
                     let storyboard1 = UIStoryboard(name: "SignUpLogIn", bundle: nil)
                     let vc1 = storyboard1.instantiateViewController(withIdentifier: "HomeControllerId") as! HomeController
                     
@@ -175,7 +177,7 @@ class LogInController: UIViewController,GIDSignInDelegate {
                                 })
                                 message.addAction(confirmAction)
                                 self.present(message, animated: true, completion: nil)
-//                                self.navigationController?.pushViewController(vc1,animated: true)
+                                //                                self.navigationController?.pushViewController(vc1,animated: true)
                             }else{
                                 let message = UIAlertController(title: "登入成功", message: nil, preferredStyle: .alert)
                                 let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
@@ -185,7 +187,7 @@ class LogInController: UIViewController,GIDSignInDelegate {
                                 })
                                 message.addAction(confirmAction)
                                 self.present(message, animated: true, completion: nil)
-//                                self.navigationController?.pushViewController(vc2,animated: true)
+                                //                                self.navigationController?.pushViewController(vc2,animated: true)
                             }                            
                         })
                     

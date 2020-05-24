@@ -99,6 +99,7 @@ class SignUpController: UIViewController {
                     Database.database().reference(withPath: "users/\(self.uid)/Profile/password").setValue(password)
                     Database.database().reference(withPath: "users/\(self.uid)/Profile/name").setValue(name)
                     Database.database().reference(withPath: "users/\(self.uid)/Profile/way").setValue("directly")
+                    Database.database().reference(withPath: "users/\(self.uid)/Profile/newUser").setValue("true")
                     
                     self.transitionToOtherScene()
                     

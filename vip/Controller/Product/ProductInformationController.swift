@@ -21,6 +21,7 @@ class ProductInformationController: UIViewController {
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var pauseAndPlay: UIButton!
+    @IBOutlet weak var autoPlay: UIButton!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var addShoppingCart: UIButton!
     @IBOutlet weak var likeButton: UIButton!
@@ -93,6 +94,18 @@ class ProductInformationController: UIViewController {
         //        購物車選取按鈕設定
         likeButton.setTitle("點擊以加入我的最愛",for: UIControl.State.normal)
         likeButton.setTitle("點擊以取消我的最愛",for: UIControl.State.selected)
+        
+        //        播放
+        pauseAndPlay.setImage(UIImage(named : "pause"), for: UIControl.State.normal) //停
+        pauseAndPlay.setImage(UIImage(named : "play"), for: UIControl.State.selected) //播
+        pauseAndPlay.setTitle("點擊以停止播放",for: UIControl.State.normal)
+        pauseAndPlay.setTitle("點擊以開始播放",for: UIControl.State.selected)
+        
+        //        自動播放開關
+        autoPlay.setTitle("自動播放已開啟",for: UIControl.State.normal)
+        autoPlay.setTitle("自動播放已關閉",for: UIControl.State.selected)
+        
+        
     }
     
     
@@ -118,32 +131,62 @@ class ProductInformationController: UIViewController {
         }
     }
     
-    func audioPlay(){
-        let lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
-        print(lemmonSound)
+    @IBAction func autoPlayButtonWasPressed(_ sender: UIButton) {
+        let ref = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile").child("autoPlay")
+        if sender.isSelected  {
+            sender.isSelected = false
+            ref.setValue("true")
+        }
+        else{
+            sender.isSelected = true
+            ref.setValue("false")
+        }
         
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-        try! AVAudioSession.sharedInstance().setActive(true)
-        
-        try! audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
-        audioPlayer!.prepareToPlay()
-        audioPlayer!.play()
-        
-        pauseAndPlay.setImage(UIImage(named : "pause"), for: UIControl.State.normal) //停
-        pauseAndPlay.setImage(UIImage(named : "play"), for: UIControl.State.selected) //播
-        
-        slider.maximumValue = Float(audioPlayer?.duration ?? 0)
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
     }
+    
+    
+    func audioPlay(){
+        
+        let ref = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile")
+        ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
+            let value = snapshot.value as? NSDictionary
+            let autoPlays = value?["autoPlay"] as? String ?? "" 
+            if autoPlays == "true"{
+                self.autoPlay.isSelected = false
+                self.pauseAndPlay.isSelected = false
+                self.musicPlay()
+            }
+            else{
+                self.autoPlay.isSelected = true
+                self.pauseAndPlay.isSelected = true
+
+            }
+        })
+    }
+    
+    func musicPlay(){
+        let lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+               print(lemmonSound)
+           try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+           try! AVAudioSession.sharedInstance().setActive(true)
+           try! self.audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
+           audioPlayer!.prepareToPlay()
+           audioPlayer!.play()
+           slider.maximumValue = Float(audioPlayer?.duration ?? 0)
+           Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+       }
     
     @IBAction func pauseAndPlayButtonWasPressed(_ sender: UIButton) {
         
         pauseAndPlay.isSelected = !sender.isSelected
-        
+     
         if(audioPlayer?.isPlaying == true){
+            print("stop")
             audioPlayer?.stop()
             
         }else{
+            print("play")
+            musicPlay()
             audioPlayer?.play()
         }
         
@@ -160,7 +203,7 @@ class ProductInformationController: UIViewController {
     
     @objc func updateSlider(){
         slider.value = Float(audioPlayer?.currentTime ?? 0)
-        NSLog("HHHHii")
+        //        NSLog("HHHHii")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -179,7 +222,7 @@ class ProductInformationController: UIViewController {
         if fromShoppingCart == true {
             
             self.ID = myShoppingCartId[index]
-           
+            
             productRef.child(myShoppingCartId[index]).queryOrderedByKey()
                 .observeSingleEvent(of: .value, with: { snapshot in
                     let value = snapshot.value as? NSDictionary
@@ -460,19 +503,19 @@ extension ProductInformationController : UICollectionViewDataSource{
         else{
             let productRef = Database.database().reference().child("Product")
             productRef.queryOrderedByKey()
-            .observeSingleEvent(of: .value, with: { snapshot in
-                for snap in snapshot.children {
-                    let userSnap = snap as! DataSnapshot
-                    let id = userSnap.key
-                    self.productID.append(id)
-                }
-                cell.setLable(index: indexPath.row, productId: self.productID[self.index])
-            })
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    for snap in snapshot.children {
+                        let userSnap = snap as! DataSnapshot
+                        let id = userSnap.key
+                        self.productID.append(id)
+                    }
+                    cell.setLable(index: indexPath.row, productId: self.productID[self.index])
+                })
             
         }
         return cell
     }
-  
+    
 }
 
 extension ProductInformationController: UICollectionViewDelegateFlowLayout{
