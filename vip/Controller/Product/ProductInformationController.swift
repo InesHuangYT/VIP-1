@@ -32,7 +32,7 @@ class ProductInformationController: UIViewController {
     
     var imageURL : String!
     var productID:[String] = []
-    var ID:String!
+    var ID : String! // set productId no matter where they from
     var audioPlayer: AVAudioPlayer?
     
     var selectProductId = [String]()
@@ -69,6 +69,7 @@ class ProductInformationController: UIViewController {
             addShoppingCart.isHidden = true
         }
         print("fromShoppingCart",fromShoppingCart)
+        
         
     }
     
@@ -146,7 +147,6 @@ class ProductInformationController: UIViewController {
     
     
     func audioPlay(){
-        
         let ref = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile")
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             let value = snapshot.value as? NSDictionary
@@ -159,27 +159,45 @@ class ProductInformationController: UIViewController {
             else{
                 self.autoPlay.isSelected = true
                 self.pauseAndPlay.isSelected = true
-
+                
             }
         })
     }
     
     func musicPlay(){
-        let lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
-               print(lemmonSound)
-           try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-           try! AVAudioSession.sharedInstance().setActive(true)
-           try! self.audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
-           audioPlayer!.prepareToPlay()
-           audioPlayer!.play()
-           slider.maximumValue = Float(audioPlayer?.duration ?? 0)
-           Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-       }
+        
+        var lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+        
+        if (ID == "-M5ShEfvKJW62oG6v6K9" || ID == "-M5ShElqTk8G6LKeCRGc" || ID == "-M5ShElxUwa7Ec47qAGw" || ID == "-M5ShEm4UkNKrIboQ6yS" || ID == "-M5ShElaBNEH2wrCtAGW" || ID == "-M6IzIvFYWVs4GdkQSbX" ){
+            
+            if ID == "-M5ShEfvKJW62oG6v6K9" {
+                lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "0", ofType: "mp3")!)
+            }else if ID == "-M5ShElaBNEH2wrCtAGW" {
+                lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "1", ofType: "mp3")!)
+            }else if ID == "-M5ShElqTk8G6LKeCRGc"{
+                lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "2", ofType: "mp3")!)
+            }else if ID == "-M5ShElxUwa7Ec47qAGw"{
+                lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "3", ofType: "mp3")!)
+            }else if ID == "-M5ShEm4UkNKrIboQ6yS"{
+                lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "4", ofType: "mp3")!)
+            }else {
+                lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "5", ofType: "mp3")!)
+            }
+        }
+        print(lemmonSound)
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        try! AVAudioSession.sharedInstance().setActive(true)
+        try! self.audioPlayer = AVAudioPlayer(contentsOf: lemmonSound)
+        audioPlayer!.prepareToPlay()
+        audioPlayer!.play()
+        slider.maximumValue = Float(audioPlayer?.duration ?? 0)
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+    }
     
     @IBAction func pauseAndPlayButtonWasPressed(_ sender: UIButton) {
         
         pauseAndPlay.isSelected = !sender.isSelected
-     
+        
         if(audioPlayer?.isPlaying == true){
             print("stop")
             audioPlayer?.stop()
@@ -204,6 +222,10 @@ class ProductInformationController: UIViewController {
     @objc func updateSlider(){
         slider.value = Float(audioPlayer?.currentTime ?? 0)
         //        NSLog("HHHHii")
+        if audioPlayer?.isPlaying == false {
+            self.pauseAndPlay.isSelected = true
+        }
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -215,6 +237,7 @@ class ProductInformationController: UIViewController {
         btnMenu.target = self.revealViewController()
         btnMenu.action = #selector(SWRevealViewController.rightRevealToggle(_:))
     }
+    
     
     func setLabel(index:Int,selectProductId:[String]){    
         let productRef = Database.database().reference().child("Product")
@@ -233,8 +256,8 @@ class ProductInformationController: UIViewController {
                     let sellerEvaluation = value?["SellerEvaluation"] as? String ?? ""
                     self.nameLabel.text = name
                     self.priceLabel.text = price + "元"
-                    self.descriptionLabel.text = "產品描述 " + description
-                    self.evaluationLabel.text = "產品評價 " + productEvaluationAll + "星"
+                    self.descriptionLabel.text = "商品描述 " + description
+                    self.evaluationLabel.text = "商品評價 " + productEvaluationAll + "星"
                     self.sellerEvaluationLabel.text = "商家評價 " + sellerEvaluation
                     let url = value?["imageURL"] as? String ?? ""
                     if let imageUrl = URL(string: url){
