@@ -18,7 +18,7 @@ class ShoppingCartController : UIViewController{
     @IBOutlet weak var btnMenu: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var checkOutButton: UIButton!
-    @IBOutlet weak var zeroShoppingCart: UIButton!
+    @IBOutlet weak var message: UILabel!
     var estimatedWidth = 300.0
     var cellMarginSize = 16.0
     var ref: DatabaseReference!
@@ -51,7 +51,10 @@ class ShoppingCartController : UIViewController{
         print("shoppingCount",shoppingCount)
         if shoppingCount == 0 {
             checkOutButton.isHidden = true
-            zeroShoppingCart.isHidden = false
+            message.text = "現在你的購物車是空的 快去逛逛"
+        }else{
+            message.text = "現在您可選取購物車的商品去結帳"
+
         }
         
         

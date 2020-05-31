@@ -154,12 +154,12 @@ class LogInController: UIViewController,GIDSignInDelegate {
                     ref.reference(withPath: "users/\(newUid)/Profile/account").setValue(newAcoount)
                     ref.reference(withPath: "users/\(newUid)/Profile/name").setValue(newUserName)
                     ref.reference(withPath: "users/\(newUid)/Profile/way").setValue("google")
-                    ref.reference(withPath: "users/\(newUid)/Profile/newUser").setValue("true")
                     let storyboard1 = UIStoryboard(name: "SignUpLogIn", bundle: nil)
                     let vc1 = storyboard1.instantiateViewController(withIdentifier: "HomeControllerId") as! HomeController
                     
                     let storyboard2 = UIStoryboard(name: "Main", bundle: nil)
                     let vc2 = storyboard2.instantiateViewController(withIdentifier: "SWRevealViewController") as! SWRevealViewController
+                    
                     Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile")
                         .queryOrderedByKey()
                         .observeSingleEvent(of: .value, with: { snapshot in 

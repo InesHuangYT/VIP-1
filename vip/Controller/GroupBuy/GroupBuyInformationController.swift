@@ -154,8 +154,8 @@ class GroupBuyInformationController: UIViewController {
                     
                     self.name.text =  name[index] as? String
                     self.price.text = (price[index] as! String) + "元"
-                    self.productDescription.text = "產品描述 " + (productDescription[index] as! String)
-                    self.productEvaluation.text = "產品評價 " + (productEvaluation[index] as! String)
+                    self.productDescription.text = "商品描述 " + (productDescription[index] as! String)
+                    self.productEvaluation.text = "商品評價 " + (productEvaluation[index] as! String)
                     self.sellerEvaluation.text = "商家評價 " + (sellerEvaluation[index] as! String)
                     let imageUrl = image[index]
                     if let url = URL(string: imageUrl as! String){

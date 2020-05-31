@@ -241,6 +241,7 @@ extension OrderCheckoutController : UICollectionViewDataSource{
             vc.commentCount = data.count
             vc.index = indexPath.row
             vc.selectProductId = self.selectProductId
+            vc.myShoppingCartId = self.selectProductId
             vc.fromShoppingCart = true
             print("commentCount",data.count)
             self.navigationController?.pushViewController(vc,animated: true)  
