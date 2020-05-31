@@ -61,7 +61,12 @@ class ViewController: UIViewController ,SFSpeechRecognizerDelegate{
         let ref = Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).child("Profile")
         ref.queryOrderedByKey().observeSingleEvent(of: .value, with: { snapshot in 
             let value = snapshot.value as? NSDictionary
+            let phone = value?["phone"] as? String ?? "" 
             let newUser = value?["newUser"] as? String ?? "" 
+            print("newUser",newUser)
+            print("phone",phone)
+
+            
             if newUser == "true"{
                 let alert = UIAlertController(title: "親愛的使用者您好，歡迎使用VIP，我們將提供商品語音自動播放服務，是否需要立即幫您開啟即可享受商品自動播放語音廣告服務", message: "", preferredStyle: .alert)
                 let openAction = UIAlertAction(title: "開啟自動播放服務", style: .default, handler: { (action) in

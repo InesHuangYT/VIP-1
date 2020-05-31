@@ -289,7 +289,7 @@
                                         <rect key="frame" x="0.0" y="8" width="375" height="1000"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8hV-8a-f3t">
-                                                <rect key="frame" x="62" y="241" width="250" height="200"/>
+                                                <rect key="frame" x="62" y="233" width="250" height="200"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="hGS-Wu-4mu"/>
                                                 </constraints>
@@ -307,59 +307,11 @@
                                                     <action selector="groupBuyOpenButtonWasPressed:" destination="FF0-cw-sgC" eventType="touchUpInside" id="5sT-3h-vO7"/>
                                                 </connections>
                                             </button>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="I4G-1X-nyQ">
-                                                <rect key="frame" x="17" y="24" width="250" height="200"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="商品名稱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9w-51-9kW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="250" id="pG6-58-UMu"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品價格" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUO-xB-sbe">
-                                                        <rect key="frame" x="0.0" y="44" width="250" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="250" id="Fji-Oq-FP6"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="商品描述" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bu-Ii-w46">
-                                                        <rect key="frame" x="0.0" y="88" width="250" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="250" id="1ap-MV-Qzh"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品評價" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDU-1d-TxW">
-                                                        <rect key="frame" x="0.0" y="132" width="250" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="250" id="hOE-SJ-pUa"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商家評價" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgf-6f-ctq">
-                                                        <rect key="frame" x="0.0" y="176" width="250" height="24"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="250" id="nUy-El-AKW"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHp-eW-7mi">
+                                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHp-eW-7mi">
                                                 <rect key="frame" x="312" y="397" width="47" height="48"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="rQp-c7-iCw"/>
+                                                </constraints>
                                                 <state key="normal" image="like-2"/>
                                                 <connections>
                                                     <action selector="likeButtonAction:" destination="FF0-cw-sgC" eventType="touchUpInside" id="o13-YA-g8Q"/>
@@ -391,7 +343,7 @@
                                                 </cells>
                                             </collectionView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-ix-Dbk">
-                                                <rect key="frame" x="328" y="948" width="39" height="33"/>
+                                                <rect key="frame" x="323" y="947" width="44" height="34"/>
                                                 <state key="normal" title="客服專線" backgroundImage="support">
                                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -399,28 +351,71 @@
                                                     <action selector="callservice:" destination="FF0-cw-sgC" eventType="touchUpInside" id="qdI-vR-dlL"/>
                                                 </connections>
                                             </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="I4G-1X-nyQ">
+                                                <rect key="frame" x="17" y="23" width="350" height="192"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="商品名稱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9w-51-9kW">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品價格" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUO-xB-sbe">
+                                                        <rect key="frame" x="0.0" y="44" width="350" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="商品描述" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bu-Ii-w46">
+                                                        <rect key="frame" x="0.0" y="88" width="350" height="16"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品評價" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDU-1d-TxW">
+                                                        <rect key="frame" x="0.0" y="124" width="350" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商家評價" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgf-6f-ctq">
+                                                        <rect key="frame" x="0.0" y="168" width="350" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="350" id="Vk5-XG-XMm"/>
+                                                    <constraint firstAttribute="height" constant="192" id="kNb-ei-xJi"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="8hV-8a-f3t" firstAttribute="top" secondItem="I4G-1X-nyQ" secondAttribute="bottom" constant="17" id="4Zr-Xb-Sxn"/>
                                             <constraint firstItem="8hV-8a-f3t" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" constant="62" id="AQd-7I-cu6"/>
                                             <constraint firstAttribute="height" constant="1000" id="AYY-e4-fZl"/>
-                                            <constraint firstItem="eLP-ix-Dbk" firstAttribute="top" secondItem="I4G-1X-nyQ" secondAttribute="top" constant="924" id="BNV-JA-ogD"/>
+                                            <constraint firstAttribute="bottom" secondItem="eLP-ix-Dbk" secondAttribute="bottom" constant="19" id="BcA-h5-gJO"/>
+                                            <constraint firstAttribute="trailing" secondItem="eHp-eW-7mi" secondAttribute="trailing" constant="16" id="Bdn-BL-Y5n"/>
                                             <constraint firstAttribute="trailing" secondItem="5OP-cd-CbJ" secondAttribute="trailing" constant="139" id="HHW-QY-pR9"/>
                                             <constraint firstItem="5OP-cd-CbJ" firstAttribute="bottom" secondItem="HPn-zW-zQr" secondAttribute="bottomMargin" id="Hvd-DB-ZwC"/>
                                             <constraint firstAttribute="trailing" secondItem="eLP-ix-Dbk" secondAttribute="trailing" constant="8" id="IUE-XA-1Jv"/>
+                                            <constraint firstItem="eHp-eW-7mi" firstAttribute="top" secondItem="HPn-zW-zQr" secondAttribute="top" constant="397" id="JXV-pp-hng"/>
+                                            <constraint firstItem="eLP-ix-Dbk" firstAttribute="centerY" secondItem="5OP-cd-CbJ" secondAttribute="centerY" id="KHM-js-5rJ"/>
+                                            <constraint firstItem="8hV-8a-f3t" firstAttribute="top" secondItem="I4G-1X-nyQ" secondAttribute="bottom" constant="18" id="KUy-Ff-f9c"/>
                                             <constraint firstItem="5OP-cd-CbJ" firstAttribute="top" secondItem="dlL-Ig-EVW" secondAttribute="bottom" constant="94" id="Ovq-L0-aoK"/>
-                                            <constraint firstItem="I4G-1X-nyQ" firstAttribute="top" secondItem="HPn-zW-zQr" secondAttribute="top" constant="24" id="Rbf-xP-STc"/>
-                                            <constraint firstItem="eLP-ix-Dbk" firstAttribute="leading" secondItem="I4G-1X-nyQ" secondAttribute="trailing" constant="61" id="Z7R-yr-Fbv"/>
+                                            <constraint firstItem="I4G-1X-nyQ" firstAttribute="trailing" secondItem="eLP-ix-Dbk" secondAttribute="trailing" id="ScF-11-Ir6"/>
+                                            <constraint firstItem="eHp-eW-7mi" firstAttribute="leading" secondItem="8hV-8a-f3t" secondAttribute="trailing" id="TXu-tu-5d7"/>
                                             <constraint firstItem="5OP-cd-CbJ" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" constant="138" id="bs5-wM-iYF"/>
                                             <constraint firstItem="8hV-8a-f3t" firstAttribute="centerX" secondItem="HPn-zW-zQr" secondAttribute="centerX" constant="-0.5" id="cQq-De-pm4"/>
                                             <constraint firstItem="dlL-Ig-EVW" firstAttribute="centerX" secondItem="5OP-cd-CbJ" secondAttribute="centerX" id="ft9-UT-ray"/>
+                                            <constraint firstItem="I4G-1X-nyQ" firstAttribute="top" secondItem="HPn-zW-zQr" secondAttribute="top" constant="23" id="riz-BS-E67"/>
                                             <constraint firstItem="dlL-Ig-EVW" firstAttribute="trailing" secondItem="HPn-zW-zQr" secondAttribute="trailing" id="seR-eI-LMc"/>
-                                            <constraint firstItem="I4G-1X-nyQ" firstAttribute="leading" secondItem="HPn-zW-zQr" secondAttribute="leading" constant="17" id="zU2-xX-9JC"/>
+                                            <constraint firstItem="eLP-ix-Dbk" firstAttribute="centerX" secondItem="eHp-eW-7mi" secondAttribute="centerX" constant="9.5" id="yjS-ov-9YJ"/>
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xDl-2J-K6B">
-                                        <rect key="frame" x="0.0" y="477" width="393" height="151"/>
+                                        <rect key="frame" x="0.0" y="469" width="393" height="159"/>
                                         <color key="backgroundColor" red="0.89170551300000001" green="0.98471993209999997" blue="0.85099905730000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="urV-xV-2Up">
                                             <size key="itemSize" width="311" height="114"/>

@@ -52,28 +52,25 @@
                                     <action selector="goToCheckButton:" destination="j4r-Fq-gBP" eventType="touchUpInside" id="d0K-1b-Fxh"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWR-5R-bxP">
-                                <rect key="frame" x="15" y="14" width="345" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="現在你的購物車是空的 快去逛逛">
-                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訊息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ysy-wU-Qee">
+                                <rect key="frame" x="24" y="20" width="35" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Ysy-wU-Qee" firstAttribute="top" secondItem="mb3-wH-3th" secondAttribute="top" constant="20" id="0cl-B0-eub"/>
                             <constraint firstItem="0Vc-VT-qP3" firstAttribute="centerX" secondItem="FYc-1m-DLT" secondAttribute="centerX" id="5UL-fH-WNP"/>
                             <constraint firstItem="mb3-wH-3th" firstAttribute="trailing" secondItem="cay-ZP-tUX" secondAttribute="trailing" id="Ac5-hZ-bnI"/>
                             <constraint firstItem="0Vc-VT-qP3" firstAttribute="top" secondItem="cay-ZP-tUX" secondAttribute="bottom" constant="8" id="Ghe-46-bsc"/>
-                            <constraint firstItem="cWR-5R-bxP" firstAttribute="leading" secondItem="mb3-wH-3th" secondAttribute="leading" constant="15" id="LoH-Bz-UkK"/>
                             <constraint firstItem="mb3-wH-3th" firstAttribute="bottom" secondItem="0Vc-VT-qP3" secondAttribute="bottom" constant="8" id="MnM-HA-x8I"/>
                             <constraint firstItem="cay-ZP-tUX" firstAttribute="top" secondItem="mb3-wH-3th" secondAttribute="top" constant="52" id="NbC-fB-pgh"/>
+                            <constraint firstItem="Ysy-wU-Qee" firstAttribute="leading" secondItem="mb3-wH-3th" secondAttribute="leading" constant="24" id="Rlb-rv-lLR"/>
                             <constraint firstItem="cay-ZP-tUX" firstAttribute="leading" secondItem="mb3-wH-3th" secondAttribute="leading" id="dCX-7b-Ae8"/>
                             <constraint firstItem="mb3-wH-3th" firstAttribute="bottom" secondItem="cay-ZP-tUX" secondAttribute="bottom" constant="87" id="g1F-f3-vp8"/>
-                            <constraint firstItem="cWR-5R-bxP" firstAttribute="top" secondItem="mb3-wH-3th" secondAttribute="top" constant="14" id="gmS-EQ-TPH"/>
-                            <constraint firstItem="cay-ZP-tUX" firstAttribute="top" secondItem="cWR-5R-bxP" secondAttribute="bottom" constant="8" id="kEW-kh-e7C"/>
                             <constraint firstItem="0Vc-VT-qP3" firstAttribute="centerX" secondItem="cay-ZP-tUX" secondAttribute="centerX" id="tOf-i6-LLy"/>
-                            <constraint firstItem="cWR-5R-bxP" firstAttribute="centerX" secondItem="cay-ZP-tUX" secondAttribute="centerX" id="yBe-fS-yub"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mb3-wH-3th"/>
                     </view>
@@ -86,7 +83,7 @@
                         <outlet property="btnMenu" destination="iPp-Yp-QG2" id="zXi-sQ-87c"/>
                         <outlet property="checkOutButton" destination="0Vc-VT-qP3" id="ncI-x2-FDg"/>
                         <outlet property="collectionView" destination="cay-ZP-tUX" id="UbU-Wz-amp"/>
-                        <outlet property="zeroShoppingCart" destination="cWR-5R-bxP" id="JeZ-g5-0vM"/>
+                        <outlet property="message" destination="Ysy-wU-Qee" id="uKH-io-4zu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GqD-2y-k1u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

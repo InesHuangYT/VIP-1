@@ -152,6 +152,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
                 if (value["way"] as? String) == "google"{
                     let message = UIAlertController(title: "您已註冊 登入成功", message: "", preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "確認", style: .default, handler: {action in 
+                        Database.database().reference(withPath: "users/\(Auth.auth().currentUser!.uid)/Profile/newUser").setValue("true")
                         print("here go to profile page!")
                         self.transitionToMain() 
                         

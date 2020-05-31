@@ -33,9 +33,34 @@ extension UIViewController{
         let message = UIAlertController(title: "已移除我的最愛", message: nil, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
         {action in 
-            print("Add to LikeList")
+            print("delete to LikeList")
         })
         message.addAction(confirmAction)
         self.present(message, animated: true, completion: nil)
+    }
+    
+    
+}
+
+extension UICollectionViewCell {
+    
+    func alertSelect(delegate: UIViewController?){
+        let message = UIAlertController(title: "已取消選取此商品", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+        {action in 
+            print("Add to checkOut")
+        })
+        message.addAction(confirmAction)
+        delegate?.present(message, animated: true, completion: nil)
+    }
+    
+    func alertDeselect(delegate: UIViewController?){
+        let message = UIAlertController(title: "已選取此商品", message: nil, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .default, handler:
+        {action in 
+            print("delete to checkOut")
+        })
+        message.addAction(confirmAction)
+        delegate?.present(message, animated: true, completion: nil)
     }
 }

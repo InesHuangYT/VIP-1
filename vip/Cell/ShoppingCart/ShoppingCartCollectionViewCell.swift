@@ -28,13 +28,7 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
         cellColorSet()
         
     }
-    
-    //    override func setSelected(_ selected: Bool, animated: Bool) {
-    //        super.setSelected(selected, animated: animated)
-    //        
-    //        // Configure the view for the selected state
-    //    }
-    
+
     func cellColorSet(){
         let myColor : UIColor = UIColor( red: 137/255, green: 137/255, blue:128/255, alpha: 1.0 )
         layer.borderWidth = 5
@@ -44,24 +38,26 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
         ProductImage.layer.cornerRadius = 20
         ProductImage.layer.borderWidth = 1
         ProductImage.layer.borderColor = myColor.cgColor
-
+        
         //        購物車選取按鈕設定
-        selectButton.setTitle("點擊以選取",for: UIControl.State.normal)
-        selectButton.setTitle("點擊以取消選取",for: UIControl.State.selected)
+        selectButton.setTitle("商品已取消選取，按兩下選取",for: UIControl.State.normal)
+        selectButton.setTitle("商品已選取，按兩下取消選取",for: UIControl.State.selected)
         
     }
     
-    func setSelectButton(status:String){
+    func setSelectButton(status:String, select:Bool){
+        
+        if select == false {
+            self.selectButton.isSelected = false
+        }
         if status == "Selected"{
             self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.selected)
-            
         }
         if status == "Canceled"{
             self.selectButton.setImage(UIImage(named : "uncheck"), for: UIControl.State.normal)
         }
-        
-        
     }
+    
     //    從首頁來
     func loadData(index:Int){
         ref = Database.database().reference().child("ShoppingCart").child(user.uid)
@@ -75,7 +71,16 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
                 let retriprice = data.compactMap({($0.value as![String:Any])["Price"]})
                 let statusValue = data.compactMap({($0.value as![String:Any])["Status"]})
                 let status = statusValue[index]
-                self.setSelectButton(status:status as! String)
+                
+                if status as! String == "Selected"{
+                    print("status",status)
+                    self.setSelectButton(status:status as! String, select: true )
+                }else{
+                    print("status",status)
+                    self.setSelectButton(status:status as! String, select: false )
+                    
+                }
+                
                 let imageURL = data.compactMap({
                     ($0.value as! [String: Any])["imageURL"]
                 })
@@ -165,32 +170,32 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
         }
         
         if fromWhere == "LikeListGroupBuy" {
-                   Database.database().reference().child("GroupBuy").child(productId)
-                       .queryOrderedByKey()
-                       .observeSingleEvent(of: .value, with: { snapshot in
-                           
-                           let value = snapshot.value as? NSDictionary
-                           self.ProductName.text = value?["ProductName"] as? String ?? ""
-                           self.Price.text = (value?["Price"] as? String ?? "") + "元"
-                           let productImageUrl = value?["imageURL"] 
-                           if let imageUrl = URL(string: productImageUrl as! String){
-                               URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                                   if error != nil {
-                                       print("Download Image Task Fail: \(error!.localizedDescription)")
-                                   }
-                                   else if let imageData = data {
-                                       DispatchQueue.main.async { 
-                                           self.ProductImage.image = UIImage(data: imageData)
-                                       }
-                                   }
-                                   
-                               }.resume()
-                               
-                           }
-                           
-                       }) 
-               }
-               
+            Database.database().reference().child("GroupBuy").child(productId)
+                .queryOrderedByKey()
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    
+                    let value = snapshot.value as? NSDictionary
+                    self.ProductName.text = value?["ProductName"] as? String ?? ""
+                    self.Price.text = (value?["Price"] as? String ?? "") + "元"
+                    let productImageUrl = value?["imageURL"] 
+                    if let imageUrl = URL(string: productImageUrl as! String){
+                        URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                            if error != nil {
+                                print("Download Image Task Fail: \(error!.localizedDescription)")
+                            }
+                            else if let imageData = data {
+                                DispatchQueue.main.async { 
+                                    self.ProductImage.image = UIImage(data: imageData)
+                                }
+                            }
+                            
+                        }.resume()
+                        
+                    }
+                    
+                }) 
+        }
+        
         
     }
     
@@ -209,13 +214,13 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
                     sender.isSelected = false
                     print(self.index)
                     shoppingCartRef.child(self.user.uid).child(data[self.index].key).child("Status").setValue("Canceled")
-                    
+                    self.alertSelect(delegate: self.delegate)                    
                 }else{
                     print("設定為selected ",sender.isSelected)
                     self.selectButton.setImage(UIImage(named : "check"), for: UIControl.State.selected)
                     sender.isSelected = true
                     shoppingCartRef.child(self.user.uid).child(data[self.index].key).child("Status").setValue("Selected")
-                    
+                    self.alertDeselect(delegate: self.delegate)
                 }
                 
             }
@@ -229,6 +234,6 @@ class ShoppingCartCollectionViewCell: UICollectionViewCell {
     }
     
     
-
+    
     
 }
