@@ -166,10 +166,10 @@ class ProductInformationController: UIViewController {
     
     func musicPlay(){
         
-        var lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
-        
+//        var lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "Easy Lemon 30 Second", ofType: "mp3")!)
+        var lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "1", ofType: "mp3")!)
+
         if (ID == "-M5ShEfvKJW62oG6v6K9" || ID == "-M5ShElqTk8G6LKeCRGc" || ID == "-M5ShElxUwa7Ec47qAGw" || ID == "-M5ShEm4UkNKrIboQ6yS" || ID == "-M5ShElaBNEH2wrCtAGW" || ID == "-M6IzIvFYWVs4GdkQSbX" ){
-            
             if ID == "-M5ShEfvKJW62oG6v6K9" {
                 lemmonSound = URL(fileURLWithPath: Bundle.main.path(forResource: "0", ofType: "mp3")!)
             }else if ID == "-M5ShElaBNEH2wrCtAGW" {
@@ -536,6 +536,9 @@ extension ProductInformationController : UICollectionViewDataSource{
                 })
             
         }
+        
+        cell.delegate = self
+
         return cell
     }
     

@@ -8,13 +8,18 @@
 
 import UIKit
 import Firebase
+import AVFoundation
 
 class ProductComment: UICollectionViewCell {
+    
+    var delegate: UIViewController?
     
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var comment: UILabel!
     @IBOutlet weak var grade: UILabel!
     @IBOutlet weak var play: UIButton!
+    var audioPlayer: AVAudioPlayer?
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +28,24 @@ class ProductComment: UICollectionViewCell {
         layer.borderColor = myColor.cgColor
         layer.cornerRadius = 45   
     }
+    
+    func musicPlay(){
+        let sound = URL(fileURLWithPath: Bundle.main.path(forResource: "ruby", ofType: "mp3")!)
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+        try! AVAudioSession.sharedInstance().setActive(true)
+        try! self.audioPlayer = AVAudioPlayer(contentsOf: sound)
+        audioPlayer!.prepareToPlay()
+        audioPlayer!.play()
+    }
+    
+    @IBAction func play(_ sender: Any) {
+        musicPlay()
+        audioPlayer?.play()
+    }
+    
+    
+    
+    
     //    productId
     func setLable(index:Int,productId:String){
         let productRef = Database.database().reference().child("Product").child(productId).child("ProductEvaluation")
