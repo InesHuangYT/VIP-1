@@ -64,12 +64,7 @@ class HomeController: UIViewController,UITextFieldDelegate {
     @objc func doneButtonAction (){
         self.view.endEditing(true)
     }
-    
-    
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //        textField.resignFirstResponder()
-    //        return true
-    //    }
+
     
     
     func currentUserName()->(String){

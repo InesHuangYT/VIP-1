@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pUl-BV-zvz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pUl-BV-zvz">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,13 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jce-oc-blb">
-                                <rect key="frame" x="171" y="320" width="33" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="客服專線" backgroundImage="support">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="SOP-Cg-4Db">
                                 <rect key="frame" x="0.0" y="107" width="375" height="434"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,23 +42,32 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pic-hE-5Yl">
                                 <rect key="frame" x="40" y="566" width="295" height="81"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="是否加入行事曆" image="加入行事曆">
+                                <state key="normal" title="加入行事曆" backgroundImage="加入行事曆-1">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="btnAddEvent:" destination="pUl-BV-zvz" eventType="touchUpInside" id="Cw1-GO-bKm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2m0-0e-z7Z">
-                                <rect key="frame" x="333" y="626" width="35" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="24小時客服" image="support"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HNY-jv-iOk">
+                                <rect key="frame" x="343" y="630" width="31" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="axC-Rb-Sex"/>
+                                    <constraint firstAttribute="width" constant="31" id="jjb-mk-T00"/>
+                                </constraints>
+                                <state key="normal" title="客服專線" backgroundImage="support">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
-                                    <action selector="callservice:" destination="pUl-BV-zvz" eventType="touchUpInside" id="exA-Wz-90S"/>
+                                    <action selector="callservice:" destination="nE6-fJ-blP" eventType="touchUpInside" id="Yh5-68-wyh"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.90570509430000001" green="0.9737959504" blue="0.88626366850000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.91253185270000003" green="0.97191637750000004" blue="0.85210216049999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="sn2-ib-GAY" firstAttribute="trailing" secondItem="HNY-jv-iOk" secondAttribute="trailing" constant="1" id="EC2-Ve-HR4"/>
+                            <constraint firstItem="sn2-ib-GAY" firstAttribute="bottom" secondItem="HNY-jv-iOk" secondAttribute="bottom" constant="7" id="ZQW-iz-mtk"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sn2-ib-GAY"/>
                     </view>
                     <navigationItem key="navigationItem" id="EI4-29-2GM">
@@ -175,6 +177,6 @@
         <image name="List_button" width="18" height="11"/>
         <image name="logo" width="175" height="166"/>
         <image name="support" width="33" height="33"/>
-        <image name="加入行事曆" width="298" height="81"/>
+        <image name="加入行事曆-1" width="298" height="81"/>
     </resources>
 </document>

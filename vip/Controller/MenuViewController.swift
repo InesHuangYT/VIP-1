@@ -160,7 +160,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
         if cell.lblMenu.text! == "個人資訊"
         {
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-            let desController = mainStoryboard.instantiateViewController(withIdentifier: "ProfileControllerId") as! ProfileController
+            let desController = mainStoryboard.instantiateViewController(withIdentifier: "FriendControllerId") as! FriendController
             let newFrontViewController = UINavigationController.init(rootViewController: desController)
             
             revealViewController().pushFrontViewController(newFrontViewController, animated: true)

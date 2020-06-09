@@ -46,6 +46,8 @@
 		B05CB1AF248409890052D55D /* 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B05CB1A9248409880052D55D /* 5.mp3 */; };
 		B05CB1B0248409890052D55D /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B05CB1AA248409880052D55D /* 1.mp3 */; };
 		B05CB1B2248415390052D55D /* Easy Lemon 30 Second.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B05CB1B1248415390052D55D /* Easy Lemon 30 Second.mp3 */; };
+		B062468B248F71A100BED2A9 /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062468A248F71A100BED2A9 /* FriendController.swift */; };
+		B06246CA248F923900BED2A9 /* ruby.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B06246C9248F923900BED2A9 /* ruby.mp3 */; };
 		B06E26C22455E99E0061627F /* MyGroupBuyHistoryOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */; };
 		B06E26E3245655310061627F /* ProductComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26E1245655310061627F /* ProductComment.swift */; };
 		B06E26E4245655310061627F /* ProductComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = B06E26E2245655310061627F /* ProductComment.xib */; };
@@ -326,6 +328,9 @@
 		B05CB1A9248409880052D55D /* 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 5.mp3; sourceTree = "<group>"; };
 		B05CB1AA248409880052D55D /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		B05CB1B1248415390052D55D /* Easy Lemon 30 Second.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Easy Lemon 30 Second.mp3"; sourceTree = "<group>"; };
+		B0624687248F5A3C00BED2A9 /* vip copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "vip copy2-Info.plist"; path = "/Users/ines/Desktop/VIP-1/vip copy2-Info.plist"; sourceTree = "<absolute>"; };
+		B062468A248F71A100BED2A9 /* FriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendController.swift; path = ../../../FriendController.swift; sourceTree = "<group>"; };
+		B06246C9248F923900BED2A9 /* ruby.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ruby.mp3; sourceTree = "<group>"; };
 		B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyHistoryOrderController.swift; sourceTree = "<group>"; };
 		B06E26E1245655310061627F /* ProductComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductComment.swift; sourceTree = "<group>"; };
 		B06E26E2245655310061627F /* ProductComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductComment.xib; sourceTree = "<group>"; };
@@ -467,6 +472,7 @@
 		B019FFFE24392AD900E6BA3E /* Mp3 */ = {
 			isa = PBXGroup;
 			children = (
+				B06246C9248F923900BED2A9 /* ruby.mp3 */,
 				B05CB1A6248409860052D55D /* 0.mp3 */,
 				B05CB1AA248409880052D55D /* 1.mp3 */,
 				B05CB1A5248409860052D55D /* 2.mp3 */,
@@ -487,6 +493,7 @@
 				5D55644732E6CFB2D245EF8D /* Pods */,
 				D485BABE6F04E2B3F027C7C4 /* Frameworks */,
 				B06E27812456F5AA0061627F /* vip copy-Info.plist */,
+				B0624687248F5A3C00BED2A9 /* vip copy2-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -566,6 +573,7 @@
 				B0EA39462438E31100AA7499 /* Product */,
 				B08376EB243262BD006D169E /* CategoryController.swift */,
 				B09ED5E42414EE0500D3C4A6 /* ProfileController.swift */,
+				B062468A248F71A100BED2A9 /* FriendController.swift */,
 				02F25D65242095F10041541E /* OrderController.swift */,
 				C015B2762439F0D5009F060D /* ShoppingCartController.swift */,
 				B0BAC50E24521FA0009D6162 /* LikeListController.swift */,
@@ -961,6 +969,7 @@
 				B0BAC478244F5BFB009D6162 /* Order.storyboard in Resources */,
 				C02BD2E524101F2900BD3E1D /* Main.storyboard in Resources */,
 				B06E2783245726840061627F /* not use.mp3 in Resources */,
+				B06246CA248F923900BED2A9 /* ruby.mp3 in Resources */,
 				B05CB1AB248409890052D55D /* 2.mp3 in Resources */,
 				B05CB1AF248409890052D55D /* 5.mp3 in Resources */,
 				B087D23523F56439001FAC9A /* Assets.xcassets in Resources */,
@@ -1039,6 +1048,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0BAC50F24521FA0009D6162 /* LikeListController.swift in Sources */,
+				B062468B248F71A100BED2A9 /* FriendController.swift in Sources */,
 				B0FE0D38243BA61200479B80 /* GroupBuyOrderConfirmController.swift in Sources */,
 				B0BAC49E244F64AF009D6162 /* ProcessingOrderCell.swift in Sources */,
 				02F25D66242095F10041541E /* OrderController.swift in Sources */,
@@ -1250,7 +1260,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = ines.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1275,7 +1285,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				PRODUCT_BUNDLE_IDENTIFIER = ines.vip;
+				PRODUCT_BUNDLE_IDENTIFIER = chun.vip;
 				PRODUCT_NAME = vip;
 				SWIFT_OBJC_BRIDGING_HEADER = "vip/vip-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

@@ -139,7 +139,6 @@ extension ProductController : UICollectionViewDataSource{
         else{
             vc.index = indexPath.row        
             self.navigationController?.pushViewController(vc,animated: true)
-            
         }
         
         
