@@ -46,8 +46,8 @@
 		B05CB1AF248409890052D55D /* 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B05CB1A9248409880052D55D /* 5.mp3 */; };
 		B05CB1B0248409890052D55D /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B05CB1AA248409880052D55D /* 1.mp3 */; };
 		B05CB1B2248415390052D55D /* Easy Lemon 30 Second.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B05CB1B1248415390052D55D /* Easy Lemon 30 Second.mp3 */; };
-		B062468B248F71A100BED2A9 /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B062468A248F71A100BED2A9 /* FriendController.swift */; };
 		B06246CA248F923900BED2A9 /* ruby.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B06246C9248F923900BED2A9 /* ruby.mp3 */; };
+		B06246EC24924F5C00BED2A9 /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06246EB24924F5C00BED2A9 /* FriendController.swift */; };
 		B06E26C22455E99E0061627F /* MyGroupBuyHistoryOrderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */; };
 		B06E26E3245655310061627F /* ProductComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E26E1245655310061627F /* ProductComment.swift */; };
 		B06E26E4245655310061627F /* ProductComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = B06E26E2245655310061627F /* ProductComment.xib */; };
@@ -329,8 +329,8 @@
 		B05CB1AA248409880052D55D /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		B05CB1B1248415390052D55D /* Easy Lemon 30 Second.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Easy Lemon 30 Second.mp3"; sourceTree = "<group>"; };
 		B0624687248F5A3C00BED2A9 /* vip copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "vip copy2-Info.plist"; path = "/Users/ines/Desktop/VIP-1/vip copy2-Info.plist"; sourceTree = "<absolute>"; };
-		B062468A248F71A100BED2A9 /* FriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FriendController.swift; path = ../../../FriendController.swift; sourceTree = "<group>"; };
 		B06246C9248F923900BED2A9 /* ruby.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ruby.mp3; sourceTree = "<group>"; };
+		B06246EB24924F5C00BED2A9 /* FriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
 		B06E26C12455E99E0061627F /* MyGroupBuyHistoryOrderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupBuyHistoryOrderController.swift; sourceTree = "<group>"; };
 		B06E26E1245655310061627F /* ProductComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductComment.swift; sourceTree = "<group>"; };
 		B06E26E2245655310061627F /* ProductComment.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductComment.xib; sourceTree = "<group>"; };
@@ -573,7 +573,6 @@
 				B0EA39462438E31100AA7499 /* Product */,
 				B08376EB243262BD006D169E /* CategoryController.swift */,
 				B09ED5E42414EE0500D3C4A6 /* ProfileController.swift */,
-				B062468A248F71A100BED2A9 /* FriendController.swift */,
 				02F25D65242095F10041541E /* OrderController.swift */,
 				C015B2762439F0D5009F060D /* ShoppingCartController.swift */,
 				B0BAC50E24521FA0009D6162 /* LikeListController.swift */,
@@ -583,6 +582,7 @@
 				02AC6139243A224800A7D94C /* Coupon */,
 				B0EA39482438E35300AA7499 /* SignUpLogIn */,
 				B019FFFE24392AD900E6BA3E /* Mp3 */,
+				B06246EB24924F5C00BED2A9 /* FriendController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1048,7 +1048,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0BAC50F24521FA0009D6162 /* LikeListController.swift in Sources */,
-				B062468B248F71A100BED2A9 /* FriendController.swift in Sources */,
+				B06246EC24924F5C00BED2A9 /* FriendController.swift in Sources */,
 				B0FE0D38243BA61200479B80 /* GroupBuyOrderConfirmController.swift in Sources */,
 				B0BAC49E244F64AF009D6162 /* ProcessingOrderCell.swift in Sources */,
 				02F25D66242095F10041541E /* OrderController.swift in Sources */,
